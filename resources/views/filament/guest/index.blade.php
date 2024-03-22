@@ -9,7 +9,6 @@
 </head>
 
 <body class="h-screen bg-gray-100" oncontextmenu="return false;">
-
     <div class="container h-screen px-4 py-8 mx-auto">
         <div class="max-w-md p-8 mx-auto overflow-hidden bg-white shadow-md rounded-xl">
             @if (is_null($student))

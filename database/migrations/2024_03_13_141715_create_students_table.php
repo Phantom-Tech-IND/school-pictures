@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('institution_id');
             $table->string('name');
-            $table->date('birth_date');
+            $table->date('birth_date')->nullable();
             $table->foreign('institution_id')->references('id')->on('institutions')->onDelete('cascade');
             $table->timestamps();
         });

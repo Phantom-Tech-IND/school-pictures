@@ -14,3 +14,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [\App\Http\Controllers\Filament\GuestPanelController::class, 'index']);
+Route::get('/upload', [\App\Http\Controllers\Filament\GuestPanelController::class, 'upload']);
+Route::post('/students/sync-photos', 'StudentController@syncPhotos')->name('students.sync-photos');

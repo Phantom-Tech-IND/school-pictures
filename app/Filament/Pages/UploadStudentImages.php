@@ -9,21 +9,29 @@ class UploadStudentImages extends Page
 {
     use WithFileUploads;
 
+    protected static ?string $navigationIcon = 'heroicon-o-academic-cap';
+
     public $photos = [];
-    protected static ?string $navigationIcon = 'heroicon-o-document-text';
+
+    public $files = [];
+
+    public $folderName = '';
 
     protected static string $view = 'filament.pages.upload-student-images';
 
     public function uploadPhotos()
     {
         $this->validate([
-            'photos.*' => 'image|max:1024', // 1MB Max
+            'photos.*' => 'image|max:1024', // 1MB Max per image
         ]);
 
         foreach ($this->photos as $photo) {
-            $photo->store('photos');
+            // Assuming you want to keep the original file names
+            $fileName = $photo->getClientOriginalName();
+            $photo->storeAs('public/student_images', $fileName);
         }
 
-        $this->photos = [];
+        $this->photos = []; // Reset the photos array after upload
+        $this->notify('success', 'Images uploaded successfully!');
     }
 }

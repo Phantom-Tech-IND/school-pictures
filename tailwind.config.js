@@ -1,6 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-    content: [],
+    content: [
+        './vendor/ralphjsmit/laravel-filament-media-library/resources/**/*.blade.php'
+    ],
     theme: {
         extend: {},
     },

@@ -35,4 +35,9 @@ class GuestPanelController extends Controller
 
         return view('filament.guest.index', compact('student', 'products'));
     }
+
+    public function upload()
+    {
+        return view('filament.guest.upload');
+    }
 }

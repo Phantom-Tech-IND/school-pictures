@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Institution;
 use App\Models\Student;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
@@ -29,13 +30,41 @@ class ParseStudentPhotos extends Command
     public function handle()
     {
         $mediaPath = public_path('media');
-        $institutions = ['kindergarten', 'school'];
+        $directories = File::directories($mediaPath);
 
-        foreach ($institutions as $institutionType) {
-            $this->processInstitution($mediaPath, $institutionType);
+        foreach ($directories as $yearPath) {
+            // Assuming the first directory under the year is the type of institution
+            $institutionTypes = File::directories($yearPath);
+            foreach ($institutionTypes as $institutionTypePath) {
+                $institutionType = basename($institutionTypePath);
+                $institutions = File::directories($institutionTypePath);
+                foreach ($institutions as $institutionPath) {
+                    $institutionNameWithPrefix = basename($institutionPath);
+                    // Remove the numeric prefix and underscore (e.g., "0001_") from the institution name
+                    $institutionName = preg_replace('/^\d+_(.*)$/', '$1', $institutionNameWithPrefix);
+
+                    // Here, you should update or create the institution with the correct type and name
+                    $institution = Institution::firstOrCreate(
+                        ['name' => $institutionName],
+                        ['type' => $institutionType] // Set the type of institution here
+                    );
+
+                    $students = File::directories($institutionPath);
+                    foreach ($students as $studentPath) {
+                        $studentName = basename($studentPath);
+                        $student = Student::firstOrCreate(
+                            ['name' => $studentName, 'institution_id' => $institution->id]
+                        );
+                        $photos = File::allFiles($studentPath);
+                        foreach ($photos as $photo) {
+                            // Associate the photo with the student record
+                            $relativePhotoPath = 'media/'.$institutionType.'/'.$institutionName.'/'.basename($yearPath).'/'.$studentName.'/'.$photo->getFilename();
+                            $student->addMedia($photo->getPathname())->usingName($photo->getFilename())->toMediaCollection('student_photos', 'public');
+                        }
+                    }
+                }
+            }
         }
-
-        $this->info('Completed updating student photos.');
     }
 
     protected function processInstitution($mediaPath, $institutionType)

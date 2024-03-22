@@ -1,25 +1,12 @@
 <x-filament-panels::page>
-    <div
-    x-data="{ isUploading: false, progress: 0 }"
-    x-on:livewire-upload-start="isUploading = true"
-    x-on:livewire-upload-finish="isUploading = false"
-    x-on:livewire-upload-error="isUploading = false"
-    x-on:livewire-upload-progress="progress = $event.detail.progress"
->
-    <form wire:submit.prevent="uploadPhotos">
-        <input type="file" wire:model="photos" multiple x-ref="input" webkitdirectory directory mozdirectory>
-        
-        <div
-        x-on:drop.prevent="$refs.input.files = $event.dataTransfer.files"
-        x-on:dragover.prevent style="border: 2px dashed gray; padding: 20px;">
-            Drag and drop files here
+    <form wire:submit.prevent="uploadPhotos" x-on:submit="console.log('Submitting form...')">
+        <div x-data="{ files: [] }" x-on:dragover.prevent
+            x-on:drop.prevent="files = $event.dataTransfer.files; console.log('Files dropped:', files); $wire.set('photos', files)"
+            class="flex flex-col items-center justify-center py-12 border-4 border-orange-300 border-dashed">
+            <p>Drag and drop files here</p>
+            <input type="file" wire:model="photos" multiple mozdirectory webkitdirectory directory class="hidden">
         </div>
-
-        <button type="submit">Upload</button>
+        <button type="submit"
+            class="w-full px-4 py-2 mt-4 text-white bg-blue-500 rounded hover:bg-blue-700">Upload</button>
     </form>
-
-    <div x-show="isUploading">
-        Uploading... <progress max="100" x-bind:value="progress"></progress>
-    </div>
-</div>
 </x-filament-panels::page>

@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         \App\Models\Institution::factory(2)->create();
-        \App\Models\Student::factory(100)->create();
+        // \App\Models\Student::factory(100)->create();
         \App\Models\Student::factory()->create([
             'name' => 'Morris Schoen DDS',
             'birth_date' => '2004-05-21',
