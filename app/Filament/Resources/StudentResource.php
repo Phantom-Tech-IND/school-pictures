@@ -30,7 +30,7 @@ class StudentResource extends Resource
                     ->required()
                     ->searchable()
                     ->label('Institution'),
-                \Filament\Forms\Components\Repeater::make('photos')
+                \Filament\Forms\Components\Repeater::make('student_photos')
                     ->relationship('photos')
                     ->schema([
                         \Filament\Forms\Components\FileUpload::make('photo_path')

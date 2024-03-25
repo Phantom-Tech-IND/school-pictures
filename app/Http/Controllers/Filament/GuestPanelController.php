@@ -13,6 +13,16 @@ class GuestPanelController extends Controller
 {
     public function index(Request $request)
     {
+        return view('welcome');
+    }
+
+    public function shop(Request $request)
+    {
+        return view('welcome');
+    }
+
+    public function search(Request $request)
+    {
         $searchTerm = $request->input('search');
         $birthDate = $request->input('birth_date'); // Get birth date from request
         $student = null;

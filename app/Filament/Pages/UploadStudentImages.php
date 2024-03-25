@@ -9,7 +9,7 @@ class UploadStudentImages extends Page
 {
     use WithFileUploads;
 
-    protected static ?string $navigationIcon = 'heroicon-o-academic-cap';
+    protected static ?string $navigationIcon = 'heroicon-o-document-plus';
 
     public $photos = [];
 

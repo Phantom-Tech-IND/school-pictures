@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Filament\GuestPanelController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [\App\Http\Controllers\Filament\GuestPanelController::class, 'index']);
-Route::get('/upload', [\App\Http\Controllers\Filament\GuestPanelController::class, 'upload']);
+Route::get('/', [GuestPanelController::class, 'index'])->name('home');
+Route::get('/shop', [GuestPanelController::class, 'shop'])->name('shop');
+Route::get('/upload', [GuestPanelController::class, 'upload']);
 Route::post('/students/sync-photos', 'StudentController@syncPhotos')->name('students.sync-photos');

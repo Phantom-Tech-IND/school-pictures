@@ -31,4 +31,13 @@ class Student extends Model implements HasMedia
     {
         return $this->hasMany(StudentPhoto::class);
     }
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('student_photos')
+            ->useDisk('public') // Specify the disk you want to use
+            ->singleFile(false); // Set to false to allow multiple files
+
+        $this->preserveOriginalMedia = true;
+    }
 }
