@@ -17,4 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [GuestPanelController::class, 'index'])->name('home');
 Route::get('/shop', [GuestPanelController::class, 'shop'])->name('shop');
 Route::get('/upload', [GuestPanelController::class, 'upload']);
+Route::get('/team', [GuestPanelController::class, 'team'])->name('team');
+Route::get('/partners', [GuestPanelController::class, 'partners'])->name('partners');
+Route::get('/contact', [GuestPanelController::class, 'contact'])->name('contact');
 Route::post('/students/sync-photos', 'StudentController@syncPhotos')->name('students.sync-photos');

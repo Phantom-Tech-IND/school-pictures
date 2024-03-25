@@ -13,9 +13,6 @@
 
 <body>
     @include('components.navbar')
-    <div class="container mx-auto">
-        @yield('content')
-    </div>
 
 
     <div class="container h-screen mx-auto text-center">

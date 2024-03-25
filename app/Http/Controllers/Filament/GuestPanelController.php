@@ -20,6 +20,26 @@ class GuestPanelController extends Controller
     {
         return view('welcome');
     }
+ public function team(Request $request)
+    {
+        return view('team');
+    }
+
+    public function about(Request $request)
+    {
+        return view('about');
+    }
+
+    public function partners(Request $request)
+    {
+        return view('partners');
+    }
+    public function contact(Request $request)
+    {
+        return view('contact');
+    }
+
+
 
     public function search(Request $request)
     {
