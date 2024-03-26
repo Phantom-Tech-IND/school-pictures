@@ -13,8 +13,11 @@
 
 <body>
     @include('components.navbar')
+    <x-hero-banner />
 
-
+    <div class="mt-24">
+        @include('components.masonry-content')
+    </div>
     <div class="container h-screen mx-auto text-center">
         <h1 class="my-12 text-5xl font-bold uppercase text-primary">ArtLine Fotografie AG</h1>
         <p class="text-xl text-gray-600">Ihr Fotograf in der Region Zürich</p>

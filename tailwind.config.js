@@ -5,7 +5,7 @@ export default {
         "./resources/**/*.js",
         "./resources/**/*.blade",
     ],
-    darkMode: 'class',
+    darkMode: "class",
     theme: {
         extend: {
             colors: {
