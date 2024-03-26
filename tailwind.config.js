@@ -17,6 +17,7 @@ export default {
                 darkgrey: "#595959",
                 transparentblack: "#00000000",
                 black: "#000000",
+                backgroundgray: "#333",
                 offwhite: "#FCF9F6",
                 darkblue: "#2E4057",
             },
