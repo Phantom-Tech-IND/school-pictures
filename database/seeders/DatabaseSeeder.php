@@ -37,7 +37,7 @@ class DatabaseSeeder extends Seeder
             'institution_id' => 1,
         ]);
 
-        \App\Models\Offer::factory(10)->create();
+        \App\Models\Offers::factory(10)->create();
         \App\Models\Student::factory()->create([
             'name' => 'Easton Marquardt',
             'birth_date' => '2003-11-15',
