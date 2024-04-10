@@ -16,6 +16,11 @@ class GuestPanelController extends Controller
         return view('welcome');
     }
 
+    public function notAvailable(Request $request)
+    {
+        return view('not-available');
+    }
+
     public function shop(Request $request)
     {
         return view('webshop');
@@ -64,11 +69,15 @@ class GuestPanelController extends Controller
                 })
                 ->first(['id', 'name', 'birth_date']); // Ensure 'id' is selected for the relationship loading
 
-            if ($student) {
-                $student->load('photos'); // Explicitly load the photos relationship
+            if (! $student) {
+                return redirect()->route('not-available'); // Redirect to a 404 page if no student is found
             }
 
+            $student->load('photos'); // Explicitly load the photos relationship
+
             Log::info(DB::getQueryLog());
+        } else {
+            return redirect()->route('not-available'); // Redirect to a 404 page if search term is empty
         }
 
         $products = Product::all(); // Fetch all products

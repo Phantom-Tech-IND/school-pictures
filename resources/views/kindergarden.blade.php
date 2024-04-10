@@ -13,6 +13,6 @@
     @include('components.gallery', [
         'title' => 'SCHUL-UND KINDERGARTENFOTOGRAFIE',
         'description' => 'Entdecken sie hier unsere musterbilder der schul-und kindergartenfotografie.
-            Möchte ihre klasse, ihr schulhaus auch eine schöne erinnerung an die schulzeit? Dann melden sie sich noch heute bei uns!',
+                Möchte ihre klasse, ihr schulhaus auch eine schöne erinnerung an die schulzeit? Dann melden sie sich noch heute bei uns!',
     ])
 @endsection
