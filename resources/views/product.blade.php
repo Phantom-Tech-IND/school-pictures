@@ -6,19 +6,19 @@
     ])
 
     <!--
-                                                                  This example requires some changes to your config:
-                                                                  
-                                                                  ```
-                                                                  // tailwind.config.js
-                                                                  module.exports = {
-                                                                    // ...
-                                                                    plugins: [
-                                                                      // ...
-                                                                      require('@tailwindcss/aspect-ratio'),
-                                                                    ],
-                                                                  }
-                                                                  ```
-                                                                -->
+                                                                      This example requires some changes to your config:
+                                                                      
+                                                                      ```
+                                                                      // tailwind.config.js
+                                                                      module.exports = {
+                                                                        // ...
+                                                                        plugins: [
+                                                                          // ...
+                                                                          require('@tailwindcss/aspect-ratio'),
+                                                                        ],
+                                                                      }
+                                                                      ```
+                                                                    -->
     <div class="bg-white">
         <div class="max-w-2xl px-4 py-16 mx-auto sm:px-6 sm:py-24 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
             <!-- Product details -->
@@ -100,9 +100,9 @@
                                         <p id="size-choice-0-description" class="mt-1 text-sm text-gray-500">Perfect for a
                                             reasonable amount of snacks.</p>
                                         <!--
-                                                                                    Active: "border", Not Active: "border-2"
-                                                                                    Checked: "border-indigo-500", Not Checked: "border-transparent"
-                                                                                  -->
+                                                                                        Active: "border", Not Active: "border-2"
+                                                                                        Checked: "border-indigo-500", Not Checked: "border-transparent"
+                                                                                      -->
                                         <div class="absolute border-2 rounded-lg pointer-events-none -inset-px"
                                             aria-hidden="true"></div>
                                     </div>
@@ -116,9 +116,9 @@
                                         <p id="size-choice-1-description" class="mt-1 text-sm text-gray-500">Enough room
                                             for a serious amount of snacks.</p>
                                         <!--
-                                                                                    Active: "border", Not Active: "border-2"
-                                                                                    Checked: "border-indigo-500", Not Checked: "border-transparent"
-                                                                                  -->
+                                                                                        Active: "border", Not Active: "border-2"
+                                                                                        Checked: "border-indigo-500", Not Checked: "border-transparent"
+                                                                                      -->
                                         <div class="absolute border-2 rounded-lg pointer-events-none -inset-px"
                                             aria-hidden="true"></div>
                                     </div>
@@ -126,7 +126,7 @@
                             </fieldset>
                         </div>
                         <div class="mt-4">
-                            <a href="#" class="inline-flex text-sm text-gray-500 group hover:text-gray-700">
+                            <a href="" class="inline-flex text-sm text-gray-500 group hover:text-gray-700">
                                 <span>What size should I buy?</span>
                                 <svg class="flex-shrink-0 w-5 h-5 ml-2 text-gray-400 group-hover:text-gray-500"
                                     viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -142,7 +142,7 @@
                                 to bag</button>
                         </div>
                         <div class="mt-6 text-center">
-                            <a href="#" class="inline-flex text-base font-medium group">
+                            <a href="" class="inline-flex text-base font-medium group">
                                 <svg class="flex-shrink-0 w-6 h-6 mr-2 text-gray-400 group-hover:text-gray-500"
                                     fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                                     aria-hidden="true">

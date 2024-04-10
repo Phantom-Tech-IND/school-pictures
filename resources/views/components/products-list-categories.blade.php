@@ -537,7 +537,7 @@
                                                 </div>
                                             </div>
                                             <div class="mt-6">
-                                                <a href="#"
+                                                <a href=""
                                                     class="relative flex items-center justify-center px-8 py-2 text-sm font-medium text-gray-900 bg-gray-100 border border-transparent rounded-md hover:bg-gray-200">Add
                                                     to bag<span class="sr-only">, {{ $product->name }}</span></a>
                                             </div>

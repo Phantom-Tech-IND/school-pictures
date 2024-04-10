@@ -20,7 +20,7 @@ class ProductFactory extends Factory
             'product_type' => $this->faker->word,
             'price' => $this->faker->randomFloat(2, 10, 1000), // Price between 10 and 1000
             'description' => $this->faker->paragraph,
-            'photo' => 'products/Mustergutschein.jpg',
+            'photo' => 'Mustergutschein.jpg',
         ];
     }
 }

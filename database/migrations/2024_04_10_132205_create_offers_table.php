@@ -11,15 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('products', function (Blueprint $table) {
+        Schema::create('offers', function (Blueprint $table) {
             $table->id();
-            $table->string('product_type');
-            $table->decimal('price', 8, 2); // Example precision for price
-            $table->string('photo')->nullable(); // Assuming the photo is optional
+            $table->string('title');
+            $table->string('image'); // Assuming you'll store the image path
+            $table->json('photo_gallery'); // Stores a JSON array of image paths
             $table->timestamps();
-            $table->json('custom_attributes')->nullable();
         });
-
     }
 
     /**
@@ -27,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('offers');
     }
 };
