@@ -1,27 +1,35 @@
-<div class="px-6 pb-8 mx-auto max-w-7xl lg:px-8">
-    <div class="my-6 mb-10 text-center">
-        <h1 class="text-3xl font-bold uppercase text-primary">HERZLICH WILLKOMMEN BEI
+<div class="px-4 pb-8 mx-auto sm:px-6 max-w-7xl lg:px-8">
+    <div class="text-center md:my-6 md:mb-10">
+        <h1 class="text-2xl sm:text-3xl font-[500] uppercase text-primary">HERZLICH WILLKOMMEN BEI
+            <br />
             ARTLINE FOTOGRAFIE AG
         </h1>
-        <h3 class="text-xl italic text-gray-600">REM GALISUM MAXIME VEL OBCAECATI QUAERAT EOS VELIT QUIA.
+        <h3 class="mt-2 text-sm italic text-gray-600 sm:text-md">REM GALISUM MAXIME VEL OBCAECATI QUAERAT EOS VELIT QUIA.
         </h3>
     </div>
-    <div class="masonry">
+    <div class="masonry py-8 sm:py-[100px] max-w-[1140px] mx-auto">
         <div class="flex flex-col gap-4">
-            <div class="flex flex-col gap-4 md:flex md:flex-row">
-                <div class="w-full bg-darkgrey h-72">
-                </div>
+            <!-- Adjusted for mobile: Stacked on small screens, side by side on medium screens and up -->
+            <div class="flex flex-col gap-4 md:flex-row">
+                @include('components.icon-card', [
+                    'icon' => 'heroicon-o-academic-cap',
+                    'title' => 'THIS IS GRAY',
+                    'description' => 'ADD YOUR HEADING TEXT HERE',
+                    'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.',
+                ])
                 <div style="background-image: url('{{ asset('/coverbluzz.jpeg') }}');"
-                    class="object-cover w-full bg-cover h-72">
+                    class="object-cover w-full bg-cover h-42">
                 </div>
-
             </div>
-            <div class="flex flex-col gap-4 md:flex md:flex-row">
+            <div class="flex flex-col gap-4 md:flex-row">
                 <div style="background-image: url('{{ asset('/coverbluzz.jpeg') }}');"
-                    class="object-cover w-full bg-cover h-72">
+                    class="object-cover w-full bg-cover h-42">
                 </div>
-                <div class="object-cover w-full bg-darkgrey h-72">
-                </div>
+                @include('components.icon-card', [
+                    'icon' => 'heroicon-o-academic-cap',
+                    'title' => 'THIS IS GRAY',
+                    'description' => 'ADD YOUR HEADING TEXT HERE',
+                ])
             </div>
         </div>
     </div>

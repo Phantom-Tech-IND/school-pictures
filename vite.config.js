@@ -13,6 +13,11 @@ export default defineConfig({
                 "resources/js/app.js",
                 "resources/css/filament/admin/theme.css",
             ],
+            server: {
+                hmr: {
+                    host: "localhost",
+                },
+            },
             refresh: [
                 "app/**/*.php",
                 "resources/**/*.blade.php",
