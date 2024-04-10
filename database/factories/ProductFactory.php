@@ -20,7 +20,7 @@ class ProductFactory extends Factory
             'product_type' => $this->faker->word,
             'price' => $this->faker->randomFloat(2, 10, 1000), // Price between 10 and 1000
             'description' => $this->faker->paragraph,
-            'photo' => 'products/'.$this->faker->image('public/storage/products', 640, 480, null, false), // Save image to public storage and return the filename
+            'photo' => 'products/Mustergutschein.jpg',
         ];
     }
 }
