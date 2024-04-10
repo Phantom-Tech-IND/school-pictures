@@ -28,10 +28,40 @@
             'background_image' => '/minimalistic-loft-photo-studio-scaled.jpg',
         ])
     </div>
-    <div class="container h-screen mx-auto text-center">
-        <h1 class="my-12 text-5xl font-bold uppercase text-primary">ArtLine Fotografie AG</h1>
-        <p class="text-xl text-gray-600">Ihr Fotograf in der Region Zürich</p>
-    </div>
+    @include('components.homepage-team', [
+        'teams' => [
+            [
+                'image' => '/coverbluzz.jpeg',
+                'name' => 'Hans Muster',
+                'text' => 'Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.',
+            ],
+            [
+                'image' => '/coverbluzz.jpeg',
+                'name' => 'Hans Muster',
+                'text' => 'Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.',
+            ],
+            [
+                'image' => '/coverbluzz.jpeg',
+                'name' => 'Hans Muster',
+                'text' => 'Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.',
+            ],
+        ],
+    ])
+
+    @include('components.popular-product', [
+        'product' => [
+            'image' => '/coverbluzz.jpeg',
+            'name' => 'Photoshooting card',
+            'description' => [
+                '10 Shootings à 10 Minuten Fotoshooting',
+                '1 Kind',
+                'gültig 2 Jahre',
+                'Angebot gültig bis 14 Jahren',
+                'alle Bilder exkl',
+            ],
+        ],
+    ])
+    @include('components.centered-text')
     @include('components.footer')
 </body>
 

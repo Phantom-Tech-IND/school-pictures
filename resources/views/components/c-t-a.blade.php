@@ -2,7 +2,7 @@
     <div class="container p-12 mx-auto bg-white w-fit bg-opacity-5"
         style="background-color : rgba(255, 255, 255, 0.8);
         backdrop-filter: blur(10px);">
-        <h3 class="text-md text-primary">{{ $title }}</h3>
+        <h3 class="font-bold text-md text-primary">{{ $title }}</h3>
         <p class="max-w-xl mt-4 font-raleway text-primary">{{ $description }}</p>
         <a href="{{ url($link) }}"
             class="inline-block px-6 py-3 mt-8 text-white rounded bg-accent hover:bg-accent-dark">
