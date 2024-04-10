@@ -18,11 +18,22 @@ class GuestPanelController extends Controller
 
     public function shop(Request $request)
     {
-        return view('welcome');
+        return view('webshop');
     }
- public function team(Request $request)
+
+    public function team(Request $request)
     {
         return view('team');
+    }
+
+    public function kindergarden(Request $request)
+    {
+        return view('kindergarden');
+    }
+
+    public function offers(Request $request)
+    {
+        return view('offers');
     }
 
     public function about(Request $request)
@@ -34,14 +45,13 @@ class GuestPanelController extends Controller
     {
         return view('partners');
     }
+
     public function contact(Request $request)
     {
         return view('contact');
     }
 
-
-
-    public function search(Request $request)
+    public function galleryCode(Request $request)
     {
         $searchTerm = $request->input('search');
         $birthDate = $request->input('birth_date'); // Get birth date from request
@@ -63,7 +73,7 @@ class GuestPanelController extends Controller
 
         $products = Product::all(); // Fetch all products
 
-        return view('filament.guest.index', compact('student', 'products'));
+        return view('gallery-code', compact('student', 'products'));
     }
 
     public function upload()

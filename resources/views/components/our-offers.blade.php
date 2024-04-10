@@ -11,7 +11,7 @@
         @endisset
     </div>
     <div class="container max-w-6xl mx-auto">
-        <div class="flex justify-center space-x-4 ">
+        <div class="flex flex-wrap justify-center gap-4 p-4 md:flex-nowrap lg:p-0">
             @include('components.icon-card')
             @include('components.icon-card')
             @include('components.icon-card')

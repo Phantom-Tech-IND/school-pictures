@@ -80,10 +80,4 @@
             ],
         ])
     </div>
-    <div class="mt-8 md:mt-24">
-        @include('components.centered-text', [
-            'text' => 'Unser Team',
-            'description' => 'Unser Team ist einzigartig und fr Sie da.',
-        ])
-    </div>
 @endsection

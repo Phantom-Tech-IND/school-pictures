@@ -11,10 +11,13 @@
 
 <body>
     @include('components.navbar')
-    @yield('content')
+    <div class="pt-12">
+        @yield('content')
+    </div>
 </body>
 
-
+@include('components.contact')
+@include('components.images-footer')
 @include('components.footer')
 </body>
 
