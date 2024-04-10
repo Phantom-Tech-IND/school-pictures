@@ -7,4 +7,5 @@
         'title' => $title,
         'image' => '/coverbluzz.jpeg',
     ])
+    @include('components.product-overview')
 @endsection

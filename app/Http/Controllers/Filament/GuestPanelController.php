@@ -53,8 +53,8 @@ class GuestPanelController extends Controller
 
     public function galleryCode(Request $request)
     {
-        $searchTerm = $request->input('search');
-        $birthDate = $request->input('birth_date'); // Get birth date from request
+        $searchTerm = $request->input('code');
+        $birthDate = $request->input('date'); // Get birth date from request
         $student = null;
         DB::enableQueryLog();
         if (! empty($searchTerm)) {
