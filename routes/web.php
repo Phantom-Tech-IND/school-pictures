@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [GuestPanelController::class, 'index'])->name('home');
 Route::get('/shop', [GuestPanelController::class, 'shop'])->name('shop');
+Route::get('/offer', [GuestPanelController::class, 'offer'])->name('offer');
 Route::get('/product', [GuestPanelController::class, 'product'])->name('product');
 Route::get('/not-available', [GuestPanelController::class, 'notAvailable'])->name('not-available');
 Route::get('/gallery-code', [GuestPanelController::class, 'galleryCode'])->name('gallery-code');

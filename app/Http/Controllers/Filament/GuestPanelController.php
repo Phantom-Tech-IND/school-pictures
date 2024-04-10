@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Filament;
 
 use App\Http\Controllers\Controller;
+use App\Models\Offers;
 use App\Models\Product;
 use App\Models\Student;
 use Illuminate\Http\Request;
@@ -55,7 +56,16 @@ class GuestPanelController extends Controller
 
     public function offers(Request $request)
     {
-        return view('offers');
+        $offers = Offers::all();
+
+        return view('offers', compact('offers'));
+    }
+
+    public function offer(Request $request)
+    {
+        $offer = Offers::where('id', $request->input('id'))->first();
+
+        return view('offer', compact('offer'));
     }
 
     public function about(Request $request)

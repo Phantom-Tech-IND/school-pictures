@@ -3,15 +3,12 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\OffersResource\Pages;
-use App\Filament\Resources\OffersResource\RelationManagers;
 use App\Models\Offers;
-use Filament\Forms;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class OffersResource extends Resource
 {
@@ -23,7 +20,24 @@ class OffersResource extends Resource
     {
         return $form
             ->schema([
-                //
+                TextInput::make('title')
+                    ->required()
+                    ->maxLength(255)
+                    ->columnSpan('full'),
+                \Filament\Forms\Components\FileUpload::make('image')
+                    ->label('Image')
+                    ->image()
+                    ->directory('offers/images')
+                    ->required()
+                    ->columnSpan('full'),
+                \Filament\Forms\Components\FileUpload::make('photo_gallery')
+                    ->label('Photo Gallery')
+                    ->image()
+                    ->multiple()
+                    ->directory('offers/photo_gallery')
+                    ->required()
+                    ->columnSpan('full'),
+
             ]);
     }
 
@@ -31,7 +45,12 @@ class OffersResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('title'),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->dateTime(),
+                Tables\Columns\ImageColumn::make('image')
+                    ->label('Photo')
+                    ->size(50),
             ])
             ->filters([
                 //
