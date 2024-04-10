@@ -4,4 +4,8 @@
         'title' => 'Webshop',
         'image' => '/coverbluzz.jpeg',
     ])
+
+    @include('components.products-list-categories', [
+        'products' => $products,
+    ])
 @endsection

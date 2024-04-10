@@ -56,7 +56,7 @@
                     alt="Two each of gray, white, and black shirts laying flat."
                     class="object-cover object-center w-full h-full">
             </div>
-            <div class="hidden lg:grid lg:grid-cols-1 lg:gap-y-8">
+            {{-- <div class="hidden lg:grid lg:grid-cols-1 lg:gap-y-8">
                 <div class="overflow-hidden rounded-lg aspect-h-2 aspect-w-3">
                     <img src="https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-01.jpg"
                         alt="Model wearing plain black basic tee." class="object-cover object-center w-full h-full">
@@ -69,7 +69,7 @@
             <div class="aspect-h-5 aspect-w-4 lg:aspect-h-4 lg:aspect-w-3 sm:overflow-hidden sm:rounded-lg">
                 <img src="https://tailwindui.com/img/ecommerce-images/product-page-02-featured-product-shot.jpg"
                     alt="Model wearing plain white basic tee." class="object-cover object-center w-full h-full">
-            </div>
+            </div> --}}
         </div>
 
         <!-- Product info -->

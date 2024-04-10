@@ -23,7 +23,24 @@ class GuestPanelController extends Controller
 
     public function shop(Request $request)
     {
-        return view('webshop');
+        $products = Product::all();
+
+        return view('webshop', compact('products'));
+    }
+
+    public function product(Request $request)
+    {
+        $product = null;
+
+        $productId = $request->input('id');
+        if ($productId) {
+            $product = Product::where('id', $productId)->first();
+
+            return view('product', compact('product'));
+        }
+
+        return view('not-available');
+
     }
 
     public function team(Request $request)

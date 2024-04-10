@@ -31,6 +31,7 @@ class ProductResource extends Resource
                     ->disk('public'),
                 Forms\Components\Textarea::make('description')
                     ->nullable(),
+
             ]);
     }
 
@@ -40,6 +41,8 @@ class ProductResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('product_type'),
                 Tables\Columns\TextColumn::make('price'),
+                Tables\Columns\TextColumn::make('category.name'), // Assuming a belongsTo relationship
+                Tables\Columns\TagsColumn::make('tags.name'), // Assuming a belongsToMany relationship
                 Tables\Columns\TextColumn::make('description')
                     ->limit(50),
                 Tables\Columns\ImageColumn::make('photo'),

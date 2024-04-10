@@ -48,5 +48,5 @@ export default {
         "./resources/**/*.vue",
     ],
 
-    plugins: [],
+    plugins: [require("@tailwindcss/forms")],
 };
