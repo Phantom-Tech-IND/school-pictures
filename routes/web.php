@@ -28,3 +28,4 @@ Route::get('/team', [GuestPanelController::class, 'team'])->name('team');
 Route::get('/partners', [GuestPanelController::class, 'partners'])->name('partners');
 Route::get('/contact', [GuestPanelController::class, 'contact'])->name('contact');
 Route::post('/students/sync-photos', 'StudentController@syncPhotos')->name('students.sync-photos');
+Route::post('/contact/submit', [GuestPanelController::class, 'postContactForm'])->name('contact.submit');

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Filament;
 
 use App\Http\Controllers\Controller;
+use App\Models\Message;
 use App\Models\Offers;
 use App\Models\Product;
 use App\Models\Student;
@@ -15,6 +16,11 @@ class GuestPanelController extends Controller
     public function index(Request $request)
     {
         return view('welcome');
+    }
+
+    public function postContactForm(Request $request)
+    {
+        Message::create($request->all());
     }
 
     public function notAvailable(Request $request)

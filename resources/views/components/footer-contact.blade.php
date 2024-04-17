@@ -10,13 +10,17 @@
             </div>
             <!-- Contact Form -->
             <div class="w-full md:w-1/2">
-                <form>
+                <form action="{{ route('contact.submit') }}" method="POST">
+                    @csrf
                     <div class="flex gap-4 mb-4">
-                        <input type="text" class="w-full p-2 text-sm border border-gray-300 " placeholder="Name">
-                        <input type="email" class="w-full p-2 text-sm border border-gray-300" placeholder="Email">
+                        <input type="text" name="name"
+                            class="w-full p-2 text-sm text-black border border-gray-300 " placeholder="Name">
+                        <input type="email" name="email"
+                            class="w-full p-2 text-sm text-black border border-gray-300" placeholder="Email">
                     </div>
                     <div class="mb-4">
-                        <textarea class="w-full p-2 text-sm border border-gray-300 " rows="4" placeholder="Message"></textarea>
+                        <textarea name="text" class="w-full p-2 text-sm text-black border border-gray-300 " rows="4"
+                            placeholder="Message"></textarea>
                     </div>
                     <button type="submit"
                         class="w-full px-4 py-2 text-sm text-white lg:w-40 bg-accent hover:bg-primary">SEND</button>

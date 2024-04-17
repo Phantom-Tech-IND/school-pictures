@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('Password123!!'),
         ]);
 
+        \App\Models\Message::factory(10)->create();
         \App\Models\Institution::factory(2)->create();
         \App\Models\Student::factory()->create([
             'name' => 'Morris Schoen DDS',

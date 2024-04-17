@@ -16,7 +16,7 @@
     </div>
 </body>
 
-@include('components.contact')
+@include('components.footer-contact')
 @include('components.images-footer')
 @include('components.footer')
 </body>
