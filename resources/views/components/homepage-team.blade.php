@@ -13,7 +13,7 @@
     </div>
     <div class="flex flex-wrap">
         @foreach ($teams as $team)
-            @include('components.team-member', $team)
+            @include('components.homepage-team-member', $team)
         @endforeach
     </div>
 </div>
