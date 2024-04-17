@@ -98,12 +98,12 @@
                     class="{{ request()->routeIs('team') ? 'text-accent' : ' hover:text-accent' }}"
                     x-transition:enter="ease-out duration-300 delay-500" x-transition:enter-start="opacity-0"
                     x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-200"
-                    x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">Unser Team</a>
+                    x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">Unsere Team</a>
                 <a href="{{ route('partners') }}"
                     class="{{ request()->routeIs('partners') ? 'text-accent' : ' hover:text-accent' }}"
                     x-transition:enter="ease-out duration-300 delay-600" x-transition:enter-start="opacity-0"
                     x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-200"
-                    x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">Unser Team</a>
+                    x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">Unsere Partnerseiten</a>
                 <a href="{{ route('partners') }}"
                     class="{{ request()->routeIs('partners') ? 'text-accent' : ' hover:text-accent' }}"
                     x-transition:enter="ease-out duration-300 delay-700" x-transition:enter-start="opacity-0"
