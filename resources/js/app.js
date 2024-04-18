@@ -6,7 +6,7 @@ window.Alpine = Alpine;
 import fslightbox from "fslightbox";
 
 Alpine.start();
-fslightbox();
+
 const swiper = new Swiper(".swiper", {
     direction: "horizontal",
     loop: false,
