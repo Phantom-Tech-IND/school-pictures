@@ -8,14 +8,12 @@
 
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 bob">
             @foreach ($images as $image)
-                <div>
-                    <a class="h-full w-full rounded-lg object-cover bg-black"
-                        data-fslightbox="{{ $gallery_name }}"
-                        href="{{ asset($image) }}">
-                        <img class="h-full w-full rounded-lg object-cover bg-black" src="{{ asset($image) }}"
-                            alt="ArtLine Fotografie AG">
-                    </a>
-                </div>
+                <a class="h-full w-full rounded-lg object-cover bg-black group" data-fslightbox="{{ $gallery_name }}"
+                    href="{{ asset($image) }}">
+                    <img class="h-full w-full rounded-lg object-cover bg-black transition-opacity duration-300 group-hover:opacity-50"
+                        src="{{ asset($image) }}"
+                        alt="ArtLine Fotografie AG">
+                </a>
             @endforeach
         </div>
     </div>
@@ -30,8 +28,6 @@
             grid-row: span 2;
         }
     }
-
-
 
     .bob>:last-child {
         grid-column: span 2;
