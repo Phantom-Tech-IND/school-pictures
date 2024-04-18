@@ -14,6 +14,7 @@
         'title' => 'SCHUL-UND KINDERGARTENFOTOGRAFIE',
         'description' => 'Entdecken sie hier unsere musterbilder der schul-und kindergartenfotografie.
                 Möchte ihre klasse, ihr schulhaus auch eine schöne erinnerung an die schulzeit? Dann melden sie sich noch heute bei uns!',
+        'gallery_name' => 'kindergarden and school',
         'images' => [
             '/content/kindergarden-and-school/SH-7321-6607.jpg',
             '/content/kindergarden-and-school/SH-7219-8137-9257.jpg',

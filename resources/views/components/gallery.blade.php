@@ -6,13 +6,15 @@
             <p class="mx-auto text-base leading-relaxed lg:pl-6 lg:w-2/3">{{ $description }}</p>
         </div>
 
-
-
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 bob">
             @foreach ($images as $image)
                 <div>
-                    <img class="h-full w-full rounded-lg object-cover bg-black" src="{{ asset($image) }}"
-                        alt="ArtLine Fotografie AG">
+                    <a class="h-full w-full rounded-lg object-cover bg-black"
+                        data-fslightbox="{{ $gallery_name }}"
+                        href="{{ asset($image) }}">
+                        <img class="h-full w-full rounded-lg object-cover bg-black" src="{{ asset($image) }}"
+                            alt="ArtLine Fotografie AG">
+                    </a>
                 </div>
             @endforeach
         </div>
@@ -20,11 +22,16 @@
 </section>
 
 <style>
-    .bob>:nth-child(6n - 3),
-    .bob>:nth-child(6n - 2) {
-        grid-column: span 2;
-        grid-row: span 2;
+    .bob {
+
+        &>:nth-child(6n - 3),
+        &>:nth-child(6n - 2) {
+            grid-column: span 2;
+            grid-row: span 2;
+        }
     }
+
+
 
     .bob>:last-child {
         grid-column: span 2;
