@@ -6,6 +6,6 @@
             <p class="mx-auto text-base leading-relaxed 2xl:pl-6 2xl:w-2/3">{{ $description }}</p>
         </div>
 
-        @include('components.lightbox-gallery', ['images' => $images])
+        @include('components.lightbox-gallery', ['images' => $images, 'lightbox_name' => $lightbox_name])
     </div>
 </section>
