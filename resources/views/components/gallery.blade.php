@@ -5,38 +5,28 @@
                 {{ $title }}</h1>
             <p class="mx-auto text-base leading-relaxed lg:pl-6 lg:w-2/3">{{ $description }}</p>
         </div>
-        <div class="flex flex-wrap -m-1 md:-m-2">
-            <div class="flex flex-wrap w-1/2">
-                <div class="w-1/2 p-1 md:p-2">
-                    <a data-fslightbox="first" href="{{ asset('coverbluzz.jpeg') }}">
-                        <img alt="gallery" class="block object-cover object-center w-full h-full"
-                            src="{{ asset('coverbluzz.jpeg') }}">
-                    </a>
 
+
+
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 bob">
+            @foreach ($images as $image)
+                <div>
+                    <img class="h-full w-full rounded-lg object-cover bg-black" src="{{ asset($image) }}"
+                        alt="ArtLine Fotografie AG">
                 </div>
-                <div class="w-1/2 p-1 md:p-2">
-                    <a data-fslightbox="first" href="{{ asset('coverbluzz.jpeg') }}">
-                        <img alt="gallery" class="block object-cover object-center w-full h-full"
-                            src="{{ asset('coverbluzz.jpeg') }}">
-                    </a>
-                </div>
-                <div class="w-full p-1 md:p-2">
-                    <img alt="gallery" class="block object-cover object-center w-full h-full"
-                        src="{{ asset('coverbluzz.jpeg') }}">
-                </div>
-            </div>
-            <div class="flex flex-wrap w-1/2">
-                <div class="w-full p-1 md:p-2">
-                    <img alt="gallery" class="block object-cover object-center w-full h-full"
-                        src="{{ asset('coverbluzz.jpeg') }}">
-                </div>
-                <div class="w-1/2 p-1 md:p-2">
-                    <img alt="gallery" class="block object-cover object-center w-full h-full"
-                        src="{{ asset('coverbluzz.jpeg') }}">
-                </div>
-                <div class="w-1/2 p-1 md:p-2">
-                    <img alt="gallery" class="block object-cover object-center w-full h-full"
-                        src="{{ asset('coverbluzz.jpeg') }}">
-                </div>
-            </div>
+            @endforeach
+        </div>
+    </div>
 </section>
+
+<style>
+    .bob>:nth-child(6n - 3),
+    .bob>:nth-child(6n - 2) {
+        grid-column: span 2;
+        grid-row: span 2;
+    }
+
+    .bob>:last-child {
+        grid-column: span 2;
+    }
+</style>
