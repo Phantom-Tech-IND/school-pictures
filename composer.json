@@ -15,8 +15,7 @@
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^11.0",
         "laravel/sanctum": "^4",
-        "laravel/tinker": "^2.8",
-        "ralphjsmit/laravel-filament-media-library": "^3.7"
+        "laravel/tinker": "^2.8"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.12",
@@ -68,16 +67,9 @@
         "sort-packages": true,
         "allow-plugins": {
             "pestphp/pest-plugin": true,
-            "php-http/discovery": true,
-            "ralphjsmit/packages": true
+            "php-http/discovery": true
         }
     },
     "minimum-stability": "stable",
-    "prefer-stable": true,
-    "repositories": {
-        "filament": {
-            "type": "composer",
-            "url": "https://satis.ralphjsmit.com"
-        }
-    }
+    "prefer-stable": true
 }

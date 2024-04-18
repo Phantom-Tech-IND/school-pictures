@@ -17,3 +17,10 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
+**/.DS_Store
+
+# Temporary ignore files for Riccardo
+# composer.json
+# app/Models/Student.php
+# app/Providers/Filament/AdminPanelProvider.php
+# database/seeders/DatabaseSeeder.php

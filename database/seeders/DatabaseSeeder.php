@@ -25,24 +25,7 @@ class DatabaseSeeder extends Seeder
 
         \App\Models\Message::factory(10)->create();
         \App\Models\Institution::factory(2)->create();
-        \App\Models\Student::factory()->create([
-            'name' => 'Morris Schoen DDS',
-            'birth_date' => '2004-05-21',
-            'institution_id' => 1,
-        ]);
-
-        \App\Models\Student::factory()->create([
-            'name' => 'Drew Veum',
-            'birth_date' => '2005-08-30',
-            'institution_id' => 1,
-        ]);
-
         \App\Models\Offers::factory(10)->create();
-        \App\Models\Student::factory()->create([
-            'name' => 'Easton Marquardt',
-            'birth_date' => '2003-11-15',
-            'institution_id' => 1,
-        ]);
 
         $this->call([
             ProductSeeder::class,

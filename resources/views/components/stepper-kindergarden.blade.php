@@ -10,10 +10,7 @@
             <div class="flex flex-col items-start flex-grow pl-6 md:pl-8 sm:items-center sm:flex-row">
                 <div
                     class="inline-flex items-center justify-center flex-shrink-0 w-24 h-24 rounded-full bg-darkgrey text-accent">
-                    <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                        stroke-width="2" class="w-12 h-12" viewBox="0 0 24 24">
-                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                    </svg>
+                    <img class="w-14 h-14" src="/content/kindergarden-and-school/general-icon.svg" alt="general icon">
                 </div>
                 <div class="flex-grow mt-6 sm:pl-6 sm:mt-0">
                     <h2 class="mb-1 text-xl font-medium text-gray-900 title-font">ANMELDEN</h2>
@@ -35,10 +32,7 @@
             <div class="flex flex-col items-start flex-grow pl-6 md:pl-8 sm:items-center sm:flex-row">
                 <div
                     class="inline-flex items-center justify-center flex-shrink-0 w-24 h-24 rounded-full bg-darkgrey text-accent">
-                    <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                        stroke-width="2" class="w-12 h-12" viewBox="0 0 24 24">
-                        <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
-                    </svg>
+                    <img class="w-14 h-14" src="/content/kindergarden-and-school/general-icon.svg" alt="general icon">
                 </div>
                 <div class="flex-grow mt-6 sm:pl-6 sm:mt-0">
                     <h2 class="mb-1 text-xl font-medium text-gray-900 title-font">FOTOGRAFIEREN</h2>
@@ -58,11 +52,7 @@
             <div class="flex flex-col items-start flex-grow pl-6 md:pl-8 sm:items-center sm:flex-row">
                 <div
                     class="inline-flex items-center justify-center flex-shrink-0 w-24 h-24 rounded-full bg-darkgrey text-accent">
-                    <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                        stroke-width="2" class="w-12 h-12" viewBox="0 0 24 24">
-                        <circle cx="12" cy="5" r="3"></circle>
-                        <path d="M12 22V8M5 12H2a10 10 0 0020 0h-3"></path>
-                    </svg>
+                    <img class="w-14 h-14" src="/content/kindergarden-and-school/general-icon.svg" alt="general icon">
                 </div>
                 <div class="flex-grow mt-6 sm:pl-6 sm:mt-0">
                     <h2 class="mb-1 text-xl font-medium text-gray-900 title-font">BEARBEITUNG</h2>
@@ -81,11 +71,7 @@
             <div class="flex flex-col items-start flex-grow pl-6 md:pl-8 sm:items-center sm:flex-row">
                 <div
                     class="inline-flex items-center justify-center flex-shrink-0 w-24 h-24 rounded-full bg-darkgrey text-accent">
-                    <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                        stroke-width="2" class="w-12 h-12" viewBox="0 0 24 24">
-                        <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path>
-                        <circle cx="12" cy="7" r="4"></circle>
-                    </svg>
+                    <img class="w-14 h-14" src="/content/kindergarden-and-school/general-icon.svg" alt="general icon">
                 </div>
                 <div class="flex-grow mt-6 sm:pl-6 sm:mt-0">
                     <h2 class="mb-1 text-xl font-medium text-gray-900 title-font">VERTEILUNG DER CODEKARTEN</h2>
@@ -105,11 +91,7 @@
             <div class="flex flex-col items-start flex-grow pl-6 md:pl-8 sm:items-center sm:flex-row">
                 <div
                     class="inline-flex items-center justify-center flex-shrink-0 w-24 h-24 rounded-full bg-darkgrey text-accent">
-                    <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                        stroke-width="2" class="w-12 h-12" viewBox="0 0 24 24">
-                        <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path>
-                        <circle cx="12" cy="7" r="4"></circle>
-                    </svg>
+                    <img class="w-14 h-14" src="/content/kindergarden-and-school/general-icon.svg" alt="general icon">
                 </div>
                 <div class="flex-grow mt-6 sm:pl-6 sm:mt-0">
                     <h2 class="mb-1 text-xl font-medium text-gray-900 title-font">BESTELLEN</h2>
@@ -131,11 +113,7 @@
             <div class="flex flex-col items-start flex-grow pl-6 md:pl-8 sm:items-center sm:flex-row">
                 <div
                     class="inline-flex items-center justify-center flex-shrink-0 w-24 h-24 rounded-full bg-darkgrey text-accent">
-                    <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                        stroke-width="2" class="w-12 h-12" viewBox="0 0 24 24">
-                        <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path>
-                        <circle cx="12" cy="7" r="4"></circle>
-                    </svg>
+                    <img class="w-14 h-14" src="/content/kindergarden-and-school/general-icon.svg" alt="general icon">
                 </div>
                 <div class="flex-grow mt-6 sm:pl-6 sm:mt-0">
                     <h2 class="mb-1 text-xl font-medium text-gray-900 title-font">LEHRPERSONENSET</h2>
@@ -156,11 +134,7 @@
             <div class="flex flex-col items-start flex-grow pl-6 md:pl-8 sm:items-center sm:flex-row">
                 <div
                     class="inline-flex items-center justify-center flex-shrink-0 w-24 h-24 rounded-full bg-darkgrey text-accent">
-                    <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                        stroke-width="2" class="w-12 h-12" viewBox="0 0 24 24">
-                        <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path>
-                        <circle cx="12" cy="7" r="4"></circle>
-                    </svg>
+                    <img class="w-14 h-14" src="/content/kindergarden-and-school/general-icon.svg" alt="general icon">
                 </div>
                 <div class="flex-grow mt-6 sm:pl-6 sm:mt-0">
                     <h2 class="mb-1 text-xl font-medium text-gray-900 title-font">ERINNERUNGEN FÜRS LEBEN</h2>
@@ -181,11 +155,7 @@
             <div class="flex flex-col items-start flex-grow pl-6 md:pl-8 sm:items-center sm:flex-row">
                 <div
                     class="inline-flex items-center justify-center flex-shrink-0 w-24 h-24 rounded-full bg-darkgrey text-accent">
-                    <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                        stroke-width="2" class="w-12 h-12" viewBox="0 0 24 24">
-                        <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path>
-                        <circle cx="12" cy="7" r="4"></circle>
-                    </svg>
+                    <img class="w-14 h-14" src="/content/kindergarden-and-school/general-icon.svg" alt="general icon">
                 </div>
                 <div class="flex-grow mt-6 sm:pl-6 sm:mt-0">
                     <h2 class="mb-1 text-xl font-medium text-gray-900 title-font">EINLOGGEN ZU HAUSE</h2>
