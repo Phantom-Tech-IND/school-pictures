@@ -16,6 +16,10 @@ class FooterContact extends Component
         //
     }
 
+    public function postContactForm()
+    {
+        
+    }
     /**
      * Get the view / contents that represent the component.
      */

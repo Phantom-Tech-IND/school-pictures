@@ -3,9 +3,10 @@ import Alpine from "alpinejs";
 import Swiper from "swiper";
 import "swiper/css";
 window.Alpine = Alpine;
+import fslightbox from "fslightbox";
 
 Alpine.start();
-
+fslightbox();
 const swiper = new Swiper(".swiper", {
     direction: "horizontal",
     loop: false,
