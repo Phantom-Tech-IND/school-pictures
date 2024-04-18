@@ -8,11 +8,10 @@
 
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 bob">
             @foreach ($images as $image)
-                <a class="h-full w-full rounded-lg object-cover bg-black group" data-fslightbox="{{ $gallery_name }}"
-                    href="{{ asset($image) }}">
-                    <img class="h-full w-full rounded-lg object-cover bg-black transition-opacity duration-300 group-hover:opacity-70"
-                        src="{{ asset($image) }}"
-                        alt="ArtLine Fotografie AG">
+                <a class="h-full w-full rounded-lg object-cover bg-black group" data-fslightbox="{{ $lightbox_name }}"
+                    href="{{ asset($image['url']) }}">
+                    <img class="h-full w-full rounded-lg object-cover bg-black transition-opacity duration-300 group-hover:opacity-50"
+                        src="{{ asset($image['url']) }}" alt="{{ $image['alt'] }}">
                 </a>
             @endforeach
         </div>
