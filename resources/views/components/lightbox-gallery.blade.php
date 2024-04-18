@@ -1,4 +1,4 @@
-<div class="grid grid-cols-2 lg:grid-cols-4 gap-4 components--lightbox-gallery">
+<div class="grid grid-cols-2 min-[420px]:grid-cols-4 gap-4 components--lightbox-gallery">
     @foreach ($images as $image)
         <a class="h-full w-full rounded-lg object-cover bg-black group" data-fslightbox="{{ $lightbox_name }}"
             href="{{ asset($image['url']) }}">
