@@ -20,7 +20,7 @@ yarn-error.log
 **/.DS_Store
 
 # Temporary ignore files for Riccardo
-composer.json
-app/Models/Student.php
-app/Providers/Filament/AdminPanelProvider.php
-database/seeders/DatabaseSeeder.php
+# composer.json
+# app/Models/Student.php
+# app/Providers/Filament/AdminPanelProvider.php
+# database/seeders/DatabaseSeeder.php
