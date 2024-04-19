@@ -4,8 +4,6 @@ import Swiper from "swiper";
 import "swiper/css";
 window.Alpine = Alpine;
 
-import './image-selection';
-
 Alpine.start();
 
 const swiper = new Swiper(".swiper", {
