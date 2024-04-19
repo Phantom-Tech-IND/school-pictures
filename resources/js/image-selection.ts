@@ -1,45 +1,61 @@
 import { v4 as uuid } from 'uuid';
 
-class ImageSelection {
-    private _galleryId: string = uuid();
+export function createImageSelection(galleryId: string = uuid(), selectedImages: Record<string, URL[]> = {}) {
+    let currentGalleryId = galleryId;
+    let imagesSelection = selectedImages;
 
-    selectedImages: Record<string, URL[]>;
+    const getGalleryId = (): string => currentGalleryId;
 
-    constructor(
-        galleryId = uuid(),
-        selectedImages: Record<string, URL[]> = {}
-    ) {
-        this._galleryId = galleryId;
-        this.selectedImages = selectedImages;
-    }
+    const toggleImageSelection = (imageUrl: URL): void => {
+        imagesSelection[currentGalleryId] = imagesSelection[currentGalleryId] || [];
+        const imageIndex = imagesSelection[currentGalleryId].indexOf(imageUrl);
 
-    get bucketId(): string {
-        return this._galleryId;
-    }
-
-    selectImage(imageUrl: URL) {
-        this.selectedImages[this.bucketId] = this.selectedImages[this.bucketId] || [];
-        if (this.selectedImages[this.bucketId].includes(imageUrl)) {
-            this.selectedImages[this.bucketId] = this.selectedImages[this.bucketId].filter((img: URL) => img !== imageUrl);
+        if (imageIndex > -1) {
+            imagesSelection[currentGalleryId].splice(imageIndex, 1);
         } else {
-            this.selectedImages[this.bucketId].push(imageUrl);
+            imagesSelection[currentGalleryId].push(imageUrl);
         }
-        this.updateSelectedImagesList();
-    }
 
-    private updateSelectedImagesList() {
-        const listElement = document.getElementById('selectedImagesList_' + this.bucketId);
+        refreshSelectedImagesDisplay();
+    };
+
+    const refreshSelectedImagesDisplay = (): void => {
+        const listElementId = `selectedImagesList_${getGalleryId()}`;
+        const listElement = document.getElementById(listElementId);
+
         if (!listElement) {
-            throw new Error('Invalid bucket id');
+            console.error('List element not found:', listElementId);
+            return;
         }
-        this.selectedImages[this.bucketId].forEach(image => {
-            const imgElement = document.createElement('img');
-            imgElement.src = image.toString();
-            imgElement.alt = 'Selected Image';
-            imgElement.classList.add('w-20', 'h-20', 'object-cover');
+
+        clearElementChildren(listElement);
+        appendSelectedImagesToListElement(listElement, imagesSelection[currentGalleryId]);
+    };
+
+    const clearElementChildren = (element: HTMLElement): void => {
+        element.innerHTML = '';
+    };
+
+    const appendSelectedImagesToListElement = (listElement: HTMLElement, images: URL[]): void => {
+        images.forEach(imageUrl => {
+            const imgElement = createImageElement(imageUrl);
             listElement.appendChild(imgElement);
         });
-    }
+    };
+
+    const createImageElement = (imageUrl: URL): HTMLImageElement => {
+        const imgElement = document.createElement('img');
+        imgElement.src = imageUrl.toString();
+        imgElement.alt = 'Selected Image';
+        imgElement.classList.add('w-20', 'h-20', 'object-cover');
+        return imgElement;
+    };
+
+    return { toggleImageSelection };
 }
 
-export default ImageSelection;
+const exampleGallery = document.getElementById('gallery1');
+const jsonData = JSON.parse(exampleGallery?.dataset?.productImages!)
+
+const imageSelection = createImageSelection();
+console.log(imageSelection);
