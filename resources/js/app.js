@@ -3,7 +3,8 @@ import Alpine from "alpinejs";
 import Swiper from "swiper";
 import "swiper/css";
 window.Alpine = Alpine;
-import fslightbox from "fslightbox";
+
+import './image-selection';
 
 Alpine.start();
 

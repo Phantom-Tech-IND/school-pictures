@@ -26,6 +26,6 @@ Route::get('/kindergarten-und-schulfotografie', [GuestPanelController::class, 'k
 Route::get('/upload', [GuestPanelController::class, 'upload']);
 Route::get('/team', [GuestPanelController::class, 'team'])->name('team');
 Route::get('/partners', [GuestPanelController::class, 'partners'])->name('partners');
-Route::get('/contact', [GuestPanelController::class, 'contact'])->name('contact');
+Route::get('/view-for-testing-purposes', [GuestPanelController::class, 'viewForTestingPurposes'])->name('view-for-testing-purposes');
 Route::post('/students/sync-photos', 'StudentController@syncPhotos')->name('students.sync-photos');
 Route::post('/contact/submit', [GuestPanelController::class, 'postContactForm'])->name('contact.submit');

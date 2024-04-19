@@ -89,6 +89,11 @@ class GuestPanelController extends Controller
         return view('contact');
     }
 
+    public function viewForTestingPurposes(Request $request)
+    {
+        return view('view-for-testing-purposes');
+    }
+
     public function galleryCode(Request $request)
     {
         $searchTerm = $request->input('code');
