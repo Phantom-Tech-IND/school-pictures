@@ -7,7 +7,7 @@
                     <img src="{{ asset('logo.png') }}" width="150" class="w-32 " alt="Logo">
                 </a>
             </div>
-            <div class="hidden lg:block">
+            <div class="hidden xl:block">
                 <div class="flex gap-4 text-sm text-center align-middle">
                     <!-- Add your menu items here -->
                     <a href="{{ route('home') }}"
@@ -21,7 +21,6 @@
                     <a href="{{ route('offers') }}"
                         class="{{ request()->routeIs('offers') ? 'text-accent' : ' hover:text-accent' }} uppercase">Unsere
                         angebote</a>
-
                     <div @click.away="open = false" class="relative" x-data="{ open: false }">
                         <button @click="open = !open"
                             class="flex uppercase {{ request()->routeIs('about.*') ? 'text-accent' : 'hover:text-accent' }}">
@@ -50,13 +49,12 @@
                             </div>
                         </div>
                     </div>
-
                     <a href="{{ route('contact') }}"
                         class="{{ request()->routeIs('contact') ? 'text-accent' : ' hover:text-accent' }} uppercase">Unsere
                         Kontakt</a>
                 </div>
             </div>
-            <div class="lg:hidden">
+            <div class="xl:hidden">
                 <button @click="open = !open" class="text-black focus:outline-none">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                         xmlns="http://www.w3.org/2000/svg">
@@ -67,49 +65,83 @@
                 </button>
             </div>
         </nav>
+        {{-- 
+            Alex, te rog, poti sa o rezolvi tu ca nu stiu de ce nu merge
+            La sfarsitul animatiei, in loc ca modalul sa fie 50% opacity, este 100% opacity.
+            Ori o rezolvi ori o poti sterge
+        --}}
+        {{-- <div class="fixed top-0 left-0 w-full h-full transition-opacity bg-black"
+            x-show="open"
+            x-transition:enter="transition-opacity ease-out duration-300"
+            x-transition:enter-start="opacity-0"
+            x-transition:enter-end="opacity-50"
+            x-transition:leave="transition-opacity ease-in duration-300"
+            x-transition:leave-start="opacity-50"
+            x-transition:leave-end="opacity-0">
+        </div> --}}
         <div x-show="open" @click.away="open = false" x-transition:enter="ease-out duration-300"
-            x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
-            x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100"
-            x-transition:leave-end="opacity-0"
-            class="absolute left-0 right-0 bg-white z-50 shadow-sm top-[74px] lg:hidden">
-            <div class="container flex flex-col gap-2 px-4 pb-8 mx-auto space-y-1 text-right h-fulllg:px-8 lg:px-8">
+            x-transition:enter-start="opacity-0 -right-full" x-transition:enter-end="opacity-100 right-0"
+            x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100 right-0"
+            x-transition:leave-end="opacity-0 -right-full"
+            class="absolute right-0 bg-gray-500 z-50 shadow-sm xl:hidden rounded-l-2xl mt-2">
+            <nav class="container flex flex-col gap-2 px-8 py-8 mx-auto space-y-1 h-full xl:px-8">
                 <a href="{{ route('home') }}"
-                    class="{{ request()->routeIs('home') ? 'text-accent' : ' hover:text-accent' }}"
-                    x-transition:enter="ease-out duration-300 delay-100" x-transition:enter-start="opacity-0"
-                    x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-200"
-                    x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">Home</a>
+                    class="{{
+                        request()->routeIs('home') ?
+                        'text-accent font-semibold relative -left-4' :
+                        'relative left-0 font-medium
+                        transition-all duration-300
+                        hover:pl-0 hover:text-accent hover:-left-4'
+                    }}">Home</a>
                 <a href="{{ route('shop') }}"
-                    class="{{ request()->routeIs('shop') ? 'text-accent' : ' hover:text-accent' }}"
-                    x-transition:enter="ease-out duration-300 delay-200" x-transition:enter-start="opacity-0"
-                    x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-200"
-                    x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">Webshop</a>
-                <a href="{{ route('shop') }}"
-                    class="{{ request()->routeIs('shop') ? 'text-accent' : ' hover:text-accent' }}"
-                    x-transition:enter="ease-out duration-300 delay-300" x-transition:enter-start="opacity-0"
-                    x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-200"
-                    x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">Kindergarten und
-                    Schulfotografie</a>
-                <a href="{{ route('shop') }}"
-                    class="{{ request()->routeIs('shop') ? 'text-accent' : ' hover:text-accent' }}"
-                    x-transition:enter="ease-out duration-300 delay-400" x-transition:enter-start="opacity-0"
-                    x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-200"
-                    x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">Unsere angebote</a>
+                    class="{{
+                        request()->routeIs('shop') ?
+                        'text-accent font-semibold relative -left-4' :
+                        'relative left-0 font-medium
+                        transition-all duration-300
+                        hover:pl-0 hover:text-accent hover:-left-4'
+                    }}">Webshop</a>
+                <a href="{{ route('kindergarden') }}"
+                    class="{{
+                        request()->routeIs('kindergarden') ?
+                        'text-accent font-semibold relative -left-4' :
+                        'relative left-0 font-medium
+                        transition-all duration-300
+                        hover:pl-0 hover:text-accent hover:-left-4'
+                    }}">Kindergarten und Schulfotografie</a>
+                <a href="{{ route('offers') }}"
+                    class="{{
+                        request()->routeIs('offers') ?
+                        'text-accent font-semibold relative -left-4' :
+                        'relative left-0 font-medium
+                        transition-all duration-300
+                        hover:pl-0 hover:text-accent hover:-left-4'
+                    }}">Unsere angebote</a>
                 <a href="{{ route('team') }}"
-                    class="{{ request()->routeIs('team') ? 'text-accent' : ' hover:text-accent' }}"
-                    x-transition:enter="ease-out duration-300 delay-500" x-transition:enter-start="opacity-0"
-                    x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-200"
-                    x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">Unsere Team</a>
+                    class="{{
+                        request()->routeIs('team') ?
+                        'text-accent font-semibold relative -left-4' :
+                        'relative left-0 font-medium
+                        transition-all duration-300
+                        hover:pl-0 hover:text-accent hover:-left-4'
+                    }}">Unsere Team</a>
                 <a href="{{ route('partners') }}"
-                    class="{{ request()->routeIs('partners') ? 'text-accent' : ' hover:text-accent' }}"
-                    x-transition:enter="ease-out duration-300 delay-600" x-transition:enter-start="opacity-0"
-                    x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-200"
-                    x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">Unsere Partnerseiten</a>
-                <a href="{{ route('partners') }}"
-                    class="{{ request()->routeIs('partners') ? 'text-accent' : ' hover:text-accent' }}"
-                    x-transition:enter="ease-out duration-300 delay-700" x-transition:enter-start="opacity-0"
-                    x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-200"
-                    x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">Unsere Kontakt</a>
-            </div>
+                    class="{{
+                        request()->routeIs('partners') ?
+                        'text-accent font-semibold relative -left-4' :
+                        'relative left-0 font-medium
+                        transition-all duration-300
+                        hover:pl-0 hover:text-accent hover:-left-4'
+                    }}">Unsere Partnerseiten</a>
+                <a href="{{ route('contact') }}"
+                    class="{{
+                        request()->routeIs('contact') ?
+                        'text-accent font-semibold relative -left-4' :
+                        'relative left-0 font-medium
+                        transition-all duration-300
+                        hover:pl-0 hover:text-accent hover:-left-4'
+                    }}">Unsere Kontakt</a>
+            </nav>
         </div>
     </div>
 
