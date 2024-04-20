@@ -7,7 +7,7 @@
 
 @section('content')
     <image-gallery-container id="myGallery" class="p-4 mt-20 bg-red-300">
-        <!-- Responsive grid with minmax and clamp -->
+        <!-- Responsive grid with minmax and clamp. Deja imi lipseste css-ul si se vede 😅 -->
         <div class="grid gap-4 bg-blue-400 auto-rows-fr"
             style="grid-template-columns: repeat(auto-fill, minmax(clamp(5rem, 2.5455rem + 10.9091vw, 20rem), 1fr));">
             <!-- Image selectors for individual images -->
