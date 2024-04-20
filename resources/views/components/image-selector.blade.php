@@ -1,6 +1,4 @@
-@include('components.img-selector.image-gallery-container')
-@include('components.img-selector.image-selector')
-@include('components.img-selector.image-display')
+@vite(['resources/js/image-selector/index.js'])
 
 <template id="image-selector-template">
     <div class="border cursor-pointer hover:border-blue-500 focus:border-blue-700 focus:outline-none">
@@ -20,11 +18,3 @@
 <template id="image-template">
     <img class="object-cover w-32 h-32">
 </template>
-
-@once
-    <script>
-        customElements.define('image-gallery-container', ImageGalleryContainer);
-        customElements.define('image-selector', ImageSelector);
-        customElements.define('image-display', ImageDisplay);
-    </script>
-@endonce
