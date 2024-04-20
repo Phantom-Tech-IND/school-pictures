@@ -100,16 +100,13 @@ class GuestPanelController extends Controller
             Constants::KINDERGARDEN_IMAGE_URL.'SH-7321-7038.jpg',
             Constants::KINDERGARDEN_IMAGE_URL.'SH-7333-8904-7425.jpg',
             Constants::KINDERGARDEN_IMAGE_URL.'SH-7326-8999-3821.jpg',
-            // Constants::KINDERGARDEN_IMAGE_URL.'KG-2115-6516-2.jpg',
-            // Constants::KINDERGARDEN_IMAGE_URL.'SH-7333-8904-7433.jpg',
-            // Constants::KINDERGARDEN_IMAGE_URL.'SH-7336-9040-8250.jpg',
-            // Constants::KINDERGARDEN_IMAGE_URL.'SH-7325-8963-3080.jpg',
-            // Constants::KINDERGARDEN_IMAGE_URL.'KG-7157-8475-4033.jpg',
-            // Constants::KINDERGARDEN_IMAGE_URL.'SH-7326-8999-3828.jpg',
-            // Constants::KINDERGARDEN_IMAGE_URL.'IMG_9936-1.jpg',
-        ];
-
-        $productImages = [
+            Constants::KINDERGARDEN_IMAGE_URL.'KG-2115-6516-2.jpg',
+            Constants::KINDERGARDEN_IMAGE_URL.'SH-7333-8904-7433.jpg',
+            Constants::KINDERGARDEN_IMAGE_URL.'SH-7336-9040-8250.jpg',
+            Constants::KINDERGARDEN_IMAGE_URL.'SH-7325-8963-3080.jpg',
+            Constants::KINDERGARDEN_IMAGE_URL.'KG-7157-8475-4033.jpg',
+            Constants::KINDERGARDEN_IMAGE_URL.'SH-7326-8999-3828.jpg',
+            Constants::KINDERGARDEN_IMAGE_URL.'IMG_9936-1.jpg',
             Constants::KINDERGARDEN_IMAGE_URL.'SH-7321-8492-6640.jpg',
             Constants::KINDERGARDEN_IMAGE_URL.'D5A7060.jpg',
             Constants::KINDERGARDEN_IMAGE_URL.'SH-7321-8884-6851.jpg',
@@ -122,7 +119,7 @@ class GuestPanelController extends Controller
             Constants::KINDERGARDEN_IMAGE_URL.'SH-7219-8137-9260.jpg',
         ];
 
-        return view('view-for-testing-purposes', compact('images'), compact('productImages'));
+        return view('view-for-testing-purposes', compact('images'));
     }
 
     public function galleryCode(Request $request)
