@@ -1,6 +1,5 @@
 export class ImageGalleryContainer extends HTMLElement {
     constructor() {
-        console.log(123);
         super();
     }
 
