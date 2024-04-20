@@ -13,9 +13,13 @@
 <template id="image-display-template">
     <div id="selectedImagesList"
         class="flex justify-start gap-4 mt-8 overflow-x-auto whitespace-nowrap scroll-smooth scrollbar-hide">
+        <!-- Styles for images within this container are defined in CSS -->
     </div>
 </template>
 
+<template id="image-template">
+    <img class="object-cover w-32 h-32">
+</template>
 
 @once
     <script>
