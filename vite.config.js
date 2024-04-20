@@ -10,7 +10,7 @@ export default defineConfig({
         laravel({
             input: [
                 "resources/css/app.css",
-                "resources/js/image-selection.js",
+                "resources/js/image-selector/index.js",
                 "resources/js/app.js",
                 "resources/css/filament/admin/theme.css",
             ],
