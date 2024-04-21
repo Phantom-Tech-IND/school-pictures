@@ -10,8 +10,10 @@ export class ImageSelector extends HTMLElement {
 
     connectedCallback() {
         this.classList.add("block"); // the default is inline
+        this.style.cursor = "pointer";
         this.render();
-        this.addEventListener("click", () => {
+        const checkbox = this.querySelector('input[type="checkbox"]');
+        checkbox.addEventListener("change", () => {
             this.toggleSelection();
         });
         this.checkContainerId();
@@ -41,6 +43,8 @@ export class ImageSelector extends HTMLElement {
         img.src = this.getAttribute("src") || "";
         img.alt = this.getAttribute("alt") || "";
         img.setAttribute("key", this.getAttribute("key"));
+        const checkbox = instance.querySelector('input[type="checkbox"]');
+        checkbox.checked = this.selected;
         this.innerHTML = "";
         this.appendChild(instance);
         // Directly reflect the selected state on the element
@@ -52,23 +56,28 @@ export class ImageSelector extends HTMLElement {
     }
 
     toggleSelection() {
-        this.selected = !this.selected;
-        // Use setAttribute/removeAttribute directly to avoid re-triggering attributeChangedCallback unnecessarily
+        this.selected = !this.selected; // Toggle the selected state
+        const checkbox = this.querySelector('input[type="checkbox"]');
+        checkbox.checked = this.selected; // Ensure checkbox state is in sync
+
+        // Reflect the selected state on the element
         if (this.selected) {
             this.setAttribute("selected", "");
-        } else {
-            this.removeAttribute("selected");
-        }
-        this.dispatchEvent(
-            new CustomEvent("image-selected", {
+            this.dispatchEvent(new CustomEvent("image-selected", {
                 bubbles: true,
                 detail: {
                     src: this.getAttribute("src"),
                     selected: this.selected,
                     key: this.getAttribute("key"),
                 },
-            })
-        );
+            }));
+        } else {
+            this.removeAttribute("selected");
+            this.dispatchEvent(new CustomEvent("remove-image", {
+                bubbles: true,
+                detail: { key: this.getAttribute("key") }
+            }));
+        }
     }
 
     checkContainerId() {

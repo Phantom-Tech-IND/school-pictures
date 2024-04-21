@@ -28,6 +28,23 @@ export class ImageGalleryContainer extends HTMLElement {
             this.setSelectedImages(selectedImages);
             this.updateDisplays();
         });
+        this.addEventListener("remove-image", (e) => {
+            const { detail: { key } } = e;
+            let selectedImages = this.getSelectedImages();
+            const indexToRemove = selectedImages.findIndex(selectedKey => selectedKey === key);
+            if (indexToRemove !== -1) {
+                selectedImages.splice(indexToRemove, 1); // Remove the image by key
+                this.setSelectedImages(selectedImages);
+                this.updateDisplays();
+
+                // Find the corresponding ImageSelector and update its selected state
+                const imageSelector = this.querySelector(`image-selector[key="${key}"]`);
+                if (imageSelector) {
+                    imageSelector.selected = false; // Update internal state
+                    imageSelector.removeAttribute("selected"); // Update attribute to reflect the change
+                }
+            }
+        });
     }
 
     updateDisplays() {
@@ -35,8 +52,8 @@ export class ImageGalleryContainer extends HTMLElement {
             'image-display[container-id="' + this.id + '"]'
         );
         displays.forEach((display) => {
-            const selectedImagesSrc = this.getSelectedImagesSrc();
-            display.updateImages(selectedImagesSrc);
+            const selectedImages = this.getSelectedImagesSrc();
+            display.updateImages(selectedImages);
         });
     }
 
@@ -54,10 +71,14 @@ export class ImageGalleryContainer extends HTMLElement {
 
     getSelectedImagesSrc() {
         const selectedKeys = this.getSelectedImages();
-        return Array.from(this.querySelectorAll("image-selector"))
-            .filter((selector) =>
-                selectedKeys.includes(selector.getAttribute("key"))
-            )
-            .map((selector) => selector.getAttribute("src"));
+        return selectedKeys.map(key => 
+            Array.from(this.querySelectorAll("image-selector"))
+                .find(selector => selector.getAttribute("key") === key)
+        )
+        .filter(selector => selector) // Filter out any null results in case of missing selectors
+        .map(selector => ({
+            src: selector.getAttribute("src"),
+            key: selector.getAttribute("key")
+        }));
     }
 }
