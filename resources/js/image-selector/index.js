@@ -1,5 +1,5 @@
 import { ImageSelector } from "./image-selector.js";
-import { ImageGalleryContainer } from "./image-callery-container.js";
+import { ImageGalleryContainer } from "./image-gallery-container.js";
 import { ImageDisplay } from "./image-display.js";
 
 customElements.define("image-gallery-container", ImageGalleryContainer);
