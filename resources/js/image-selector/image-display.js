@@ -1,12 +1,15 @@
 export class ImageDisplay extends HTMLElement {
     constructor() {
         super();
+        this.draggedItem = null; // To keep track of the item being dragged
     }
 
     connectedCallback() {
         this.classList.add("block"); // the default is inline
         this.render();
         this.checkContainerId();
+        this.addEventListener('dragover', (e) => this.handleDragOver(e));
+        this.addEventListener('drop', (e) => this.handleDrop(e));
     }
 
     attributeChangedCallback(name, oldValue, newValue) {
@@ -31,17 +34,62 @@ export class ImageDisplay extends HTMLElement {
         container.innerHTML = ""; // Clear existing images
         const template = document.getElementById("image-template");
 
-        images.forEach(({ src, key }) => {
+        images.forEach(({ src, key }, index) => {
             const instance = template.content.cloneNode(true);
             const img = instance.querySelector("img");
             const button = instance.querySelector("button");
             img.src = src;
+            img.setAttribute("draggable", true);
+            img.setAttribute("data-key", key);
+            img.setAttribute("data-index", index); // Track the index for reordering
+            img.addEventListener("dragstart", (e) => this.handleDragStart(e, key));
             button.addEventListener("click", (e) => {
                 e.stopPropagation();
                 this.removeImage(key); // Use key to identify the image to remove
             });
             container.appendChild(instance);
         });
+    }
+
+    handleDragStart(e, key) {
+        this.draggedItem = e.target;
+        e.dataTransfer.effectAllowed = 'move';
+        e.dataTransfer.setData('text/plain', key); // Use the key as the drag data
+    }
+
+    handleDragOver(e) {
+        e.preventDefault(); // Necessary to allow dropping
+        e.dataTransfer.dropEffect = 'move';
+    }
+
+    handleDrop(e) {
+        e.preventDefault();
+        if (e.target.tagName === 'IMG' && this.draggedItem !== e.target) {
+            const draggedIndex = parseInt(this.draggedItem.getAttribute('data-index'), 10);
+            const targetIndex = parseInt(e.target.getAttribute('data-index'), 10);
+            this.reorderImages(draggedIndex, targetIndex);
+        }
+    }
+
+    reorderImages(draggedIndex, targetIndex) {
+        const container = this.querySelector("#selectedImagesList");
+        let images = Array.from(container.querySelectorAll("img"));
+        // Reorder the array based on the drag and drop
+        const draggedItem = images.splice(draggedIndex, 1)[0];
+        images.splice(targetIndex, 0, draggedItem);
+
+        // Update the DOM to reflect the new order
+        container.innerHTML = "";
+        images.forEach((img, index) => {
+            img.setAttribute('data-index', index); // Update the index after reordering
+            container.appendChild(img.parentNode); // Assuming img is wrapped in a div or similar
+        });
+
+        // Notify the container to update the order
+        this.dispatchEvent(new CustomEvent("update-order", {
+            bubbles: true,
+            detail: { newOrder: images.map(img => img.getAttribute('data-key')) }
+        }));
     }
 
     removeImage(key) {

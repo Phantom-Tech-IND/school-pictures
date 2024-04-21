@@ -17,13 +17,13 @@
 </template>
 
 <template id="image-template">
-    <div class="relative w-32 h-32">
+    <div class="relative w-32 h-32 min-w-32 min-h-32">
         <!-- Adjusted button styles for round shape and centering in the top right corner -->
         <button class="absolute top-0 right-0 p-1 text-white transform translate-x-1/2 -translate-y-1/2 bg-red-500 rounded-full">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
             </svg>
         </button>
-        <img class="object-cover w-full h-full min-w-32">
+        <img class="object-cover w-full h-full">
     </div>
 </template>
