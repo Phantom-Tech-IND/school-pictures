@@ -4,7 +4,6 @@ export default {
     presets: [preset],
     content: [
         "./app/Filament/**/*.php",
-        "./vendor/ralphjsmit/laravel-filament-media-library/resources/**/*.blade.php",
         "./resources/views/filament/**/*.blade.php",
         "./vendor/filament/**/*.blade.php",
     ],

@@ -7,7 +7,6 @@ use App\Models\Student;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
-use RalphJSmit\Filament\MediaLibrary\Media\Models\MediaLibraryItem;
 
 class ParseStudentPhotos extends Command
 {
@@ -97,27 +96,27 @@ class ParseStudentPhotos extends Command
                                 $this->error("Invalid file type for photo: {$photo->getFilename()}");
                             }
                             // Check if the photo already exists in the collection
-                            $photoExists = $student->getMedia('student_photos')->contains(function ($value) use ($photo) {
-                                return $value->file_name === $photo->getFilename();
-                            });
+                            // $photoExists = $student->getMedia('student_photos')->contains(function ($value) use ($photo) {
+                            //     return $value->file_name === $photo->getFilename();
+                            // });
 
                             // Only add the photo if it doesn't already exist
-                            if (! $photoExists) {
-                                $mediaItem = $student->addMedia($photo->getPathname())
-                                    ->preservingOriginal()
-                                    ->usingName($originalPhotoName)
-                                    ->toMediaCollection('student_photos', 'public');
+                            // if (! $photoExists) {
+                            //     $mediaItem = $student->addMedia($photo->getPathname())
+                            //         ->preservingOriginal()
+                            //         ->usingName($originalPhotoName)
+                            //         ->toMediaCollection('student_photos', 'public');
 
-                                // Insert a record into the student_photos table
-                                DB::table('student_photos')->insert([
-                                    'student_id' => $student->id,
-                                    'photo_path' => $mediaItem->getPath(), // Adjust according to how you store paths
-                                    'created_at' => now(),
-                                    'updated_at' => now(),
-                                ]);
+                            //     // Insert a record into the student_photos table
+                            //     DB::table('student_photos')->insert([
+                            //         'student_id' => $student->id,
+                            //         'photo_path' => $mediaItem->getPath(), // Adjust according to how you store paths
+                            //         'created_at' => now(),
+                            //         'updated_at' => now(),
+                            //     ]);
 
-                                $this->info("Added photo for student: {$studentName}");
-                            }
+                            //     $this->info("Added photo for student: {$studentName}");
+                            // }
                         }
                     }
                 }
@@ -173,11 +172,11 @@ class ParseStudentPhotos extends Command
             if (! $photoExists) {
                 // Manually add uploaded file to the Filament Media Library
                 $uploadedFile = new \Illuminate\Http\UploadedFile($photo->getPathname(), $photoName);
-                $mediaItem = MediaLibraryItem::addUpload($uploadedFile);
+                // $mediaItem = MediaLibraryItem::addUpload($uploadedFile);
 
                 // Optionally, update the student's photo attribute if it's empty
                 if (empty($student->photo)) {
-                    $student->photo = $mediaItem->getUrl(); // Assuming getUrl() method exists or similar to get the photo URL
+                    // $student->photo = $mediaItem->getUrl(); // Assuming getUrl() method exists or similar to get the photo URL
                     $student->save();
                 }
 
