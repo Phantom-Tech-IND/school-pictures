@@ -13,10 +13,9 @@ return new class extends Migration
     {
         Schema::create('students', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('institution_id');
             $table->string('name');
+            $table->enum('institution_type', ['school', 'kindergarden']);
             $table->date('birth_date')->nullable();
-            $table->foreign('institution_id')->references('id')->on('institutions')->onDelete('cascade');
             $table->timestamps();
         });
     }

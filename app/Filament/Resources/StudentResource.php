@@ -24,17 +24,24 @@ class StudentResource extends Resource
                     ->label('Name'),
                 \Filament\Forms\Components\DatePicker::make('birth_date')
                     ->required()
+                    ->native(false)
                     ->label('Birth Date'),
-                \Filament\Forms\Components\Select::make('institution_id')
-                    ->relationship('institution', 'name')
+                \Filament\Forms\Components\Select::make('institution_type')
                     ->required()
-                    ->searchable()
-                    ->label('Institution'),
+                    ->label('Institution Type')
+                    ->options([
+                        'school' => 'School',
+                        'kindergarden' => 'Kindergarden',
+                    ]),
                 \Filament\Forms\Components\Repeater::make('student_photos')
                     ->relationship('photos')
                     ->schema([
                         \Filament\Forms\Components\FileUpload::make('photo_path')
                             ->image()
+                            ->imageEditor()
+                            ->preserveFilenames()
+                            ->required()
+                            ->downloadable()
                             ->label('Photo'),
                     ])
                     ->columnSpan('full'),
@@ -47,7 +54,6 @@ class StudentResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name')->searchable(),
                 Tables\Columns\TextColumn::make('birth_date')->label('Birth Date')->searchable(),
-                Tables\Columns\TextColumn::make('institution.name')->label('Institution Name')->searchable(),
                 Tables\Columns\BadgeColumn::make('photos_count')
                     ->sortable()
                     ->label('Has Photos')

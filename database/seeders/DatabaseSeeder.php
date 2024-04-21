@@ -24,7 +24,6 @@ class DatabaseSeeder extends Seeder
         ]);
 
         \App\Models\Message::factory(10)->create();
-        \App\Models\Institution::factory(2)->create();
         \App\Models\Offers::factory(10)->create();
 
         $this->call([
