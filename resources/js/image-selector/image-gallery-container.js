@@ -45,6 +45,16 @@ export class ImageGalleryContainer extends HTMLElement {
                 }
             }
         });
+        this.addEventListener("update-order", (e) => {
+            const { detail: { newOrder } } = e;
+            this.updateSelectedImagesOrder(newOrder);
+            this.updateDisplays();
+        });
+    }
+
+    updateSelectedImagesOrder(newOrder) {
+        // Assuming newOrder is an array of keys representing the new order of images
+        this.setSelectedImages(newOrder);
     }
 
     updateDisplays() {
@@ -82,3 +92,4 @@ export class ImageGalleryContainer extends HTMLElement {
         }));
     }
 }
+
