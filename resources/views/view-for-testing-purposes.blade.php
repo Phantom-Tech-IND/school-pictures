@@ -20,6 +20,7 @@
 
         <!-- Display for selected images -->
         <image-display container-id="myGallery" class="bg-green-600"></image-display>
+        <image-display container-id="myGallery" class="bg-green-300"></image-display>
     </image-gallery-container>
 
     {{-- Example of how to get the selected images --}}

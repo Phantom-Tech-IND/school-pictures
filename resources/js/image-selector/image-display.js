@@ -26,17 +26,29 @@ export class ImageDisplay extends HTMLElement {
         this.appendChild(instance);
     }
 
-    updateImages(imagesSrc) {
+    updateImages(images) {
         const container = this.querySelector("#selectedImagesList");
         container.innerHTML = ""; // Clear existing images
         const template = document.getElementById("image-template");
 
-        imagesSrc.forEach((src) => {
+        images.forEach(({ src, key }) => {
             const instance = template.content.cloneNode(true);
             const img = instance.querySelector("img");
+            const button = instance.querySelector("button");
             img.src = src;
+            button.addEventListener("click", (e) => {
+                e.stopPropagation();
+                this.removeImage(key); // Use key to identify the image to remove
+            });
             container.appendChild(instance);
         });
+    }
+
+    removeImage(key) {
+        this.dispatchEvent(new CustomEvent("remove-image", {
+            bubbles: true,
+            detail: { key }
+        }));
     }
 
     checkContainerId() {
