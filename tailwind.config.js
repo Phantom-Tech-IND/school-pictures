@@ -36,6 +36,9 @@ export default {
             fontStyle: {
                 italic: "italic",
             },
+            screens: {
+                'xs': '475px',
+            },
         },
     },
     purge: [
