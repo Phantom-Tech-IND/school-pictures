@@ -9,8 +9,8 @@
             <div
                 class="flex flex-col items-center justify-center max-w-4xl mx-auto mt-6 space-x-0 space-y-4 lg:flex-row lg:space-x-4 lg:space-y-0">
                 @foreach ($tabs as $tab)
-                    <button @click="tab = '{{ $tab['id'] }}'" :class="{ 'bg-green-900': tab === '{{ $tab['id'] }}' }"
-                        class="w-auto px-4 py-2 text-sm text-gray-100 bg-green-600 rounded-full sm:text-base lg:text-lg tab-button">{{ $tab['name'] }}</button>
+                    <button @click="tab = '{{ $tab['id'] }}'" :class="{ 'bg-accent-700': tab === '{{ $tab['id'] }}' }"
+                        class="w-auto px-4 py-2 text-sm text-gray-100 rounded-full bg-accent sm:text-base lg:text-lg tab-button">{{ $tab['name'] }}</button>
                 @endforeach
             </div>
             @foreach ($tabs as $tabIndex => $tab)
@@ -19,7 +19,7 @@
                         @foreach ($tab['questions'] as $index => $question)
                             <div @click="openAccordion = openAccordion === {{ $index }} ? null : {{ $index }}"
                                 :class="{
-                                    'bg-indigo-50 border-green-600': openAccordion === {{ $index }},
+                                    'bg-green-50 border-accent': openAccordion === {{ $index }},
                                     'border-gray-300': openAccordion !== {{ $index }}
                                 }"
                                 class="p-4 mb-8 transition duration-500 border-2 cursor-pointer rounded-xl"

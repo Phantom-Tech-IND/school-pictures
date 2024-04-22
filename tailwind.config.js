@@ -8,7 +8,19 @@ export default {
                 primary: "#041F1E",
                 secondary: "#041F1E",
                 text: "#041F1E",
-                accent: "#94C11C",
+                accent: {
+                    DEFAULT: "#94C11C", // Original color
+                    50: "#f7f9e8", // Lightest shade
+                    100: "#e8f2bf",
+                    200: "#d9eb96",
+                    300: "#cae46d",
+                    400: "#bbdd44",
+                    500: "#acD61B", // Slightly lighter than the original
+                    600: "#8cb416",
+                    700: "#6d8f11",
+                    800: "#4e6a0c",
+                    900: "#2f4507", // Darkest shade
+                },
                 white: "#FFFFFF",
                 darkgrey: "#595959",
                 transparentblack: "#00000000",
