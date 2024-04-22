@@ -10,6 +10,18 @@ export class ImageDisplay extends HTMLElement {
         this.checkContainerId();
         this.addEventListener('dragover', (e) => this.handleDragOver(e));
         this.addEventListener('drop', (e) => this.handleDrop(e));
+
+        // Fetch the associated ImageGalleryContainer
+        const containerId = this.getAttribute("container-id");
+        const container = document.querySelector(`image-gallery-container#${containerId}`);
+        if (container) {
+            // Calculate placeholders needed based on the 'data-min' attribute and current selected images
+            const minRequired = parseInt(container.getAttribute('data-min'), 10) || 0;
+            const selectedImages = container.getSelectedImagesSrc ? container.getSelectedImagesSrc() : [];
+            const placeholdersNeeded = Math.max(0, minRequired - selectedImages.length);
+            // Initialize display with the required number of placeholders
+            this.updateImages([], placeholdersNeeded);
+        }
     }
 
     attributeChangedCallback(name, oldValue, newValue) {
@@ -29,32 +41,51 @@ export class ImageDisplay extends HTMLElement {
         this.appendChild(instance);
     }
 
-    updateImages(images) {
+    updateImages(images, placeholdersNeeded = 0) {
         const container = this.querySelector("#selectedImagesList");
-        container.innerHTML = ""; // Clear existing images
-        const template = document.getElementById("image-template");
+        container.innerHTML = ""; // Clear existing images and placeholders
+        const imageTemplate = document.getElementById("image-template");
 
         images.forEach(({ src, key }, index) => {
-            const instance = template.content.cloneNode(true);
+            const instance = imageTemplate.content.cloneNode(true);
             const img = instance.querySelector("img");
             const button = instance.querySelector("button");
             img.src = src;
             img.setAttribute("draggable", true);
             img.setAttribute("data-key", key);
             img.setAttribute("data-index", index); // Track the index for reordering
-            img.addEventListener("dragstart", (e) => this.handleDragStart(e, key));
+            img.style.cursor = "grab"; // Change cursor to indicate draggable
+            img.addEventListener("dragstart", (e) => {
+                this.handleDragStart(e, key);
+                e.target.style.cursor = "grabbing"; // Change cursor on drag start
+                e.target.style.opacity = '0.5'; // Make the image more transparent when dragged
+            });
+            img.addEventListener("dragend", (e) => {
+                e.target.style.cursor = "grab"; // Revert cursor on drag end
+                e.target.style.opacity = '1'; // Revert opacity on drag end
+            });
             button.addEventListener("click", (e) => {
                 e.stopPropagation();
                 this.removeImage(key); // Use key to identify the image to remove
             });
             container.appendChild(instance);
         });
+
+        // Render placeholders if needed
+        const placeholderTemplate = document.getElementById("image-placeholder-template");
+        for (let i = 0; i < placeholdersNeeded; i++) {
+            const instance = placeholderTemplate.content.cloneNode(true);
+            const placeholderText = instance.querySelector(".placeholder-text");
+            placeholderText.textContent = `${images.length + i + 1}`; // Display index number
+            container.appendChild(instance);
+        }
     }
 
     handleDragStart(e, key) {
         this.draggedItem = e.target;
         e.dataTransfer.effectAllowed = 'move';
         e.dataTransfer.setData('text/plain', key); // Use the key as the drag data
+        e.target.style.opacity = '0.5'; // Make the image more transparent when dragged
     }
 
     handleDragOver(e) {
