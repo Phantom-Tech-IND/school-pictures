@@ -16,6 +16,7 @@
     </div>
 </body>
 
+@include('components.modal-right-click')
 @include('components.footer-contact')
 @include('components.images-footer')
 @include('components.footer')
