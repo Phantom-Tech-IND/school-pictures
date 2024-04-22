@@ -1,9 +1,13 @@
 import "./bootstrap";
-import Alpine from "alpinejs";
+
 import Swiper from "swiper";
 import "swiper/css";
-window.Alpine = Alpine;
 
+import Alpine from "alpinejs";
+import collapse from '@alpinejs/collapse'
+Alpine.plugin(collapse)
+
+window.Alpine = Alpine;
 Alpine.start();
 
 const swiper = new Swiper(".swiper", {
@@ -30,3 +34,4 @@ const swiper = new Swiper(".swiper", {
         delay: 5000,
     },
 });
+
