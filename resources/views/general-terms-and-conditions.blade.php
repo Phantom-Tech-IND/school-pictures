@@ -1,8 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="max-w-4xl px-4 pt-20 mx-auto sm:px-6 lg:px-8">
-        <h1 class="text-3xl font-bold leading-tight text-gray-900">Allgemeine Geschäftsbedingungen</h1>
+<div class="px-4 py-5 mt-12 text-white">
+    <div class="container max-w-6xl py-10 mx-auto">
+        <h1 class="text-2xl font-bold leading-tight text-gray-900 sm:text-3xl">Allgemeine Geschäftsbedingungen</h1>
 
         <div class="mt-6 space-y-6 text-lg text-gray-700">
             <h2 class="text-2xl font-semibold">Zustandekommen des Vertrags</h2>
@@ -103,4 +104,5 @@
                 Aufenthalt hat, eingeschränkt werden.</p>
         </div>
     </div>
+</div>
 @endsection
