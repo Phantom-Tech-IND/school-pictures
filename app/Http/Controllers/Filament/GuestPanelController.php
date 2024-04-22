@@ -92,7 +92,6 @@ class GuestPanelController extends Controller
 
     public function viewForTestingPurposes(Request $request)
     {
-
         $images = [
             Constants::KINDERGARDEN_IMAGE_URL.'SH-7321-6607.jpg',
             Constants::KINDERGARDEN_IMAGE_URL.'SH-7219-8137-9257.jpg',
@@ -166,8 +165,10 @@ class GuestPanelController extends Controller
         return view('general-terms-and-conditions');
     }
 
-    public function frequentlyAskedQuestion()
+    public function frequentlyAskedQuestions()
     {
-        return view('frequently-asked-question');
+        $tabs = \App\Constants\Constants::FAQ_TABS;
+
+        return view('frequently-asked-questions', compact('tabs'));
     }
 }
