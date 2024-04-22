@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\ProductResource\Pages;
 use App\Models\Product;
 use Filament\Forms;
+use Filament\Forms\Components\TagsInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -20,8 +21,15 @@ class ProductResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\TextInput::make('name')
+                    ->required(),
                 Forms\Components\TextInput::make('product_type')
                     ->required(),
+                Forms\Components\Select::make('category_id')
+                    ->searchable()
+                    ->relationship('category', 'name')
+                    ->required(),
+                TagsInput::make('tags')->separator(','),
                 Forms\Components\TextInput::make('price')
                     ->numeric()
                     ->required(),
@@ -39,10 +47,12 @@ class ProductResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('name'),
                 Tables\Columns\TextColumn::make('product_type'),
                 Tables\Columns\TextColumn::make('price'),
-                Tables\Columns\TextColumn::make('category.name'), // Assuming a belongsTo relationship
-                Tables\Columns\TagsColumn::make('tags.name'), // Assuming a belongsToMany relationship
+                Tables\Columns\TextColumn::make('category.name'),
+                Tables\Columns\TextColumn::make('tags')
+                    ->badge()->separator(','),
                 Tables\Columns\TextColumn::make('description')
                     ->limit(50),
                 Tables\Columns\ImageColumn::make('photo'),
@@ -64,6 +74,7 @@ class ProductResource extends Resource
     {
         return [
             //
+
         ];
     }
 

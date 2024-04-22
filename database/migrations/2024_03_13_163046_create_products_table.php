@@ -13,8 +13,10 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->string('product_type');
+            $table->string('name');
+            $table->enum('product_type', ['personal', 'school']);
             $table->decimal('price', 8, 2); // Example precision for price
+            $table->string('tags')->nullable();
             $table->string('photo')->nullable(); // Assuming the photo is optional
             $table->timestamps();
             $table->json('custom_attributes')->nullable();

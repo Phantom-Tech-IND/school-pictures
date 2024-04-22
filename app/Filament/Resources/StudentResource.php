@@ -52,8 +52,15 @@ class StudentResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')->searchable(),
-                Tables\Columns\TextColumn::make('birth_date')->label('Birth Date')->searchable(),
+                Tables\Columns\TextColumn::make('name')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('birth_date')->sortable()->label('Birth Date')->searchable(),
+                Tables\Columns\BadgeColumn::make('institution_type')
+                    ->searchable()
+                    ->sortable()
+                    ->colors([
+                        'success' => fn ($state) => $state === 'school',
+                        'danger' => fn ($state) => $state === 'kindergarden',
+                    ]),
                 Tables\Columns\BadgeColumn::make('photos_count')
                     ->sortable()
                     ->label('Has Photos')

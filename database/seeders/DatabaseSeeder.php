@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Category;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -25,6 +26,8 @@ class DatabaseSeeder extends Seeder
 
         \App\Models\Message::factory(10)->create();
         \App\Models\Offers::factory(10)->create();
+
+        Category::factory(10)->create();
 
         $this->call([
             ProductSeeder::class,
