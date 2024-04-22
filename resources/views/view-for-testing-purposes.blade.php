@@ -6,7 +6,7 @@
 @include('components.image-selector')
 
 @section('content')
-    <image-gallery-container id="myGallery" class="p-4 mt-20 bg-red-300">
+    <image-gallery-container data-min="3" data-max="5" id="myGallery" class="p-4 mt-20 bg-red-300">
         <!-- Responsive grid with minmax and clamp. Deja imi lipseste css-ul si se vede 😅 -->
         <div class="grid gap-4 bg-blue-400 auto-rows-fr"
             style="grid-template-columns: repeat(auto-fill, minmax(clamp(5rem, 2.5455rem + 10.9091vw, 20rem), 1fr));">
@@ -18,7 +18,7 @@
             @endforeach
         </div>
 
-        <!-- Display for selected images -->
+        <h5 class="mt-10 mb-0">i added two <code class="bg-gray-300">image-display components</code> to check if the behaviour is consistent</h5>
         <image-display container-id="myGallery" class="bg-green-600"></image-display>
         <image-display container-id="myGallery" class="bg-green-300"></image-display>
     </image-gallery-container>

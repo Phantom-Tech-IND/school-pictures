@@ -16,8 +16,29 @@
     </div>
 </template>
 
+<template id="image-placeholder-template">
+    <div class="relative flex items-center justify-center w-32 h-32 bg-gray-200 placeholder min-w-32 min-h-32">
+        <!-- Placeholder content goes here -->
+        <span class="placeholder-text">Add Image</span>
+    </div>
+</template>
+
 <template id="image-template">
     <div class="relative w-32 h-32 min-w-32 min-h-32">
+        <!-- Draggable indicator (2x3 bullets), now white and not interfering with mouse events -->
+        <div class="absolute top-0 left-0 pointer-events-none">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white">
+                <!-- Row 1 -->
+                <circle cx="6" cy="8" r="2"></circle>
+                <circle cx="14" cy="8" r="2"></circle>
+                <!-- Row 2 -->
+                <circle cx="6" cy="14" r="2"></circle>
+                <circle cx="14" cy="14" r="2"></circle>
+                <!-- Row 3 -->
+                <circle cx="6" cy="20" r="2"></circle>
+                <circle cx="14" cy="20" r="2"></circle>
+            </svg>
+        </div>
         <!-- Adjusted button styles for round shape and centering in the top right corner -->
         <button class="absolute top-0 right-0 p-1 text-white transform translate-x-1/2 -translate-y-1/2 bg-red-500 rounded-full">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
