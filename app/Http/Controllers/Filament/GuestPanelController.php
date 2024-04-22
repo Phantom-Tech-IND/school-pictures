@@ -155,4 +155,19 @@ class GuestPanelController extends Controller
     {
         return view('filament.guest.upload');
     }
+
+    public function impressum()
+    {
+        return view('impressum');
+    }
+
+    public function generalTermsAndConditions()
+    {
+        return view('general-terms-and-conditions');
+    }
+
+    public function frequentlyAskedQuestion()
+    {
+        return view('frequently-asked-question');
+    }
 }
