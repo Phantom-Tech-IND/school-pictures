@@ -2,32 +2,27 @@
 
 @section('content')
     <div class="px-4 py-5 mt-12">
-        <div class="container max-w-6xl pt-10 mx-auto text-center" x-data="{ tab: '{{ $tabs[0]['id'] }}' }">
-            <h1 class="text-2xl font-bold leading-tight text-gray-900 sm:text-3xl">
+        <div class="container max-w-6xl pt-10 mx-auto text-center">
+            <h1 class="mb-4 text-2xl font-semibold leading-tight text-gray-900 sm:text-3xl">
                 HÄUFIG GESTELLTE FRAGEN (FAQ)
             </h1>
-            <div
-                class="flex flex-col items-center justify-center max-w-4xl mx-auto mt-6 space-x-0 space-y-4 lg:flex-row lg:space-x-4 lg:space-y-0">
-                @foreach ($tabs as $tab)
-                    <button @click="tab = '{{ $tab['id'] }}'" :class="{ 'bg-accent-700': tab === '{{ $tab['id'] }}' }"
-                        class="w-auto px-4 py-2 text-sm text-gray-100 rounded-full bg-accent sm:text-base lg:text-lg tab-button">{{ $tab['name'] }}</button>
-                @endforeach
-            </div>
+            <!-- Removed tab buttons here -->
             @foreach ($tabs as $tabIndex => $tab)
-                <div x-show="tab === '{{ $tab['id'] }}'" class="faq-content" x-data="{ openAccordion: null }">
+                <div class="faq-content">
                     <section class="px-0 pt-8 mx-auto max-w-7xl sm:px-6 lg:px-8">
+                        <h2 class="mb-4 text-xl font-semibold text-gray-900">{{ $tab['name'] }}</h2> <!-- Tab name as section title -->
                         @foreach ($tab['questions'] as $index => $question)
-                            <div @click="openAccordion = openAccordion === {{ $index }} ? null : {{ $index }}"
+                            <div x-data="{ openAccordion: null }" @click="openAccordion = openAccordion === {{ $index }} ? null : {{ $index }}"
+                                class="p-4 mb-8 transition duration-500 border-b-2 cursor-pointer hover:bg-green-50 hover:border-accent"
                                 :class="{
                                     'bg-green-50 border-accent': openAccordion === {{ $index }},
                                     'border-gray-300': openAccordion !== {{ $index }}
                                 }"
-                                class="p-4 mb-8 transition duration-500 border-2 cursor-pointer rounded-xl"
-                                id="accordion-{{ $index }}">
+                                id="accordion-{{ $tabIndex }}-{{ $index }}">
                                 <div class="flex items-center justify-between"
                                     :class="{ 'text-green-700': openAccordion === {{ $index }} }">
-                                    <h2 class="text-base font-semibold text-left text-gray-900 sm:text-lg md:text-lg">
-                                        {{ $question['title'] }}</h2>
+                                    <h3 class="text-base font-semibold text-left text-gray-900 sm:text-lg md:text-lg">
+                                        {{ $question['title'] }}</h3>
                                     <svg :class="{ 'rotate-180': openAccordion === {{ $index }} }"
                                         class="w-6 h-6 transition duration-500 transform" xmlns="http://www.w3.org/2000/svg"
                                         viewBox="0 0 24 24" fill="none">
@@ -36,7 +31,7 @@
                                     </svg>
                                 </div>
                                 <div x-show="openAccordion === {{ $index }}" x-collapse
-                                    id="content-{{ $index }}">
+                                    id="content-{{ $tabIndex }}-{{ $index }}">
                                     <p class="pt-4 text-base text-left text-gray-700 sm:text-lg">
                                         {!! nl2br(e($question['answer'])) !!}
                                     </p>
