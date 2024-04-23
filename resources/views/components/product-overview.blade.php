@@ -11,12 +11,13 @@
         </div>
 
         <div
-            class="mx-auto max-w-2xl px-4 pb-16 pt-10 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pb-24 lg:pt-16">
+            class="mx-auto max-w-2xl px-4 pb-16 pt-10 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-4 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pb-24 lg:pt-16">
+
             <div class="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
                 <h1 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">{{ $student->name }}</h1>
             </div>
 
-            <div class="mt-4 lg:row-span-3 lg:mt-0">
+            <div class="mt-4 lg:row-span-3 lg:mt-0 lg:col-span-2">
                 <h2 class="sr-only">Product information</h2>
                 <p class="text-3xl tracking-tight text-gray-900">$192</p>
 
@@ -88,7 +89,7 @@
 
                         <fieldset class="mt-4">
                             <legend class="sr-only">Choose a product</legend>
-                            <div class="grid grid-cols-4 gap-4 sm:grid-cols-6 lg:grid-cols-4">
+                            <div class="grid grid-cols-2 gap-4 sm:grid-cols-6 lg:grid-cols-4 xs:grid-cols-3">
                                 @foreach ($products as $product)
                                     <label
                                         :class="{ 'ring-2 ring-accent-500': selectedProductId ==
@@ -123,7 +124,7 @@
                     <h3 class="sr-only">Description</h3>
 
                     <div class="space-y-6">
-                        <p class="text-base text-gray-900">A basic description here</p>
+                        <p class="text-base text-gray-900">A basic description here Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia, perferendis! Cupiditate aperiam, minus facere quasi quos delectus quidem repellat porro voluptatem odit minima autem, enim dolorem! Porro assumenda voluptatem unde?</p>
                     </div>
                 </div>
 
