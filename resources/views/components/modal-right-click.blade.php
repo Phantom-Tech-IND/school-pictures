@@ -12,59 +12,55 @@
             Fotografie AG -Fotografin- Tanja Arnold.</b></p>
 
     <div class="mt-5 sm:mt-6">
-        <button type="button"
-        onclick="document.getElementById('disable-right-click-modal').close()"
+        <button type="button" onclick="document.getElementById('disable-right-click-modal').close()"
             class="inline-flex justify-center w-full px-3 py-2 text-sm font-semibold text-white bg-red-600 rounded-md shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600">
             I understand</button>
     </div>
 </dialog>
 
 <style>
-    dialog::backdrop {
+    #disable-right-click-modal {
+        transition: opacity 300ms ease-out, transform 300ms ease-out;
+        opacity: 0;
+        transform: translateY(-20px) scale(0.9);
+    }
+
+    #disable-right-click-modal[open] {
+        transition: opacity 300ms ease-out, transform 300ms ease-out;
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+    #disable-right-click-modal::backdrop {
+        background-color: rgba(0, 0, 0, 0.5);
         opacity: 0;
         transition: opacity 300ms ease-out;
     }
 
-    dialog[open]::backdrop {
+    #disable-right-click-modal[open]::backdrop {
         opacity: 1;
     }
 </style>
 
-<script>
+<script type="module">
+    const modal = document.getElementById("disable-right-click-modal");
+
+    modal.addEventListener("click", e => {
+        const dialogDimensions = modal.getBoundingClientRect();
+        if (
+            e.clientX < dialogDimensions.left ||
+            e.clientX > dialogDimensions.right ||
+            e.clientY < dialogDimensions.top ||
+            e.clientY > dialogDimensions.bottom
+        ) {
+
+            modal.close();
+        }
+    });
+
     document.addEventListener('contextmenu', event => {
         event.preventDefault();
 
-        const modal = document.getElementById("disable-right-click-modal");
-        // Set initial state for entering animation
-        modal.style.opacity = '0';
-        modal.style.transform = 'translate-y-4 sm:translate-y-0 sm:scale-95';
-        modal.style.transition = 'opacity 300ms ease-out, transform 300ms ease-out';
-
         modal.showModal();
-
-        // Trigger the entering animation
-        setTimeout(() => {
-            modal.style.opacity = '100';
-            modal.style.transform = 'translate-y-0 sm:scale-100';
-        }, 10); // Timeout ensures the styles are applied after the modal is shown
-
-        modal.addEventListener("click", e => {
-            const dialogDimensions = modal.getBoundingClientRect();
-            if (
-                e.clientX < dialogDimensions.left ||
-                e.clientX > dialogDimensions.right ||
-                e.clientY < dialogDimensions.top ||
-                e.clientY > dialogDimensions.bottom
-            ) {
-                // Set leaving animation
-                modal.style.transition = 'opacity 200ms ease-in, transform 200ms ease-in';
-                modal.style.opacity = '0';
-                modal.style.transform = 'translate-y-4 sm:translate-y-0 sm:scale-95';
-
-                setTimeout(() => {
-                    modal.close();
-                }, 200); // Delay closing to allow animation to play
-            }
-        });
     });
 </script>
