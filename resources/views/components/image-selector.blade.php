@@ -5,26 +5,26 @@
         class="relative block border cursor-pointer hover:cursor-pointer hover:border-blue-500 focus:border-blue-700 focus:outline-none">
         <!-- Hidden checkbox -->
         <input type="checkbox" class="absolute opacity-0" style="width: 0; height: 0;">
-        <!-- Image displayed as before -->
-        <img class="object-cover w-full h-full transition duration-300 ease-in-out transform">
+        <!-- Adjusted image display -->
+        <img class="object-cover w-full h-full max-w-xs transition duration-300 ease-in-out transform max-h-xs">
     </label>
 </template>
 
 <template id="image-display-template">
-    <div id="selectedImagesList" class="flex justify-start gap-4 py-4 mt-8 overflow-x-auto">
+    <div id="selectedImagesList" class="flex justify-start gap-4 p-4">
         <!-- Styles for images within this container are defined in CSS -->
     </div>
 </template>
 
 <template id="image-placeholder-template">
-    <div class="relative flex items-center justify-center w-32 h-32 bg-gray-200 placeholder min-w-32 min-h-32">
+    <div class="relative flex items-center justify-center w-24 h-24 bg-gray-200 placeholder min-w-24 min-h-24">
         <!-- Placeholder content goes here -->
         <span class="placeholder-text">Add Image</span>
     </div>
 </template>
 
 <template id="image-template">
-    <div class="relative w-32 h-32 min-w-32 min-h-32">
+    <div class="relative w-24 h-24 min-w-24 min-h-24">
         <!-- Draggable indicator (2x3 bullets), now with a shadow instead of background -->
         <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
             <div
