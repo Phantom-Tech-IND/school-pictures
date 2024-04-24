@@ -17,14 +17,14 @@
 </template>
 
 <template id="image-placeholder-template">
-    <div class="relative flex items-center justify-center w-24 h-24 bg-gray-200 placeholder min-w-24 min-h-24">
+    <div class="relative flex items-center justify-center w-20 h-20 bg-gray-200 min-w-20 min-h-20 sm:w-24 sm:h-24 sm:min-w-24 sm:min-h-24 placeholder">
         <!-- Placeholder content goes here -->
         <span class="placeholder-text">Add Image</span>
     </div>
 </template>
 
 <template id="image-template">
-    <div class="relative w-24 h-24 min-w-24 min-h-24">
+    <div class="relative w-20 h-20 min-w-20 min-h-20 sm:w-24 sm:h-24 sm:min-w-24 sm:min-h-24">
         <!-- Draggable indicator (2x3 bullets), now with a shadow instead of background -->
         <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
             <div
