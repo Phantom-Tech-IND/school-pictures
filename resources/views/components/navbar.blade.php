@@ -144,5 +144,7 @@
             </nav>
         </div>
     </div>
-
+    
 </div>
+
+<div class="min-h-[70px] bg-red h-20"></div>

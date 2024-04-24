@@ -19,6 +19,11 @@ class GuestPanelController extends Controller
         return view('welcome');
     }
 
+    public function cart(Request $request)
+    {
+        return view('cart');
+    }
+
     public function postContactForm(Request $request)
     {
         Message::create($request->all());

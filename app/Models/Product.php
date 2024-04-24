@@ -11,6 +11,7 @@ class Product extends Model
 
     protected $fillable = [
         'product_type',
+        'name',
         'category',
         'tags',
         'price',
@@ -21,16 +22,12 @@ class Product extends Model
 
     protected $casts = [
         'custom_attributes' => 'array',
+        'tags' => 'array',
     ];
 
     public function categories()
     {
         return $this->belongsToMany(Category::class);
-    }
-
-    public function tags()
-    {
-        return $this->belongsToMany(Tag::class);
     }
 
     public function category()
