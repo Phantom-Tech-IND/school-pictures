@@ -4,15 +4,15 @@
 
             <div
                 class="max-w-2xl grid-rows-1 mx-auto mt-6 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-4 lg:gap-x-8 lg:px-8 lg:h-[80lvh]">
-                <div class="bg-red-500 lg:col-span-2 lg:flex lg:flex-col lg:h-full lg:justify-stretch">
+                <div class="bg-gray-100 border-2 border-gray-300 shadow-lg lg:col-span-2 lg:flex lg:flex-col lg:h-full lg:justify-stretch">
                     <img src="https://tailwindui.com/img/ecommerce-images/product-page-02-secondary-product-shot.jpg"
                         alt="Two each of gray, white, and black shirts laying flat."
-                        class="flex-shrink object-contain object-center w-full max-w-full min-h-0 rounded-lg lg:h-auto h-96"
+                        class="flex-shrink object-contain object-center w-full max-w-full min-h-0 p-4 rounded-lg lg:grow lg:h-auto h-96"
                         >
-                    <image-display container-id="myGallery" class="flex flex-row flex-shrink-0 overflow-x-auto bg-green-600"></image-display>
+                    <image-display container-id="myGallery" class="flex flex-row flex-shrink-0 overflow-x-auto"></image-display>
                 </div>
 
-                <div class="grid grid-cols-3 gap-4 p-4 overflow-y-scroll bg-blue-400 max-h-96 lg:max-h-max lg:h-auto auto-rows-min place-items-center lg:col-span-2 lg:grid-cols-4 xs:grid-cols-4"
+                <div class="relative grid grid-cols-3 gap-4 p-4 overflow-y-scroll border-2 border-gray-300 shadow-lg max-h-96 lg:max-h-max lg:h-auto auto-rows-min place-items-center lg:col-span-2 lg:grid-cols-4 xs:grid-cols-4"
                     @foreach ($images as $key => $image)
                         <image-selector container-id="myGallery" alt="Image {{ $key + 1 }}"
                             key="key{{ $key + 1 }}" src="{{ $image }}"
@@ -191,3 +191,27 @@
             </div>
         </div>
 </image-gallery-container>
+
+<style>
+    /* Custom pseudo-elements adjusted for vertical scrolling */
+    
+    .scrollable-grid::before,
+    .scrollable-grid::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        height: 20px; /* Adjust height as needed */
+        z-index: 10;
+    }
+    
+    .scrollable-grid::before {
+        top: 0;
+        background: linear-gradient(to bottom, white, transparent);
+    }
+    
+    .scrollable-grid::after {
+        bottom: 0;
+        background: linear-gradient(to top, white, transparent);
+    }
+</style>

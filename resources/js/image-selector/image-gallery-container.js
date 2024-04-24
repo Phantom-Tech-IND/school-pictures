@@ -63,6 +63,7 @@ export class ImageGalleryContainer extends HTMLElement {
                 if (imageSelector) {
                     imageSelector.selected = false; // Update internal state
                     imageSelector.removeAttribute("selected"); // Update attribute to reflect the change
+                    imageSelector.updateSelectionVisuals(); // Ensure visual update is called
                 }
             }
         });
@@ -93,7 +94,8 @@ export class ImageGalleryContainer extends HTMLElement {
     updateDisplays() {
         const displays = this.querySelectorAll('image-display[container-id="' + this.id + '"]');
         const selectedImages = this.getSelectedImagesSrc();
-        const placeholdersNeeded = Math.max(0, this.min - selectedImages.length); // Calculate how many placeholders are needed
+        const maxAllowed = parseInt(this.getAttribute('data-max'), 10) || Infinity; // Use max attribute
+        const placeholdersNeeded = Math.max(0, maxAllowed - selectedImages.length); // Calculate placeholders based on max
 
         displays.forEach((display) => {
             display.updateImages(selectedImages, placeholdersNeeded);
