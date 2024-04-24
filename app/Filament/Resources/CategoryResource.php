@@ -4,10 +4,13 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\CategoryResource\Pages;
 use App\Models\Category;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\MarkdownEditor;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -15,7 +18,12 @@ class CategoryResource extends Resource
 {
     protected static ?string $model = Category::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-tag';
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
 
     public static function form(Form $form): Form
     {
@@ -24,6 +32,20 @@ class CategoryResource extends Resource
                 TextInput::make('name')
                     ->required()
                     ->label('Category Name'),
+
+                TextInput::make('slug')
+                    ->required()
+                    ->label('Slug'),
+
+                FileUpload::make('image')
+                    ->label('Image')
+                    ->image()
+                    ->directory('categories/images')
+                    ->required()
+                    ->columnSpan(2),
+                MarkdownEditor::make('description')
+                    ->label('Description')
+                    ->columnSpan(2),
             ]);
     }
 
@@ -31,8 +53,10 @@ class CategoryResource extends Resource
     {
         return $table
             ->columns([
-                //
-                TextColumn::make('name')->label('Category Name'),
+                TextColumn::make('name')->label('Category Name')->searchable(),
+                TextColumn::make('slug')->label('Slug')->searchable(),
+                TextColumn::make('description')->label('Description')->searchable(),
+                ImageColumn::make('image')->label('Image'),
             ])
             ->filters([
                 //
