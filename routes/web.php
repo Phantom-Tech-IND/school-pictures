@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\Filament\GuestPanelController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [GuestPanelController::class, 'index'])->name('home');
+Route::get('/cart', [CartController::class, 'index'])->name('cart');
 Route::get('/shop', [GuestPanelController::class, 'shop'])->name('shop');
 Route::get('/offer', [GuestPanelController::class, 'offer'])->name('offer');
 Route::get('/product', [GuestPanelController::class, 'product'])->name('product');
