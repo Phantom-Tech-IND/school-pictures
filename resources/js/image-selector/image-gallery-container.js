@@ -102,8 +102,6 @@ export class ImageGalleryContainer extends HTMLElement {
         displays.forEach((display) => {
             if (typeof display.updateImages === "function") {
                 display.updateImages(selectedImages, placeholdersNeeded);
-            } else {
-                // console.error('TypeError: display.updateImages is not a function. Check the implementation of the components being iterated.');
             }
         });
     }
