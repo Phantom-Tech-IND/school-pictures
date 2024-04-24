@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\Message::factory(10)->create();
         \App\Models\Offers::factory(10)->create();
 
-        Category::factory(10)->create();
+        Category::factory(4)->create();
 
         $this->call([
             ProductSeeder::class,

@@ -18,12 +18,11 @@ class ProductFactory extends Factory
     {
         return [
             'product_type' => $this->faker->randomElement(['personal', 'school']),
-            'category_id' => $this->faker->numberBetween(1, 10),
+            'category_id' => $this->faker->numberBetween(1, 4),
             'name' => $this->faker->words(3, true),
             'tags' => $this->faker->words(3, true),
             'price' => $this->faker->randomFloat(2, 10, 1000), // Price between 10 and 1000
             'description' => $this->faker->paragraph,
-            'photo' => 'Mustergutschein.jpg',
         ];
     }
 }

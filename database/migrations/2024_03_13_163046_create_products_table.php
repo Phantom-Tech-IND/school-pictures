@@ -15,11 +15,37 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->enum('product_type', ['personal', 'school']);
-            $table->decimal('price', 8, 2); // Example precision for price
+            $table->decimal('price', 8, 2);
             $table->string('tags')->nullable();
-            $table->string('photo')->nullable(); // Assuming the photo is optional
+            $table->string('images')->nullable();
+            $table->boolean('is_digital')->default(false);
+            $table->decimal('digital_price')->nullable();
+            $table->text('description')->nullable();
             $table->timestamps();
             $table->json('custom_attributes')->nullable();
+        });
+
+        Schema::create('product_images', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('product_id')->constrained()->onDelete('cascade');
+            $table->string('image_path');
+            $table->timestamps();
+        });
+
+        Schema::create('product_attributes', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('product_id')->constrained()->onDelete('cascade');
+            $table->string('type');  // 'radio', 'selector', 'input', 'fileInput'
+            $table->string('name');  // To identify the attribute
+            $table->text('options')->nullable();  // JSON encoded values for radios and selectors
+            $table->timestamps();
+        });
+
+        Schema::create('product_attribute_values', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('product_attribute_id')->constrained()->onDelete('cascade');
+            $table->string('value');  // Value could be text, selected option, or file path
+            $table->timestamps();
         });
 
     }
