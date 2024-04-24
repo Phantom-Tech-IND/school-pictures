@@ -47,36 +47,51 @@ export class ImageSelector extends HTMLElement {
         checkbox.checked = this.selected;
         this.innerHTML = "";
         this.appendChild(instance);
-        // Directly reflect the selected state on the element
-        if (this.selected) {
-            this.setAttribute("selected", "");
-        } else {
-            this.removeAttribute("selected");
-        }
+        this.updateSelectionVisuals(); // Update visual indicators for selection
     }
 
     toggleSelection() {
-        this.selected = !this.selected; // Toggle the selected state
-        const checkbox = this.querySelector('input[type="checkbox"]');
-        checkbox.checked = this.selected; // Ensure checkbox state is in sync
+        const containerId = this.getAttribute("container-id");
+        const container = document.querySelector(`image-gallery-container#${containerId}`);
+        if (!container) {
+            console.error(`ImageSelector error: No ImageGalleryContainer found with ID "${containerId}".`);
+            return;
+        }
 
-        // Reflect the selected state on the element
+        // Check if the maximum number of selections has been reached
+        const maxAllowed = parseInt(container.getAttribute('data-max'), 10) || Infinity;
+        const currentSelectedCount = container.getSelectedImages().length;
+
+        if (!this.selected && currentSelectedCount >= maxAllowed) {
+            console.warn(`ImageGalleryContainer warning: Cannot select more than ${maxAllowed} images.`);
+            return; // Prevent selection if the maximum has been reached
+        }
+
+        this.selected = !this.selected;
+        const checkbox = this.querySelector('input[type="checkbox"]');
+        checkbox.checked = this.selected;
+        this.updateSelectionVisuals();
+
+        this.dispatchEvent(new CustomEvent(this.selected ? "image-selected" : "remove-image", {
+            bubbles: true,
+            detail: {
+                src: this.getAttribute("src"),
+                selected: this.selected,
+                key: this.getAttribute("key"),
+            },
+        }));
+    }
+
+    updateSelectionVisuals() {
+        const label = this.querySelector('label');
         if (this.selected) {
+            label.classList.add("border-accent-500");
+            label.classList.remove("hover:border-accent-300");
             this.setAttribute("selected", "");
-            this.dispatchEvent(new CustomEvent("image-selected", {
-                bubbles: true,
-                detail: {
-                    src: this.getAttribute("src"),
-                    selected: this.selected,
-                    key: this.getAttribute("key"),
-                },
-            }));
         } else {
+            label.classList.remove("border-accent-500");
+            label.classList.add("hover:border-accent-300");
             this.removeAttribute("selected");
-            this.dispatchEvent(new CustomEvent("remove-image", {
-                bubbles: true,
-                detail: { key: this.getAttribute("key") }
-            }));
         }
     }
 
@@ -99,5 +114,3 @@ export class ImageSelector extends HTMLElement {
         }
     }
 }
-
-

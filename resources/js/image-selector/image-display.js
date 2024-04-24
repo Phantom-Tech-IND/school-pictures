@@ -15,10 +15,10 @@ export class ImageDisplay extends HTMLElement {
         const containerId = this.getAttribute("container-id");
         const container = document.querySelector(`image-gallery-container#${containerId}`);
         if (container) {
-            // Calculate placeholders needed based on the 'data-min' attribute and current selected images
-            const minRequired = parseInt(container.getAttribute('data-min'), 10) || 0;
+            // Calculate placeholders needed based on the 'data-max' attribute and current selected images
+            const maxAllowed = parseInt(container.getAttribute('data-max'), 10) || Infinity;
             const selectedImages = container.getSelectedImagesSrc ? container.getSelectedImagesSrc() : [];
-            const placeholdersNeeded = Math.max(0, minRequired - selectedImages.length);
+            const placeholdersNeeded = Math.max(0, maxAllowed - selectedImages.length);
             // Initialize display with the required number of placeholders
             this.updateImages([], placeholdersNeeded);
         }
