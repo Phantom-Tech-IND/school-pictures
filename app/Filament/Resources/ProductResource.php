@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\ProductResource\Pages;
 use App\Models\Product;
 use Filament\Forms;
+use Filament\Forms\Components\MarkdownEditor;
 use Filament\Forms\Components\TagsInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -15,7 +16,7 @@ class ProductResource extends Resource
 {
     protected static ?string $model = Product::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-rectangle-group';
 
     public static function form(Form $form): Form
     {
@@ -23,22 +24,30 @@ class ProductResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('name')
                     ->required(),
+
                 Forms\Components\TextInput::make('product_type')
                     ->required(),
                 Forms\Components\Select::make('category_id')
                     ->searchable()
                     ->relationship('category', 'name')
                     ->required(),
-                TagsInput::make('tags')->separator(','),
                 Forms\Components\TextInput::make('price')
                     ->numeric()
+                    ->prefix('CHF')
                     ->required(),
+                Forms\Components\Checkbox::make('is_digital')
+                    ->label('Is Digital')
+                    ->inline(false)
+                    ->required(),
+                TagsInput::make('tags')->separator(',')->columnSpan(2),
                 Forms\Components\FileUpload::make('photo')
                     ->image()
+                    ->columnSpan(2)
                     ->directory('product-photos')
                     ->disk('public'),
-                Forms\Components\Textarea::make('description')
-                    ->nullable(),
+                MarkdownEditor::make('description')
+                    ->label('Description')
+                    ->columnSpan(2),
 
             ]);
     }
