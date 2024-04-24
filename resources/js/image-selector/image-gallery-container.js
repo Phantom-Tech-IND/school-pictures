@@ -13,7 +13,7 @@ export class ImageGalleryContainer extends HTMLElement {
         }
 
         // Initialize min and max attributes with default values if not provided
-        this.min = minAttribute || 0; // Default minimum
+        this.min = minAttribute || 1; // Default minimum
         this.max = maxAttribute || Infinity; // Default maximum
     }
 
@@ -63,6 +63,7 @@ export class ImageGalleryContainer extends HTMLElement {
                 if (imageSelector) {
                     imageSelector.selected = false; // Update internal state
                     imageSelector.removeAttribute("selected"); // Update attribute to reflect the change
+                    imageSelector.updateSelectionVisuals(); // Ensure visual update is called
                 }
             }
         });
@@ -80,8 +81,10 @@ export class ImageGalleryContainer extends HTMLElement {
     attributeChangedCallback(name, oldValue, newValue) {
         if (name === "data-min") {
             this.min = parseInt(newValue, 10);
+            this.updateDisplays(); // Refresh display if needed
         } else if (name === "data-max") {
             this.max = parseInt(newValue, 10);
+            this.updateDisplays(); // Refresh display if needed
         }
     }
 
@@ -93,10 +96,13 @@ export class ImageGalleryContainer extends HTMLElement {
     updateDisplays() {
         const displays = this.querySelectorAll('image-display[container-id="' + this.id + '"]');
         const selectedImages = this.getSelectedImagesSrc();
-        const placeholdersNeeded = Math.max(0, this.min - selectedImages.length); // Calculate how many placeholders are needed
+        const maxAllowed = parseInt(this.getAttribute('data-max'), 10) || Infinity; // Use max attribute
+        const placeholdersNeeded = Math.max(0, maxAllowed - selectedImages.length); // Calculate placeholders based on max
 
         displays.forEach((display) => {
-            display.updateImages(selectedImages, placeholdersNeeded);
+            if (typeof display.updateImages === "function") {
+                display.updateImages(selectedImages, placeholdersNeeded);
+            }
         });
     }
 
@@ -123,5 +129,24 @@ export class ImageGalleryContainer extends HTMLElement {
             src: selector.getAttribute("src"),
             key: selector.getAttribute("key")
         }));
+    }
+
+    updateProductSelection() {
+        const selectElement = document.getElementById('productSelect');
+        const selectedOption = selectElement.options[selectElement.selectedIndex];
+        const min = selectedOption.getAttribute('data-min');
+        const max = selectedOption.getAttribute('data-max');
+    
+        updateImageGalleryConstraints(min, max);
+    }
+    
+    updateImageGalleryConstraints(min, max) {
+        const galleryContainer = document.querySelector('image-gallery-container');
+        if (galleryContainer) {
+            galleryContainer.setAttribute('data-min', min);
+            galleryContainer.setAttribute('data-max', max);
+            // Optionally, refresh the gallery to apply the new constraints
+            galleryContainer.updateDisplays(); // Assuming you have such a method
+        }
     }
 }
