@@ -6,21 +6,30 @@
     </div>
     <div class="mt-8 md:mt-24">
         @include('components.c-t-a', [
-            'link' => 'kontakt',
+            'link' => 'contact',
             'button' => 'Warum ArtLine fotografie AG?',
             'title' => 'Warum ArtLine fotografie AG?',
-            'description' =>
-                'Lorem ipsum dolor sit amet, quaeque delectus consetetur ex sea. Legendos percipitur ne est. Cu sea epicurei pertinax voluptaria, quo an deleniti persequeris. Malis consequuntur definitionem no per, docendi honestatis an pro.',
+            'description' => 'Die ArtLine Fotografie AG ist Ihr perfekter Partner für alle fotografischen Bedürfnisse.Unserengagiertes Team kombiniert jahrelange Erfahrung mit einem einzigartigen künstlerischen Ansatz, um Ihre Momente in zeitlose Kunstwerke zu verwandeln. Bei uns steht Qualität anerster Stelle, und wir sind stolz darauf, jedem Kunden ein individuelles Erlebnis zu bieten.<br/>
+            <br/>
+            Entdecken Sie die ArtLine Fotografie AG – wo jedes Bild eine Geschichte erzählt und jede Aufnahme ein Kunstwerk ist.',
             'background_image' => '/minimalistic-loft-photo-studio-scaled.jpg',
         ])
     </div>
     <div class="mt-8 md:mt-24">
-        @include('components.team', [ 'teamMembers' => \App\Constants\Constants::TEAM_MEMBERS ])
+        @include('components.team', ['teamMembers' => \App\Constants\Constants::TEAM_MEMBERS])
     </div>
     <div class="mt-8 md:mt-24">
         @include('components.popular-product', [
             'product' => [
-                'image' => '/coverbluzz.jpeg',
+                'bg-image' => 'gr20-6782-7121.jpg',
+                'images' => [
+                    'kc-0287-5607-2.jpg',
+                    'kc-0173-0564-1.jpg',
+                    'gr17-5575-7039.jpg',
+                    'ak9-0009-9795.jpg',
+                    'kc-0283-1085-1.jpg',
+                    'gr20-6782-6987.jpg',
+                ],
                 'name' => 'Photoshooting card',
                 'type' => 'Pro shooting',
                 'description' => [
