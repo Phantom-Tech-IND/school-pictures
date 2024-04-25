@@ -106,9 +106,9 @@ class GuestPanelController extends Controller
         return view('offers', compact('offers'));
     }
 
-    public function offer(Request $request)
+    public function offer($id)
     {
-        $offer = Offers::where('id', $request->input('id'))->first();
+        $offer = Offers::where('id', $id)->first();
 
         return view('offer', compact('offer'));
     }

@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Resources\OfferItemsRelationManagerResource\RelationManagers\OfferItemsRelationManager;
 use App\Filament\Resources\OffersResource\Pages;
 use App\Models\Offers;
 use Filament\Forms\Components\TextInput;
@@ -44,7 +45,6 @@ class OffersResource extends Resource
                     ->directory('offers/photo_gallery')
                     ->required()
                     ->columnSpan('full'),
-
             ]);
     }
 
@@ -75,7 +75,7 @@ class OffersResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            OfferItemsRelationManager::class,
         ];
     }
 

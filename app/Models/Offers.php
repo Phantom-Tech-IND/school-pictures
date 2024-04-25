@@ -14,4 +14,9 @@ class Offers extends Model
     protected $casts = [
         'photo_gallery' => 'array',
     ];
+
+    public function offerItems()
+    {
+        return $this->hasMany(OfferItem::class, 'offer_id');
+    }
 }

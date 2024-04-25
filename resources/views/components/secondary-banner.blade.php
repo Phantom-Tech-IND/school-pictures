@@ -1,4 +1,5 @@
-<div class="w-full h-[400px] relative bg-cover bg-center" style="background-image: url('{{ $image }}');">
+<div class="w-full h-[300px] md:h-[500px] relative bg-cover bg-center"
+    style="background-image: url('{{ asset($image) }}');">
     <div class="absolute inset-0 w-full h-full bg-black bg-opacity-30">
     </div>
     <!-- Adjust the positioning classes here -->

@@ -17,12 +17,12 @@ use Illuminate\Support\Facades\Route;
 Route::controller(GuestPanelController::class)->group(function () {
     Route::get('/', 'index')->name('home');
     Route::get('/shop', 'shop')->name('shop');
-    Route::get('/offer', 'offer')->name('offer');
     Route::get('/product', 'product')->name('product');
     Route::get('/not-available', 'notAvailable')->name('not-available');
     Route::get('/gallery-code', 'galleryCode')->name('gallery-code');
     Route::get('/contact', 'contact')->name('contact');
     Route::get('/offers', 'offers')->name('offers');
+    Route::get('/offer/{id}', 'offer')->name('offer');
     Route::get('/kindergarten-und-schulfotografie', 'kindergarden')->name('kindergarden');
     Route::get('/upload', 'upload');
     Route::get('/team', 'team')->name('team');

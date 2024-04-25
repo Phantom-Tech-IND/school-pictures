@@ -1,9 +1,10 @@
 @extends('layouts.app')
 @section('content')
     @include('components.secondary-banner', [
-        'title' => 'Angebote',
-        'image' => '/coverbluzz.jpeg',
+        'title' => $offer->title,
+        'image' => $offer->image,
     ])
+
     <div class="py-24 bg-white sm:py-32">
         <div class="px-6 mx-auto max-w-7xl lg:px-8">
             <div class="max-w-4xl mx-auto text-center">
