@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
 Route::controller(GuestPanelController::class)->group(function () {
     Route::get('/', 'index')->name('home');
     Route::get('/shop', 'shop')->name('shop');
@@ -28,9 +29,14 @@ Route::controller(GuestPanelController::class)->group(function () {
     Route::get('/team', 'team')->name('team');
     Route::get('/partners', 'partners')->name('partners');
     Route::get('/view-for-testing-purposes', 'viewForTestingPurposes')->name('view-for-testing-purposes');
-    Route::get('/haeufig-gestellte-fragen-faq', 'frequentlyAskedQuestions')->name('frequently-asked-questions');
+
+    // Routes for legal and informational pages
     Route::get('/impressum', 'impressum')->name('impressum');
+    Route::get('/cookie-policy', 'cookiePolicy')->name('cookie-policy');
+    Route::get('/privacy-policy', 'privacyPolicy')->name('privacy-policy');
     Route::get('/agb', 'generalTermsAndConditions')->name('general-terms-and-conditions');
+    Route::get('/haeufig-gestellte-fragen-faq', 'frequentlyAskedQuestions')->name('frequently-asked-questions');
+
     Route::post('/contact/submit', 'postContactForm')->name('contact.submit');
 });
 
