@@ -198,6 +198,16 @@ class GuestPanelController extends Controller
         return view('impressum');
     }
 
+    public function cookiePolicy()
+    {
+        return view('cookie-policy');
+    }
+
+    public function privacyPolicy()
+    {
+        return view('privacy-policy');
+    }
+
     public function generalTermsAndConditions()
     {
         return view('general-terms-and-conditions');

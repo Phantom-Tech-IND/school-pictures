@@ -13,9 +13,9 @@ return [
      */
     'cookie_name' => 'cookie_consent',
 
-    'cookie_policy_url' => '#',
-    'privacy_policy_url' => '#',
-    'imprint_url' => '#',
+    'cookie_policy_url' => '/cookie-policy',
+    'privacy_policy_url' => '/privacy-policy',
+    'imprint_url' => '/impressum',
 
     /*
      * Set the cookie duration in days.  Default is 365 * 20.
