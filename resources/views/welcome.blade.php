@@ -10,8 +10,8 @@
             'button' => 'Warum ArtLine fotografie AG?',
             'title' => 'Warum ArtLine fotografie AG?',
             'description' => 'Die ArtLine Fotografie AG ist Ihr perfekter Partner für alle fotografischen Bedürfnisse.Unserengagiertes Team kombiniert jahrelange Erfahrung mit einem einzigartigen künstlerischen Ansatz, um Ihre Momente in zeitlose Kunstwerke zu verwandeln. Bei uns steht Qualität anerster Stelle, und wir sind stolz darauf, jedem Kunden ein individuelles Erlebnis zu bieten.<br/>
-            <br/>
-            Entdecken Sie die ArtLine Fotografie AG – wo jedes Bild eine Geschichte erzählt und jede Aufnahme ein Kunstwerk ist.',
+                    <br/>
+                    Entdecken Sie die ArtLine Fotografie AG – wo jedes Bild eine Geschichte erzählt und jede Aufnahme ein Kunstwerk ist.',
             'background_image' => '/minimalistic-loft-photo-studio-scaled.jpg',
         ])
     </div>
@@ -42,30 +42,50 @@
             ],
         ])
     </div>
-    <div class="mt-8 md:mt-24">
+    <div class="mt-8">
         @include('components.our-offers', [
             'title' => 'Unsere Angebote',
             'subtitle' => 'FINDE DEIN PASSENDES ANGEBOT FÜR DEINE WÜNSCHE',
-            'description' =>
-                'Aenean vehicula tempus orci non molestie. Sed egestas commodo porta. Praesent consectetur sollicitudin scelerisque. Nullam ornare elit interdum posuere facilisis. Donec consequat pretium pretium. Nullam imperdiet varius dignissim. Mauris at interdum turpis. Sed ex massa, vestibulum quis viverra at, dapibus facilisis risus. In ac volutpat justo, et pretium risus. Quisque semper sed orci vel porta. Etiam quis lobortis justo, ut pharetra libero. Aliquam ac nisl eget.',
+            'description' => 'Erleben Sie die Vielfalt der Fotografie – ob im Studio oder im Freien, ArtLine Fotografie AG
+        bietet Ihnen die perfekte Kulisse für unvergessliche Aufnahmen. Tauchen Sie ein in unsere
+        kreative Welt und lassen Sie sich von der Schönheit jeder Umgebung inspirieren. Mit
+        einem breiten Angebot an Studio- und Outdoor-Shootings stehen wir bereit, um Ihre
+        einzigartige Persönlichkeit zum Strahlen zu bringen. Entdecken Sie die Möglichkeiten mit
+        ArtLine Fotografie AG und lassen Sie uns gemeinsam Ihre Visionen verwirklichen.',
             'offers' => [
                 [
-                    'icon' => 'heroicon-o-academic-cap',
-                    'title' => 'This is the heading',
-                    'description' =>
-                        'Mauris imperdiet tempor ex quis consectetur. Morbi rhoncus velit non orci viverra, ac sollicitudin orci pellentesque.',
+                    'title' => 'FAMILY MEDIUMM MOST POPULAR',
+                    'price' => '298',
+                    'badge' => 'Most popular',
+                    'features' => [
+                        '60 Minuten Fotoshooting',
+                        'Gruppenbilder, nur Kinder, nur Eltern',
+                        'alle Bilder in kleiner Auflösung (900×600 px)',
+                        '5 Bilder bearbeitet und in der vollen Auflösung',
+                        'Outdoor zusätzlich CHF 95.00',
+                    ],
                 ],
                 [
-                    'icon' => 'heroicon-o-academic-cap',
-                    'title' => 'This is the heading',
-                    'description' =>
-                        'Mauris imperdiet tempor ex quis consectetur. Morbi rhoncus velit non orci viverra, ac sollicitudin orci pellentesque.',
+                    'title' => 'SCHWANGERSCHAFT MEDIUM MOST POPULAR',
+                    'price' => '398',
+                    'badge' => 'Most popular',
+                    'features' => [
+                        '60 Minuten Fotoshooting',
+                        'Mama, Papa und Geschwister',
+                        'Bilder alleine und zusammen',
+                        'alle Bilder in kleiner Auflösung (900×600 px)',
+                        '5 Bilder bearbeitet und in der vollen Auflösung',
+                    ],
                 ],
                 [
-                    'icon' => 'heroicon-o-academic-cap',
-                    'title' => 'This is the heading',
-                    'description' =>
-                        'Mauris imperdiet tempor ex quis consectetur. Morbi rhoncus velit non orci viverra, ac sollicitudin orci pellentesque.',
+                    'title' => 'KINDERSHOOTING',
+                    'price' => '248',
+                    'features' => [
+                        '30 Minuten Fotoshooting',
+                        '1 Kind',
+                        'alle Bilder in kleiner Auflösung (900×600 px)',
+                        '5 Bilder bearbeitet und in der vollen Auflösung',
+                    ],
                 ],
             ],
         ])
