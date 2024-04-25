@@ -21,31 +21,9 @@ return new class extends Migration
             $table->boolean('is_digital')->default(false);
             $table->decimal('digital_price')->nullable();
             $table->text('description')->nullable();
+            $table->text('additional_information')->nullable();
             $table->timestamps();
             $table->json('custom_attributes')->nullable();
-        });
-
-        Schema::create('product_images', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('product_id')->constrained()->onDelete('cascade');
-            $table->string('image_path');
-            $table->timestamps();
-        });
-
-        Schema::create('product_attributes', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('product_id')->constrained()->onDelete('cascade');
-            $table->string('type');  // 'radio', 'selector', 'input', 'fileInput'
-            $table->string('name');  // To identify the attribute
-            $table->text('options')->nullable();  // JSON encoded values for radios and selectors
-            $table->timestamps();
-        });
-
-        Schema::create('product_attribute_values', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('product_attribute_id')->constrained()->onDelete('cascade');
-            $table->string('value');  // Value could be text, selected option, or file path
-            $table->timestamps();
         });
 
     }

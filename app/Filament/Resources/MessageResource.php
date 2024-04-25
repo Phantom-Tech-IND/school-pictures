@@ -18,6 +18,13 @@ class MessageResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-inbox-stack';
 
+    public static function getNavigationBadge(): ?string
+    {
+        $count = static::getModel()::count();
+
+        return $count > 100 ? '100+' : (string) $count;
+    }
+
     public static function form(Form $form): Form
     {
         return $form
