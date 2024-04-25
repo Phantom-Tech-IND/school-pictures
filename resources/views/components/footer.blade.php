@@ -99,7 +99,7 @@
         </div>
         <div class="pt-8 mt-16 border-t border-white/10 sm:mt-20 lg:mt-24">
             <p class="text-xs leading-5 text-gray-400">&copy; ARTLINE FOTOGRAFIE AG
-                2024 | Developed by <a target="_blank" href="https://bluzz.ch" class="text-white">Bluzz</p>
+                2024 | Developed by <a target="_blank" href="https://bluzz.ch" class="text-white">Bluzz</a>
         </div>
     </div>
 </footer>
