@@ -40,7 +40,6 @@ class CategoryResource extends Resource
                 FileUpload::make('image')
                     ->label('Image')
                     ->image()
-                    ->directory('categories/images')
                     ->required()
                     ->columnSpan(2),
                 MarkdownEditor::make('description')

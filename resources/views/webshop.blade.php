@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     @include('components.secondary-banner', [
-        'title' => 'Webshop',
+        'title' => 'Shop',
         'image' => '/coverbluzz.jpeg',
     ])
 

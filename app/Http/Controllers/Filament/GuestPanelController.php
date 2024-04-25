@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Filament;
 
 use App\Constants\Constants;
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Message;
 use App\Models\Offers;
 use App\Models\Product;
@@ -36,9 +37,41 @@ class GuestPanelController extends Controller
 
     public function shop(Request $request)
     {
-        $products = Product::all();
+        $productsQuery = Product::query(); // Start with a base query
+        $categories = Category::all(); // Fetch all categories
 
-        return view('webshop', compact('products'));
+        // Check if a search term is provided and modify the query accordingly
+        if ($search = $request->input('search')) {
+            $productsQuery->where('name', 'LIKE', "%{$search}%"); // Adjust 'name' if your product name column is different
+        }
+
+        $products = $productsQuery->paginate(10);
+
+        return view('webshop', [
+            'products' => $products,
+            'categories' => $categories,
+        ]);
+    }
+
+    public function showCategoryProducts($slug, Request $request)
+    {
+        $category = Category::where('slug', $slug)->first();
+        $categories = Category::all();
+        if (! $category) {
+            abort(404);
+        }
+
+        // Start with the category's products query
+        $query = $category->products();
+
+        // Check if a search term is provided and modify the query accordingly
+        if ($search = $request->input('search')) {
+            $query->where('name', 'LIKE', "%{$search}%"); // Adjust 'name' if your product name column is different
+        }
+
+        $products = $query->paginate(10);
+
+        return view('category.products', compact('products', 'category', 'categories'));
     }
 
     public function product(Request $request)

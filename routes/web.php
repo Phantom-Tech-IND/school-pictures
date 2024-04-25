@@ -32,6 +32,7 @@ Route::controller(GuestPanelController::class)->group(function () {
     Route::get('/impressum', 'impressum')->name('impressum');
     Route::get('/agb', 'generalTermsAndConditions')->name('general-terms-and-conditions');
     Route::post('/contact/submit', 'postContactForm')->name('contact.submit');
+    Route::get('/category/{slug}', 'showCategoryProducts')->name('category.products');
 });
 
 Route::get('/cart', [CartController::class, 'index'])->name('cart');

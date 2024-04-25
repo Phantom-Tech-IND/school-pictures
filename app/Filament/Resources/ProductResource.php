@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\ProductResource\Pages;
 use App\Models\Product;
 use Filament\Forms;
+use Filament\Forms\Components\BelongsToManyMultiSelect;
 use Filament\Forms\Components\MarkdownEditor;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TagsInput;
@@ -39,10 +40,8 @@ class ProductResource extends Resource
                         'school' => 'School Pictures',
                     ])
                     ->required(),
-                Forms\Components\Select::make('category_id')
-                    ->searchable()
-                    ->relationship('category', 'name')
-                    ->required(),
+                BelongsToManyMultiSelect::make('categories')
+                    ->relationship('categories', 'name'),
                 Forms\Components\TextInput::make('price')
                     ->numeric()
                     ->prefix('CHF')
@@ -50,6 +49,9 @@ class ProductResource extends Resource
                 Forms\Components\Checkbox::make('is_digital')
                     ->label('Is Digital')
                     ->inline(false),
+                Forms\Components\TextInput::make('digital_price')
+                    ->numeric()
+                    ->prefix('CHF'),
                 TagsInput::make('tags')->separator(',')->columnSpan(2),
                 MarkdownEditor::make('description')
                     ->label('Description')
@@ -133,7 +135,9 @@ class ProductResource extends Resource
                 Tables\Columns\TextColumn::make('name')->searchable(),
                 Tables\Columns\TextColumn::make('product_type')->searchable(),
                 Tables\Columns\TextColumn::make('price')->numeric()->sortable(),
-                Tables\Columns\TextColumn::make('category.name')->searchable(),
+                Tables\Columns\TextColumn::make('categories.name')
+                    ->searchable()
+                    ->label('Category'),
                 Tables\Columns\TextColumn::make('tags')
                     ->searchable()
                     ->badge()->separator(','),

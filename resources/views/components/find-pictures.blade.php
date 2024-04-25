@@ -1,4 +1,4 @@
-<div x-data="{ showDialog: false }" class="p-2 bg-accent">
+<div x-data="{ showDialog: false }" x-cloak class="p-2 bg-accent">
     <h1 @click="showDialog = true" class="font-semibold text-center text-white uppercase cursor-pointer">Search by gallery
         code</h1>
     <div x-show="showDialog" class="fixed inset-0 p-4 bg-black bg-opacity-50" @click="showDialog = false">
@@ -28,3 +28,9 @@
         </div>
     </div>
 </div>
+
+<style>
+    [x-cloak] {
+        display: none !important;
+    }
+</style>
