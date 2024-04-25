@@ -16,6 +16,13 @@ class OffersResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    public static function getNavigationBadge(): ?string
+    {
+        $count = static::getModel()::count();
+
+        return $count > 100 ? '100+' : (string) $count;
+    }
+
     public static function form(Form $form): Form
     {
         return $form

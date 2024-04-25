@@ -15,7 +15,8 @@ class Product extends Model
         'category',
         'tags',
         'price',
-        'photo',
+        'images',
+        'additional_information',
         'description',
         'custom_attributes',
     ];
@@ -23,6 +24,7 @@ class Product extends Model
     protected $casts = [
         'custom_attributes' => 'array',
         'tags' => 'array',
+        'images' => 'array',
     ];
 
     public function categories()
@@ -33,5 +35,15 @@ class Product extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function images()
+    {
+        return $this->hasMany(ProductImage::class);
+    }
+
+    public function attributes()
+    {
+        return $this->hasMany(ProductAttribute::class);
     }
 }
