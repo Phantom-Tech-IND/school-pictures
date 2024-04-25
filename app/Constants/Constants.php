@@ -21,6 +21,30 @@ class Constants
         'Gruppenbilder für Firmen',
     ];
 
+    const TEAM_MEMBERS = [
+        [
+            'name' => 'Tanja Arnold',
+            'role' => 'Geschäftsinhaberin',
+            'image' => 'Tanja-Arnold-1.jpg',
+            'twitter' => '#',
+            'linkedin' => '#',
+        ],
+        [
+            'name' => 'Petra Mettler',
+            'role' => 'Printmedienverarbeiterin EFZ',
+            'image' => '/Petra-Mettler.jpg',
+            'twitter' => '#',
+            'linkedin' => '#',
+        ],
+        [
+            'name' => 'Martina Aregger',
+            'role' => 'Stv. Geschäftsführung / Fotofachfrau EFZ',
+            'image' => '/Martina-Aregger-Neu.jpg',
+            'twitter' => '#',
+            'linkedin' => '#',
+        ],
+    ];
+
     const FAQ_TABS = [
         [
             'id' => 'kindergarten-und-schulfotografie',

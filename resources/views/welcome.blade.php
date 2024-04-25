@@ -15,25 +15,7 @@
         ])
     </div>
     <div class="mt-8 md:mt-24">
-        @include('components.homepage-team', [
-            'teams' => [
-                [
-                    'image' => '/coverbluzz.jpeg',
-                    'name' => 'Hans Muster',
-                    'text' => 'Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.',
-                ],
-                [
-                    'image' => '/coverbluzz.jpeg',
-                    'name' => 'Hans Muster',
-                    'text' => 'Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.',
-                ],
-                [
-                    'image' => '/coverbluzz.jpeg',
-                    'name' => 'Hans Muster',
-                    'text' => 'Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.',
-                ],
-            ],
-        ])
+        @include('components.team', [ 'teamMembers' => \App\Constants\Constants::TEAM_MEMBERS ])
     </div>
     <div class="mt-8 md:mt-24">
         @include('components.popular-product', [
