@@ -1,4 +1,4 @@
-<div class="py-24 bg-white sm:py-32">
+<div class="">
     <div class="px-6 mx-auto max-w-7xl lg:px-8">
         <div class="max-w-2xl mx-auto lg:mx-0">
             <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Unser Team</h2>
