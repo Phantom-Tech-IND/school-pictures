@@ -1,6 +1,6 @@
 <!-- Cookie Consent Dialog -->
-<div class="fixed bottom-0 right-0 z-50 pb-2 js-cookie-consent cookie-consent">
-    <div class="max-w-xl px-6 mx-auto">
+<div class="fixed right-0 z-50 pb-2 bottom-8 js-cookie-consent cookie-consent">
+    <div class="max-w-3xl px-6 mx-auto">
         <div class="p-2 bg-gray-100 rounded-lg shadow-2xl">
 
             <!-- Content Container -->
