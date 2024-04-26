@@ -18,7 +18,7 @@
             </p>
         @endif
     </div>
-    <a href="#" aria-describedby="offer-{{ $offerId }}"
+    <a href="{{ $offer_url }}" aria-describedby="offer-{{ $offerId }}"
         class="block px-3 py-2 mt-6 text-sm font-semibold leading-6 text-center
             {{ isset($badge) ?
                 'text-white bg-accent-700 rounded-md shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-7000 hover:bg-accent-800' :
