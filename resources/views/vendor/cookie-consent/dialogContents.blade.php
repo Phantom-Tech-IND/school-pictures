@@ -1,6 +1,6 @@
 <!-- Cookie Consent Dialog -->
-<div class="fixed inset-x-0 bottom-0 z-50 pb-2 js-cookie-consent cookie-consent">
-    <div class="px-6 mx-auto max-w-7xl">
+<div class="fixed bottom-0 right-0 z-50 pb-2 js-cookie-consent cookie-consent">
+    <div class="max-w-xl px-6 mx-auto">
         <div class="p-2 bg-gray-100 rounded-lg shadow-2xl">
 
             <!-- Content Container -->
@@ -17,10 +17,12 @@
                 </p>
 
                 <!-- Agree Button -->
-                <button
-                    class="px-4 py-2 mt-2 text-sm font-medium rounded-md cursor-pointer sm:mt-0 text-accent-800 bg-accent-500 js-cookie-consent-agree cookie-consent__agree hover:bg-accent-400">
-                    {{ trans('cookie-consent::texts.agree') }}
-                </button>
+                <div class="flex justify-center">
+                    <button
+                        class="w-full max-w-xs px-4 py-2 mt-2 text-sm font-medium rounded-md cursor-pointer sm:mt-0 text-accent-800 bg-accent-500 js-cookie-consent-agree cookie-consent__agree hover:bg-accent-400">
+                        {{ trans('cookie-consent::texts.agree') }}
+                    </button>
+                </div>
 
                 <!-- Links -->
                 <ul class="flex flex-wrap justify-center gap-x-6 gap-y-1">
