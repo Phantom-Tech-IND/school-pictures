@@ -57,6 +57,7 @@
                     'title' => 'FAMILY MEDIUMM MOST POPULAR',
                     'price' => '298',
                     'badge' => 'Most popular',
+                    'offer_url' => '#',
                     'features' => [
                         '60 Minuten Fotoshooting',
                         'Gruppenbilder, nur Kinder, nur Eltern',
@@ -69,6 +70,7 @@
                     'title' => 'SCHWANGERSCHAFT MEDIUM MOST POPULAR',
                     'price' => '398',
                     'badge' => 'Most popular',
+                    'offer_url' => '#',
                     'features' => [
                         '60 Minuten Fotoshooting',
                         'Mama, Papa und Geschwister',
@@ -80,6 +82,7 @@
                 [
                     'title' => 'KINDERSHOOTING',
                     'price' => '248',
+                    'offer_url' => '#',
                     'features' => [
                         '30 Minuten Fotoshooting',
                         '1 Kind',

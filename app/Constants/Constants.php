@@ -4,6 +4,8 @@ namespace App\Constants;
 
 class Constants
 {
+    const FACEBOOK_URL = 'https://www.facebook.com/pages/ArtLine-Fotografie-AG/105849706102568';
+    const INSTAGRAM_URL = 'https://www.instagram.com/artline.fotografie.ag/';
     const KINDERGARDEN_IMAGE_URL = '/content/kindergarden-and-school/';
     const KINDERGARDEN_ALT_TEXT = 'ArtLine Fotografie AG';
     const CHECKBOX_LABELS = [
@@ -26,22 +28,24 @@ class Constants
             'name' => 'Tanja Arnold',
             'role' => 'Geschäftsinhaberin',
             'image' => 'Tanja-Arnold-1.jpg',
-            'twitter' => '#',
-            'linkedin' => '#',
+            'facebook_url' => '#',
+            'instagram_url' => '#',
         ],
         [
             'name' => 'Petra Mettler',
             'role' => 'Printmedienverarbeiterin EFZ',
             'image' => '/Petra-Mettler.jpg',
-            'twitter' => '#',
-            'linkedin' => '#',
+            'facebook_url' => '#',
+            'instagram_url' => '#',
+
         ],
         [
             'name' => 'Martina Aregger',
             'role' => 'Stv. Geschäftsführung / Fotofachfrau EFZ',
             'image' => '/Martina-Aregger-Neu.jpg',
-            'twitter' => '#',
-            'linkedin' => '#',
+            'facebook_url' => '#',
+            'instagram_url' => '#',
+
         ],
     ];
 

@@ -1,6 +1,6 @@
 <div class="px-4 mx-auto sm:px-6 max-w-7xl lg:px-8">
     <div class="text-center md:my-6">
-        <h1 class="text-2xl sm:text-3xl font-[500] uppercase text-primary">HERZLICH WILLKOMMEN BEI
+        <h1 class="text-xl xs:text-2xl sm:text-3xl font-[500] uppercase text-primary">HERZLICH WILLKOMMEN BEI
             <br />
             ARTLINE FOTOGRAFIE AG
         </h1>
