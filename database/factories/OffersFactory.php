@@ -19,7 +19,7 @@ class OffersFactory extends Factory
         return [
             'title' => $this->faker->words(3, true),
             'image' => 'offer.jpg',
-            'photo_gallery' => json_encode([$this->faker->imageUrl(), $this->faker->imageUrl()]),
+            'photo_gallery' => [$this->faker->imageUrl(), $this->faker->imageUrl()],
         ];
     }
 }

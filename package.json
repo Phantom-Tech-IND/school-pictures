@@ -24,7 +24,6 @@
         "alpinejs": "^3.13.7",
         "fslightbox": "^3.4.1",
         "install": "^0.13.0",
-        "masonry-layout": "^4.2.2",
         "npm": "^10.5.2",
         "swiper": "^11.0.7",
         "uuid": "^9.0.1"
