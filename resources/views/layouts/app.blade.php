@@ -17,7 +17,7 @@
 </body>
 
 @include('components.modal-right-click')
-@include('components.images-footer')
+{{-- @include('components.images-footer') --}}
 @include('components.footer')
 </body>
 

@@ -2,7 +2,7 @@
     use App\Constants\Constants;
 @endphp
 
-<footer class="bg-primary" aria-labelledby="footer-heading">
+<footer class="mt-24 bg-primary" aria-labelledby="footer-heading">
     <h2 id="footer-heading" class="sr-only">Footer</h2>
     <div class="px-6 pt-16 pb-8 mx-auto max-w-7xl sm:pt-24 lg:px-8 lg:pt-32">
         <div class="xl:grid xl:grid-cols-3 xl:gap-8">
@@ -52,7 +52,8 @@
                                 <span class="text-sm leading-6 text-gray-300">Mo. + Mi. und Fr. : 13:00 – 17:00</span>
                             </li>
                             <li>
-                                <span class="text-sm leading-6 text-gray-300">Ausserhalb der Öffnungszeiten : Termine nach Vereinbarung</span>
+                                <span class="text-sm leading-6 text-gray-300">Ausserhalb der Öffnungszeiten : Termine
+                                    nach Vereinbarung</span>
                             </li>
                         </ul>
                     </div>
@@ -60,13 +61,17 @@
                         <h3 class="text-sm font-semibold leading-6 text-white">ARTLINE FOTOGRAFIE AG</h3>
                         <ul role="list" class="mt-6 space-y-4">
                             <li>
-                                <a href="{{ route('frequently-asked-questions') }}" class="text-sm leading-6 text-gray-300 hover:text-white">HÄUFIG GESTELLTE FRAGEN (FAQ)</a>
+                                <a href="{{ route('frequently-asked-questions') }}"
+                                    class="text-sm leading-6 text-gray-300 hover:text-white">HÄUFIG GESTELLTE FRAGEN
+                                    (FAQ)</a>
                             </li>
                             <li>
-                                <a href="{{ route('impressum') }}" class="text-sm leading-6 text-gray-300 hover:text-white">IMPRESSUM</a>
+                                <a href="{{ route('impressum') }}"
+                                    class="text-sm leading-6 text-gray-300 hover:text-white">IMPRESSUM</a>
                             </li>
                             <li>
-                                <a href="{{ route('general-terms-and-conditions') }}" class="text-sm leading-6 text-gray-300 hover:text-white">AGB</a>
+                                <a href="{{ route('general-terms-and-conditions') }}"
+                                    class="text-sm leading-6 text-gray-300 hover:text-white">AGB</a>
                             </li>
                         </ul>
                     </div>

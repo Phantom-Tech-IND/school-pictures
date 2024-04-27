@@ -4,7 +4,8 @@
         <h3 class="mb-4 text-lg font-semibold">ArtLine Fotografie AG</h3>
         <label class="mb-1 font-semibold"> <!-- Adjusted spacing from mb-4 to mb-2 -->
             Adresse:
-            <a href="https://www.google.com/maps/search/?api=1&query=Gewerbezone+59,+6018+Buttisholz" target="_blank" class="mb-4 text-green-500 hover:text-green-700 focus:text-green-700">
+            <a href="https://www.google.com/maps/search/?api=1&query=Gewerbezone+59,+6018+Buttisholz" target="_blank"
+                class="mb-4 text-green-500 hover:text-green-700 focus:text-green-700">
                 Gewerbezone 59, 6018 Buttisholz
             </a>
         </label>
@@ -22,7 +23,7 @@
         </label>
         <label class="mb-2 font-semibold"> <!-- Adjusted spacing from mb-4 to mb-2 -->
             Öffnungszeiten:<br>
-            <div class="flex w-full">
+            <div class="flex flex-wrap w-full">
                 <p class="whitespace-nowrap">Mo-Fr: 09:00 - 18:00</p>
                 <p class="mx-2">|</p>
                 <p class="whitespace-nowrap">Sa: 10:00 - 14:00</p>
