@@ -1,332 +1,332 @@
 [
   {
-    "id": 60,
-    "offer_id": 14,
-    "name": "PASSBILDER",
-    "description": ".",
-    "price": 40.00,
-    "is_popular": 1,
-    "custom_attributes": "[{\"title\": \"5 Minuten Aufnahme\"}, {\"title\": \"digital oder 4 Stk ausgedruckt\"}, {\"title\": \"Bearbeitung nach Biometrischen Vorgaben ( wenn nötig)\"}, {\"title\": \"Zusätzlich digital Plus CHF 15.00\"}, {\"title\": \"Jedes weitere 4er Set CHF 10.00\"}]",
-    "created_at": "2024-04-28 07:08:48",
-    "updated_at": "2024-04-28 07:08:48"
-  },
-  {
-    "id": 61,
-    "offer_id": 13,
+    "id": 1,
+    "offer_id": 1,
     "name": "BEWERBUNGSBILD",
     "description": ".",
     "price": 89.00,
     "is_popular": 1,
     "custom_attributes": "[{\"title\": \"10 Minuten Fotoshooting\"}, {\"title\": \"gemeinsame Auswahl am PC\"}, {\"title\": \"2 Bilder inkl. Feinretouche in digitaler Form per Mail\"}, {\"title\": \"zusätzlich in gedruckter Form CHF 15.00\"}, {\"title\": \"Jedes weitere Bild CHF 15.00\"}]",
-    "created_at": "2024-04-28 07:10:59",
-    "updated_at": "2024-04-28 07:10:59"
+    "created_at": "2024-04-28 16:24:07",
+    "updated_at": "2024-04-28 16:24:07"
   },
   {
-    "id": 62,
-    "offer_id": 13,
+    "id": 2,
+    "offer_id": 1,
     "name": "BEWERBUNGSBILD PLUS",
     "description": ".",
     "price": 198.00,
     "is_popular": 0,
     "custom_attributes": "[{\"title\": \"15 Minuten Fotoshooting im Studio\"}, {\"title\": \"gemeinsame Auswahl am PC\"}, {\"title\": \"Ganzkörper möglich\"}, {\"title\": \"4 Bilder inkl. Feinretouche in digitaler Form per Mail\"}, {\"title\": \"zusätzlich in gedruckter Form CHF 15.00\"}, {\"title\": \"Jedes weitere Bild CHF 15.00\"}]",
-    "created_at": "2024-04-28 07:11:47",
-    "updated_at": "2024-04-28 07:11:47"
+    "created_at": "2024-04-28 16:24:07",
+    "updated_at": "2024-04-28 16:24:07"
   },
   {
-    "id": 63,
-    "offer_id": 13,
+    "id": 3,
+    "offer_id": 1,
     "name": "BEWERBUNGSMAPPE",
     "description": ".",
     "price": 165.00,
     "is_popular": 0,
     "custom_attributes": "[{\"title\": \"10 Minuten Fotoshooting\"}, {\"title\": \"gemeinsame Auswahl am PC\"}, {\"title\": \"2 Bilder inkl. Feinretouche in digitaler Form per Mail\"}, {\"title\": \"gestaltetes Deckblatt\"}, {\"title\": \"inkl. gedrucktes Deckblatt, Mappe und Couvert\"}, {\"title\": \"Deckblatt in digitaler Form zusätzlich CHF 30.00\"}, {\"title\": \"jede weiter Mappe CHF 15.00\"}, {\"title\": \"Jedes weitere Bild CHF 15.00\"}]",
-    "created_at": "2024-04-28 07:16:48",
-    "updated_at": "2024-04-28 07:16:48"
+    "created_at": "2024-04-28 16:24:07",
+    "updated_at": "2024-04-28 16:24:07"
   },
   {
-    "id": 64,
-    "offer_id": 13,
+    "id": 4,
+    "offer_id": 1,
     "name": "BEWERBUNGSBILD OUTDOOR",
     "description": ".",
     "price": 245.00,
     "is_popular": 0,
     "custom_attributes": "[{\"title\": \"30 Minuten Fotoshooting Outdoor\"}, {\"title\": \"gemeinsame Auswahl am PC\"}, {\"title\": \"verschiedene Posen und Hintergründe\"}, {\"title\": \"Ganzkörper möglich\"}, {\"title\": \"6 Bilder inkl. Feinretouche in digitaler Form per Mail\"}, {\"title\": \"Jedes weitere Bild CHF 15.00\"}]",
-    "created_at": "2024-04-28 07:17:40",
-    "updated_at": "2024-04-28 07:17:40"
+    "created_at": "2024-04-28 16:24:07",
+    "updated_at": "2024-04-28 16:24:07"
   },
   {
-    "id": 65,
-    "offer_id": 15,
+    "id": 5,
+    "offer_id": 2,
+    "name": "PASSBILDER",
+    "description": ".",
+    "price": 40.00,
+    "is_popular": 1,
+    "custom_attributes": "[{\"title\": \"5 Minuten Aufnahme\"}, {\"title\": \"digital oder 4 Stk ausgedruckt\"}, {\"title\": \"Bearbeitung nach Biometrischen Vorgaben ( wenn nötig)\"}, {\"title\": \"Zusätzlich digital Plus CHF 15.00\"}, {\"title\": \"Jedes weitere 4er Set CHF 10.00\"}]",
+    "created_at": "2024-04-28 16:24:07",
+    "updated_at": "2024-04-28 16:24:07"
+  },
+  {
+    "id": 6,
+    "offer_id": 3,
     "name": "FAMILY SMALL",
     "description": ".",
     "price": 248.00,
     "is_popular": 0,
     "custom_attributes": "[{\"title\": \"30 Minuten Fotoshooting\"}, {\"title\": \"nur Gruppenbilder\"}, {\"title\": \"alle Bilder in kleiner Auflösung (900×600 px)\"}, {\"title\": \"5 Bilder bearbeitet und in der vollen Auflösung\"}]",
-    "created_at": "2024-04-28 07:19:06",
-    "updated_at": "2024-04-28 07:19:06"
+    "created_at": "2024-04-28 16:24:07",
+    "updated_at": "2024-04-28 16:24:07"
   },
   {
-    "id": 66,
-    "offer_id": 15,
+    "id": 7,
+    "offer_id": 3,
     "name": "FAMILY MEDIUM",
     "description": ".",
     "price": 298.00,
     "is_popular": 1,
     "custom_attributes": "[{\"title\": \"60 Minuten Fotoshooting\"}, {\"title\": \"Gruppenbilder, nur Kinder, nur Eltern\"}, {\"title\": \"alle Bilder in kleiner Auflösung (900×600 px)\"}, {\"title\": \"5 Bilder bearbeitet und in der vollen Auflösung\"}, {\"title\": \"Outdoor zusätzlich CHF 95.00\"}]",
-    "created_at": "2024-04-28 07:19:49",
-    "updated_at": "2024-04-28 07:19:49"
+    "created_at": "2024-04-28 16:24:07",
+    "updated_at": "2024-04-28 16:24:07"
   },
   {
-    "id": 67,
-    "offer_id": 15,
+    "id": 8,
+    "offer_id": 3,
     "name": "FAMILY PLUS (AB 2 FAMILIEN)",
     "description": ".",
     "price": 398.00,
     "is_popular": 0,
     "custom_attributes": "[{\"title\": \"60 Minuten Fotoshooting\"}, {\"title\": \"Gruppenbilder, nur Kinder, nur Eltern\"}, {\"title\": \"ab 2 Familien / 3 Generationen\"}, {\"title\": \"alle Bilder in kleiner Auflösung (900×600 px)\"}, {\"title\": \"5 Bilder bearbeitet und in der vollen Auflösung\"}, {\"title\": \"Outdoor zusätzlich CHF 95.00\"}, {\"title\": \"einzelne Familien zusätzlich CHF 59.00\"}]",
-    "created_at": "2024-04-28 07:20:47",
-    "updated_at": "2024-04-28 07:20:47"
+    "created_at": "2024-04-28 16:24:07",
+    "updated_at": "2024-04-28 16:24:07"
   },
   {
-    "id": 68,
-    "offer_id": 16,
+    "id": 9,
+    "offer_id": 4,
     "name": "KINDERSHOOTING",
     "description": ".",
     "price": 248.00,
     "is_popular": 0,
     "custom_attributes": "[{\"title\": \"30 Minuten Fotoshooting\"}, {\"title\": \"1 Kind\"}, {\"title\": \"alle Bilder in kleiner Auflösung (900×600 px)\"}, {\"title\": \"5 Bilder bearbeitet und in der vollen Auflösung\"}]",
-    "created_at": "2024-04-28 07:21:54",
-    "updated_at": "2024-04-28 07:21:54"
+    "created_at": "2024-04-28 16:24:07",
+    "updated_at": "2024-04-28 16:24:07"
   },
   {
-    "id": 69,
-    "offer_id": 16,
+    "id": 10,
+    "offer_id": 4,
     "name": "FOTOSHOOTINGCARD",
     "description": ".",
     "price": 198.00,
     "is_popular": 1,
     "custom_attributes": "[{\"title\": \"10 Shootings à 10 Minuten Fotoshooting\"}, {\"title\": \"1 Kind\"}, {\"title\": \"gültig 2 Jahre\"}, {\"title\": \"Angebot gültig bis 14 Jahren\"}, {\"title\": \"alle Bilder exkl.\"}]",
-    "created_at": "2024-04-28 07:22:50",
-    "updated_at": "2024-04-28 07:22:50"
+    "created_at": "2024-04-28 16:24:07",
+    "updated_at": "2024-04-28 16:24:07"
   },
   {
-    "id": 70,
-    "offer_id": 17,
+    "id": 11,
+    "offer_id": 5,
     "name": "GESCHWISTER-/ ENKELKINDERSHOOTING",
     "description": ".",
     "price": 248.00,
     "is_popular": 1,
     "custom_attributes": "[{\"title\": \"20 Minuten Fotoshooting\"}, {\"title\": \"Geschwister oder Enkelkinder\"}, {\"title\": \"alle zusammen\"}, {\"title\": \"alle Bilder in kleiner Auflösung (900×600 px)\"}, {\"title\": \"1 Bild bearbeitet und in der vollen Auflösung\"}]",
-    "created_at": "2024-04-28 07:23:56",
-    "updated_at": "2024-04-28 07:23:56"
+    "created_at": "2024-04-28 16:24:07",
+    "updated_at": "2024-04-28 16:24:07"
   },
   {
-    "id": 71,
-    "offer_id": 17,
+    "id": 12,
+    "offer_id": 5,
     "name": "GESCHWISTER-/ ENKELKINDERSHOOTING MIT VARIATIONEN",
     "description": ".",
     "price": 298.00,
     "is_popular": 0,
     "custom_attributes": "[{\"title\": \"60 Minuten Fotoshooting\"}, {\"title\": \"Geschwister oder Enkelkinder\"}, {\"title\": \"zusammen und alleine\"}, {\"title\": \"alle Bilder in kleiner Auflösung (900×600 px)\"}, {\"title\": \"5 Bilder bearbeitet und in der vollen Auflösung\"}]",
-    "created_at": "2024-04-28 07:24:52",
-    "updated_at": "2024-04-28 07:24:52"
+    "created_at": "2024-04-28 16:24:07",
+    "updated_at": "2024-04-28 16:24:07"
   },
   {
-    "id": 72,
-    "offer_id": 18,
+    "id": 13,
+    "offer_id": 6,
     "name": "SCHWANGERSCHAFT SMALL",
     "description": ".",
     "price": 248.00,
     "is_popular": 0,
     "custom_attributes": "[{\"title\": \"30 Minuten Fotoshooting\"}, {\"title\": \"nur Mama\"}, {\"title\": \"alle Bilder in kleiner Auflösung (900×600 px)\"}, {\"title\": \"5 Bilder bearbeitet und in der vollen Auflösung\"}]",
-    "created_at": "2024-04-28 07:26:13",
-    "updated_at": "2024-04-28 07:26:13"
+    "created_at": "2024-04-28 16:24:07",
+    "updated_at": "2024-04-28 16:24:07"
   },
   {
-    "id": 73,
-    "offer_id": 18,
+    "id": 14,
+    "offer_id": 6,
     "name": "SCHWANGERSCHAFT MEDIUM",
     "description": ".",
     "price": 398.00,
     "is_popular": 1,
     "custom_attributes": "[{\"title\": \"60 Minuten Fotoshooting\"}, {\"title\": \"Mama, Papa und Geschwister\"}, {\"title\": \"Bilder alleine und zusammen\"}, {\"title\": \"alle Bilder in kleiner Auflösung (900×600 px)\"}, {\"title\": \"5 Bilder bearbeitet und in der vollen Auflösung\"}]",
-    "created_at": "2024-04-28 07:26:58",
-    "updated_at": "2024-04-28 07:26:58"
+    "created_at": "2024-04-28 16:24:07",
+    "updated_at": "2024-04-28 16:24:07"
   },
   {
-    "id": 74,
-    "offer_id": 18,
+    "id": 15,
+    "offer_id": 6,
     "name": "KOMBI SCHWANGERSCHAFT- UND NEWBORNSHOOTING",
     "description": ".",
     "price": 698.00,
     "is_popular": 0,
     "custom_attributes": "[{\"title\": \"60 Minuten Fotoshooting (Schwangerschaft)\"}, {\"title\": \"Mama, Papa und Geschwister\"}, {\"title\": \"Bilder alleine und zusammen\"}, {\"title\": \"60 Minuten Fotoshooting (Newborn)\"}, {\"title\": \"wenige Familienbilder möglich\"}, {\"title\": \"alle Bilder in kleiner Auflösung (900×600 px)\"}, {\"title\": \"5 Bilder bearbeitet und in der vollen Auflösung pro Shooting\"}]",
-    "created_at": "2024-04-28 07:28:02",
-    "updated_at": "2024-04-28 07:28:02"
+    "created_at": "2024-04-28 16:24:07",
+    "updated_at": "2024-04-28 16:24:07"
   },
   {
-    "id": 75,
-    "offer_id": 19,
+    "id": 16,
+    "offer_id": 7,
     "name": "BABYSHOOTING",
     "description": ".",
     "price": 248.00,
     "is_popular": 0,
     "custom_attributes": "[{\"title\": \"30 Minuten Fotoshooting\"}, {\"title\": \"1 Kind\"}, {\"title\": \"Bilder alleine und zusammen (wenn 2 Kinder)\"}, {\"title\": \"zusätzliches Kind CHF 50.00\"}, {\"title\": \"alle Bilder in kleiner Auflösung (900×600 px)\"}, {\"title\": \"5 Bilder bearbeitet und in der vollen Auflösung\"}]",
-    "created_at": "2024-04-28 07:29:54",
-    "updated_at": "2024-04-28 07:29:54"
+    "created_at": "2024-04-28 16:24:07",
+    "updated_at": "2024-04-28 16:24:07"
   },
   {
-    "id": 76,
-    "offer_id": 19,
+    "id": 17,
+    "offer_id": 7,
     "name": "NEWBORNSHOOTING",
     "description": ".",
     "price": 398.00,
     "is_popular": 1,
     "custom_attributes": "[{\"title\": \"60 Minuten Fotoshooting\"}, {\"title\": \"1 Kind\"}, {\"title\": \"bis 4 Wochen\"}, {\"title\": \"wenige Familienbilder möglich\"}, {\"title\": \"alle Bilder in kleiner Auflösung (900×600 px)\"}, {\"title\": \"5 Bilder bearbeitet und in der vollen Auflösung\"}]",
-    "created_at": "2024-04-28 07:30:45",
-    "updated_at": "2024-04-28 07:30:45"
+    "created_at": "2024-04-28 16:24:07",
+    "updated_at": "2024-04-28 16:24:07"
   },
   {
-    "id": 77,
-    "offer_id": 19,
+    "id": 18,
+    "offer_id": 7,
     "name": "FOTOSHOOTINGCARD",
     "description": ".",
     "price": 198.00,
     "is_popular": 0,
     "custom_attributes": "[{\"title\": \"10 Shootings à 10 Minuten Fotoshooting\"}, {\"title\": \"1 Kind\"}, {\"title\": \"gültig 2 Jahre\"}, {\"title\": \"Angebot gültig bis 14 Jahren\"}, {\"title\": \"alle Bilder exkl.\"}]",
-    "created_at": "2024-04-28 07:31:27",
-    "updated_at": "2024-04-28 07:31:27"
+    "created_at": "2024-04-28 16:24:07",
+    "updated_at": "2024-04-28 16:24:07"
   },
   {
-    "id": 78,
-    "offer_id": 20,
+    "id": 19,
+    "offer_id": 8,
     "name": "LEHRLING FOTOGRAFIERT LEHRLING",
     "description": ".",
     "price": 175.00,
     "is_popular": 0,
     "custom_attributes": "[{\"title\": \"30 Minuten Fotoshooting\"}, {\"title\": \"1 Person\"}, {\"title\": \"alle Bilder in kleiner Auflösung (900×600 px)\"}, {\"title\": \"5 Bilder bearbeitet und in der vollen Auflösung\"}]",
-    "created_at": "2024-04-28 07:32:33",
-    "updated_at": "2024-04-28 07:32:33"
+    "created_at": "2024-04-28 16:24:07",
+    "updated_at": "2024-04-28 16:24:07"
   },
   {
-    "id": 79,
-    "offer_id": 20,
+    "id": 20,
+    "offer_id": 8,
     "name": "PORTRAIT SMALL",
     "description": ".",
     "price": 248.00,
     "is_popular": 0,
     "custom_attributes": "[{\"title\": \"30 Minuten Fotoshooting\"}, {\"title\": \"1 Person\"}, {\"title\": \"alle Bilder in kleiner Auflösung (900×600 px)\"}, {\"title\": \"5 Bilder bearbeitet und in der vollen Auflösung\"}, {\"title\": \"Irishooting zusätzlich CHF 100.00\"}]",
-    "created_at": "2024-04-28 07:33:12",
-    "updated_at": "2024-04-28 07:33:12"
+    "created_at": "2024-04-28 16:24:07",
+    "updated_at": "2024-04-28 16:24:07"
   },
   {
-    "id": 80,
-    "offer_id": 20,
+    "id": 21,
+    "offer_id": 8,
     "name": "PORTRAIT MEDIUM",
     "description": ".",
     "price": 378.00,
     "is_popular": 1,
     "custom_attributes": "[{\"title\": \"60 Minuten Fotoshooting\"}, {\"title\": \"1 Person\"}, {\"title\": \"Akt-/ Erotikaufnahmen möglich\"}, {\"title\": \"alle Bilder in kleiner Auflösung (900×600 px)\"}, {\"title\": \"5 Bilder bearbeitet und in der vollen Auflösung\"}, {\"title\": \"Outdoor zuätzlich CHF 95.00\"}, {\"title\": \"Rainshooting zusätzlich CHF 100.00\"}]",
-    "created_at": "2024-04-28 07:34:17",
-    "updated_at": "2024-04-28 07:34:17"
+    "created_at": "2024-04-28 16:24:07",
+    "updated_at": "2024-04-28 16:24:07"
   },
   {
-    "id": 81,
-    "offer_id": 21,
+    "id": 22,
+    "offer_id": 9,
     "name": "LEHRLING FOTOGRAFIERT LEHRLING",
     "description": ".",
     "price": 175.00,
     "is_popular": 0,
     "custom_attributes": "[{\"title\": \"30 Minuten Fotoshooting\"}, {\"title\": \"1 Person\"}, {\"title\": \"alle Bilder in kleiner Auflösung (900×600 px)\"}, {\"title\": \"5 Bilder bearbeitet und in der vollen Auflösung\"}]",
-    "created_at": "2024-04-28 07:35:23",
-    "updated_at": "2024-04-28 07:35:23"
+    "created_at": "2024-04-28 16:24:07",
+    "updated_at": "2024-04-28 16:24:07"
   },
   {
-    "id": 82,
-    "offer_id": 21,
+    "id": 23,
+    "offer_id": 9,
     "name": "PORTRAIT SMALL",
     "description": ".",
     "price": 248.00,
     "is_popular": 0,
     "custom_attributes": "[{\"title\": \"30 Minuten Fotoshooting\"}, {\"title\": \"1 Person\"}, {\"title\": \"alle Bilder in kleiner Auflösung (900×600 px)\"}, {\"title\": \"5 Bilder bearbeitet und in der vollen Auflösung\"}]",
-    "created_at": "2024-04-28 07:36:04",
-    "updated_at": "2024-04-28 07:36:04"
+    "created_at": "2024-04-28 16:24:07",
+    "updated_at": "2024-04-28 16:24:07"
   },
   {
-    "id": 83,
-    "offer_id": 21,
+    "id": 24,
+    "offer_id": 9,
     "name": "PORTRAIT MEDIUM",
     "description": ".",
     "price": 378.00,
     "is_popular": 1,
     "custom_attributes": "[{\"title\": \"60 Minuten Fotoshooting\"}, {\"title\": \"1 Person\"}, {\"title\": \"Akt-/ Erotikaufnahmen möglich\"}, {\"title\": \"alle Bilder in kleiner Auflösung (900×600 px)\"}, {\"title\": \"5 Bilder bearbeitet und in der vollen Auflösung\"}, {\"title\": \"Outdoor zuätzlich CHF 95.00\"}, {\"title\": \"Rainshooting zusätzlich CHF 100.00\"}]",
-    "created_at": "2024-04-28 07:36:59",
-    "updated_at": "2024-04-28 07:36:59"
+    "created_at": "2024-04-28 16:24:07",
+    "updated_at": "2024-04-28 16:24:07"
   },
   {
-    "id": 84,
-    "offer_id": 22,
+    "id": 25,
+    "offer_id": 10,
     "name": "PARTNER SMALL",
     "description": ".",
     "price": 298.00,
     "is_popular": 0,
     "custom_attributes": "[{\"title\": \"30 Minuten Fotoshooting\"}, {\"title\": \"nur Bilder zusammen\"}, {\"title\": \"alle Bilder in kleiner Auflösung (900×600 px)\"}, {\"title\": \"5 Bilder bearbeitet und in der vollen Auflösung\"}]",
-    "created_at": "2024-04-28 07:37:57",
-    "updated_at": "2024-04-28 07:37:57"
+    "created_at": "2024-04-28 16:24:07",
+    "updated_at": "2024-04-28 16:24:07"
   },
   {
-    "id": 85,
-    "offer_id": 22,
+    "id": 26,
+    "offer_id": 10,
     "name": "PARTNER MEDIUM",
     "description": ".",
     "price": 398.00,
     "is_popular": 1,
     "custom_attributes": "[{\"title\": \"60 Minuten Fotoshooting\"}, {\"title\": \"Bilder zusammen und alleine\"}, {\"title\": \"Akt-/Erotikaufnahmen möglich\"}, {\"title\": \"alle Bilder in kleiner Auflösung (900×600 px)\"}, {\"title\": \"5 Bilder bearbeitet und in der vollen Auflösung\"}, {\"title\": \"Outdoor zusätzlich CHF 95.00\"}, {\"title\": \"Rainshooting zusätzlich CHF 100.00\"}]",
-    "created_at": "2024-04-28 07:38:58",
-    "updated_at": "2024-04-28 07:38:58"
+    "created_at": "2024-04-28 16:24:07",
+    "updated_at": "2024-04-28 16:24:07"
   },
   {
-    "id": 86,
-    "offer_id": 23,
+    "id": 27,
+    "offer_id": 11,
     "name": "RAINSHOOTING",
     "description": ".",
     "price": 398.00,
     "is_popular": 0,
     "custom_attributes": "[{\"title\": \"30 Minuten Fotoshooting\"}, {\"title\": \"alle Bilder in kleiner Auflösung (900×600 px)\"}, {\"title\": \"3 Bilder in der vollen Auflösung bearbeitet\"}]",
-    "created_at": "2024-04-28 07:39:45",
-    "updated_at": "2024-04-28 07:39:45"
+    "created_at": "2024-04-28 16:24:07",
+    "updated_at": "2024-04-28 16:24:07"
   },
   {
-    "id": 87,
-    "offer_id": 24,
+    "id": 28,
+    "offer_id": 12,
     "name": "PARTNER MEDIUM",
     "description": ".",
     "price": 349.00,
     "is_popular": 0,
     "custom_attributes": "[{\"title\": \"60 Minuten Fotoshooting\"}, {\"title\": \"Bilder zusammen und alleine\"}, {\"title\": \"Akt-/Erotikaufnahmen möglich\"}, {\"title\": \"alle Bilder in kleiner Auflösung (900×600 px)\"}, {\"title\": \"5 Bilder bearbeitet und in der vollen Auflösung\"}, {\"title\": \"Outdoor zusätzlich CHF 95.00\"}, {\"title\": \"Rainshooting zusätzlich CHF 100.00\"}]",
-    "created_at": "2024-04-28 07:40:53",
-    "updated_at": "2024-04-28 07:40:53"
+    "created_at": "2024-04-28 16:24:07",
+    "updated_at": "2024-04-28 16:24:07"
   },
   {
-    "id": 88,
-    "offer_id": 24,
+    "id": 29,
+    "offer_id": 12,
     "name": "AKT-UND EROTIKSHOOTING",
     "description": ".",
     "price": 398.00,
     "is_popular": 1,
     "custom_attributes": "[{\"title\": \"60 Minuten Fotoshooting\"}, {\"title\": \"1 Person\"}, {\"title\": \"alle Bilder in kleiner Auflösung (900×600 px)\"}, {\"title\": \"5 Bilder bearbeitet und in der vollen Auflösung\"}, {\"title\": \"Rainshooting zusätzlich CHF 100.00\"}]",
-    "created_at": "2024-04-28 07:41:41",
-    "updated_at": "2024-04-28 07:41:41"
+    "created_at": "2024-04-28 16:24:07",
+    "updated_at": "2024-04-28 16:24:07"
   },
   {
-    "id": 89,
-    "offer_id": 24,
+    "id": 30,
+    "offer_id": 12,
     "name": "PORTRAIT MEDIUM",
     "description": ".",
     "price": 349.00,
     "is_popular": 0,
     "custom_attributes": "[{\"title\": \"60 Minuten Fotoshooting\"}, {\"title\": \"1 Person\"}, {\"title\": \"Akt-/Erotikaufnahmen möglich\"}, {\"title\": \"alle Bilder in kleiner Auflösung (900×600 px)\"}, {\"title\": \"5 Bilder bearbeitet und in der vollen Auflösung\"}, {\"title\": \"Outdoor zusätzlich CHF 95.00\"}, {\"title\": \"Rainshooting zusätzlich CHF 100.00\"}]",
-    "created_at": "2024-04-28 07:42:40",
-    "updated_at": "2024-04-28 07:42:40"
+    "created_at": "2024-04-28 16:24:07",
+    "updated_at": "2024-04-28 16:24:07"
   }
 ]
