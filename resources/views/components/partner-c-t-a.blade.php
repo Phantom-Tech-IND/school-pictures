@@ -11,7 +11,7 @@
             <h4 class="mb-4 text-lg font-semibold">{{ $title }}</h4>
             {!! $text !!}
             <a href="{{ $link }}"
-                class="block px-4 py-2 mt-12 border border-2 border-accent text-accent w-fit btn btn-primary hover:border-primary hover:text-primary">{{ $link }}</a>
+                class="block px-4 py-2 mt-12 border-2 border-accent text-accent w-fit btn btn-primary hover:border-primary hover:text-primary">{{ $link }}</a>
         </div>
     </div>
 </div>

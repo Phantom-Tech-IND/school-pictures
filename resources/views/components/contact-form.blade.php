@@ -5,23 +5,6 @@
     <div class="max-w-2xl mx-auto text-center">
         <h2 class="text-2xl font-semibold tracking-tight text-gray-900 xs:text-3xl md:text-4xl">KONTAKTFORMULAR</h2>
     </div>
-    @if ($offerItem)
-        <p>Interest in: {{ $offerItem->name }}
-            - Price: {{ $offerItem->price }}
-            - Details:
-            @if (is_array($offerItem->custom_attributes))
-                @php
-                    $attributes = collect($offerItem->custom_attributes)->toArray();
-                @endphp
-                @foreach ($attributes as $attribute)
-                    {{ json_encode($attribute) }}
-                @endforeach
-            @else
-                {{ $offerItem->custom_attributes }}
-            @endif
-
-        </p>
-    @endif
     <form id="contactForm" method="POST" class="mx-auto mt-8 sm:mt-10">
         <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
             <div class="sm:col-span-2">
@@ -63,7 +46,7 @@
                 <label for="subject" class="block text-sm font-semibold leading-6 text-gray-900">Betreff: Zu welchem
                     Bereich haben Sie Fragen?</label>
                 <div class="mt-2.5">
-                    <input type="text" name="subject" id="subject" placeholder="Betreff" maxlength="255"
+                    <input type="text" name="subject" id="subject" placeholder="Betreff" maxlength="255" value="{{ $offerItem ? $offerItem->name . ' paket' : '' }}"
                         class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                 </div>
             </div>
@@ -71,7 +54,15 @@
                 <label for="message" class="block text-sm font-semibold leading-6 text-gray-900">Ihre Nachricht</label>
                 <div class="mt-2.5">
                     <textarea name="message" id="message" rows="4" placeholder="Ihre Nachricht" maxlength="10000" required
-                        class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
+                        class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+@if ($offerItem)
+I am interested in the offer {{ $offerItem->name }} with price {{ $offerItem->price }} which contains:
+
+@foreach ($offerItem->custom_attributes as $attribute)
+- {!! strip_tags(html_entity_decode($attribute['title'])) !!}
+@endforeach
+@endif
+</textarea>
                 </div>
             </div>
         </div>
