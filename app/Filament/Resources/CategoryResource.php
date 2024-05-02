@@ -40,6 +40,8 @@ class CategoryResource extends Resource
                 FileUpload::make('image')
                     ->label('Image')
                     ->image()
+                    ->preserveFilenames()
+                    ->directory('categories/')
                     ->required()
                     ->columnSpan(2),
                 MarkdownEditor::make('description')
@@ -54,7 +56,7 @@ class CategoryResource extends Resource
             ->columns([
                 TextColumn::make('name')->label('Category Name')->searchable(),
                 TextColumn::make('slug')->label('Slug')->searchable(),
-                TextColumn::make('description')->label('Description')->searchable(),
+                TextColumn::make('description')->limit(40)->label('Description')->searchable(),
                 ImageColumn::make('image')->label('Image'),
             ])
             ->filters([
