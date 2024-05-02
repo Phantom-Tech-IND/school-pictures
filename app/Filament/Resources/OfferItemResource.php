@@ -89,6 +89,7 @@ class OfferItemResource extends Resource
             Tables\Columns\TextColumn::make('name'),
             Tables\Columns\TextColumn::make('price')->money('usd'),
             Tables\Columns\BooleanColumn::make('is_popular'),
+            
         ])->filters([
             //
         ])

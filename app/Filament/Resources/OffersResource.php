@@ -56,7 +56,15 @@ class OffersResource extends Resource
                 Tables\Columns\TextColumn::make('updated_at')
                     ->dateTime(),
                 Tables\Columns\ImageColumn::make('image')
-                    ->label('Photo')
+                    ->label('Featured Photo')
+                    ->circular()
+                    ->size(50),
+                Tables\Columns\ImageColumn::make('photo_gallery')
+                    ->label('Photo Gallery')
+                    ->limit(3)
+                    ->circular()
+                    ->limitedRemainingText()
+                    ->stacked()
                     ->size(50),
             ])
             ->filters([
