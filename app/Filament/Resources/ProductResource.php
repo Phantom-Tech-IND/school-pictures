@@ -91,15 +91,15 @@ class ProductResource extends Resource
                             }),
                         Forms\Components\TextInput::make('value')
                             ->label('Value')
-                            ->visible(fn ($record) => in_array($record['type'], ['text', 'select', 'fileInput'])),
+                            ->visible(fn ($record) => $record && in_array($record['type'], ['text', 'select', 'fileInput'])),
                         Forms\Components\Checkbox::make('value')
                             ->label('Value')
-                            ->visible(fn ($record) => $record['type'] === 'checkbox'),
+                            ->visible(fn ($record) => $record && $record['type'] === 'checkbox'),
                         Forms\Components\TextInput::make('price')
                             ->label('Price')
                             ->numeric()
                             ->prefix('CHF')
-                            ->visible(fn ($record) => $record['type'] !== 'checkbox'), // Price field visibility
+                            ->visible(fn ($record) => $record && $record['type'] !== 'checkbox'), // Price field visibility
                         Forms\Components\Repeater::make('options')
                             ->label('Options')
                             ->schema([
@@ -112,11 +112,11 @@ class ProductResource extends Resource
                                     ->numeric()
                                     ->prefix('CHF'),
                             ])
-                            ->visible(fn ($record) => $record['type'] === 'select')
+                            ->visible(fn ($record) => $record && $record['type'] === 'select')
                             ->createItemButtonLabel('Add Option'),
                         Forms\Components\FileUpload::make('value')
                             ->label('File')
-                            ->visible(fn ($record) => $record['type'] === 'fileInput')
+                            ->visible(fn ($record) => $record && $record['type'] === 'fileInput')
                             ->directory('custom-attributes')
                             ->disk('public'),
 
