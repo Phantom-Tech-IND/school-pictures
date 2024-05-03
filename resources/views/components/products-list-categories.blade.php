@@ -82,7 +82,7 @@
                                         <a href="{{ route('product', ['id' => $product->id]) }}">
                                             <div class="relative">
                                                 <div class="relative w-full overflow-hidden rounded-lg h-72">
-                                                    <img src="{{ $product->images && count($product->images) > 0 ? $product->images[0] : 'default-image-path.jpg' }}"
+                                                    <img src="{{ $product->images && count($product->images) > 0 ? asset($product->images[0]) : asset('images/no-image.jpg') }}"
                                                         alt="{{ $product->type }}"
                                                         class="object-cover object-center w-full h-full">
                                                 </div>
