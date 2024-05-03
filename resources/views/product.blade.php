@@ -9,7 +9,7 @@
         <div class="px-4 mx-auto max-w-7xl">
             <div class="flex flex-wrap">
                 <!-- Image Gallery -->
-                <div class="w-full p-4 md:w-1/2" x-data="{ selectedImage: '{{ $product->images[0] }}' }">
+                <div class="w-full p-4 md:w-2/3" x-data="{ selectedImage: '{{ $product->images[0] }}' }">
                     <img :src="selectedImage" alt="{{ $product->name }}"
                         class="object-contain w-full bg-gray-300 rounded-lg shadow-md h-80 xs:h-96 lg:h-[500px]">
                     <div class="flex h-40 mt-4 overflow-x-auto">
@@ -28,7 +28,7 @@
                 </div>
 
                 <!-- Product Details -->
-                <div class="w-full p-4 md:w-1/2">
+                <div class="w-full p-4 md:w-1/3">
                     <h2 class="text-2xl font-bold">{{ $product->name }}</h2>
                     <p class="text-xl text-gray-500">{{ $product->price }} CHF</p>
                     <div class="mt-4">
@@ -41,7 +41,8 @@
                         @if ($attribute['type'] == 'select')
                             <div x-data="{ open: false, selected: { label: 'Select an option', price: 0 } }">
                                 <label id="listbox-label"
-                                    class="block text-sm font-medium leading-6 text-gray-900">{{ $attribute['title'] }}</label>
+                                    class="block pt-4 font-medium leading-6 text-gray-900">{{ $attribute['title'] }}</label>
+                                <p class="text-sm text-gray-600">{{ $attribute['additional_info'] }}</p>
                                 <div class="relative mt-2">
                                     <button @click="open = !open" type="button"
                                         class="relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -69,7 +70,7 @@
                                         @click.away="open = false">
                                         @foreach ($attribute['options'] as $option)
                                             <li @click="selected = { label: '{{ $option['label'] }}', price: {{ $option['price'] ?? 0 }} }; open = false"
-                                                :class="{'option-selected': selected.label === '{{ $option['label'] }}'}"
+                                                :class="{ 'option-selected': selected.label === '{{ $option['label'] }}' }"
                                                 class="relative py-2 pl-3 text-gray-900 cursor-default select-none pr-9 hover:bg-gray-100"
                                                 id="listbox-option-{{ $loop->index }}" role="option"
                                                 data-price="{{ $option['price'] ?? 0 }}">
@@ -114,32 +115,39 @@
                         @endif
                     @endforeach
 
-                    <div class="flex items-center mt-4" x-data="{ quantity: 1 }">
-                        <label for="quantity" class="block text-sm font-medium text-gray-700">Quantity:</label>
-                        <div class="flex items-center gap-1 ml-3">
-                            <button type="button" class="w-8 h-8 text-gray-500 bg-gray-200 rounded-full hover:bg-gray-300"
-                                @click="quantity > 1 ? quantity-- : null">
-                                -
-                            </button>
-                            <input type="text" id="quantity" name="quantity" x-bind:value="quantity" min="1"
-                                class="block w-12 text-center border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring focus:ring-accent-500 focus:ring-opacity-50"
-                                readonly>
-                            <button type="button" class="w-8 h-8 text-gray-500 bg-gray-200 rounded-full hover:bg-gray-300"
-                                @click="quantity++">
-                                +
-                            </button>
+                    <div class="p-4 mt-2 bg-gray-200 rounded-lg">
+                        <div class="flex flex-wrap justify-between px-2 gap-x-8 gap-y-4">
+                            <div class="flex flex-col justify-center items-end flex-grow-[1]" x-data="{ quantity: 1 }">
+                                <div class="flex items-center gap-2">
+                                    <button type="button"
+                                        class="w-8 h-8 text-gray-500 rounded-full bg-accent-200 hover:bg-accent-300"
+                                        @click="quantity > 1 ? quantity-- : null">
+                                        -
+                                    </button>
+                                    <input type="text" id="quantity" name="quantity" x-bind:value="quantity"
+                                        min="1"
+                                        class="block w-12 text-center rounded-md shadow-sm border-accent-300 focus:border-accent-500 focus:ring focus:ring-accent-500 focus:ring-opacity-50"
+                                        readonly>
+                                    <button type="button"
+                                        class="w-8 h-8 text-gray-500 rounded-full bg-accent-200 hover:bg-accent-300"
+                                        @click="quantity++">
+                                        +
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="flex flex-col items-end flex-grow-[1000]">
+                                <span class="text-sm">{{ $product->price }} CHF</span>
+                                <span class="text-sm" id="optionsPrice">0.00 CHF</span>
+                                <span class="text-sm" id="priceWithOptions">1 x {{ number_format($product->price, 2) }}
+                                    CHF</span>
+                                <span class="font-semibold" id="totalPrice">{{ number_format($product->price, 2) }}
+                                    CHF</span>
+                            </div>
                         </div>
-                    </div>
-
-
-                    <div class="float-right p-4 mt-2 bg-gray-200 rounded-lg">
-                        <span class="float-right text-sm">{{$product->price}} CHF</span><br/>
-                        <span class="float-right text-sm" id="optionsPrice">0.00 CHF</span><br/>
-                        <span class="float-right text-sm" id="priceWithOptions">1 x {{ number_format($product->price, 2) }} CHF</span><br/>
-                        <span class="float-right font-semibold" id="totalPrice">{{ number_format($product->price, 2) }} CHF</span><br/>
 
                         <button type="submit"
-                            class="px-4 py-2 mt-4 font-bold text-white rounded bg-accent-500 hover:bg-accent-700">
+                            class="w-full px-4 py-2 mt-4 font-bold text-white rounded bg-accent-500 hover:bg-accent-700">
                             Add to bag
                         </button>
                     </div>
