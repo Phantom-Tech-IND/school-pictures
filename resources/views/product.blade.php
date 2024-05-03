@@ -38,6 +38,7 @@
                     {{-- <pre>{{ json_encode($product, JSON_PRETTY_PRINT) }}</pre> --}}
 
                     @foreach ($product->custom_attributes as $attribute)
+                        {{-- selector --}}
                         @if ($attribute['type'] == 'select')
                             <div x-data="{ open: false, selected: { label: 'Select an option', price: 0 } }">
                                 <label id="listbox-label"
@@ -58,6 +59,9 @@
                                             </svg>
                                         </span>
                                     </button>
+
+                                    <!-- Hidden input to store the selected value for form submission -->
+                                    <input type="hidden" name="{{ $attribute['title'] }}" x-model="selected.label">
 
                                     <ul x-show="open" x-transition:enter="transition ease-out duration-100"
                                         x-transition:enter-start="transform opacity-0 scale-95"
@@ -98,16 +102,23 @@
                                 </div>
                             </div>
                         @endif
+
+                        {{-- checkbox --}}
                         @if ($attribute['type'] == 'checkbox')
                             <div class="mt-4">
                                 <label class="block text-sm font-medium text-gray-700">{{ $attribute['title'] }}</label>
                                 @foreach ($attribute['options'] as $option)
                                     <div class="mt-2">
                                         <label class="inline-flex items-center">
-                                            <input type="checkbox" class="form-checkbox" name="{{ $attribute['title'] }}[]"
-                                                value="{{ $option['label'] }}"
+                                            <input type="checkbox"
+                                                class="form-checkbox checked:bg-accent-600 checked:hover:bg-accent-700 focus:ring-accent-500"
+                                                name="{{ $option['label'] }}[]" value="{{ $option['label'] }}"
+                                                data-price="{{ $option['price'] ?? 0 }}"
                                                 @if ($option['is_required']) required @endif>
                                             <span class="ml-2">{{ $option['label'] }}</span>
+                                            @if (isset($option['price']))
+                                                <span class="ml-2 text-sm text-gray-500">(+{{ $option['price'] }} CHF)</span>
+                                            @endif
                                         </label>
                                     </div>
                                 @endforeach
@@ -164,7 +175,8 @@
             // Get the form data
             var formData = new FormData(this);
 
-            alert(JSON.stringify(Object.fromEntries(formData)));
+            const formDataObject = Object.fromEntries(formData);
+            alert(JSON.stringify(formDataObject, null, 2));
         });
 
         function updateTotalPrice() {
@@ -175,6 +187,12 @@
             // Assuming each selected option has a class or attribute you can select on
             document.querySelectorAll('.option-selected').forEach(option => {
                 optionsPrice += parseFloat(option.dataset.price); // Use dataset to access data attributes
+            });
+
+            // Update to include checkbox options with prices
+            document.querySelectorAll('input[type="checkbox"]:checked').forEach(checkbox => {
+                var price = parseFloat(checkbox.getAttribute('data-price') || 0);
+                optionsPrice += price;
             });
 
             var priceWithOptions = basePrice + optionsPrice;
@@ -191,5 +209,8 @@
         });
 
         document.getElementById('quantity').addEventListener('change', updateTotalPrice);
+        document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', updateTotalPrice);
+        });
     </script>
 @endsection
