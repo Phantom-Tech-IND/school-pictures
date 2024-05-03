@@ -13,7 +13,6 @@ class Product extends Model
         'product_type',
         'name',
         'category',
-        'tags',
         'price',
         'images',
         'additional_information',

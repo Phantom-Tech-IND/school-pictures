@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "name": "Prints & posters",
+    "slug": "prints-and-posters",
+    "image": "categories/prints.jpeg",
+    "description": "Includes Photo Prints, Posters, Canvas, Acrylic Glass, Aluminum Dibond, and Enlargements",
+    "created_at": "2024-05-02 09:17:56",
+    "updated_at": "2024-05-02 09:19:23"
+  },
+  {
+    "id": 2,
+    "name": "Digital Products",
+    "slug": "digital-products",
+    "image": "categories/digital.jpeg",
+    "description": "Includes all digital-related products and data",
+    "created_at": "2024-05-02 09:17:56",
+    "updated_at": "2024-05-02 09:19:33"
+  },
+  {
+    "id": 3,
+    "name": "School & Kindergarten",
+    "slug": "school-and-kindergarten",
+    "image": "categories/school.jpeg",
+    "description": "Combines all products related to educational settings like schools and kindergartens",
+    "created_at": "2024-05-02 09:17:56",
+    "updated_at": "2024-05-02 09:19:44"
+  },
+  {
+    "id": 4,
+    "name": "Special Offers",
+    "slug": "special-offers",
+    "image": "categories/special.jpeg",
+    "description": "Encompasses all promotions, coupons, and value sets",
+    "created_at": "2024-05-02 09:17:56",
+    "updated_at": "2024-05-02 09:19:53"
+  },
+  {
+    "id": 5,
+    "name": "Accessories",
+    "slug": "accessories",
+    "image": "categories/accessories.jpg",
+    "description": "For photo accessories and other related items",
+    "created_at": "2024-05-02 09:17:56",
+    "updated_at": "2024-05-02 09:20:05"
+  }
+]

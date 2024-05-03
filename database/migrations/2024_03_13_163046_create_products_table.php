@@ -16,10 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->enum('product_type', ['personal', 'school']);
             $table->decimal('price', 8, 2);
-            $table->string('tags')->nullable();
             $table->string('images')->nullable();
-            $table->boolean('is_digital')->default(false);
-            $table->decimal('digital_price')->nullable();
             $table->text('description')->nullable();
             $table->text('additional_information')->nullable();
             $table->timestamps();

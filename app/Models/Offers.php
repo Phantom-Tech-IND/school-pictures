@@ -19,4 +19,4 @@ class Offers extends Model
     {
         return $this->hasMany(OfferItem::class, 'offer_id');
     }
-}
+  }

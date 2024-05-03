@@ -2,9 +2,11 @@
 
 namespace Database\Seeders;
 
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\File;
 use App\Models\OfferItem;
 use App\Models\Offers;
-use Illuminate\Database\Seeder;
 
 class OfferItemSeeder extends Seeder
 {
@@ -13,14 +15,17 @@ class OfferItemSeeder extends Seeder
      */
     public function run(): void
     {
-        $offers = Offers::all();
-
-        foreach ($offers as $offer) {
-            OfferItem::factory()
-                ->count(5) // Generate 5 items per offer
-                ->create([
-                    'offer_id' => $offer->id,
-                ]);
+        $json = File::get("database/data/offer_items.json");
+        $data = json_decode($json);
+        foreach ($data as $obj) {
+            OfferItem::create([
+                'offer_id' => $obj->offer_id,
+                'name' => $obj->name,
+                'description' => $obj->description,
+                'price' => $obj->price,
+                'is_popular' => $obj->is_popular,
+                'custom_attributes' => json_decode($obj->custom_attributes, true),
+            ]);
         }
     }
 }

@@ -1,0 +1,54 @@
+[
+  {
+    "id": 2,
+    "category_id": null,
+    "name": "POSTER (SQUARE)",
+    "product_type": "personal",
+    "price": 68.00,
+    "images": "[\"product-images\\/poster.png\"]",
+    "description": "Your images even larger and in the best professional quality for the highest demands on color and details. Additional advantage for you: Professional image retouching (skin imperfections, shiny spots on the face) at no extra charge.",
+    "additional_information": null,
+    "created_at": "2024-05-03 10:57:35",
+    "updated_at": "2024-05-03 11:00:57",
+    "custom_attributes": "[{\"type\": \"select\", \"title\": \"Square format\", \"value\": null, \"options\": [{\"label\": \"40x40\", \"price\": null, \"custom_info\": null}, {\"label\": \"50x50\", \"price\": null, \"custom_info\": null}, {\"label\": \"60x60\", \"price\": null, \"custom_info\": null}, {\"label\": \"70x70\", \"price\": null, \"custom_info\": null}, {\"label\": \"80x80\", \"price\": null, \"custom_info\": null}, {\"label\": \"90x90\", \"price\": null, \"custom_info\": null}, {\"label\": \"100x100\", \"price\": null, \"custom_info\": null}], \"additional_info\": null}, {\"type\": \"select\", \"title\": \"Finishing\", \"value\": null, \"options\": [{\"label\": \"Without\", \"price\": null, \"custom_info\": null}, {\"label\": \"Laminates\", \"price\": null, \"custom_info\": null}], \"additional_info\": null}, {\"type\": \"select\", \"title\": \"Wind up\", \"value\": null, \"options\": [{\"label\": \"Without\", \"price\": null, \"custom_info\": null}, {\"label\": \"2mm Plastic\", \"price\": null, \"custom_info\": null}], \"additional_info\": null}]"
+  },
+  {
+    "id": 3,
+    "category_id": null,
+    "name": "DIGITALE DATEN",
+    "product_type": "personal",
+    "price": 59.00,
+    "images": "[\"product-images\\/digital.jpg\"]",
+    "description": "Erwerben Sie alle Portraitbilder der Galerie (ausser den Gruppenbilder*), hochauflösend (mind. 2400x1600px), als digitale Daten per Email. Durch den Kauf der digitalen Daten erwerben Sie gleichzeitig die Rechte an den Bildern und können diese somit vielfältig einsetzen.\n\n",
+    "additional_information": null,
+    "created_at": "2024-05-03 11:04:47",
+    "updated_at": "2024-05-03 11:06:32",
+    "custom_attributes": "[{\"type\": \"select\", \"title\": \"Zusatzoptionen Klassenbild in gedruckter Form\", \"value\": null, \"options\": [{\"label\": \"Class picture printed 13×18 cm \", \"price\": \"10\", \"custom_info\": null, \"is_required\": false}, {\"label\": \"Class picture printed 18×24 cm\", \"price\": \"19\", \"custom_info\": null, \"is_required\": false}], \"additional_info\": null}, {\"type\": \"checkbox\", \"title\": \"Read the information?\", \"value\": null, \"options\": [{\"label\": \"Yes\", \"price\": null, \"custom_info\": null, \"is_required\": true}], \"additional_info\": null}]"
+  },
+  {
+    "id": 4,
+    "category_id": null,
+    "name": "PHOTO STANDEE",
+    "product_type": "personal",
+    "price": 19.90,
+    "images": "[\"product-images\\/accessory.jpg\"]",
+    "description": "Small photo display made of plexiglass.\nImage size approx. 4.5×7 cm\n\nPerfect as a small gift for the office table or where there is little space.\n\nSelect an image from your gallery.\n\n",
+    "additional_information": null,
+    "created_at": "2024-05-03 11:08:15",
+    "updated_at": "2024-05-03 11:15:32",
+    "custom_attributes": "[{\"type\": \"select\", \"title\": \"PHOTO COLOR\", \"value\": null, \"options\": [{\"label\": \"Original\", \"price\": null, \"custom_info\": null, \"is_required\": false}, {\"label\": \"Sepia\", \"price\": null, \"custom_info\": null, \"is_required\": false}, {\"label\": \"Black-and-white\", \"price\": null, \"custom_info\": null, \"is_required\": false}], \"additional_info\": \"Sepia are kept in a yellowish-brownish color over the entire picture area.\"}]"
+  },
+  {
+    "id": 5,
+    "category_id": null,
+    "name": "BEWERBUNG SET",
+    "product_type": "school",
+    "price": 49.90,
+    "images": "[\"product-images\\/school.jpeg\"]",
+    "description": "**Bitte wählen Sie ein Portrait für die Produktion aus.\n\nDas Klassenbild müssen Sie nicht auswählen. Dies ist automatisch inbegriffen.**",
+    "additional_information": null,
+    "created_at": "2024-05-03 11:21:03",
+    "updated_at": "2024-05-03 11:21:03",
+    "custom_attributes": "[{\"type\": \"select\", \"title\": \"DIGITALE DATEN\", \"value\": null, \"options\": [{\"label\": \"Nein\", \"price\": null, \"custom_info\": null, \"is_required\": false}, {\"label\": \"Ja\", \"price\": \"39\", \"custom_info\": null, \"is_required\": false}], \"additional_info\": \"Erwerben Sie zusätzlich alle Bilder (außer dem Gruppenbild*) der Galerie, hochauflösend (mind. 2400x1600px), als digitale Daten per Email. Aus rechtlichen Gründen ist es leider nicht erlaubt, das Gruppenbild digital zur Verfügung zu stellen.\"}]"
+  }
+]

@@ -12,6 +12,7 @@ use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use App\Models\OfferItem;
 
 class GuestPanelController extends Controller
 {
@@ -125,7 +126,12 @@ class GuestPanelController extends Controller
 
     public function contact(Request $request)
     {
-        return view('contact');
+        $offerItemId = $request->query('offerItemId');
+        $offerItem = null;
+        if ($offerItemId) {
+            $offerItem = OfferItem::find($offerItemId);
+        }
+        return view('contact', compact('offerItem'));
     }
 
     public function viewForTestingPurposes(Request $request)
