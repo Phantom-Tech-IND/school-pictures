@@ -39,8 +39,10 @@ class ProductResource extends Resource
                         'personal' => 'Personal',
                         'school' => 'School Pictures',
                     ])
+                    ->default('personal')
                     ->required(),
                 BelongsToManyMultiSelect::make('categories')
+                    ->preload()
                     ->relationship('categories', 'name'),
                 Forms\Components\TextInput::make('price')
                     ->numeric()
@@ -103,8 +105,12 @@ class ProductResource extends Resource
                                 Forms\Components\TextInput::make('custom_info')
                                     ->label('Custom information')
                                     ->columnSpan(2),
+                                Forms\Components\Checkbox::make('is_required')
+                                    ->label('Is required')
+                                    ->columnSpan(2),
                             ])
                             ->collapsible()
+                            ->reorderable()
                             ->columns(2)
                             ->visible(fn (Get $get): bool => $get('type') === 'select' || $get('type') === 'checkbox')
                             ->reactive()
@@ -113,6 +119,7 @@ class ProductResource extends Resource
                     ->grid(2)
                     ->collapsible()
                     ->columnSpan(2)
+                    ->reorderable()
                     ->createItemButtonLabel('Add Custom Attribute'),
 
             ]);
@@ -123,14 +130,16 @@ class ProductResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')->searchable(),
-                Tables\Columns\TextColumn::make('product_type')->searchable(),
+                Tables\Columns\TextColumn::make('product_type')
+                ->color(fn (string $state): string => match ($state) {
+                    'personal' => 'success',
+                    'school' => 'primary',
+                })
+                    ->badge()->searchable(),
                 Tables\Columns\TextColumn::make('price')->numeric()->sortable(),
                 Tables\Columns\TextColumn::make('categories.name')
                     ->searchable()
                     ->label('Category'),
-                Tables\Columns\TextColumn::make('tags')
-                    ->searchable()
-                    ->badge()->separator(','),
                 Tables\Columns\TextColumn::make('description')
                     ->searchable()
                     ->limit(20),
