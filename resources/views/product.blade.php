@@ -18,7 +18,9 @@
                                 class="object-cover w-full h-full rounded-lg shadow-md cursor-pointer"
                                 @click="selectedImage = '{{ $image }}'"
                                 :class="{ 'ring-2 ring-offset-2 ring-accent-500': selectedImage === '{{ $image }}' }">
-                            <div class="absolute inset-0 m-2 bg-black rounded-lg opacity-0 pointer-events-none group-hover:opacity-20"></div>
+                            <div
+                                class="absolute inset-0 m-2 bg-black rounded-lg opacity-0 pointer-events-none group-hover:opacity-20">
+                            </div>
                         </div>
                     @endforeach
                 </div>
@@ -34,17 +36,26 @@
                 <div class="mt-4">
                     <label class="block text-gray-700">Custom Attributes</label>
                     <ul>
-                        {{ json_encode($product->custom_attributes) }}
+                        {{-- tytle, description, price --}}
+                        <li>Title here</li>
+                        <li>Description here</li>
+                        <li>$100</li>
+                        {{-- <pre>{{ json_encode($product->custom_attributes, JSON_PRETTY_PRINT) }}</pre> --}}
                     </ul>
                 </div>
-                <div class="mt-4">
-                    <label class="block text-gray-700">Color</label>
-                    <div class="flex">
-                        <!-- Assuming colors are predefined -->
-                        <div class="w-6 h-6 mr-2 bg-black rounded-full"></div>
-                        <div class="w-6 h-6 bg-gray-500 rounded-full"></div>
-                    </div>
-                </div>
+
+                @foreach ($product->custom_attributes as $attribute)
+                    @if ($attribute['type'] == 'color')
+                        <div class="mt-4">
+                            <label class="block text-gray-700">{{ $attribute['name'] }}</label>
+                            <div class="flex">
+                                @foreach ($attribute['values'] as $color)
+                                    <div class="w-6 h-6 mr-2 bg-[#{{ $color }}] rounded-full"></div>
+                                @endforeach
+                            </div>
+                        </div>
+                    @endif
+                @endforeach
                 <button class="px-4 py-2 mt-4 font-bold text-white rounded bg-accent-500 hover:bg-accent-700">
                     Add to bag
                 </button>
