@@ -29,38 +29,101 @@
             <!-- Product Details -->
             <div class="w-full p-4 md:w-1/2">
                 <h2 class="text-2xl font-bold">{{ $product->name }}</h2>
-                <p class="text-xl text-gray-500">${{ $product->price }}</p>
+                <p class="text-xl text-gray-500">{{ $product->price }} CHF</p>
                 <div class="mt-4">
                     <div class="text-sm text-gray-600">{{ $product->description }}</div>
                 </div>
 
-                <pre>{{ json_encode($product, JSON_PRETTY_PRINT) }}</pre>
-                @foreach($product->custom_attributes as $attribute)
-                    @if($attribute['type'] == 'select')
-                        <div class="mt-4">
-                            <label class="block text-gray-700">{{ $attribute['title'] }}</label>
-                            <select class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring focus:ring-accent-500 focus:ring-opacity-50">
-                                @foreach($attribute['options'] as $option)
-                                    <option value="{{ $option['label'] }}">{{ $option['label'] }}</option>
-                                @endforeach
-                            </select>
+                {{-- <pre>{{ json_encode($product, JSON_PRETTY_PRINT) }}</pre> --}}
+
+                @foreach ($product->custom_attributes as $attribute)
+                    @if ($attribute['type'] == 'select')
+                        <div x-data="{ open: false, selected: { label: 'Select an option', price: 0 } }">
+                            <label id="listbox-label"
+                                class="block text-sm font-medium leading-6 text-gray-900">{{ $attribute['title'] }}</label>
+                            <div class="relative mt-2">
+                                <button @click="open = !open" type="button"
+                                    class="relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                    :aria-expanded="open" aria-haspopup="listbox" aria-labelledby="listbox-label">
+                                    <span class="block truncate"
+                                        x-text="selected.label + (selected.price ? ' - ' + selected.price + ' CHF' : '')"></span>
+                                    <span class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                                        <svg class="w-5 h-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor"
+                                            aria-hidden="true">
+                                            <path fill-rule="evenodd"
+                                                d="M10 3a.75.75 0 01.55.24l3.25 3.5a.75.75 0 11-1.1 1.02L10 4.852 7.3 7.76a.75.75 0 01-1.1-1.02l3.25-3.5A.75.75 0 0110 3zm-3.76 9.2a.75.75 0 011.06.04l2.7 2.908 2.7-2.908a.75.75 0 111.1 1.02l-3.25 3.5a.75.75 0 01-1.1 0l-3.25-3.5a.75.75 0 01.04-1.06z"
+                                                clip-rule="evenodd" />
+                                        </svg>
+                                    </span>
+                                </button>
+
+                                <ul x-show="open" x-transition:enter="transition ease-out duration-100"
+                                    x-transition:enter-start="transform opacity-0 scale-95"
+                                    x-transition:enter-end="transform opacity-100 scale-100"
+                                    x-transition:leave="transition ease-in duration-75"
+                                    x-transition:leave-start="transform opacity-100 scale-100"
+                                    x-transition:leave-end="transform opacity-0 scale-95"
+                                    class="absolute z-10 w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+                                    tabindex="-1" role="listbox" aria-labelledby="listbox-label"
+                                    @click.away="open = false">
+                                    @foreach ($attribute['options'] as $option)
+                                        <li @click="selected = { label: '{{ $option['label'] }}', price: {{ $option['price'] ?? 0 }} }; open = false"
+                                            class="relative py-2 pl-3 text-gray-900 cursor-default select-none pr-9 hover:bg-gray-100"
+                                            id="listbox-option-{{ $loop->index }}" role="option">
+                                            <div class="flex justify-between">
+                                                <span class="block font-normal truncate">{{ $option['label'] }}</span>
+                                                @if (isset($option['price']))
+                                                    <span
+                                                        class="block font-normal text-right text-gray-500 truncate">{{ $option['price'] }}
+                                                        CHF</span>
+                                                @endif
+                                            </div>
+                                            <span class="absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600"
+                                                x-show="selected.label === '{{ $option['label'] }}'">
+                                                <svg class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor"
+                                                    aria-hidden="true">
+                                                    <path fill-rule="evenodd"
+                                                        d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
+                                                        clip-rule="evenodd" />
+                                                </svg>
+                                            </span>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </div>
                         </div>
                     @endif
-                    
+                    @if ($attribute['type'] == 'checkbox')
+                        <div class="mt-4">
+                            <label class="block text-sm font-medium text-gray-700">{{ $attribute['title'] }}</label>
+                            @foreach ($attribute['options'] as $option)
+                                <div class="mt-2">
+                                    <label class="inline-flex items-center">
+                                        <input type="checkbox" class="form-checkbox" name="{{ $attribute['title'] }}[]"
+                                            value="{{ $option['label'] }}"
+                                            @if ($option['is_required']) required @endif>
+                                        <span class="ml-2">{{ $option['label'] }}</span>
+                                    </label>
+                                </div>
+                            @endforeach
+                        </div>
+                    @endif
                 @endforeach
+
+                
 
                 <div class="flex items-center mt-4" x-data="{ quantity: 1 }">
                     <label for="quantity" class="block text-sm font-medium text-gray-700">Quantity:</label>
                     <div class="flex items-center gap-1 ml-3">
                         <button type="button" class="w-8 h-8 text-gray-500 bg-gray-200 rounded-full hover:bg-gray-300"
-                                @click="quantity > 1 ? quantity-- : null">
+                            @click="quantity > 1 ? quantity-- : null">
                             -
                         </button>
                         <input type="text" id="quantity" name="quantity" x-bind:value="quantity" min="1"
-                               class="block w-12 text-center border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring focus:ring-accent-500 focus:ring-opacity-50"
-                               readonly>
+                            class="block w-12 text-center border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring focus:ring-accent-500 focus:ring-opacity-50"
+                            readonly>
                         <button type="button" class="w-8 h-8 text-gray-500 bg-gray-200 rounded-full hover:bg-gray-300"
-                                @click="quantity++">
+                            @click="quantity++">
                             +
                         </button>
                     </div>
@@ -72,3 +135,4 @@
         </div>
     </div>
 @endsection
+

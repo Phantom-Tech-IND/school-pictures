@@ -9,9 +9,15 @@ class StorageSeeder extends Seeder
 {
     public function run(): void
     {
-        $from = database_path('storage/offers');
-        $to = storage_path('app/public/offers');
+        $directories = [
+            'offers', 'categories', 'products', 'product-images'
+        ];
 
-        File::copyDirectory($from, $to);
+        foreach ($directories as $dir) {
+            $from = database_path("storage/$dir");
+            $to = storage_path("app/public/$dir");
+            File::copyDirectory($from, $to);
+        }
+
     }
 }
