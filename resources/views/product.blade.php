@@ -33,29 +33,38 @@
                 <div class="mt-4">
                     <div class="text-sm text-gray-600">{{ $product->description }}</div>
                 </div>
-                <div class="mt-4">
-                    <label class="block text-gray-700">Custom Attributes</label>
-                    <ul>
-                        {{-- tytle, description, price --}}
-                        <li>Title here</li>
-                        <li>Description here</li>
-                        <li>$100</li>
-                        {{-- <pre>{{ json_encode($product->custom_attributes, JSON_PRETTY_PRINT) }}</pre> --}}
-                    </ul>
-                </div>
 
-                @foreach ($product->custom_attributes as $attribute)
-                    @if ($attribute['type'] == 'color')
+                <pre>{{ json_encode($product, JSON_PRETTY_PRINT) }}</pre>
+                @foreach($product->custom_attributes as $attribute)
+                    @if($attribute['type'] == 'select')
                         <div class="mt-4">
-                            <label class="block text-gray-700">{{ $attribute['name'] }}</label>
-                            <div class="flex">
-                                @foreach ($attribute['values'] as $color)
-                                    <div class="w-6 h-6 mr-2 bg-[#{{ $color }}] rounded-full"></div>
+                            <label class="block text-gray-700">{{ $attribute['title'] }}</label>
+                            <select class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring focus:ring-accent-500 focus:ring-opacity-50">
+                                @foreach($attribute['options'] as $option)
+                                    <option value="{{ $option['label'] }}">{{ $option['label'] }}</option>
                                 @endforeach
-                            </div>
+                            </select>
                         </div>
                     @endif
+                    
                 @endforeach
+
+                <div class="flex items-center mt-4" x-data="{ quantity: 1 }">
+                    <label for="quantity" class="block text-sm font-medium text-gray-700">Quantity:</label>
+                    <div class="flex items-center gap-1 ml-3">
+                        <button type="button" class="w-8 h-8 text-gray-500 bg-gray-200 rounded-full hover:bg-gray-300"
+                                @click="quantity > 1 ? quantity-- : null">
+                            -
+                        </button>
+                        <input type="text" id="quantity" name="quantity" x-bind:value="quantity" min="1"
+                               class="block w-12 text-center border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring focus:ring-accent-500 focus:ring-opacity-50"
+                               readonly>
+                        <button type="button" class="w-8 h-8 text-gray-500 bg-gray-200 rounded-full hover:bg-gray-300"
+                                @click="quantity++">
+                            +
+                        </button>
+                    </div>
+                </div>
                 <button class="px-4 py-2 mt-4 font-bold text-white rounded bg-accent-500 hover:bg-accent-700">
                     Add to bag
                 </button>
