@@ -8,8 +8,8 @@ use Filament\Forms;
 use Filament\Forms\Components\BelongsToManyMultiSelect;
 use Filament\Forms\Components\MarkdownEditor;
 use Filament\Forms\Components\Section;
-use Filament\Forms\Components\TagsInput;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -46,13 +46,6 @@ class ProductResource extends Resource
                     ->numeric()
                     ->prefix('CHF')
                     ->required(),
-                Forms\Components\Checkbox::make('is_digital')
-                    ->label('Is Digital')
-                    ->inline(false),
-                Forms\Components\TextInput::make('digital_price')
-                    ->numeric()
-                    ->prefix('CHF'),
-                TagsInput::make('tags')->separator(',')->columnSpan(2),
                 MarkdownEditor::make('description')
                     ->label('Description')
                     ->columnSpan(2),
@@ -77,10 +70,11 @@ class ProductResource extends Resource
                         Forms\Components\TextInput::make('title')
                             ->label('Title')
                             ->required(),
+
                         Forms\Components\Select::make('type')
                             ->label('Type')
+                            ->live()
                             ->options([
-                                'text' => 'Text',
                                 'select' => 'Select',
                                 'checkbox' => 'Checkbox',
                                 'fileInput' => 'File Input',
@@ -89,39 +83,35 @@ class ProductResource extends Resource
                             ->afterStateUpdated(function (callable $set, $state) {
                                 $set('value', null); // Ensures value is reset when type changes
                             }),
-                        Forms\Components\TextInput::make('value')
-                            ->label('Value')
-                            ->visible(fn ($record) => $record && in_array($record['type'], ['text', 'select', 'fileInput'])),
-                        Forms\Components\Checkbox::make('value')
-                            ->label('Value')
-                            ->visible(fn ($record) => $record && $record['type'] === 'checkbox'),
-                        Forms\Components\TextInput::make('price')
-                            ->label('Price')
-                            ->numeric()
-                            ->prefix('CHF')
-                            ->visible(fn ($record) => $record && $record['type'] !== 'checkbox'), // Price field visibility
+                            Forms\Components\TextInput::make('additional_info')
+                            ->label('Additional Information')
+                            ->visible(fn (Get $get): bool => $get('type') === 'select'),
+
                         Forms\Components\Repeater::make('options')
                             ->label('Options')
                             ->schema([
-                                Forms\Components\TextInput::make('key')
-                                    ->label('Key'),
                                 Forms\Components\TextInput::make('label')
-                                    ->label('Label'),
+                                    ->required()
+                                    ->label('Label')
+                                    ->columnSpan(1), // Set column span to half of the grid width
                                 Forms\Components\TextInput::make('price')
                                     ->label('Price')
                                     ->numeric()
-                                    ->prefix('CHF'),
+                                    ->prefix('CHF')
+                                    ->nullable() // Make the price field optional
+                                    ->columnSpan(1), // Make the price field optional
+                                Forms\Components\TextInput::make('custom_info')
+                                    ->label('Custom information')
+                                    ->columnSpan(2),
                             ])
-                            ->visible(fn ($record) => $record && $record['type'] === 'select')
+                            ->collapsible()
+                            ->columns(2)
+                            ->visible(fn (Get $get): bool => $get('type') === 'select' || $get('type') === 'checkbox')
+                            ->reactive()
                             ->createItemButtonLabel('Add Option'),
-                        Forms\Components\FileUpload::make('value')
-                            ->label('File')
-                            ->visible(fn ($record) => $record && $record['type'] === 'fileInput')
-                            ->directory('custom-attributes')
-                            ->disk('public'),
-
                     ])
                     ->grid(2)
+                    ->collapsible()
                     ->columnSpan(2)
                     ->createItemButtonLabel('Add Custom Attribute'),
 
