@@ -24,13 +24,6 @@
         'title' => $title,
         'image' => '/coverbluzz.jpeg',
     ])
-
-    {{-- student, student --}}
-    <div class="student-info-json">
-        <h2>Student Information (JSON)</h2>
-        <pre>{{ json_encode($products, JSON_PRETTY_PRINT) }}</pre>
-    </div>
-
     
     <form onsubmit="handleSubmit()">
         @include('components.product-overview', [
