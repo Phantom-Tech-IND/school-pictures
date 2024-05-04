@@ -138,15 +138,14 @@
                     @endforeach
 
 
-                    <div class="flex flex-col justify-center" x-data="{ quantity: 1 }">
+                    <div class="flex flex-col justify-center my-4" x-data="{ quantity: 1 }">
                         <div class="flex items-center gap-2">
                             <button type="button"
                                 class="w-8 h-8 text-gray-500 rounded-full bg-accent-200 hover:bg-accent-300"
                                 @click="quantity > 1 ? quantity-- : null">
                                 -
                             </button>
-                            <input type="text" id="quantity" name="quantity" x-bind:value="quantity"
-                                min="1"
+                            <input type="text" id="quantity" name="quantity" x-bind:value="quantity" min="1"
                                 class="block w-12 text-center rounded-md shadow-sm border-accent-300 focus:border-accent-500 focus:ring focus:ring-accent-500 focus:ring-opacity-50"
                                 readonly>
                             <button type="button"
@@ -156,16 +155,16 @@
                             </button>
                         </div>
                     </div>
-                    <div class="p-4 mt-2 bg-gray-200 rounded-lg">
+                    <div class="p-4 mt-2 rounded-lg bg-gray-100">
                         <div class="flex justify-between px-2 gap-x-4 gap-y-4">
-                            <div class="flex flex-col">
+                            <div class="flex flex-col gap-2">
                                 <span class="text-sm">Product price</span>
                                 <span class="text-sm">Options</span>
                                 <span class="text-sm">Quantity</span>
                                 <span class="font-semibold">Total</span>
                             </div>
 
-                            <div class="flex flex-col items-end flex-grow-[1000]">
+                            <div class="flex flex-col gap-2 items-end flex-grow-[1000]">
                                 <span class="text-sm">{{ $product->price }} CHF</span>
                                 <span class="text-sm" id="optionsPrice">0.00 CHF</span>
                                 <span class="text-sm" id="priceWithOptions">1 x {{ number_format($product->price, 2) }}

@@ -86,21 +86,29 @@ class ParseStudentPhotos extends Command
                 ->where('student_id', $student->id)
                 ->where(DB::raw('photo_path'), '=', $photoName)
                 ->exists()) {
-                $this->addPhotoToStudent($photo, $student);
+                $this->addPhotoToStudent($photo, $student, $studentDir);
             }
         }
     }
 
-    protected function addPhotoToStudent($photo, Student $student)
+    protected function addPhotoToStudent($photo, Student $student, $studentDir)
     {
-        $studentPhoto = new \App\Models\StudentPhoto([
+        // Get the base path to the media directory
+        $basePath = public_path('media');
 
+        // Construct the full photo path
+        $fullPhotoPath = $studentDir.'/'.$photo->getFilename();
+
+        // Remove the base path, leaving only the relative path from 'media'
+        $relativePhotoPath = '/media/'.str_replace($basePath.'/', '', $fullPhotoPath);
+
+        $studentPhoto = new \App\Models\StudentPhoto([
             'student_id' => $student->id,
-            'photo_path' => $photo->getFilename(),
+            'photo_path' => $relativePhotoPath,
         ]);
 
         $studentPhoto->save();
 
-        $this->info("Photo {$photo} added for student: {$student->name}");
+        $this->info("Photo {$photo->getFilename()} added for student: {$student->name} with path {$relativePhotoPath}");
     }
 }

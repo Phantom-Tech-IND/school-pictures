@@ -9,8 +9,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body>
-    @include('components.navbar')
+    @include('components.navbar'  )
     <div class="pt-12">
         @yield('content')
     </div>

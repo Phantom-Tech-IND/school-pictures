@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\File;
 
@@ -18,18 +17,14 @@ class CategorySeeder extends Seeder
         $data = json_decode($json);
 
         foreach ($data as $obj) {
-            \App\Models\Category::create(array(
+            \App\Models\Category::create([
                 'id' => $obj->id,
                 'name' => $obj->name,
                 'slug' => $obj->slug,
                 'image' => $obj->image,
-                'description' => $obj->description
-            ));
+                'description' => $obj->description,
+            ]);
         }
 
-        $from = database_path('storage/categories');
-        $to = storage_path('app/public/categories');
-
-        File::copyDirectory($from, $to);
     }
 }

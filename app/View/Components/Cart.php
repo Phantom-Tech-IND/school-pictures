@@ -16,6 +16,11 @@ class Cart extends Component
         $this->total = $total;
     }
 
+    public function cartItems()
+    {
+        return $this->cartItems;
+    }
+
     public function render()
     {
         return view('components.cart', [

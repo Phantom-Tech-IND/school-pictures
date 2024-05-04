@@ -52,6 +52,13 @@
                     <a href="{{ route('contact') }}"
                         class="{{ request()->routeIs('contact') ? 'text-accent' : ' hover:text-accent' }} uppercase">Unsere
                         Kontakt</a>
+                    <a href="{{ route('cart') }}">
+                        <button class="flex pl-4 border-l-2 border-accent-500">
+                            <x-heroicon-o-shopping-cart class="relative w-5 h-5" />
+                            <span
+                                class="absolute right-0 w-4 p-1 text-sm rounded-md text-accent bold top-4 ">{{ $cartCount }}</span>
+                        </button>
+                    </a>
                 </div>
             </div>
             <div class="xl:hidden">
@@ -82,69 +89,59 @@
         <div x-show="open" @click.away="open = false" x-transition:enter="ease-out duration-300"
             x-transition:enter-start="opacity-0 -right-full" x-transition:enter-end="opacity-100 right-0"
             x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100 right-0"
-            x-transition:leave-end="opacity-0 -right-full"
-            class="absolute right-0 z-50 bg-white shadow-sm xl:hidden ">
+            x-transition:leave-end="opacity-0 -right-full" class="absolute right-0 z-50 bg-white shadow-sm xl:hidden ">
             <nav class="container flex flex-col h-full gap-2 px-8 py-8 mx-auto space-y-1 xl:px-8">
                 <a href="{{ route('home') }}"
-                    class="{{
-                        request()->routeIs('home') ?
-                        'text-accent font-semibold relative -left-2' :
-                        'relative left-0 font-medium
-                        transition-all duration-300
-                        hover:pl-0 hover:text-accent hover:-left-2'
-                    }}">Home</a>
+                    class="{{ request()->routeIs('home')
+                        ? 'text-accent font-semibold relative -left-2'
+                        : 'relative left-0 font-medium
+                                            transition-all duration-300
+                                            hover:pl-0 hover:text-accent hover:-left-2' }}">Home</a>
                 <a href="{{ route('shop') }}"
-                    class="{{
-                        request()->routeIs('shop') ?
-                        'text-accent font-semibold relative -left-2' :
-                        'relative left-0 font-medium
-                        transition-all duration-300
-                        hover:pl-0 hover:text-accent hover:-left-2'
-                    }}">Webshop</a>
+                    class="{{ request()->routeIs('shop')
+                        ? 'text-accent font-semibold relative -left-2'
+                        : 'relative left-0 font-medium
+                                            transition-all duration-300
+                                            hover:pl-0 hover:text-accent hover:-left-2' }}">Webshop</a>
                 <a href="{{ route('kindergarden') }}"
-                    class="{{
-                        request()->routeIs('kindergarden') ?
-                        'text-accent font-semibold relative -left-2' :
-                        'relative left-0 font-medium
-                        transition-all duration-300
-                        hover:pl-0 hover:text-accent hover:-left-2'
-                    }}">Kindergarten und Schulfotografie</a>
+                    class="{{ request()->routeIs('kindergarden')
+                        ? 'text-accent font-semibold relative -left-2'
+                        : 'relative left-0 font-medium
+                                            transition-all duration-300
+                                            hover:pl-0 hover:text-accent hover:-left-2' }}">Kindergarten
+                    und Schulfotografie</a>
                 <a href="{{ route('offers') }}"
-                    class="{{
-                        request()->routeIs('offers') ?
-                        'text-accent font-semibold relative -left-2' :
-                        'relative left-0 font-medium
-                        transition-all duration-300
-                        hover:pl-0 hover:text-accent hover:-left-2'
-                    }}">Unsere angebote</a>
+                    class="{{ request()->routeIs('offers')
+                        ? 'text-accent font-semibold relative -left-2'
+                        : 'relative left-0 font-medium
+                                            transition-all duration-300
+                                            hover:pl-0 hover:text-accent hover:-left-2' }}">Unsere
+                    angebote</a>
                 <a href="{{ route('team') }}"
-                    class="{{
-                        request()->routeIs('team') ?
-                        'text-accent font-semibold relative -left-2' :
-                        'relative left-0 font-medium
-                        transition-all duration-300
-                        hover:pl-0 hover:text-accent hover:-left-2'
-                    }}">Unsere Team</a>
+                    class="{{ request()->routeIs('team')
+                        ? 'text-accent font-semibold relative -left-2'
+                        : 'relative left-0 font-medium
+                                            transition-all duration-300
+                                            hover:pl-0 hover:text-accent hover:-left-2' }}">Unsere
+                    Team</a>
                 <a href="{{ route('partners') }}"
-                    class="{{
-                        request()->routeIs('partners') ?
-                        'text-accent font-semibold relative -left-2' :
-                        'relative left-0 font-medium
-                        transition-all duration-300
-                        hover:pl-0 hover:text-accent hover:-left-2'
-                    }}">Unsere Partnerseiten</a>
+                    class="{{ request()->routeIs('partners')
+                        ? 'text-accent font-semibold relative -left-2'
+                        : 'relative left-0 font-medium
+                                            transition-all duration-300
+                                            hover:pl-0 hover:text-accent hover:-left-2' }}">Unsere
+                    Partnerseiten</a>
                 <a href="{{ route('contact') }}"
-                    class="{{
-                        request()->routeIs('contact') ?
-                        'text-accent font-semibold relative -left-2' :
-                        'relative left-0 font-medium
-                        transition-all duration-300
-                        hover:pl-0 hover:text-accent hover:-left-2'
-                    }}">Unsere Kontakt</a>
+                    class="{{ request()->routeIs('contact')
+                        ? 'text-accent font-semibold relative -left-2'
+                        : 'relative left-0 font-medium
+                                            transition-all duration-300
+                                            hover:pl-0 hover:text-accent hover:-left-2' }}">Unsere
+                    Kontakt</a>
             </nav>
         </div>
     </div>
-    
+
 </div>
 
 <div class="min-h-[70px] bg-red h-20"></div>

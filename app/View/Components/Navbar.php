@@ -8,12 +8,13 @@ use Illuminate\View\Component;
 
 class Navbar extends Component
 {
+    protected $cartItems;
     /**
      * Create a new component instance.
      */
-    public function __construct()
+    public function __construct(Cart $cart)
     {
-        //
+        $this->cartItems = $cart->cartItems();
     }
 
     /**
@@ -21,6 +22,8 @@ class Navbar extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.navbar');
+        return view('components.navbar', [
+            'cartItems' => $this->cartItems,
+        ]);
     }
 }
