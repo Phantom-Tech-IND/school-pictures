@@ -36,7 +36,7 @@
 
                 <div class="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
                     <h1 id="productName" x-text="selectedProductName"
-                        class="inline text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
+                        class="inline text-2xl font-semibold tracking-tight text-gray-900 sm:text-3xl">
                         {{ $selectedProduct['name'] }}
                     </h1>
                     <span id="productPrice" class="text-lg text-gray-500">{{ $selectedProduct['price'] }} CHF</span>
