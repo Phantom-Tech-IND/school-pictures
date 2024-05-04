@@ -79,10 +79,10 @@
                                                 id="listbox-option-{{ $loop->index }}" role="option"
                                                 data-price="{{ $option['price'] ?? 0 }}">
                                                 <div class="flex justify-between">
-                                                    <span class="block font-normal truncate">{{ $option['label'] }}</span>
+                                                    <span class="block font-normal">{{ $option['label'] }}</span>
                                                     @if (isset($option['price']))
                                                         <span
-                                                            class="block font-normal text-right text-gray-500 truncate">{{ $option['price'] }}
+                                                            class="block font-normal text-right text-gray-500 whitespace-nowrap">{{ $option['price'] }}
                                                             CHF</span>
                                                     @endif
                                                 </div>
@@ -117,34 +117,52 @@
                                                 @if ($option['is_required']) required @endif>
                                             <span class="ml-2">{{ $option['label'] }}</span>
                                             @if (isset($option['price']))
-                                                <span class="ml-2 text-sm text-gray-500">(+{{ $option['price'] }} CHF)</span>
+                                                <span class="ml-2 text-sm text-gray-500">(+{{ $option['price'] }}
+                                                    CHF)</span>
                                             @endif
                                         </label>
                                     </div>
                                 @endforeach
                             </div>
                         @endif
+
+
+                        @if ($attribute['type'] == 'fileInput')
+                            <div class="my-4">
+                                <label class="block text-sm font-medium text-gray-700">{{ $attribute['title'] }}</label>
+                                <input type="file" id="{{ $attribute['title'] }}_image"
+                                    name="{{ $attribute['title'] }}_image" accept="image/*"
+                                    class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-accent-500 file:text-white hover:file:bg-accent-700">
+                            </div>
+                        @endif
                     @endforeach
 
+
+                    <div class="flex flex-col justify-center" x-data="{ quantity: 1 }">
+                        <div class="flex items-center gap-2">
+                            <button type="button"
+                                class="w-8 h-8 text-gray-500 rounded-full bg-accent-200 hover:bg-accent-300"
+                                @click="quantity > 1 ? quantity-- : null">
+                                -
+                            </button>
+                            <input type="text" id="quantity" name="quantity" x-bind:value="quantity"
+                                min="1"
+                                class="block w-12 text-center rounded-md shadow-sm border-accent-300 focus:border-accent-500 focus:ring focus:ring-accent-500 focus:ring-opacity-50"
+                                readonly>
+                            <button type="button"
+                                class="w-8 h-8 text-gray-500 rounded-full bg-accent-200 hover:bg-accent-300"
+                                @click="quantity++">
+                                +
+                            </button>
+                        </div>
+                    </div>
                     <div class="p-4 mt-2 bg-gray-200 rounded-lg">
-                        <div class="flex flex-wrap justify-between px-2 gap-x-8 gap-y-4">
-                            <div class="flex flex-col justify-center items-end flex-grow-[1]" x-data="{ quantity: 1 }">
-                                <div class="flex items-center gap-2">
-                                    <button type="button"
-                                        class="w-8 h-8 text-gray-500 rounded-full bg-accent-200 hover:bg-accent-300"
-                                        @click="quantity > 1 ? quantity-- : null">
-                                        -
-                                    </button>
-                                    <input type="text" id="quantity" name="quantity" x-bind:value="quantity"
-                                        min="1"
-                                        class="block w-12 text-center rounded-md shadow-sm border-accent-300 focus:border-accent-500 focus:ring focus:ring-accent-500 focus:ring-opacity-50"
-                                        readonly>
-                                    <button type="button"
-                                        class="w-8 h-8 text-gray-500 rounded-full bg-accent-200 hover:bg-accent-300"
-                                        @click="quantity++">
-                                        +
-                                    </button>
-                                </div>
+                        <div class="flex justify-between px-2 gap-x-4 gap-y-4">
+                            <div class="flex flex-col">
+                                <span class="text-sm">Product price</span>
+                                <span class="text-sm">Options</span>
+                                <span class="text-sm">Quantity</span>
+                                <span class="font-semibold">Total</span>
                             </div>
 
                             <div class="flex flex-col items-end flex-grow-[1000]">
