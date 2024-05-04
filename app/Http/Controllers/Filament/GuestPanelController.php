@@ -189,7 +189,8 @@ class GuestPanelController extends Controller
             return redirect()->route('not-available'); // Redirect to a 404 page if search term is empty
         }
 
-        $products = Product::all(); // Fetch all products
+        // $products = Product::all(); // Fetch all products
+        $products = Product::where('product_type', 'school')->get(); // Fetch all products of type 'school'a
 
         return view('gallery-code', compact('student', 'products'));
     }

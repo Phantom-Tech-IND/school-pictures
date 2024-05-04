@@ -20,10 +20,21 @@
         ];
     @endphp
 
-    @include('components.secondary-banner', [
+    {{-- @include('components.secondary-banner', [
         'title' => $title,
         'image' => '/coverbluzz.jpeg',
-    ])
+    ]) --}}
+
+    {{-- student, student --}}
+    {{-- <div class="student-info-json">
+        <h2>Student Information (JSON)</h2>
+        <pre>{{ json_encode($products, JSON_PRETTY_PRINT) }}</pre>
+    </div> --}}
+
+    {{-- @php
+        dd($products);
+    @endphp --}}
+
     
     <form onsubmit="handleSubmit()">
         @include('components.product-overview', [
