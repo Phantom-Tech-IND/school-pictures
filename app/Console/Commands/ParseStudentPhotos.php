@@ -73,7 +73,7 @@ class ParseStudentPhotos extends Command
 
         return $student;
     }
-
+    
     protected function updateStudentPhotos(Student $student, $studentDir, $institutionType)
     {
         foreach (File::allFiles($studentDir) as $photo) {
@@ -85,27 +85,36 @@ class ParseStudentPhotos extends Command
             $basePath = public_path('media');
             $fullPhotoPath = $studentDir.'/'.$photo->getFilename();
 
-            $relativePhotoPath = '/media/'.str_replace($basePath.'/', '', $fullPhotoPath);
+            // Ensure the relative path is correctly formatted
+            $relativePhotoPath = '/media/' . $institutionType . '/' . $photo->getFilename();
+ 
 
+            // Check if the photo already exists for the student
             if (! DB::table('student_photos')
                 ->where('student_id', $student->id)
                 ->where('photo_path', '=', $relativePhotoPath)
                 ->exists()) {
-                $this->addPhotoToStudent($photo, $student, $studentDir);
+                $this->addPhotoToStudent($photo, $student, $studentDir, $institutionType);
+            } else {
+                $this->info("Skipping duplicate photo: {$photo->getFilename()}");
             }
         }
     }
-
-    protected function addPhotoToStudent($photo, Student $student, $studentDir)
+    
+    protected function addPhotoToStudent($photo, Student $student, $studentDir, $institutionType)
     {
-        // Get the base path to the media directory
-        $basePath = public_path('media');
+        $basePath = storage_path('app/public/media');
 
-        // Construct the full photo path
-        $fullPhotoPath = $studentDir.'/'.$photo->getFilename();
+        $targetDir = $basePath . '/' . $institutionType;
+        if (!File::exists($targetDir)) {
+            File::makeDirectory($targetDir, 0755, true);
+        }
 
-        // Remove the base path, leaving only the relative path from 'media'
-        $relativePhotoPath = '/media/'.str_replace($basePath.'/', '', $fullPhotoPath);
+        $fullPhotoPath = $targetDir . '/' . $photo->getFilename();
+
+        File::copy($photo->getPathname(), $fullPhotoPath);
+
+        $relativePhotoPath = '/media/' . $institutionType . '/' . $photo->getFilename();
 
         $studentPhoto = new \App\Models\StudentPhoto([
             'student_id' => $student->id,

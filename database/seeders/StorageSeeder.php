@@ -16,6 +16,7 @@ class StorageSeeder extends Seeder
         foreach ($directories as $dir) {
             $from = database_path("storage/$dir");
             $to = storage_path("app/public/$dir");
+
             File::copyDirectory($from, $to);
         }
 
