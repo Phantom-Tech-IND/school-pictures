@@ -82,9 +82,14 @@ class ParseStudentPhotos extends Command
                 continue;
             }
 
+            $basePath = public_path('media');
+            $fullPhotoPath = $studentDir.'/'.$photo->getFilename();
+
+            $relativePhotoPath = '/media/'.str_replace($basePath.'/', '', $fullPhotoPath);
+
             if (! DB::table('student_photos')
                 ->where('student_id', $student->id)
-                ->where(DB::raw('photo_path'), '=', $photoName)
+                ->where('photo_path', '=', $relativePhotoPath)
                 ->exists()) {
                 $this->addPhotoToStudent($photo, $student, $studentDir);
             }
