@@ -37,8 +37,7 @@
                 class="mx-auto max-w-2xl px-4 pb-16 pt-10 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-4 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pb-24 lg:pt-16">
 
                 <div class="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
-                    <h1 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">{{ $student->name }}
-                    </h1>
+                    <h1 id="productName" x-text="selectedProductName" class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">{{ $selectedProduct['name'] }}</h1>
                 </div>
 
                 <div class="mt-4 lg:row-span-3 lg:mt-0 lg:col-span-2">
@@ -48,17 +47,26 @@
                     <div class="mt-10">
                         <div x-data="{
                             selectedProductId: '{{ $selectedProductId }}',
+                            selectedProductName: '{{ $selectedProduct['name'] }}',
+                            selectedProductDescription: '{{ $selectedProduct['description'] }}',
                             updateProducts() {
-                                console.log(this.selectedProductId);
+                                console.log('Selected Product ID:', this.selectedProductId);
+
                                 var productImage = document.getElementById('productImage');
                                 var selectedProductId = document.getElementById('y-selected-product-' + this.selectedProductId);
-                                if (productImage) {
+                                var productDescription = document.getElementById('productDescription');
+                                var productName = document.getElementById('productName');
+
+                                if (productImage && selectedProductId) {
                                     productImage.src = selectedProductId.src;
+                                    this.selectedProductName = selectedProductId.getAttribute('data-name');
+                                    productName.textContent = this.selectedProductName;
+
+                                    productDescription.textContent = selectedProductId.getAttribute('data-description');
                                 }
                                 var gallery = document.getElementById('{{ $galleryName }}');
                                 gallery.setAttribute('data-min', selectedProductId.getAttribute('data-min'));
                                 gallery.setAttribute('data-max', selectedProductId.getAttribute('data-max'));
-                        
                                 gallery.setAttribute('data-selected-product-id', this.selectedProductId);
                             }
                         }" class="mt-10">
@@ -87,10 +95,10 @@
                                                 class="sr-only">{{ $product['id'] }}</span>
                                             <img src="{{ $product['images'][0] }}" alt=""
                                                 id="y-selected-product-{{ $product['id'] }}"
-                                                {{-- data-min="{{ $product['min'] }}" --}}
-                                                {{-- data-max="{{ $product['max'] }}" --}}
                                                 data-min="{{ 1 }}"
                                                 data-max="{{ 5 }}"
+                                                data-name="{{ $product['name'] }}"
+                                                data-description="{{ $product['description'] }}"
                                                 class="object-cover w-full h-full transition-opacity duration-300 ease-in-out rounded-md">
                                             <div
                                                 class="absolute inset-0 transition-all duration-300 ease-in-out bg-black bg-opacity-0 group-hover:bg-opacity-50">
@@ -113,11 +121,7 @@
                         <h3 class="sr-only">Description</h3>
 
                         <div class="space-y-6">
-                            <p class="text-base text-gray-900">A basic description here Lorem ipsum dolor sit amet
-                                consectetur adipisicing elit. Officia, perferendis! Cupiditate aperiam, minus facere
-                                quasi quos delectus quidem repellat porro voluptatem odit minima autem, enim
-                                dolorem!
-                                Porro assumenda voluptatem unde?</p>
+                            <p id="productDescription" x-text="selectedProductDescription" class="text-base text-gray-900">{{ $selectedProduct['description'] }}</p>
                         </div>
                     </div>
 
