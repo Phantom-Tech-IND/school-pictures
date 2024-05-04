@@ -85,11 +85,8 @@ class ParseStudentPhotos extends Command
             $basePath = public_path('media');
             $fullPhotoPath = $studentDir.'/'.$photo->getFilename();
 
-            // Ensure the relative path is correctly formatted
             $relativePhotoPath = '/media/' . $institutionType . '/' . $photo->getFilename();
  
-
-            // Check if the photo already exists for the student
             if (! DB::table('student_photos')
                 ->where('student_id', $student->id)
                 ->where('photo_path', '=', $relativePhotoPath)
