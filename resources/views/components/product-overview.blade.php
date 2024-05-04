@@ -1,10 +1,15 @@
 @php
+    $products = json_decode($products, true);
     $selectedProductKey = array_search($selectedProductId, array_column($products, 'id'));
     $selectedProduct = $selectedProductKey !== false ? $products[$selectedProductKey] : null;
 @endphp
 
 
-<image-gallery-container data-min="{{ $selectedProduct['min'] }}" data-max="{{ $selectedProduct['max'] }}"
+<image-gallery-container
+    {{-- data-min="{{ $selectedProduct['min'] }}" --}}
+    {{-- data-max="{{ $selectedProduct['max'] }}" --}}
+    data-min="{{ 1 }}"
+    data-max="{{ 5 }}"
     data-selected-product-id="{{ $selectedProductId }}" id="{{ $galleryName }}">
     <div class="bg-white">
         <div class="pt-6">
@@ -12,7 +17,7 @@
                 class="max-w-2xl grid-rows-1 mx-auto mt-6 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-4 lg:gap-x-8 lg:px-8 lg:h-[80lvh]">
                 <div
                     class="bg-gray-100 border-2 border-gray-300 shadow-lg lg:col-span-2 lg:flex lg:flex-col lg:h-full lg:justify-stretch">
-                    <img src="{{ $selectedProduct['image'] }}" id="productImage"
+                    <img src="{{ $selectedProduct['images'][0] }}" id="productImage"
                         alt="Two each of gray, white, and black shirts laying flat."
                         class="flex-shrink object-contain object-center w-full max-w-full min-h-0 p-4 rounded-lg lg:grow lg:h-auto h-72">
                     <image-display container-id="{{ $galleryName }}"
@@ -20,9 +25,9 @@
                 </div>
 
                 <div class="relative grid grid-cols-3 gap-4 p-4 mt-8 overflow-y-scroll border-2 border-gray-300 shadow-lg lg:mt-0 max-h-72 lg:max-h-max lg:h-auto auto-rows-min place-items-center lg:col-span-2 lg:grid-cols-4 xs:grid-cols-4">
-                    @foreach ($images as $key => $image)
+                    @foreach ($student['photos'] as $key => $photo)
                         <image-selector container-id="{{ $galleryName }}" alt="Image {{ $key + 1 }}"
-                            key="key{{ $key + 1 }}" src="{{ $image }}" class="w-24 h-24"></image-selector>
+                            key="{{ $photo['id'] }}" src="{{ $photo['photo_path'] }}" class="w-24 h-24"></image-selector>
                     @endforeach
                 </div>
 
@@ -38,82 +43,9 @@
 
                 <div class="mt-4 lg:row-span-3 lg:mt-0 lg:col-span-2">
                     <h2 class="sr-only">Product information</h2>
-                    <p class="text-3xl tracking-tight text-gray-900">$192</p>
-
-                    <div class="mt-6" x-data="{ rating: 4, maxRating: 5, tempRating: null }">
-                        <h3 class="sr-only">Reviews</h3>
-                        <div class="flex items-center">
-                            <div class="flex items-center gap-2">
-                                <template x-for="(star, index) in Array.from({ length: maxRating }, (_, i) => i + 1)"
-                                    :key="index">
-                                    <svg @click="rating = index + 1; tempRating = null"
-                                        @mouseover="tempRating = index + 1" @mouseleave="tempRating = null"
-                                        :class="{ 'w-6 h-6': tempRating === index + 1, 'w-5 h-5': tempRating !== index + 1 }"
-                                        class="flex-shrink-0 text-yellow-400 transition-transform duration-150 ease-in-out cursor-pointer"
-                                        style="margin: -0.125rem" <!-- Adjust margin to compensate for size change -->
-                                        viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                        <path
-                                            :fill="tempRating !== null ? (tempRating >= index + 1 ? 'currentColor' :
-                                                    'none') :
-                                                (
-                                                    rating >= index + 1 ? 'currentColor' : 'none')"
-                                            stroke="currentColor" stroke-width="1" fill-rule="evenodd"
-                                            d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-                                            clip-rule="evenodd" />
-                                    </svg>
-                                </template>
-                            </div>
-                            <p class="sr-only"
-                                x-text="(tempRating !== null ? tempRating : rating) + ' out of ' + maxRating + ' stars'">
-                            </p>
-                            <a href="#" class="ml-3 text-sm font-medium text-accent-600 hover:text-accent-500">117
-                                reviews</a>
-                        </div>
-                    </div>
+                    <p class="text-3xl tracking-tight text-gray-900">Some title here</p>
 
                     <div class="mt-10">
-                        <!-- Colors -->
-                        <div>
-                            <h3 class="text-sm font-medium text-gray-900">Color</h3>
-
-                            <fieldset class="mt-4">
-                                <legend class="sr-only">Other clickable options</legend>
-                                <div class="flex items-center space-x-3">
-                                    @php
-                                        $colors = [
-                                            [
-                                                'value' => 'White',
-                                                'bg' => 'bg-white',
-                                                'border' => 'border-opacity-10',
-                                            ],
-                                            [
-                                                'value' => 'Gray',
-                                                'bg' => 'bg-gray-200',
-                                                'border' => 'border-opacity-10',
-                                            ],
-                                            [
-                                                'value' => 'Black',
-                                                'bg' => 'bg-gray-900',
-                                                'border' => 'border-opacity-10',
-                                            ],
-                                        ];
-                                    @endphp
-                                    @foreach ($colors as $index => $color)
-                                        <label
-                                            class="relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none ring-gray-400">
-                                            <input type="radio" name="color-choice" value="{{ $color['value'] }}"
-                                                class="sr-only"
-                                                aria-labelledby="color-choice-{{ $index }}-label">
-                                            <span id="color-choice-{{ $index }}-label"
-                                                class="sr-only">{{ $color['value'] }}</span>
-                                            <span aria-hidden="true"
-                                                class="{{ $color['bg'] }} border border-black rounded-full {{ $color['border'] }} w-8 h-8"></span>
-                                        </label>
-                                    @endforeach
-                                </div>
-                            </fieldset>
-                        </div>
-
                         <div x-data="{
                             selectedProductId: '{{ $selectedProductId }}',
                             updateProducts() {
@@ -153,9 +85,12 @@
                                                 aria-labelledby="product-choice-{{ $product['id'] }}-label">
                                             <span id="product-choice-{{ $product['id'] }}-label"
                                                 class="sr-only">{{ $product['id'] }}</span>
-                                            <img src="{{ $product['image'] }}" alt=""
+                                            <img src="{{ $product['images'][0] }}" alt=""
                                                 id="y-selected-product-{{ $product['id'] }}"
-                                                data-min="{{ $product['min'] }}" data-max="{{ $product['max'] }}"
+                                                {{-- data-min="{{ $product['min'] }}" --}}
+                                                {{-- data-max="{{ $product['max'] }}" --}}
+                                                data-min="{{ 1 }}"
+                                                data-max="{{ 5 }}"
                                                 class="object-cover w-full h-full transition-opacity duration-300 ease-in-out rounded-md">
                                             <div
                                                 class="absolute inset-0 transition-all duration-300 ease-in-out bg-black bg-opacity-0 group-hover:bg-opacity-50">
