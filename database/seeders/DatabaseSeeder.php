@@ -30,7 +30,8 @@ class DatabaseSeeder extends Seeder
             StorageSeeder::class,
             OfferSeeder::class,
             OfferItemSeeder::class,
-            ProductSeeder::class
+            ProductSeeder::class,
+            StudentSeeder::class,
         ]);
 
     }

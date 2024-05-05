@@ -23,6 +23,29 @@ class ParseStudentPhotos extends Command
                 $this->processInstitution($mediaPath, $institutionType);
             }
         }
+
+        $this->deleteDirectory(public_path('media/kindergarden'));
+        $this->deleteDirectory(public_path('media/school'));
+        $this->deleteDirectory(public_path('media/temp'));
+    }
+
+    private function deleteDirectory(string $path): void
+    {
+        try {
+            $files = new \RecursiveIteratorIterator(
+                new \RecursiveDirectoryIterator($path, \RecursiveDirectoryIterator::SKIP_DOTS),
+                \RecursiveIteratorIterator::CHILD_FIRST
+            );
+
+            foreach ($files as $fileinfo) {
+                $todo = ($fileinfo->isDir() ? 'rmdir' : 'unlink');
+                @$todo($fileinfo->getRealPath()); // Suppress errors with @
+            }
+
+            @rmdir($path); // Suppress errors with @
+        } catch (\Exception $e) {
+            // Optionally log the error or just ignore it
+        }
     }
 
     protected function processInstitution($mediaPath, $institutionType)
