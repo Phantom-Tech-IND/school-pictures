@@ -62,18 +62,7 @@ class ListStudents extends ListRecords
                     $this->processExtractedFiles($extractPath);
 
                     // Call the Artisan command here
-                    if (Artisan::call('parse:student-photos') === 0) { // Check if command was successful
-                        // Delete the directories if the command was successful
-                        $this->deleteDirectory(public_path('media/kindergarden'));
-                        $this->deleteDirectory(public_path('media/school'));
-                        $this->deleteDirectory(public_path('media/temp'));
-
-                    } else {
-                        Notification::make()
-                            ->title('Failed to organize photos.')
-                            ->danger()
-                            ->send();
-                    }
+                    Artisan::call('parse:student-photos');
                 } else {
                     Notification::make()
                         ->title('Failed to open ZIP file.')
@@ -82,21 +71,6 @@ class ListStudents extends ListRecords
                 }
             }
         }
-    }
-
-    private function deleteDirectory(string $path): void
-    {
-        $files = new \RecursiveIteratorIterator(
-            new \RecursiveDirectoryIterator($path, \RecursiveDirectoryIterator::SKIP_DOTS),
-            \RecursiveIteratorIterator::CHILD_FIRST
-        );
-
-        foreach ($files as $fileinfo) {
-            $todo = ($fileinfo->isDir() ? 'rmdir' : 'unlink');
-            $todo($fileinfo->getRealPath());
-        }
-
-        rmdir($path);
     }
 
     protected function getHeaderActions(): array
