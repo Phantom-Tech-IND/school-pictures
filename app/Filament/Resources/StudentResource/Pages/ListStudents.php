@@ -77,16 +77,11 @@ class ListStudents extends ListRecords
     {
         return [
             CreateAction::make(),
-            Action::make('syncPhotos')
-                ->label('Sync Photos')
-                ->action(function () {
-                    Artisan::call('parse:student-photos');
-                }),
             Action::make('uploadPhotos')
-                ->label('Upload Student Photos')
+                ->label('Upload Multiple Students')
                 ->form([
                     FileUpload::make('zipFolder')
-                        ->label('Student Photo ZIP')
+                        ->label('Only .zip files allowed')
                         ->disk('public')
                         ->required()
                         ->acceptedFileTypes(['application/zip'])
