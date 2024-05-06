@@ -91,6 +91,11 @@ class ListStudents extends ListRecords
                         ->placeholder('Drop ZIP file here or click to upload'),
                 ])
                 ->action(fn (array $data) => $this->handleUploadAction($data)),
+            Action::make('syncPhotos')
+                ->label('Sync Photos')
+                ->action(function () {
+                    \Illuminate\Support\Facades\Artisan::call('parse:student-photos');
+                }),
         ];
     }
 
