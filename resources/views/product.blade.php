@@ -1,11 +1,5 @@
 @extends('layouts.app')
 @section('content')
-
-    @include('components.secondary-banner', [
-        'title' => $product->name,
-        'image' => $product->images[0],
-    ])
-
     <form onsubmit="handleAsyncSubmit(event)" method="POST" action="{{ route('add.to.cart') }}" id="myForm">
         @csrf
         <input type="hidden" name="product_id" value="{{ $product->id }}">
