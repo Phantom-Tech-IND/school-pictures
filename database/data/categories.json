@@ -1,47 +1,26 @@
 [
   {
-    "id": 1,
-    "name": "Prints & posters",
-    "slug": "prints-and-posters",
-    "image": "categories/prints.jpeg",
-    "description": "Includes Photo Prints, Posters, Canvas, Acrylic Glass, Aluminum Dibond, and Enlargements",
-    "created_at": "2024-05-02 09:17:56",
-    "updated_at": "2024-05-02 09:19:23"
+    "id": 6,
+    "name": "Spar Sets",
+    "slug": "Spar Sets",
+    "description": "These are our sets. This means that various individual products are sold together (only in this\nconfiguration) and are therefore cheaper than if they were bought individually.\nEach set has a different product and requires a different number of images.\nA picture is always minimal.\nThe maximum number is listed under each set.",
+    "created_at": "2024-05-08 07:11:10",
+    "updated_at": "2024-05-08 07:11:10"
   },
   {
-    "id": 2,
-    "name": "Digital Products",
-    "slug": "digital-products",
-    "image": "categories/digital.jpeg",
-    "description": "Includes all digital-related products and data",
-    "created_at": "2024-05-02 09:17:56",
-    "updated_at": "2024-05-02 09:19:33"
+    "id": 7,
+    "name": "Favoriten",
+    "slug": "Favoriten",
+    "description": "These products are all individual so not a package/set.\nHowever, there are variants for the sizes or any additional options.",
+    "created_at": "2024-05-08 11:38:11",
+    "updated_at": "2024-05-08 11:39:31"
   },
   {
-    "id": 3,
-    "name": "School & Kindergarten",
-    "slug": "school-and-kindergarten",
-    "image": "categories/school.jpeg",
-    "description": "Combines all products related to educational settings like schools and kindergartens",
-    "created_at": "2024-05-02 09:17:56",
-    "updated_at": "2024-05-02 09:19:44"
-  },
-  {
-    "id": 4,
-    "name": "Special Offers",
-    "slug": "special-offers",
-    "image": "categories/special.jpeg",
-    "description": "Encompasses all promotions, coupons, and value sets",
-    "created_at": "2024-05-02 09:17:56",
-    "updated_at": "2024-05-02 09:19:53"
-  },
-  {
-    "id": 5,
-    "name": "Accessories",
-    "slug": "accessories",
-    "image": "categories/accessories.jpg",
-    "description": "For photo accessories and other related items",
-    "created_at": "2024-05-02 09:17:56",
-    "updated_at": "2024-05-02 09:20:05"
+    "id": 8,
+    "name": "Einzelprodukte",
+    "slug": "Einzelprodukte",
+    "description": "These products are all individual products, which means it is not a package/set. The customer\nmust be able to choose one image at a time",
+    "created_at": "2024-05-08 11:38:56",
+    "updated_at": "2024-05-08 11:38:56"
   }
 ]

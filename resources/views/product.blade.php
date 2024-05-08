@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+
     @include('components.secondary-banner', [
         'title' => $product->name,
         'image' => $product->images[0],
@@ -9,7 +10,6 @@
         @csrf
         <input type="hidden" name="product_id" value="{{ $product->id }}">
         <input type="hidden" name="quantity" x-model="quantity">
-
         <div class="px-4 mx-auto max-w-7xl">
             <div class="flex flex-wrap">
                 <!-- Image Gallery -->
@@ -160,7 +160,7 @@
                             </button>
                         </div>
                     </div>
-                    <div class="p-4 mt-2 rounded-lg bg-gray-100">
+                    <div class="p-4 mt-2 bg-gray-100 rounded-lg">
                         <div class="flex justify-between px-2 gap-x-4 gap-y-4">
                             <div class="flex flex-col gap-2">
                                 <span class="text-sm">Product price</span>
