@@ -235,6 +235,7 @@
                 .then(data => {
                     console.log('Success:', data);
                     window.updateCartCount();
+                    window.toggleSlideOverCart();
                     updateTotalPrice();
                 })
                 .catch((error) => {
