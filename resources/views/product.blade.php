@@ -5,7 +5,11 @@
         'image' => $product->images[0],
     ])
 
-    <form id="myForm">
+    <form onsubmit="handleAsyncSubmit(event)" method="POST" action="{{ route('add.to.cart') }}" id="myForm">
+        @csrf
+        <input type="hidden" name="product_id" value="{{ $product->id }}">
+        <input type="hidden" name="quantity" x-model="quantity">
+
         <div class="px-4 mx-auto max-w-7xl">
             <div class="flex flex-wrap">
                 <!-- Image Gallery -->
@@ -145,7 +149,8 @@
                                 @click="quantity > 1 ? quantity-- : null">
                                 -
                             </button>
-                            <input type="text" id="quantity" name="quantity" x-bind:value="quantity" min="1"
+                            <input type="text" id="quantity" name="quantity" x-bind:value="quantity"
+                                min="1"
                                 class="block w-12 text-center rounded-md shadow-sm border-accent-300 focus:border-accent-500 focus:ring focus:ring-accent-500 focus:ring-opacity-50"
                                 readonly>
                             <button type="button"
@@ -186,15 +191,28 @@
     </form>
 
     <script>
-        document.getElementById('myForm').addEventListener('submit', function(e) {
-            e.preventDefault();
+        function handleAsyncSubmit(event) {
+            event.preventDefault(); // Prevent normal form submission
+            const form = event.target;
+            const url = form.action;
+            const formData = new FormData(form);
 
-            // Get the form data
-            var formData = new FormData(this);
-
-            const formDataObject = Object.fromEntries(formData);
-            alert(JSON.stringify(formDataObject, null, 2));
-        });
+            fetch(url, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Success:', data);
+                    updateTotalPrice();
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+        }
 
         function updateTotalPrice() {
             var basePrice = parseFloat('{{ $product->price }}'); // Get the base price from Blade into JS

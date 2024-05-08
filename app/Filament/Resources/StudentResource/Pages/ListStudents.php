@@ -3,16 +3,13 @@
 namespace App\Filament\Resources\StudentResource\Pages;
 
 use App\Filament\Resources\StudentResource;
-
-use Filament\Resources\Pages\ListRecords;
-use Filament\Forms\Components\FileUpload;
-use Filament\Actions\CreateAction;
 use Filament\Actions\Action;
-use Filament\Facades\Filament;
+use Filament\Actions\CreateAction;
+use Filament\Forms\Components\FileUpload;
 use Filament\Notifications\Notification;
-
-use Illuminate\Support\Facades\Storage;
+use Filament\Resources\Pages\ListRecords;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Storage;
 use ZipArchive;
 
 class ListStudents extends ListRecords
@@ -27,20 +24,20 @@ class ListStudents extends ListRecords
             if ($file->isDir()) {
                 $dirName = $file->getFilename();
                 if (str_starts_with($dirName, 'KG-')) {
-                    $targetPath = public_path('media/kindergarden/' . $dirName);
+                    $targetPath = public_path('media/kindergarden/'.$dirName);
                 } elseif (str_starts_with($dirName, 'SH-')) {
-                    $targetPath = public_path('media/school/' . $dirName);
+                    $targetPath = public_path('media/school/'.$dirName);
                 } else {
                     continue;
                 }
 
-                if (!file_exists($targetPath)) {
+                if (! file_exists($targetPath)) {
                     mkdir($targetPath, 0777, true);
                 }
 
                 foreach (new \DirectoryIterator($file->getPathname()) as $fileInfo) {
-                    if (!$fileInfo->isDot()) {
-                        rename($fileInfo->getPathname(), $targetPath . '/' . $fileInfo->getFilename());
+                    if (! $fileInfo->isDot()) {
+                        rename($fileInfo->getPathname(), $targetPath.'/'.$fileInfo->getFilename());
                     }
                 }
             }
