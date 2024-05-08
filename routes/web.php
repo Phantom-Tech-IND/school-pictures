@@ -44,6 +44,6 @@ Route::controller(GuestPanelController::class)->group(function () {
 Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('add.to.cart');
 Route::get('/cart', [CartController::class, 'index'])->name('cart');
 Route::get('/cart/count', [CartController::class, 'countItems'])->name('cart.count');
-
+Route::post('/cart/remove/{productId}', [CartController::class, 'removeFromCart'])->name('cart.remove');
 Route::post('/students/sync-photos', 'StudentController@syncPhotos')->name('students.sync-photos');
 Route::get('/cart/items', [CartController::class, 'getCartItems'])->name('cart.items');

@@ -80,6 +80,26 @@
         loadCartItems(); // Optionally load cart items if not already loaded
     }
 
+    function removeFromCart(productId) {
+        fetch(`/cart/remove/${productId}`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    productId: productId
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    loadCartItems(); // Reload cart items to reflect the changes
+                }
+            })
+            .catch(error => console.error('Error removing cart item:', error));
+    }
+
     function loadCartItems() {
         // Fetch cart items from a Laravel route and update the slide-over cart's content
         fetch('/cart/items') // Adjust the URL based on your actual route for fetching cart items
@@ -102,7 +122,7 @@
                                     <p class="mt-1 text-sm text-gray-500">Qty ${item.quantity}</p>
                                 </div>
                                 <div class="flex flex-1 items-end justify-between text-sm">
-                                    <button type="button" class="font-medium text-accent-600 hover:text-accent-500">Remove</button>
+                                    <button onclick="removeFromCart(${item.product.id})" type="button" class="font-medium text-accent-600 hover:text-accent-500">Remove</button>
                                 </div>
                             </div>
                         </li>
@@ -110,8 +130,6 @@
                 });
                 document.querySelector('.slide-over-cart .subtotal-display').textContent =
                     `CHF ${data.subtotal.toFixed(2)}`;
-
-
 
             })
             .catch(error => console.error('Error loading cart items:', error));

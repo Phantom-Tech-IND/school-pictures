@@ -23,7 +23,9 @@ class CartController extends Controller
             }
         }
 
-        return response()->json(['items' => $productDetails, 'subtotal' => array_sum(array_column($productDetails, 'subtotal'))]);
+        $subtotal = array_sum(array_column($productDetails, 'subtotal'));
+
+        return ['items' => $productDetails, 'subtotal' => $subtotal];
     }
 
     public function addToCart(Request $request)
@@ -63,8 +65,28 @@ class CartController extends Controller
         return response()->json($count);
     }
 
+    public function removeFromCart(Request $request, $productId)  // Ensure $productId is passed correctly
+    {
+        $cart = session()->get('cart', []);
+        if (isset($cart[$productId])) {
+            unset($cart[$productId]); // Remove the item from the cart
+            session()->put('cart', $cart); // Update the cart in the session
+        } else {
+            return response()->json(['error' => 'Product not found in cart'], 404);
+        }
+
+        $totalItems = array_sum(array_column($cart, 'quantity')); // Recalculate the total items
+
+        return response()->json([
+            'success' => 'Product removed from cart successfully!',
+            'totalItems' => $totalItems,
+        ]);
+    }
+
     public function index()
     {
-        return view('cart', ['cartItems' => session()->get('cart', [])]);
+        $cartItems = $this->getCartItems(); // This now returns an array directly.
+
+        return view('cart', ['cartItems' => $cartItems]);
     }
 }
