@@ -18,7 +18,9 @@ class ProductSeeder extends Seeder
         $data = json_decode($json);
         foreach ($data as $product) {
             Product::create([
+                'id' => $product->id,
                 'name' => $product->name,
+                'category_id' => $product->category_id,
                 'description' => $product->description,
                 'price' => $product->price,
                 'images' => json_decode($product->images), // Assuming you want the first image
