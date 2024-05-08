@@ -94,6 +94,7 @@
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
+                    window.updateCartCount();
                     loadCartItems(); // Reload cart items to reflect the changes
                 }
             })

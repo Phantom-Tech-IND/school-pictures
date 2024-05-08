@@ -191,8 +191,35 @@
     </form>
 
     <script>
+        function validateForm() {
+            let isValid = true;
+
+            // Validate product ID
+            const productId = document.querySelector('input[name="product_id"]').value;
+            if (!productId) {
+                console.error('Product ID is required');
+                isValid = false;
+            }
+
+            // Validate quantity
+            const quantity = parseInt(document.querySelector('[x-bind\\:value="quantity"]').value, 10);
+            if (isNaN(quantity) || quantity < 1) {
+                console.error('Quantity must be at least 1');
+                isValid = false;
+            }
+
+            // Add more validations as needed
+
+            return isValid;
+        }
+
         function handleAsyncSubmit(event) {
             event.preventDefault(); // Prevent normal form submission
+            if (!validateForm()) {
+                alert('Please correct the errors in the form.');
+                return;
+            }
+
             const form = event.target;
             const url = form.action;
             const formData = new FormData(form);
@@ -207,6 +234,7 @@
                 .then(response => response.json())
                 .then(data => {
                     console.log('Success:', data);
+                    window.updateCartCount();
                     updateTotalPrice();
                 })
                 .catch((error) => {

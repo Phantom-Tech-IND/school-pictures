@@ -30,6 +30,11 @@ class CartController extends Controller
 
     public function addToCart(Request $request)
     {
+        $validated = $request->validate([
+            'product_id' => 'required|exists:products,id',
+            'quantity' => 'required|integer|min:1',
+        ]);
+
         $cart = session()->get('cart', []);
         $product_id = $request->product_id;
         $quantity = $request->quantity;
