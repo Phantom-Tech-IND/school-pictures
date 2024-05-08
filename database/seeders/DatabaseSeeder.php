@@ -24,7 +24,6 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('Password123!!'),
         ]);
 
-
         $this->call([
             CategorySeeder::class,
             StorageSeeder::class,

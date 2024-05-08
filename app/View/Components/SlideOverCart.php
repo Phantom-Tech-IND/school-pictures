@@ -6,16 +6,14 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class Navbar extends Component
+class SlideOverCart extends Component
 {
-    protected $cartItems;
-
     /**
      * Create a new component instance.
      */
-    public function __construct(Cart $cart)
+    public function __construct()
     {
-        $this->cartItems = $cart->cartItems();
+        //
     }
 
     /**
@@ -23,8 +21,6 @@ class Navbar extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.navbar', [
-            'cartItems' => $this->cartItems,
-        ]);
+        return view('components.slide-over-cart');
     }
 }

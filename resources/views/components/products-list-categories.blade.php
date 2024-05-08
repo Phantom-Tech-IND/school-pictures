@@ -101,17 +101,6 @@
                                                         ${{ $product->price }}</p>
                                                 </div>
                                             </div>
-                                            <div class="mt-6">
-                                                <form action="{{ route('add.to.cart') }}" method="POST">
-                                                    @csrf
-                                                    <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                                    <input type="hidden" name="quantity" value="1"> <!-- Default quantity set to 1 -->
-                                                    <button type="submit"
-                                                            class="relative flex items-center justify-center w-full px-8 py-2 text-sm font-medium text-gray-900 bg-gray-100 border border-transparent rounded-md hover:bg-gray-200">
-                                                        Add to bag<span class="sr-only">, {{ $product->name }}</span>
-                                                    </button>
-                                                </form>
-                                            </div>
                                         </a>
                                     </div>
                                 @endforeach
