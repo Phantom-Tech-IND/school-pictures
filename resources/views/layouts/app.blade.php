@@ -7,12 +7,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ config('app.name', 'Laravel') }}</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 
-    @include('components.navbar'  )
-    <div class="pt-12">
-        @yield('content')
-    </div>
+@include('components.navbar')
+@include('components.slide-over-cart')
+<div class="pt-12">
+    @yield('content')
+</div>
 </body>
 
 @include('components.modal-right-click')

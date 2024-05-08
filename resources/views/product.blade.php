@@ -1,6 +1,15 @@
 @extends('layouts.app')
 @section('content')
-    <form id="myForm">
+
+    @include('components.secondary-banner', [
+        'title' => $product->name,
+        'image' => $product->images[0],
+    ])
+
+    <form onsubmit="handleAsyncSubmit(event)" method="POST" action="{{ route('add.to.cart') }}" id="myForm">
+        @csrf
+        <input type="hidden" name="product_id" value="{{ $product->id }}">
+        <input type="hidden" name="quantity" x-model="quantity">
         <div class="px-4 mx-auto max-w-7xl">
             <div class="flex flex-wrap">
                 <!-- Image Gallery -->
@@ -140,7 +149,8 @@
                                 @click="quantity > 1 ? quantity-- : null">
                                 -
                             </button>
-                            <input type="text" id="quantity" name="quantity" x-bind:value="quantity" min="1"
+                            <input type="text" id="quantity" name="quantity" x-bind:value="quantity"
+                                min="1"
                                 class="block w-12 text-center rounded-md shadow-sm border-accent-300 focus:border-accent-500 focus:ring focus:ring-accent-500 focus:ring-opacity-50"
                                 readonly>
                             <button type="button"
@@ -181,15 +191,57 @@
     </form>
 
     <script>
-        document.getElementById('myForm').addEventListener('submit', function(e) {
-            e.preventDefault();
+        function validateForm() {
+            let isValid = true;
 
-            // Get the form data
-            var formData = new FormData(this);
+            // Validate product ID
+            const productId = document.querySelector('input[name="product_id"]').value;
+            if (!productId) {
+                console.error('Product ID is required');
+                isValid = false;
+            }
 
-            const formDataObject = Object.fromEntries(formData);
-            alert(JSON.stringify(formDataObject, null, 2));
-        });
+            // Validate quantity
+            const quantity = parseInt(document.querySelector('[x-bind\\:value="quantity"]').value, 10);
+            if (isNaN(quantity) || quantity < 1) {
+                console.error('Quantity must be at least 1');
+                isValid = false;
+            }
+
+            // Add more validations as needed
+
+            return isValid;
+        }
+
+        function handleAsyncSubmit(event) {
+            event.preventDefault(); // Prevent normal form submission
+            if (!validateForm()) {
+                alert('Please correct the errors in the form.');
+                return;
+            }
+
+            const form = event.target;
+            const url = form.action;
+            const formData = new FormData(form);
+
+            fetch(url, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Success:', data);
+                    window.updateCartCount();
+                    window.toggleSlideOverCart();
+                    updateTotalPrice();
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+        }
 
         function updateTotalPrice() {
             var basePrice = parseFloat('{{ $product->price }}'); // Get the base price from Blade into JS
