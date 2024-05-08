@@ -85,8 +85,11 @@ class ProductResource extends Resource
                             ->afterStateUpdated(function (callable $set, $state) {
                                 $set('value', null); // Ensures value is reset when type changes
                             }),
-                            Forms\Components\TextInput::make('additional_info')
+                        Forms\Components\TextInput::make('additional_info')
                             ->label('Additional Information')
+                            ->visible(fn (Get $get): bool => $get('type') === 'select' || $get('type') === 'checkbox'),
+                        Forms\Components\Checkbox::make('is_required')
+                            ->label('Is required')
                             ->visible(fn (Get $get): bool => $get('type') === 'select'),
 
                         Forms\Components\Repeater::make('options')
@@ -107,7 +110,8 @@ class ProductResource extends Resource
                                     ->columnSpan(2),
                                 Forms\Components\Checkbox::make('is_required')
                                     ->label('Is required')
-                                    ->columnSpan(2),
+                                    ->columnSpan(2)
+                                    ->visible(fn (Get $get): bool => $get('type') === 'select'),
                             ])
                             ->collapsible()
                             ->reorderable()
@@ -131,10 +135,10 @@ class ProductResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name')->searchable(),
                 Tables\Columns\TextColumn::make('product_type')
-                ->color(fn (string $state): string => match ($state) {
-                    'personal' => 'success',
-                    'school' => 'primary',
-                })
+                    ->color(fn (string $state): string => match ($state) {
+                        'personal' => 'success',
+                        'school' => 'primary',
+                    })
                     ->badge()->searchable(),
                 Tables\Columns\TextColumn::make('price')->numeric()->sortable(),
                 Tables\Columns\TextColumn::make('categories.name')
