@@ -21,7 +21,6 @@ class CategorySeeder extends Seeder
                 'id' => $obj->id,
                 'name' => $obj->name,
                 'slug' => $obj->slug,
-                'image' => $obj->image,
                 'description' => $obj->description,
             ]);
         }

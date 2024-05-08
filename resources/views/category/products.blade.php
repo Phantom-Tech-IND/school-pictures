@@ -1,9 +1,5 @@
 @extends('layouts.app')
 @section('content')
-    @include('components.secondary-banner', [
-        'title' => $category->name,
-        'image' => asset($category->image),
-    ])
     <div class="bg-white" x-data="{ isOpen: false }">
         <div>
             <div x-cloak class="relative z-50 lg:hidden" x-show="isOpen" role="dialog" aria-modal="true">
