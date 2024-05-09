@@ -35,29 +35,29 @@
         dd($products);
     @endphp --}}
 
-    
+
     <form onsubmit="handleSubmit()">
         @include('components.product-overview', [
             'products' => $products,
             'selectedProductId' => $products[0]['id'],
             'galleryName' => $galleryName,
-             compact('images'),
+            compact('images'),
             'student' => $student,
         ])
     </form>
 
     <script>
-    function handleSubmit() {
-        event.preventDefault();
+        function handleSubmit() {
+            event.preventDefault();
 
-        const galleryContainer = document.getElementById('{{ $galleryName }}');
+            const galleryContainer = document.getElementById('{{ $galleryName }}');
 
-        const selectedProductId = galleryContainer.getAttribute('data-selected-product-id');
-        const selectedImages = galleryContainer.getAttribute('data-selected-images') ?? [];
+            const selectedProductId = galleryContainer.getAttribute('data-selected-product-id');
+            const selectedImages = galleryContainer.getAttribute('data-selected-images') ?? [];
 
-        let alertMessage = `Selected Product ID: ${selectedProductId}\nSelected Images: ${selectedImages}`;
+            let alertMessage = `Selected Product ID: ${selectedProductId}\nSelected Images: ${selectedImages}`;
 
-        alert(alertMessage);
-    }
+            alert(alertMessage);
+        }
     </script>
 @endsection
