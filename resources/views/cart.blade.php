@@ -250,7 +250,8 @@
                                 </div>
                                 <div class="relative mt-1">
                                     <input type="tel" name="phone" id="phone" required
-                                        pattern="^\+?[1-9]\d{1,14}$" title="Please enter a valid phone number"
+                                        pattern="^\+?[0-9]{1,15}$"
+                                        title="Please enter a valid phone number"
                                         autocomplete="tel"
                                         oninput="this.value = this.value.replace(/[^0-9+]/g, '').replace(/(\..*)\./g, '$1');"
                                         inputmode="tel"
@@ -447,7 +448,8 @@
                                     </div>
                                     <div class="relative mt-1">
                                         <input type="tel" name="shipping-phone" id="shipping-phone"
-                                            :required="sameAsBilling === 'false'" pattern="^\+?[1-9]\d{1,14}$"
+                                            :required="sameAsBilling === 'false'"
+                                            pattern="^\+?[0-9]{1,15}$"
                                             title="Please enter a valid phone number" autocomplete="tel"
                                             oninput="this.value = this.value.replace(/[^0-9+]/g, '').replace(/(\..*)\./g, '$1');"
                                             inputmode="tel"
