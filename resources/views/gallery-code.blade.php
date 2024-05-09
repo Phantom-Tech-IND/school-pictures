@@ -11,13 +11,6 @@
         $galleryName = 'myGallery';
         $title = request('code', 'Code Gallery');
 
-        $images = [
-            Constants::KINDERGARDEN_IMAGE_URL . 'SH-7321-6607.jpg',
-            Constants::KINDERGARDEN_IMAGE_URL . 'SH-7219-8137-9257.jpg',
-            Constants::KINDERGARDEN_IMAGE_URL . 'KG-7157-8475-4031.jpg',
-            Constants::KINDERGARDEN_IMAGE_URL . 'SH-7321-7038.jpg',
-            Constants::KINDERGARDEN_IMAGE_URL . 'SH-7333-8904-7425.jpg',
-        ];
     @endphp
 
     {{-- @include('components.secondary-banner', [
@@ -41,7 +34,6 @@
             'products' => $products,
             'selectedProductId' => $products[0]['id'],
             'galleryName' => $galleryName,
-            compact('images'),
             'student' => $student,
         ])
     </form>

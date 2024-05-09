@@ -24,7 +24,7 @@
                     class="relative grid grid-cols-3 gap-4 p-4 mt-8 overflow-y-scroll border-2 border-gray-300 shadow-lg lg:mt-0 max-h-72 lg:max-h-max lg:h-auto auto-rows-min place-items-center lg:col-span-2 lg:grid-cols-4 xs:grid-cols-4">
                     @foreach ($student['photos'] as $key => $photo)
                         <image-selector container-id="{{ $galleryName }}" alt="Image {{ $key + 1 }}"
-                            key="{{ $photo['id'] }}" src="{{ $photo['photo_path'] }}"
+                            key="{{ $photo['id'] }}" src="{{ asset('storage/' . $photo['photo_path']) }}"
                             class="w-24 h-24"></image-selector>
                     @endforeach
                 </div>
