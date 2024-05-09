@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use App\Providers\Filament\AdminPanelProvider;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -12,6 +14,10 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    public function canAccessPanel(AdminPanelProvider $panel): bool
+    {
+        return str_ends_with($this->email, '@schoolpictures.com');
+    }
     /**
      * The attributes that are mass assignable.
      *
