@@ -16,7 +16,7 @@ class User extends Authenticatable
 
     public function canAccessPanel(AdminPanelProvider $panel): bool
     {
-        return str_ends_with($this->email, '@schoolpictures.com');
+        return true;
     }
     /**
      * The attributes that are mass assignable.
