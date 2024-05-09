@@ -7,7 +7,7 @@
         <div class="px-4 mx-auto max-w-7xl">
             <div class="flex flex-wrap">
                 <!-- Image Gallery -->
-                <div class="w-full p-4 md:w-2/3" x-data="{ selectedImage: '{{ $product->images[0] }}' }">
+                <div class="w-full p-4 md:w-2/3" x-data="{ selectedImage: '{{ asset('storage/' . $product->images[0]) }}' }">
                     <img :src="selectedImage" alt="{{ $product->name }}"
                         class="object-contain w-full bg-gray-300 rounded-lg shadow-md h-80 xs:h-96 lg:h-[500px]">
                     <div class="flex h-40 mt-4 overflow-x-auto">
