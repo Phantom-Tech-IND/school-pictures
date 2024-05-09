@@ -250,8 +250,7 @@
                                 </div>
                                 <div class="relative mt-1">
                                     <input type="tel" name="phone" id="phone" required
-                                        pattern="^\+?[0-9]{1,15}$"
-                                        title="Please enter a valid phone number"
+                                        pattern="^\+?[0-9]{1,15}$" title="Please enter a valid phone number"
                                         autocomplete="tel"
                                         oninput="this.value = this.value.replace(/[^0-9+]/g, '').replace(/(\..*)\./g, '$1');"
                                         inputmode="tel"
@@ -448,8 +447,7 @@
                                     </div>
                                     <div class="relative mt-1">
                                         <input type="tel" name="shipping-phone" id="shipping-phone"
-                                            :required="sameAsBilling === 'false'"
-                                            pattern="^\+?[0-9]{1,15}$"
+                                            :required="sameAsBilling === 'false'" pattern="^\+?[0-9]{1,15}$"
                                             title="Please enter a valid phone number" autocomplete="tel"
                                             oninput="this.value = this.value.replace(/[^0-9+]/g, '').replace(/(\..*)\./g, '$1');"
                                             inputmode="tel"
@@ -570,9 +568,9 @@
 
                     <div class="mt-4 bg-white border border-gray-200 rounded-lg shadow-sm">
                         <h3 class="sr-only">Items in your cart</h3>
-                        <ul role="list" class="divide-y divide-gray-200">
+                        <ul id="cart-items" role="list" class="divide-y divide-gray-200">
                             @foreach ($cartItems['items'] as $item)
-                                <li class="flex px-4 py-6 sm:px-6">
+                                <li id="cart-item-{{ $item['id'] }}" class="flex px-4 py-6 sm:px-6">
                                     <div class="flex-shrink-0">
                                         <img src="{{ $item['product']->images[0] }}" alt="{{ $item['product']->name }}"
                                             class="w-20 rounded-md">
@@ -590,8 +588,22 @@
                                             </div>
 
                                             <div class="flex-shrink-0 flow-root ml-4">
-                                                <button type="button"
-                                                    class="-m-2.5 flex items-center justify-center bg-white p-2.5 text-gray-400 hover:text-gray-500">
+                                                <button type="button" data-product-id="{{ $item['id'] }}"
+                                                    class="-m-2.5 flex items-center justify-center bg-white p-2.5 text-gray-400 hover:text-gray-500"
+                                                    onclick="
+                                                        axios.post('/cart/remove/' + {{ $item['id'] }})
+                                                            .then(response => {
+                                                                const itemElement = document.getElementById('cart-item-' + {{ $item['id'] }});
+                                                                if (itemElement) { itemElement.remove(); }
+
+                                                                let subtotal = response.data.cartItems.subtotal;
+                                                                document.getElementById('subtotal').textContent = `${subtotal.toFixed(2)}`;
+                                                            })
+                                                            .catch(error => {
+                                                                alert('Failed to remove product!');
+                                                                console.error('Error:', error);
+                                                            });
+                                                        ">
                                                     <span class="sr-only">Remove</span>
                                                     <svg class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor"
                                                         aria-hidden="true">
@@ -605,7 +617,7 @@
 
                                         <div class="flex items-end justify-between flex-1 pt-2">
                                             <p class="mt-1 text-sm font-medium text-gray-900">
-                                                ${{ number_format($item['product']->price, 2) }}</p>
+                                                {{ number_format($item['product']->price, 2) }} CHF</p>
 
                                             <div class="ml-4" x-data="{ quantity: {{ $item['quantity'] }} }">
                                                 <label for="quantity-{{ $item['id'] }}" class="sr-only">Quantity</label>
@@ -617,7 +629,8 @@
                                                         type="text" x-model="quantity"
                                                         class="w-12 text-base font-medium text-center text-gray-700 border-none focus:outline-none focus:ring-0 sm:text-sm"
                                                         readonly disabled>
-                                                    <button type="button" @click="updateQuantity(1, {{ $item['id'] }})"
+                                                    <button type="button"
+                                                        @click="updateQuantity(1, {{ $item['id'] }})"
                                                         class="p-2 text-base font-medium text-gray-700 focus:outline-none focus:border-accent-500 focus:ring-1 focus:ring-accent-500 sm:text-lg">+</button>
                                                 </div>
                                             </div>
@@ -645,23 +658,23 @@
                                 <dt class="text-base font-medium">Total</dt>
                                 <dd class="text-base font-medium text-gray-900"><span id="total">75.52</span> CHF</dd>
                             </div>
-
-                            <script>
-                                function updateTotal() {
-                                    const subtotal = parseFloat(document.getElementById('subtotal').textContent);
-                                    const shipping = parseFloat(document.getElementById('shipping').textContent);
-                                    const taxes = parseFloat(document.getElementById('taxes').textContent);
-
-                                    const total = subtotal + shipping + taxes;
-                                    document.getElementById('total').textContent = `${total.toFixed(2)}`;
-                                }
-
-                                // Event listeners to update total when subtotal, shipping, or taxes change
-                                document.getElementById('subtotal').addEventListener('DOMSubtreeModified', updateTotal);
-                                document.getElementById('shipping').addEventListener('DOMSubtreeModified', updateTotal);
-                                document.getElementById('taxes').addEventListener('DOMSubtreeModified', updateTotal);
-                            </script>
                         </dl>
+
+                        <script>
+                            function updateTotal() {
+                                const subtotal = parseFloat(document.getElementById('subtotal').textContent);
+                                const shipping = parseFloat(document.getElementById('shipping').textContent);
+                                const taxes = parseFloat(document.getElementById('taxes').textContent);
+                        
+                                const total = subtotal + shipping + taxes;
+                                document.getElementById('total').textContent = `${total.toFixed(2)}`;
+                            }
+                        
+                            // Event listeners to update total when subtotal, shipping, or taxes change
+                            document.getElementById('subtotal').addEventListener('DOMSubtreeModified', updateTotal);
+                            document.getElementById('shipping').addEventListener('DOMSubtreeModified', updateTotal);
+                            document.getElementById('taxes').addEventListener('DOMSubtreeModified', updateTotal);
+                        </script>
 
                         <!-- Payment -->
                         <div class="px-4 py-6 space-y-6 border-t border-gray-200 sm:px-6">
@@ -710,9 +723,7 @@
         var formData = new FormData(event.target);
         alert(JSON.stringify(Object.fromEntries(formData), null, 2));
     }
-</script>
 
-<script>
     function updateQuantity(change, productId) {
         var quantityInput = document.getElementById('quantity-' + productId);
         var currentQuantity = parseInt(quantityInput.value);
@@ -724,10 +735,10 @@
                 .then(response => {
                     const items = response.data.cartItems.items;
                     const item = items.find(item => item.id === productId);
-                    const subtotal = response.data.cartItems.subtotal;
+                    let subtotal = response.data.cartItems.subtotal;
 
                     quantityInput.value = item.quantity;
-                    document.getElementById('subtotal').textContent = `$${subtotal.toFixed(2)}`;
+                    document.getElementById('subtotal').textContent = `${subtotal.toFixed(2)}`;
                 })
                 .catch(error => {
                     /* Handle error */

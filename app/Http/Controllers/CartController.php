@@ -86,6 +86,7 @@ class CartController extends Controller
         return response()->json([
             'success' => 'Product removed from cart successfully!',
             'totalItems' => $totalItems,
+            'cartItems' => $this->getCartItems(),
         ]);
     }
 
