@@ -10,102 +10,458 @@
                     <div>
                         <h2 class="text-lg font-medium text-gray-900">Contact information</h2>
 
-                        <div class="mt-4">
-                            <label for="email-address" class="block text-sm font-medium text-gray-700">Email address</label>
-                            <div class="mt-1">
-                                <input type="email" id="email-address" name="email-address" autocomplete="email"
-                                    class="block w-full border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring-accent-500 sm:text-sm">
+                        <div class="mt-4 input-component">
+                            <div class="flex justify-between">
+                                <label for="email-address" class="block text-sm font-medium text-gray-700">Email
+                                    address</label>
+                                <p class="hidden text-sm text-red-600 input-error-message" id="email-error">Not a valid
+                                    email address</p>
+                            </div>
+                            <div class="relative mt-1">
+                                <input type="email" id="email-address" name="email-address" required
+                                    pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+                                    title="Please enter a valid email address" autocomplete="email"
+                                    placeholder="you@example.com"
+                                    class="block w-full border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring-accent-500 sm:text-sm custom-input">
+
+                                <div
+                                    class="absolute inset-y-0 right-0 items-center hidden pr-3 pointer-events-none input-error-icon">
+                                    <svg class="w-5 h-5 text-red-500" viewBox="0 0 20 20" fill="currentColor"
+                                        aria-hidden="true">
+                                        <path fill-rule="evenodd"
+                                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-5a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0110 5zm0 10a1 1 0 100-2 1 1 0 000 2z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                </div>
                             </div>
                         </div>
                     </div>
 
                     <div class="pt-10 mt-10 border-t border-gray-200">
-                        <h2 class="text-lg font-medium text-gray-900">Shipping information</h2>
+                        <h2 class="text-lg font-medium text-gray-900">Billing information</h2>
 
                         <div class="grid grid-cols-1 mt-4 gap-y-6 sm:grid-cols-2 sm:gap-x-4">
-                            <div>
-                                <label for="first-name" class="block text-sm font-medium text-gray-700">First name</label>
-                                <div class="mt-1">
-                                    <input type="text" id="first-name" name="first-name" autocomplete="given-name"
-                                        class="block w-full border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring-accent-500 sm:text-sm">
+                            <div class="input-component">
+                                <div class="flex justify-between">
+                                    <label for="first-name" class="block text-sm font-medium text-gray-700">First
+                                        name</label>
+                                    <p class="hidden text-sm text-red-600 input-error-message">Not a valid first name</p>
+                                </div>
+                                <div class="relative mt-1">
+                                    <input type="text" id="first-name" name="first-name" required
+                                        autocomplete="given-name" placeholder="John"
+                                        class="block w-full border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring-accent-500 sm:text-sm custom-input">
+                                    <div
+                                        class="absolute inset-y-0 right-0 items-center hidden pr-3 pointer-events-none input-error-icon">
+                                        <svg class="w-5 h-5 text-red-500" viewBox="0 0 20 20" fill="currentColor"
+                                            aria-hidden="true">
+                                            <path fill-rule="evenodd"
+                                                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-5a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0110 5zm0 10a1 1 0 100-2 1 1 0 000 2z"
+                                                clip-rule="evenodd" />
+                                        </svg>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div>
-                                <label for="last-name" class="block text-sm font-medium text-gray-700">Last name</label>
-                                <div class="mt-1">
-                                    <input type="text" id="last-name" name="last-name" autocomplete="family-name"
-                                        class="block w-full border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring-accent-500 sm:text-sm">
+                            <div class="input-component">
+                                <div class="flex justify-between">
+                                    <label for="last-name" class="block text-sm font-medium text-gray-700">Last name</label>
+                                    <p class="hidden text-sm text-red-600 input-error-message" id="last-name-error">Not a
+                                        valid last name</p>
+                                </div>
+                                <div class="relative mt-1">
+                                    <input type="text" id="last-name" name="last-name" required
+                                        autocomplete="family-name"
+                                        class="block w-full border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring-accent-500 sm:text-sm custom-input">
+                                    <div
+                                        class="absolute inset-y-0 right-0 items-center hidden pr-3 pointer-events-none input-error-icon">
+                                        <svg class="w-5 h-5 text-red-500" viewBox="0 0 20 20" fill="currentColor"
+                                            aria-hidden="true">
+                                            <path fill-rule="evenodd"
+                                                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-5a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0110 5zm0 10a1 1 0 100-2 1 1 0 000 2z"
+                                                clip-rule="evenodd" />
+                                        </svg>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div class="sm:col-span-2">
-                                <label for="company" class="block text-sm font-medium text-gray-700">Company</label>
-                                <div class="mt-1">
+                            <div class="sm:col-span-2 input-component">
+                                <div class="flex justify-between">
+                                    <label for="company" class="block text-sm font-medium text-gray-700">Company</label>
+                                    <p class="hidden text-sm text-red-600 input-error-message" id="company-error">Not a
+                                        valid company name</p>
+                                </div>
+                                <div class="relative mt-1">
                                     <input type="text" name="company" id="company"
-                                        class="block w-full border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring-accent-500 sm:text-sm">
+                                        class="block w-full border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring-accent-500 sm:text-sm custom-input">
+                                    <div
+                                        class="absolute inset-y-0 right-0 items-center hidden pr-3 pointer-events-none input-error-icon">
+                                        <svg class="w-5 h-5 text-red-500" viewBox="0 0 20 20" fill="currentColor"
+                                            aria-hidden="true">
+                                            <path fill-rule="evenodd"
+                                                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-5a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0110 5zm0 10a1 1 0 100-2 1 1 0 000 2z"
+                                                clip-rule="evenodd" />
+                                        </svg>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div class="sm:col-span-2">
-                                <label for="address" class="block text-sm font-medium text-gray-700">Address</label>
-                                <div class="mt-1">
-                                    <input type="text" name="address" id="address" autocomplete="street-address"
-                                        class="block w-full border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring-accent-500 sm:text-sm">
+                            <div class="sm:col-span-2 input-component">
+                                <div class="flex justify-between">
+                                    <label for="address" class="block text-sm font-medium text-gray-700">Address</label>
+                                    <p class="hidden text-sm text-red-600 input-error-message" id="address-error">Not a
+                                        valid address</p>
+                                </div>
+                                <div class="relative mt-1">
+                                    <input type="text" name="address" id="address" required
+                                        autocomplete="street-address"
+                                        class="block w-full border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring-accent-500 sm:text-sm custom-input">
+                                    <div
+                                        class="absolute inset-y-0 right-0 items-center hidden pr-3 pointer-events-none input-error-icon">
+                                        <svg class="w-5 h-5 text-red-500" viewBox="0 0 20 20" fill="currentColor"
+                                            aria-hidden="true">
+                                            <path fill-rule="evenodd"
+                                                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-5a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0110 5zm0 10a1 1 0 100-2 1 1 0 000 2z"
+                                                clip-rule="evenodd" />
+                                        </svg>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div class="sm:col-span-2">
-                                <label for="apartment" class="block text-sm font-medium text-gray-700">Apartment, suite,
-                                    etc.</label>
-                                <div class="mt-1">
+                            <div class="sm:col-span-2 input-component">
+                                <div class="flex justify-between">
+                                    <label for="apartment" class="block text-sm font-medium text-gray-700">Apartment,
+                                        suite, etc.</label>
+                                    <p class="hidden text-sm text-red-600 input-error-message" id="apartment-error">Not a
+                                        valid apartment, suite, etc.</p>
+                                </div>
+                                <div class="relative mt-1">
                                     <input type="text" name="apartment" id="apartment"
-                                        class="block w-full border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring-accent-500 sm:text-sm">
+                                        class="block w-full border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring-accent-500 sm:text-sm custom-input">
+                                    <div
+                                        class="absolute inset-y-0 right-0 items-center hidden pr-3 pointer-events-none input-error-icon">
+                                        <svg class="w-5 h-5 text-red-500" viewBox="0 0 20 20" fill="currentColor"
+                                            aria-hidden="true">
+                                            <path fill-rule="evenodd"
+                                                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-5a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0110 5zm0 10a1 1 0 100-2 1 1 0 000 2z"
+                                                clip-rule="evenodd" />
+                                        </svg>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div>
-                                <label for="city" class="block text-sm font-medium text-gray-700">City</label>
-                                <div class="mt-1">
-                                    <input type="text" name="city" id="city" autocomplete="address-level2"
-                                        class="block w-full border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring-accent-500 sm:text-sm">
+                            <div class="input-component">
+                                <div class="flex justify-between">
+                                    <label for="city" class="block text-sm font-medium text-gray-700">City</label>
+                                    <p class="hidden text-sm text-red-600 input-error-message" id="city-error">Not a valid
+                                        city</p>
+                                </div>
+                                <div class="relative mt-1">
+                                    <input type="text" name="city" id="city" required
+                                        autocomplete="address-level2"
+                                        class="block w-full border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring-accent-500 sm:text-sm custom-input">
+                                    <div
+                                        class="absolute inset-y-0 right-0 items-center hidden pr-3 pointer-events-none input-error-icon">
+                                        <svg class="w-5 h-5 text-red-500" viewBox="0 0 20 20" fill="currentColor"
+                                            aria-hidden="true">
+                                            <path fill-rule="evenodd"
+                                                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-5a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0110 5zm0 10a1 1 0 100-2 1 1 0 000 2z"
+                                                clip-rule="evenodd" />
+                                        </svg>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div>
-                                <label for="country" class="block text-sm font-medium text-gray-700">Country</label>
+                            <div class="input-component">
+                                <div class="flex justify-between">
+                                    <label for="country" class="block text-sm font-medium text-gray-700">Country</label>
+                                    <p class="hidden text-sm text-red-600 input-error-message" id="country-error">Not a
+                                        valid country</p>
+                                </div>
                                 <div class="mt-1">
                                     <select id="country" name="country" autocomplete="country-name"
-                                        class="block w-full border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring-accent-500 sm:text-sm">
+                                        class="block w-full border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring-accent-500 sm:text-sm custom-input">
                                         <option>United States</option>
                                         <option>Canada</option>
                                         <option>Mexico</option>
                                     </select>
+                                    <div
+                                        class="absolute inset-y-0 right-0 items-center hidden pr-3 pointer-events-none input-error-icon">
+                                        <svg class="w-5 h-5 text-red-500" viewBox="0 0 20 20" fill="currentColor"
+                                            aria-hidden="true">
+                                            <path fill-rule="evenodd"
+                                                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-5a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0110 5zm0 10a1 1 0 100-2 1 1 0 000 2z"
+                                                clip-rule="evenodd" />
+                                        </svg>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div>
-                                <label for="region" class="block text-sm font-medium text-gray-700">State /
-                                    Province</label>
-                                <div class="mt-1">
+                            <div class="input-component">
+                                <div class="flex justify-between">
+                                    <label for="region" class="block text-sm font-medium text-gray-700">State /
+                                        Province</label>
+                                    <p class="hidden text-sm text-red-600 input-error-message" id="region-error">Not a
+                                        valid state or province</p>
+                                </div>
+                                <div class="relative mt-1">
                                     <input type="text" name="region" id="region" autocomplete="address-level1"
-                                        class="block w-full border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring-accent-500 sm:text-sm">
+                                        class="block w-full border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring-accent-500 sm:text-sm custom-input">
+                                    <div
+                                        class="absolute inset-y-0 right-0 items-center hidden pr-3 pointer-events-none input-error-icon">
+                                        <svg class="w-5 h-5 text-red-500" viewBox="0 0 20 20" fill="currentColor"
+                                            aria-hidden="true">
+                                            <path fill-rule="evenodd"
+                                                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-5a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0110 5zm0 10a1 1 0 100-2 1 1 0 000 2z"
+                                                clip-rule="evenodd" />
+                                        </svg>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div>
-                                <label for="postal-code" class="block text-sm font-medium text-gray-700">Postal code</label>
-                                <div class="mt-1">
-                                    <input type="text" name="postal-code" id="postal-code" autocomplete="postal-code"
-                                        class="block w-full border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring-accent-500 sm:text-sm">
+                            <div class="input-component">
+                                <div class="flex justify-between">
+                                    <label for="postal-code" class="block text-sm font-medium text-gray-700">Postal
+                                        code</label>
+                                    <p class="hidden text-sm text-red-600 input-error-message" id="postal-code-error">Not
+                                        a valid postal code</p>
+                                </div>
+                                <div class="relative mt-1">
+                                    <input type="text" name="postal-code" id="postal-code" required
+                                        autocomplete="postal-code"
+                                        class="block w-full border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring-accent-500 sm:text-sm custom-input">
+                                    <div
+                                        class="absolute inset-y-0 right-0 items-center hidden pr-3 pointer-events-none input-error-icon">
+                                        <svg class="w-5 h-5 text-red-500" viewBox="0 0 20 20" fill="currentColor"
+                                            aria-hidden="true">
+                                            <path fill-rule="evenodd"
+                                                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-5a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0110 5zm0 10a1 1 0 100-2 1 1 0 000 2z"
+                                                clip-rule="evenodd" />
+                                        </svg>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div class="sm:col-span-2">
-                                <label for="phone" class="block text-sm font-medium text-gray-700">Phone</label>
-                                <div class="mt-1">
-                                    <input type="text" name="phone" id="phone" autocomplete="tel"
-                                        class="block w-full border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring-accent-500 sm:text-sm">
+                            <div class="sm:col-span-2 input-component">
+                                <div class="flex justify-between">
+                                    <label for="phone" class="block text-sm font-medium text-gray-700">Phone</label>
+                                    <p class="hidden text-sm text-red-600 input-error-message" id="phone-error">Not a
+                                        valid phone number</p>
+                                </div>
+                                <div class="relative mt-1">
+                                    <input type="tel" name="phone" id="phone" required
+                                        pattern="^\+?[1-9]\d{1,14}$" title="Please enter a valid phone number"
+                                        autocomplete="tel"
+                                        oninput="this.value = this.value.replace(/[^0-9+]/g, '').replace(/(\..*)\./g, '$1');"
+                                        inputmode="tel"
+                                        class="block w-full border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring-accent-500 sm:text-sm custom-input">
+                                    <div
+                                        class="absolute inset-y-0 right-0 items-center hidden pr-3 pointer-events-none input-error-icon">
+                                        <svg class="w-5 h-5 text-red-500" viewBox="0 0 20 20" fill="currentColor"
+                                            aria-hidden="true">
+                                            <path fill-rule="evenodd"
+                                                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-5a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0110 5zm0 10a1 1 0 100-2 1 1 0 000 2z"
+                                                clip-rule="evenodd" />
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-10" x-data="{ sameAsBilling: true }">
+                            <h2 class="text-lg font-medium text-gray-900">Shipping Address</h2>
+                            <div class="flex flex-wrap gap-10 mt-4">
+                                <div class="flex items-center">
+                                    <input id="same-as-billing" type="radio" name="address-same-as-billing"
+                                        value="true" x-model="sameAsBilling" checked
+                                        class="w-4 h-4 text-accent-600 focus:ring-accent-500">
+                                    <label for="same-as-billing" class="block ml-3 text-sm font-medium text-gray-700">
+                                        Same as billing address
+                                    </label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input id="different-shipping-address" type="radio" name="address-same-as-billing"
+                                        value="false" x-model="sameAsBilling"
+                                        class="w-4 h-4 text-accent-600 focus:ring-accent-500">
+                                    <label for="different-shipping-address"
+                                        class="block ml-3 text-sm font-medium text-gray-700">
+                                        Different shipping address
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div x-show="sameAsBilling === 'false'"
+                                class="grid grid-cols-1 mt-4 gap-y-6 sm:grid-cols-2 sm:gap-x-4">
+                                <div class="sm:col-span-2 input-component">
+                                    <div class="flex justify-between">
+                                        <label for="shipping-address"
+                                            class="block text-sm font-medium text-gray-700">Address</label>
+                                        <p class="hidden text-sm text-red-600 input-error-message"
+                                            id="shipping-address-error">Not a valid address</p>
+                                    </div>
+                                    <div class="relative mt-1">
+                                        <input type="text" name="shipping-address" id="shipping-address"
+                                            :required="sameAsBilling === 'false'" autocomplete="street-address"
+                                            class="block w-full border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring-accent-500 sm:text-sm custom-input">
+                                        <div
+                                            class="absolute inset-y-0 right-0 items-center hidden pr-3 pointer-events-none input-error-icon">
+                                            <svg class="w-5 h-5 text-red-500" viewBox="0 0 20 20" fill="currentColor"
+                                                aria-hidden="true">
+                                                <path fill-rule="evenodd"
+                                                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-5a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0110 5zm0 10a1 1 0 100-2 1 1 0 000 2z"
+                                                    clip-rule="evenodd" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="sm:col-span-2 input-component">
+                                    <div class="flex justify-between">
+                                        <label for="shipping-apartment"
+                                            class="block text-sm font-medium text-gray-700">Apartment, suite, etc.</label>
+                                        <p class="hidden text-sm text-red-600 input-error-message"
+                                            id="shipping-apartment-error"> Not a valid apartment, suite, etc.</p>
+                                    </div>
+                                    <div class="relative mt-1">
+                                        <input type="text" name="shipping-apartment" id="shipping-apartment"
+                                            class="block w-full border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring-accent-500 sm:text-sm custom-input">
+                                        <div
+                                            class="absolute inset-y-0 right-0 items-center hidden pr-3 pointer-events-none input-error-icon">
+                                            <svg class="w-5 h-5 text-red-500" viewBox="0 0 20 20" fill="currentColor"
+                                                aria-hidden="true">
+                                                <path fill-rule="evenodd"
+                                                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-5a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0110 5zm0 10a1 1 0 100-2 1 1 0 000 2z"
+                                                    clip-rule="evenodd" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="input-component">
+                                    <div class="flex justify-between">
+                                        <label for="shipping-city"
+                                            class="block text-sm font-medium text-gray-700">City</label>
+                                        <p class="hidden text-sm text-red-600 input-error-message"
+                                            id="shipping-city-error">Not a valid city</p>
+                                    </div>
+                                    <div class="relative mt-1">
+                                        <input type="text" name="shipping-city" id="shipping-city"
+                                            :required="sameAsBilling === 'false'" autocomplete="address-level2"
+                                            class="block w-full border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring-accent-500 sm:text-sm custom-input">
+                                        <div
+                                            class="absolute inset-y-0 right-0 items-center hidden pr-3 pointer-events-none input-error-icon">
+                                            <svg class="w-5 h-5 text-red-500" viewBox="0 0 20 20" fill="currentColor"
+                                                aria-hidden="true">
+                                                <path fill-rule="evenodd"
+                                                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-5a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0110 5zm0 10a1 1 0 100-2 1 1 0 000 2z"
+                                                    clip-rule="evenodd" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="input-component">
+                                    <div class="flex justify-between">
+                                        <label for="shipping-country"
+                                            class="block text-sm font-medium text-gray-700">Country</label>
+                                        <p class="hidden text-sm text-red-600 input-error-message"
+                                            id="shipping-country-error">Not a valid country</p>
+                                    </div>
+                                    <div class="mt-1">
+                                        <select id="shipping-country" name="shipping-country" autocomplete="country-name"
+                                            class="block w-full border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring-accent-500 sm:text-sm custom-input">
+                                            <option>United States</option>
+                                            <option>Canada</option>
+                                            <option>Mexico</option>
+                                        </select>
+                                        <div
+                                            class="absolute inset-y-0 right-0 items-center hidden pr-3 pointer-events-none input-error-icon">
+                                            <svg class="w-5 h-5 text-red-500" viewBox="0 0 20 20" fill="currentColor"
+                                                aria-hidden="true">
+                                                <path fill-rule="evenodd"
+                                                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-5a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0110 5zm0 10a1 1 0 100-2 1 1 0 000 2z"
+                                                    clip-rule="evenodd" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="input-component">
+                                    <div class="flex justify-between">
+                                        <label for="shipping-region" class="block text-sm font-medium text-gray-700">State
+                                            /
+                                            Province</label>
+                                        <p class="hidden text-sm text-red-600 input-error-message"
+                                            id="shipping-region-error">Not a
+                                            valid state or province</p>
+                                    </div>
+                                    <div class="relative mt-1">
+                                        <input type="text" name="shipping-region" id="shipping-region"
+                                            autocomplete="address-level1"
+                                            class="block w-full border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring-accent-500 sm:text-sm custom-input">
+                                        <div
+                                            class="absolute inset-y-0 right-0 items-center hidden pr-3 pointer-events-none input-error-icon">
+                                            <svg class="w-5 h-5 text-red-500" viewBox="0 0 20 20" fill="currentColor"
+                                                aria-hidden="true">
+                                                <path fill-rule="evenodd"
+                                                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-5a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0110 5zm0 10a1 1 0 100-2 1 1 0 000 2z"
+                                                    clip-rule="evenodd" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="input-component">
+                                    <div class="flex justify-between">
+                                        <label for="shipping-postal-code"
+                                            class="block text-sm font-medium text-gray-700">Postal
+                                            code</label>
+                                        <p class="hidden text-sm text-red-600 input-error-message"
+                                            id="shipping-postal-code-error">
+                                            Not
+                                            a valid postal code</p>
+                                    </div>
+                                    <div class="relative mt-1">
+                                        <input type="text" name="shipping-postal-code" id="shipping-postal-code"
+                                            :required="sameAsBilling === 'false'" autocomplete="postal-code"
+                                            class="block w-full border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring-accent-500 sm:text-sm custom-input">
+                                        <div
+                                            class="absolute inset-y-0 right-0 items-center hidden pr-3 pointer-events-none input-error-icon">
+                                            <svg class="w-5 h-5 text-red-500" viewBox="0 0 20 20" fill="currentColor"
+                                                aria-hidden="true">
+                                                <path fill-rule="evenodd"
+                                                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-5a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0110 5zm0 10a1 1 0 100-2 1 1 0 000 2z"
+                                                    clip-rule="evenodd" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="sm:col-span-2 input-component">
+                                    <div class="flex justify-between">
+                                        <label for="shipping-phone"
+                                            class="block text-sm font-medium text-gray-700">Phone</label>
+                                        <p class="hidden text-sm text-red-600 input-error-message"
+                                            id="shipping-phone-error">Not a
+                                            valid phone number</p>
+                                    </div>
+                                    <div class="relative mt-1">
+                                        <input type="tel" name="shipping-phone" id="shipping-phone"
+                                            :required="sameAsBilling === 'false'" pattern="^\+?[1-9]\d{1,14}$"
+                                            title="Please enter a valid phone number" autocomplete="tel"
+                                            oninput="this.value = this.value.replace(/[^0-9+]/g, '').replace(/(\..*)\./g, '$1');"
+                                            inputmode="tel"
+                                            class="block w-full border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring-accent-500 sm:text-sm custom-input">
+                                        <div
+                                            class="absolute inset-y-0 right-0 items-center hidden pr-3 pointer-events-none input-error-icon">
+                                            <svg class="w-5 h-5 text-red-500" viewBox="0 0 20 20" fill="currentColor"
+                                                aria-hidden="true">
+                                                <path fill-rule="evenodd"
+                                                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-5a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0110 5zm0 10a1 1 0 100-2 1 1 0 000 2z"
+                                                    clip-rule="evenodd" />
+                                            </svg>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -120,8 +476,8 @@
                                     class="relative flex p-4 bg-white border rounded-lg shadow-sm cursor-pointer focus:outline-none"
                                     :class="{ 'border-accent-500 ring-2 ring-accent-500': deliveryMethod === 'Standard' }"
                                     @click="deliveryMethod = 'Standard'">
-                                    <input type="radio" name="delivery-method" value="Standard" class="sr-only"
-                                        checked x-model="deliveryMethod">
+                                    <input id="delivery-method-standard" type="radio" name="delivery-method"
+                                        value="Standard" class="sr-only" checked x-model="deliveryMethod">
                                     <span class="flex flex-1">
                                         <span class="flex flex-col">
                                             <span id="delivery-method-0-label"
@@ -147,8 +503,8 @@
                                     class="relative flex p-4 bg-white border rounded-lg shadow-sm cursor-pointer focus:outline-none"
                                     :class="{ 'border-accent-500 ring-2 ring-accent-500': deliveryMethod === 'Express' }"
                                     @click="deliveryMethod = 'Express'">
-                                    <input type="radio" name="delivery-method" value="Express" class="sr-only"
-                                        x-model="deliveryMethod">
+                                    <input id="delivery-method-express" type="radio" name="delivery-method"
+                                        value="Express" class="sr-only" x-model="deliveryMethod">
                                     <span class="flex flex-1">
                                         <span class="flex flex-col">
                                             <span id="delivery-method-1-label"
@@ -171,9 +527,39 @@
                                 </label>
                             </div>
                         </fieldset>
+
+                        <script>
+                            function updateShippingCost() {
+                                let deliveryMethod = document.querySelector('input[name="delivery-method"]:checked').value;
+                                let deliveryCost = 0;
+                                if (deliveryMethod === 'Standard') {
+                                    deliveryCost = 5.00;
+                                } else if (deliveryMethod === 'Express') {
+                                    deliveryCost = 16.00;
+                                }
+
+                                document.getElementById('shipping').textContent = `${deliveryCost.toFixed(2)}`;
+                            }
+                            document.getElementById('delivery-method-express').addEventListener('click', updateShippingCost);
+                            document.getElementById('delivery-method-standard').addEventListener('click', updateShippingCost);
+                        </script>
                     </div>
 
+                    <div class="pt-10 mt-10 border-t border-gray-200" x-data="{ comment: '', commentLength: 0 }">
+                        <h2 class="text-lg font-medium text-gray-900">Comments</h2>
+                        <div class="mt-4 input-component">
+                            <div class="flex justify-between px-1">
+                                <label for="comment" class="block text-sm font-medium text-gray-700">Add a comment
+                                    (optional)</label>
+                                <p class="text-sm text-gray-600" x-text="`${commentLength} / 512 characters`"></p>
+                            </div>
+                            <textarea id="comment" name="comment" rows="4" maxlength="512" x-model="comment"
+                                x-on:input="commentLength = comment.length"
+                                class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring-accent-500 sm:text-sm custom-input"
+                                placeholder="Type your comment here..."></textarea>
 
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Order summary -->
@@ -228,7 +614,7 @@
                                                     <input id="quantity-{{ $item['id'] }}" name="quantity"
                                                         type="text" x-model="quantity"
                                                         class="w-12 text-base font-medium text-center text-gray-700 border-none focus:outline-none focus:ring-0 sm:text-sm"
-                                                        readonly>
+                                                        readonly disabled>
                                                     <button type="button" @click="updateQuantity(1, {{ $item['id'] }})"
                                                         class="p-2 text-base font-medium text-gray-700 focus:outline-none focus:border-accent-500 focus:ring-1 focus:ring-accent-500 sm:text-lg">+</button>
                                                 </div>
@@ -239,35 +625,33 @@
                             @endforeach
                         </ul>
 
-                        @dump($cartItems)
-
                         <dl class="px-4 py-6 space-y-6 border-t border-gray-200 sm:px-6">
                             <div class="flex items-center justify-between">
                                 <dt class="text-sm">Subtotal</dt>
-                                <dd id="subtotal" class="text-sm font-medium text-gray-900">
-                                    ${{ number_format($cartItems['subtotal'], 2) }}</dd>
+                                <dd class="text-sm font-medium text-gray-900"><span
+                                        id="subtotal">{{ number_format($cartItems['subtotal'], 2) }}</span> CHF</dd>
                             </div>
                             <div class="flex items-center justify-between">
                                 <dt class="text-sm">Shipping</dt>
-                                <dd id="shipping" class="text-sm font-medium text-gray-900">$5.00</dd>
+                                <dd class="text-sm font-medium text-gray-900"><span id="shipping">5.00</span> CHF</dd>
                             </div>
                             <div class="flex items-center justify-between">
                                 <dt class="text-sm">Taxes</dt>
-                                <dd id="taxes" class="text-sm font-medium text-gray-900">$5.52</dd>
+                                <dd class="text-sm font-medium text-gray-900"><span id="taxes">5.52</span> CHF</dd>
                             </div>
                             <div class="flex items-center justify-between pt-6 border-t border-gray-200">
                                 <dt class="text-base font-medium">Total</dt>
-                                <dd id="total" class="text-base font-medium text-gray-900">$75.52</dd>
+                                <dd class="text-base font-medium text-gray-900"><span id="total">75.52</span> CHF</dd>
                             </div>
 
                             <script>
                                 function updateTotal() {
-                                    const subtotal = parseFloat(document.getElementById('subtotal').textContent.replace('$', ''));
-                                    const shipping = parseFloat(document.getElementById('shipping').textContent.replace('$', ''));
-                                    const taxes = parseFloat(document.getElementById('taxes').textContent.replace('$', ''));
+                                    const subtotal = parseFloat(document.getElementById('subtotal').textContent);
+                                    const shipping = parseFloat(document.getElementById('shipping').textContent);
+                                    const taxes = parseFloat(document.getElementById('taxes').textContent);
 
                                     const total = subtotal + shipping + taxes;
-                                    document.getElementById('total').textContent = `$${total.toFixed(2)}`;
+                                    document.getElementById('total').textContent = `${total.toFixed(2)}`;
                                 }
 
                                 // Event listeners to update total when subtotal, shipping, or taxes change
@@ -285,20 +669,19 @@
                                 <legend class="sr-only">Payment type</legend>
                                 <div class="space-y-4 sm:flex sm:items-center sm:space-x-10 sm:space-y-0">
                                     <div class="flex items-center">
-                                        <input id="credit-card" name="payment-type" type="radio" checked
-                                            class="w-4 h-4 border-gray-300 text-accent-600 focus:ring-accent-500">
+                                        <input id="credit-card" name="payment-type" type="radio" value="credit-card"
+                                            checked class="w-4 h-4 border-gray-300 text-accent-600 focus:ring-accent-500">
                                         <label for="credit-card"
-                                            class="block ml-3 text-sm font-medium text-gray-700">Credit
-                                            card</label>
+                                            class="block ml-3 text-sm font-medium text-gray-700">Credit card</label>
                                     </div>
                                     <div class="flex items-center">
-                                        <input id="paypal" name="payment-type" type="radio"
+                                        <input id="paypal" name="payment-type" type="radio" value="paypal"
                                             class="w-4 h-4 border-gray-300 text-accent-600 focus:ring-accent-500">
                                         <label for="paypal"
                                             class="block ml-3 text-sm font-medium text-gray-700">PayPal</label>
                                     </div>
                                     <div class="flex items-center">
-                                        <input id="etransfer" name="payment-type" type="radio"
+                                        <input id="etransfer" name="payment-type" type="radio" value="etransfer"
                                             class="w-4 h-4 border-gray-300 text-accent-600 focus:ring-accent-500">
                                         <label for="etransfer"
                                             class="block ml-3 text-sm font-medium text-gray-700">eTransfer</label>
@@ -345,7 +728,31 @@
                     document.getElementById('subtotal').textContent = `$${subtotal.toFixed(2)}`;
                 })
                 .catch(error => {
-                    /* Handle error */ });
+                    /* Handle error */
+                });
         }
     }
 </script>
+
+
+
+
+<style>
+    .custom-input:user-invalid {
+        border-color: red;
+        padding-right: 2.5rem;
+    }
+
+    .custom-input:user-invalid:focus {
+        border-color: red;
+        box-shadow: 0 0 0 1px red;
+    }
+
+    .custom-input:user-invalid~.input-error-icon {
+        display: flex;
+    }
+
+    .input-component:has(.custom-input:user-invalid) .input-error-message {
+        display: block;
+    }
+</style>
