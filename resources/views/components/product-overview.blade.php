@@ -13,7 +13,7 @@
                 class="max-w-2xl grid-rows-1 mx-auto mt-6 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-4 lg:gap-x-8 lg:px-8 lg:h-[80lvh]">
                 <div
                     class="bg-gray-100 border-2 border-gray-300 shadow-lg lg:col-span-2 lg:flex lg:flex-col lg:h-full lg:justify-stretch">
-                    <img src="{{ $selectedProduct['images'][0] ?? '' }}" id="productImage"
+                    <img src="{{ asset('storage/' . $selectedProduct['images'][0]) ?? '' }}" id="productImage"
                         alt="Two each of gray, white, and black shirts laying flat."
                         class="flex-shrink object-contain object-center w-full max-w-full min-h-0 p-4 rounded-lg lg:grow lg:h-auto h-72">
                     <image-display container-id="{{ $galleryName }}"
@@ -95,8 +95,8 @@
                                                 aria-labelledby="product-choice-{{ $product['id'] }}-label">
                                             <span id="product-choice-{{ $product['id'] }}-label"
                                                 class="sr-only">{{ $product['id'] }}</span>
-                                            <img src="{{ $product['images'][0] ?? '' }}" alt=""
-                                                id="y-selected-product-{{ $product['id'] }}"
+                                            <img src="{{ asset('storage/' . $product['images'][0]) ?? '' }}"
+                                                alt="" id="y-selected-product-{{ $product['id'] }}"
                                                 data-min="{{ 1 }}" data-max="{{ 5 }}"
                                                 data-name="{{ $product['name'] }}"
                                                 data-description="{{ $product['description'] }}"
