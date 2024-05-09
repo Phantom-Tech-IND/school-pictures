@@ -71,7 +71,7 @@
                                 </div>
                                 <div class="relative mt-1">
                                     <input type="text" id="last-name" name="last-name" required
-                                        autocomplete="family-name"
+                                        autocomplete="family-name" placeholder="Doe"
                                         class="block w-full border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring-accent-500 sm:text-sm custom-input">
                                     <div
                                         class="absolute inset-y-0 right-0 items-center hidden pr-3 pointer-events-none input-error-icon">
@@ -82,7 +82,7 @@
                                                 clip-rule="evenodd" />
                                         </svg>
                                     </div>
-                                </div>
+                                </div
                             </div>
 
                             <div class="sm:col-span-2 input-component">
@@ -92,7 +92,7 @@
                                         valid company name</p>
                                 </div>
                                 <div class="relative mt-1">
-                                    <input type="text" name="company" id="company"
+                                    <input type="text" name="company" id="company" placeholder="Your Company"
                                         class="block w-full border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring-accent-500 sm:text-sm custom-input">
                                     <div
                                         class="absolute inset-y-0 right-0 items-center hidden pr-3 pointer-events-none input-error-icon">
@@ -114,7 +114,7 @@
                                 </div>
                                 <div class="relative mt-1">
                                     <input type="text" name="address" id="address" required
-                                        autocomplete="street-address"
+                                        autocomplete="street-address" placeholder="1234 Main St"
                                         class="block w-full border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring-accent-500 sm:text-sm custom-input">
                                     <div
                                         class="absolute inset-y-0 right-0 items-center hidden pr-3 pointer-events-none input-error-icon">
@@ -136,7 +136,7 @@
                                         valid apartment, suite, etc.</p>
                                 </div>
                                 <div class="relative mt-1">
-                                    <input type="text" name="apartment" id="apartment"
+                                    <input type="text" name="apartment" id="apartment" placeholder="Apartment or suite"
                                         class="block w-full border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring-accent-500 sm:text-sm custom-input">
                                     <div
                                         class="absolute inset-y-0 right-0 items-center hidden pr-3 pointer-events-none input-error-icon">
@@ -158,7 +158,7 @@
                                 </div>
                                 <div class="relative mt-1">
                                     <input type="text" name="city" id="city" required
-                                        autocomplete="address-level2"
+                                        autocomplete="address-level2" placeholder="Anytown"
                                         class="block w-full border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring-accent-500 sm:text-sm custom-input">
                                     <div
                                         class="absolute inset-y-0 right-0 items-center hidden pr-3 pointer-events-none input-error-icon">
@@ -168,7 +168,7 @@
                                                 d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-5a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0110 5zm0 10a1 1 0 100-2 1 1 0 000 2z"
                                                 clip-rule="evenodd" />
                                         </svg>
-                                    </div>
+                                    </div
                                 </div>
                             </div>
 
@@ -205,7 +205,7 @@
                                         valid state or province</p>
                                 </div>
                                 <div class="relative mt-1">
-                                    <input type="text" name="region" id="region" autocomplete="address-level1"
+                                    <input type="text" name="region" id="region" autocomplete="address-level1" placeholder="State or Province"
                                         class="block w-full border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring-accent-500 sm:text-sm custom-input">
                                     <div
                                         class="absolute inset-y-0 right-0 items-center hidden pr-3 pointer-events-none input-error-icon">
@@ -228,7 +228,7 @@
                                 </div>
                                 <div class="relative mt-1">
                                     <input type="text" name="postal-code" id="postal-code" required
-                                        autocomplete="postal-code"
+                                        autocomplete="postal-code" placeholder="Postal Code"
                                         class="block w-full border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring-accent-500 sm:text-sm custom-input">
                                     <div
                                         class="absolute inset-y-0 right-0 items-center hidden pr-3 pointer-events-none input-error-icon">
@@ -251,7 +251,7 @@
                                 <div class="relative mt-1">
                                     <input type="tel" name="phone" id="phone" required
                                         pattern="^\+?[0-9]{1,15}$" title="Please enter a valid phone number"
-                                        autocomplete="tel"
+                                        autocomplete="tel" placeholder="e.g. +1234567890"
                                         oninput="this.value = this.value.replace(/[^0-9+]/g, '').replace(/(\..*)\./g, '$1');"
                                         inputmode="tel"
                                         class="block w-full border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring-accent-500 sm:text-sm custom-input">
@@ -272,7 +272,8 @@
                             <h2 class="text-lg font-medium text-gray-900">Shipping Address</h2>
                             <div class="flex flex-wrap gap-10 mt-4">
                                 <div class="flex items-center">
-                                    <input id="same-as-billing" type="radio" name="address-same-as-billing"
+                                    <input id="same-as-billing" type="radio" 
+                                    name="address-same-as-billing"
                                         value="true" x-model="sameAsBilling" checked
                                         class="w-4 h-4 text-accent-600 focus:ring-accent-500">
                                     <label for="same-as-billing" class="block ml-3 text-sm font-medium text-gray-700">
@@ -302,6 +303,7 @@
                                     <div class="relative mt-1">
                                         <input type="text" name="shipping-address" id="shipping-address"
                                             :required="sameAsBilling === 'false'" autocomplete="street-address"
+                                            placeholder="Enter your shipping address"
                                             class="block w-full border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring-accent-500 sm:text-sm custom-input">
                                         <div
                                             class="absolute inset-y-0 right-0 items-center hidden pr-3 pointer-events-none input-error-icon">
@@ -324,6 +326,7 @@
                                     </div>
                                     <div class="relative mt-1">
                                         <input type="text" name="shipping-apartment" id="shipping-apartment"
+                                            placeholder="Apartment, suite, etc. (optional)"
                                             class="block w-full border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring-accent-500 sm:text-sm custom-input">
                                         <div
                                             class="absolute inset-y-0 right-0 items-center hidden pr-3 pointer-events-none input-error-icon">
@@ -347,6 +350,7 @@
                                     <div class="relative mt-1">
                                         <input type="text" name="shipping-city" id="shipping-city"
                                             :required="sameAsBilling === 'false'" autocomplete="address-level2"
+                                            placeholder="Enter city name"
                                             class="block w-full border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring-accent-500 sm:text-sm custom-input">
                                         <div
                                             class="absolute inset-y-0 right-0 items-center hidden pr-3 pointer-events-none input-error-icon">
@@ -398,6 +402,7 @@
                                     <div class="relative mt-1">
                                         <input type="text" name="shipping-region" id="shipping-region"
                                             autocomplete="address-level1"
+                                            placeholder="State or Province"
                                             class="block w-full border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring-accent-500 sm:text-sm custom-input">
                                         <div
                                             class="absolute inset-y-0 right-0 items-center hidden pr-3 pointer-events-none input-error-icon">
@@ -424,6 +429,7 @@
                                     <div class="relative mt-1">
                                         <input type="text" name="shipping-postal-code" id="shipping-postal-code"
                                             :required="sameAsBilling === 'false'" autocomplete="postal-code"
+                                            placeholder="Postal Code"
                                             class="block w-full border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring-accent-500 sm:text-sm custom-input">
                                         <div
                                             class="absolute inset-y-0 right-0 items-center hidden pr-3 pointer-events-none input-error-icon">
@@ -449,6 +455,7 @@
                                         <input type="tel" name="shipping-phone" id="shipping-phone"
                                             :required="sameAsBilling === 'false'" pattern="^\+?[0-9]{1,15}$"
                                             title="Please enter a valid phone number" autocomplete="tel"
+                                            placeholder="e.g. +1234567890"
                                             oninput="this.value = this.value.replace(/[^0-9+]/g, '').replace(/(\..*)\./g, '$1');"
                                             inputmode="tel"
                                             class="block w-full border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring-accent-500 sm:text-sm custom-input">
