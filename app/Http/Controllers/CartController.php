@@ -15,6 +15,7 @@ class CartController extends Controller
             $product = \App\Models\Product::find($productId);
             if ($product) {
                 $productDetails[] = [
+                    'id' => $productId,
                     'product' => $product,
                     'quantity' => $details['quantity'],
                     'options' => $details['options'] ?? [],
@@ -85,6 +86,26 @@ class CartController extends Controller
         return response()->json([
             'success' => 'Product removed from cart successfully!',
             'totalItems' => $totalItems,
+        ]);
+    }
+
+    public function updateQuantity(Request $request, $productId)
+    {
+        $validated = $request->validate([
+            'quantity' => 'required|integer|min:1',
+        ]);
+
+        $cart = session()->get('cart', []);
+        if (isset($cart[$productId])) {
+            $cart[$productId]['quantity'] = $validated['quantity'];
+            session()->put('cart', $cart);
+        } else {
+            return response()->json(['error' => 'Product not found in cart'], 404);
+        }
+
+        return response()->json([
+            'success' => 'Quantity updated successfully!',
+            'cartItems' => $this->getCartItems(),
         ]);
     }
 
