@@ -112,7 +112,7 @@
                     itemsList.innerHTML += `
                         <li class="flex py-6">
                             <div class="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-                                <img src="${item.product.images[0]}" alt="${item.product.name}" class="h-full w-full object-cover object-center">
+                                <img src="storage/${item.product.images[0]}" alt="${item.product.name}" class="h-full w-full object-cover object-center">
                             </div>
                             <div class="ml-4 flex flex-1 flex-col">
                                 <div>
