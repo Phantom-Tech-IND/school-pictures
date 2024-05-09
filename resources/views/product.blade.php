@@ -13,7 +13,7 @@
                     <div class="flex h-40 mt-4 overflow-x-auto">
                         @foreach ($product->images as $image)
                             <div class="relative p-2 w-36 shrink-0 group">
-                                <img src="{{ $image }}" alt="{{ $product->name }}"
+                                <img src="{{ asset('storage/' . $image) }}" alt="{{ $product->name }}"
                                     class="object-cover w-full h-full rounded-lg shadow-md cursor-pointer"
                                     @click="selectedImage = '{{ $image }}'"
                                     :class="{ 'ring-2 ring-offset-2 ring-accent-500': selectedImage === '{{ $image }}' }">
