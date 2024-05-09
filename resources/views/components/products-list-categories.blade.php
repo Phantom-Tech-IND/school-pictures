@@ -88,9 +88,9 @@
                                                 </div>
                                                 <div class="relative mt-4">
                                                     <h3 class="text-sm font-medium text-gray-900">
-                                                        {{ $product->type }}</h3>
+                                                        {{ $product->name }}</h3>
                                                     <p class="mt-1 text-sm text-gray-500">
-                                                        {{ $product->description }}</p>
+                                                        {{ Str::limit($product->description, 90) }}
                                                 </div>
                                                 <div
                                                     class="absolute inset-x-0 top-0 flex items-end justify-end p-4 overflow-hidden rounded-lg h-72">
