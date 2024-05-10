@@ -22,7 +22,7 @@ Route::controller(GuestPanelController::class)->group(function () {
     Route::get('/not-available', 'notAvailable')->name('not-available');
     Route::get('/gallery-code', 'galleryCode')->name('gallery-code');
     Route::get('/contact', 'contact')->name('contact');
-    Route::get('/offers-test', 'offers')->name('offers');
+    Route::get('/our-offers', 'offers')->name('offers');
     Route::get('/offer/{id}', 'offer')->name('offer');
     Route::get('/kindergarten-und-schulfotografie', 'kindergarden')->name('kindergarden');
     Route::get('/upload', 'upload');

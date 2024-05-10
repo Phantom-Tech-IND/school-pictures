@@ -2,17 +2,16 @@
 
 namespace App\Http\Controllers\Filament;
 
-use App\Constants\Constants;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Message;
+use App\Models\OfferItem;
 use App\Models\Offers;
 use App\Models\Product;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use App\Models\OfferItem;
 
 class GuestPanelController extends Controller
 {
@@ -131,6 +130,7 @@ class GuestPanelController extends Controller
         if ($offerItemId) {
             $offerItem = OfferItem::find($offerItemId);
         }
+
         return view('contact', compact('offerItem'));
     }
 
