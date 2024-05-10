@@ -10,13 +10,13 @@
             <div class="gap-3 mx-auto space-y-3 columns-2 xs:columns-3 max-w-7xl pb-28">
                 @foreach ($offer->photo_gallery as $image)
                     <div class="bg-black break-inside-avoid group">
-                        <a href="{{ asset($image) }}" data-fslightbox="offer-gallery">
-                            <img src="{{ asset($image) }}" alt="" class="transition-opacity duration-300 bg-black group-hover:opacity-50">
+                        <a href="{{ asset('storage/'.$image) }}" data-fslightbox="offer-gallery">
+                            <img src="{{ asset('storage/',$image) }}" alt="" class="transition-opacity duration-300 bg-black group-hover:opacity-50">
                         </a>
                     </div>
                 @endforeach
             </div>
-            
+
             @php
                 $itemCount = count($offer->offerItems);
                 $columnsClass = match($itemCount) {
