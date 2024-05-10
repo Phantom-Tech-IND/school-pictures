@@ -550,6 +550,10 @@
 
                                 document.getElementById('shipping').textContent = `${deliveryCost.toFixed(2)}`;
                             }
+                            document.addEventListener('DOMContentLoaded', function() {
+                                updateShippingCost();
+                            });
+
                             document.getElementById('delivery-method-express').addEventListener('click', updateShippingCost);
                             document.getElementById('delivery-method-standard').addEventListener('click', updateShippingCost);
                         </script>
@@ -658,15 +662,15 @@
                             </div>
                             <div class="flex items-center justify-between">
                                 <dt class="text-sm">Shipping</dt>
-                                <dd class="text-sm font-medium text-gray-900"><span id="shipping">5.00</span> CHF</dd>
+                                <dd class="text-sm font-medium text-gray-900"><span id="shipping">0</span> CHF</dd>
                             </div>
                             <div class="flex items-center justify-between">
                                 <dt class="text-sm">Taxes</dt>
-                                <dd class="text-sm font-medium text-gray-900"><span id="taxes">5.52</span> CHF</dd>
+                                <dd class="text-sm font-medium text-gray-900"><span id="taxes">0</span> CHF</dd>
                             </div>
                             <div class="flex items-center justify-between pt-6 border-t border-gray-200">
                                 <dt class="text-base font-medium">Total</dt>
-                                <dd class="text-base font-medium text-gray-900"><span id="total">75.52</span> CHF</dd>
+                                <dd class="text-base font-medium text-gray-900"><span id="total">0</span> CHF</dd>
                             </div>
                         </dl>
 
