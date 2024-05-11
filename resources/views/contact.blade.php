@@ -7,7 +7,7 @@
         referrerpolicy="no-referrer-when-downgrade">
     </iframe>
     <div class="flex flex-col justify-center m-auto mt-12 lg:flex-row max-w-7xl lg:px-8">
-        @include('components.contact-form', ['class' => 'w-full md:w-2/3'])
-        @include('components.location-info', ['class' => 'w-full md:w-1/3'])
+        @include('components.contact-form')
+        @include('components.location-info')
     </div>
 @endsection

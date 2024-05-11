@@ -123,14 +123,14 @@ class GuestPanelController extends Controller
     public function contact(Request $request)
     {
         $offerItemId = $request->query('offerItemId');
-        $offerItems = OfferItem::all();
-        $selectedOfferItem = null;
+        $offers = Offers::with('offerItems')->get(); // Fetch all offers with their related offer items
+        $offerItem = null;
 
         if ($offerItemId) {
-            $selectedOfferItem = OfferItem::find($offerItemId);
+            $offerItem = OfferItem::find($offerItemId);
         }
 
-        return view('contact', compact('offerItems', 'selectedOfferItem'));
+        return view('contact', compact('offers', 'offerItem'));
     }
 
     public function galleryCode(Request $request)
