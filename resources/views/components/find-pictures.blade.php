@@ -1,10 +1,10 @@
 <div x-data="{ showDialog: false }" x-cloak class="p-2 bg-accent">
-    @guest
+    @guest('student')
         <h1 @click="showDialog = true" class="font-semibold text-center text-white uppercase cursor-pointer">Search by gallery
             code</h1>
     @endguest
 
-    @auth
+    @auth('student')
         <div class="flex items-center mx-auto max-w-7xl lg:px-8 font-bold justify-between text-white gap-4">
             <a href="{{ route('gallery-code') }}"
                 class="cursor-pointer flex gap-2 hover:text-accent-100"><x-heroicon-s-rectangle-stack class="w-6 h-6" />
