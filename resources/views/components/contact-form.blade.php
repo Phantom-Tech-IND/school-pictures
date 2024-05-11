@@ -10,11 +10,12 @@
             <div class="sm:col-span-2">
                 <label for="interests" class="block text-sm font-semibold leading-6 text-gray-900">Optional können Sie aus
                     den Bereichen auswählen:</label>
-                @foreach (Constants::CHECKBOX_LABELS as $index => $label)
-                    <label class="inline-flex items-center text-sm mt-2.5">
-                        <input type="checkbox" name="interests[]" value="{{ $label }}"
-                            class="w-5 h-5 text-green-500 form-checkbox">
-                        <span class="ml-2">{{ $label }}</span>
+                @foreach ($offerItems as $offerItem)
+                    <label class="inline-flex items-center text-sm mt-2.5 mr-2">
+                        <input type="checkbox" name="interests[]" value="{{ $offerItem->name }}"
+                               class="w-5 h-5 text-green-500 form-checkbox"
+                               {{ $selectedOfferItem && $selectedOfferItem->id == $offerItem->id ? 'checked' : '' }}>
+                        <span class="ml-2">{{ $offerItem->name }}</span>
                     </label>
                 @endforeach
             </div>
