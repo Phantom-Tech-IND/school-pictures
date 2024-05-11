@@ -10,8 +10,6 @@ use App\Models\Offers;
 use App\Models\Product;
 use App\Models\Student;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 
 class GuestPanelController extends Controller
 {
@@ -136,30 +134,23 @@ class GuestPanelController extends Controller
 
     public function galleryCode(Request $request)
     {
-        $searchTerm = $request->input('code');
-        $birthDate = $request->input('date'); // Get birth date from request
-        $student = null;
-        DB::enableQueryLog();
-        if (! empty($searchTerm)) {
-            $student = Student::where('name', 'like', '%'.$searchTerm.'%')
-                ->when($birthDate, function ($query) use ($birthDate) {
-                    return $query->where('birth_date', $birthDate);
-                })
-                ->first(['id', 'name', 'birth_date']); // Ensure 'id' is selected for the relationship loading
+        // Retrieve student ID from session
+        $studentId = session('student_id');
 
-            if (! $student) {
-                return redirect()->route('not-available'); // Redirect to a 404 page if no student is found
-            }
-
-            $student->load('photos'); // Explicitly load the photos relationship
-
-            Log::info(DB::getQueryLog());
-        } else {
-            return redirect()->route('not-available'); // Redirect to a 404 page if search term is empty
+        if (! $studentId) {
+            return redirect()->route('not-available'); // Redirect if no student ID is found in session
         }
 
-        // $products = Product::all(); // Fetch all products
-        $products = Product::where('product_type', 'school')->get(); // Fetch all products of type 'school'a
+        // Fetch the student from the database
+        $student = Student::with('photos') // Eager load photos
+            ->find($studentId);
+
+        if (! $student) {
+            return redirect()->route('not-available'); // Redirect if no student is found
+        }
+
+        // Fetch all products of type 'school'
+        $products = Product::where('product_type', 'school')->get();
 
         return view('gallery-code', compact('student', 'products'));
     }

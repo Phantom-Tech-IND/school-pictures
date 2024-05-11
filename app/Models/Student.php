@@ -2,10 +2,14 @@
 
 namespace App\Models;
 
+use Illuminate\Auth\Authenticatable;
+use Illuminate\Contracts\Auth\Authenticatable as AuthAuthenticatable;
 use Illuminate\Database\Eloquent\Model;
 
-class Student extends Model
+class Student extends Model implements AuthAuthenticatable
 {
+    use Authenticatable;
+
     protected $fillable = [
         'name',
         'birth_date',
