@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\Filament\GuestPanelController;
 use Illuminate\Support\Facades\Route;
@@ -43,12 +44,13 @@ Route::controller(GuestPanelController::class)->group(function () {
     Route::get('/category/{slug}', 'showCategoryProducts')->name('category.products');
 });
 
-Route::controller(CartController::class)->group(function () {
-    Route::post('/add-to-cart', 'addToCart')->name('add.to.cart');
-    Route::post('/cart/update-quantity/{productId}', 'updateQuantity');
-    Route::get('/cart', 'index')->name('cart');
-    Route::get('/cart/count', 'countItems')->name('cart.count');
-    Route::post('/cart/remove/{productId}', 'removeFromCart')->name('cart.remove');
-    Route::get('/cart/items', 'getCartItems')->name('cart.items');
+Route::post('/login', [AuthController::class, 'login'])->name('login');
+Route::middleware(['auth:student'])->group(function () {
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('add.to.cart');
+    Route::get('/cart', [CartController::class, 'index'])->name('cart');
+    Route::get('/cart/count', [CartController::class, 'countItems'])->name('cart.count');
+    Route::post('/cart/remove/{productId}', [CartController::class, 'removeFromCart'])->name('cart.remove');
+    Route::post('/students/sync-photos', 'StudentController@syncPhotos')->name('students.sync-photos');
+    Route::get('/cart/items', [CartController::class, 'getCartItems'])->name('cart.items');
 });
-Route::post('/students/sync-photos', 'StudentController@syncPhotos')->name('students.sync-photos');
