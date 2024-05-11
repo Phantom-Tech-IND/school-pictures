@@ -55,7 +55,7 @@ class GuestPanelController extends Controller
     {
         $category = Category::where('slug', $slug)->first();
         $categories = Category::all();
-        if (! $category) {
+        if (!$category) {
             abort(404);
         }
 
@@ -77,14 +77,22 @@ class GuestPanelController extends Controller
         $product = null;
 
         $productId = $request->input('id');
-        if ($productId) {
+        $studentId = session('student_id');
+
+        if ($productId && $studentId) {
             $product = Product::where('id', $productId)->first();
 
-            return view('product', compact('product'));
+            $student = Student::with('photos') // Eager load photos
+                ->find($studentId);
+
+            if (!$student) {
+                return redirect()->route('not-available'); // Redirect if no student is found
+            }
+
+            return view('product', compact('product', 'student'));
         }
 
         return view('not-available');
-
     }
 
     public function team(Request $request)
@@ -137,7 +145,7 @@ class GuestPanelController extends Controller
         // Retrieve student ID from session
         $studentId = session('student_id');
 
-        if (! $studentId) {
+        if (!$studentId) {
             return redirect()->route('not-available'); // Redirect if no student ID is found in session
         }
 
@@ -145,7 +153,7 @@ class GuestPanelController extends Controller
         $student = Student::with('photos') // Eager load photos
             ->find($studentId);
 
-        if (! $student) {
+        if (!$student) {
             return redirect()->route('not-available'); // Redirect if no student is found
         }
 
