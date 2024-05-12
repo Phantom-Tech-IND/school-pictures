@@ -77,10 +77,19 @@ class GuestPanelController extends Controller
         $product = null;
 
         $productId = $request->input('id');
-        if ($productId) {
+        $studentId = session('student_id');
+
+        if ($productId && $studentId) {
             $product = Product::where('id', $productId)->first();
 
-            return view('product', compact('product'));
+            $student = Student::with('photos') // Eager load photos
+                ->find($studentId);
+
+            if (!$student) {
+                return redirect()->route('not-available'); // Redirect if no student is found
+            }
+
+            return view('product', compact('product', 'student'));
         }
 
         return view('not-available');
