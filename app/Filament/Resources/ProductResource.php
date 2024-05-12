@@ -90,7 +90,7 @@ class ProductResource extends Resource
                             ->visible(fn (Get $get): bool => $get('type') === 'select' || $get('type') === 'checkbox'),
                         Forms\Components\Checkbox::make('is_required')
                             ->label('Is required')
-                            ->visible(fn (Get $get): bool => $get('type') === 'select' || $get('type') === 'fileInput'),
+                            ->visible(fn (Get $get): bool => $get('type') === 'select'),
 
                         Forms\Components\FileUpload::make('fileInputImage')
                             ->label('Upload Image')
