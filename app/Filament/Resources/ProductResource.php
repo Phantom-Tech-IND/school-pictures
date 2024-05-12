@@ -92,6 +92,10 @@ class ProductResource extends Resource
                             ->label('Is required')
                             ->visible(fn (Get $get): bool => $get('type') === 'select' || $get('type') === 'fileInput'),
 
+                        Forms\Components\FileUpload::make('fileInputImage')
+                            ->label('Upload Image')
+                            ->visible(fn (Get $get): bool => $get('type') === 'fileInput'),
+
                         Forms\Components\Repeater::make('options')
                             ->label('Options')
                             ->schema([

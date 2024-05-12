@@ -35,7 +35,7 @@
 
                     {{-- <pre>{{ json_encode($product, JSON_PRETTY_PRINT) }}</pre> --}}
 
-                    @foreach ($product->custom_attributes as $attribute)
+                    @foreach ($product->custom_attributes as $index => $attribute)
                         {{-- selector --}}
                         @if ($attribute['type'] == 'select')
                             <div x-data="{ open: false, selected: { label: 'Select an option', price: 0 } }">
@@ -110,8 +110,8 @@
                                         <label class="inline-flex items-center">
                                             <input type="checkbox"
                                                 class="form-checkbox checked:bg-accent-600 checked:hover:bg-accent-700 focus:ring-accent-500"
-                                                name="{{ $option['label'] }}[]" value="{{ $option['label'] }}"
-                                                data-price="{{ $option['price'] ?? 0 }}"
+                                                name="{{ $attribute['title'] . '[' . $option['label'] . ']' }}"
+                                                value="true" data-price="{{ $option['price'] ?? 0 }}"
                                                 @if ($option['is_required']) required @endif>
                                             <span class="ml-2">{{ $option['label'] }}</span>
                                             @if (isset($option['price']))
@@ -124,16 +124,65 @@
                             </div>
                         @endif
 
-
+                        {{-- Existing file input section to be replaced --}}
                         @if ($attribute['type'] == 'fileInput')
                             <div class="my-4">
                                 <label class="block text-sm font-medium text-gray-700">{{ $attribute['title'] }}</label>
-                                <input type="file" id="{{ $attribute['title'] }}_image"
-                                    name="{{ $attribute['title'] }}_image" accept="image/*"
-                                    class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-accent-500 file:text-white hover:file:bg-accent-700">
+                                <div class="flex items-center gap-2">
+                                    @if (isset($attribute['fileInputImage']))
+                                        <img src="{{ $attribute['fileInputImage'] }}"
+                                            class="object-contain w-20 h-20 p-0.5 bg-gray-300 border-2 border-gray-300 rounded-lg" />
+                                    @endif
+                                    <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M9 5l7 7-7 7"></path>
+                                    </svg>
+                                    <input type="hidden" id="{{ 'fileInput-' . $index }}"
+                                        name="{{ 'fileInput-' . $attribute['title'] }}" value="" readonly required>
+                                    <button type="button" onclick="openImageModal({{ $index }})"
+                                        class="w-20 h-20 text-white bg-center bg-no-repeat bg-contain rounded bg-accent-500 hover:bg-accent-700"
+                                        data-attribute-index="{{ $index }}">
+                                        Choose Image
+                                    </button>
+                                </div>
                             </div>
                         @endif
                     @endforeach
+                    {{-- Modal structure using <dialog> --}}
+                    <dialog id="attributeProductImageModal" class="relative bg-transparent p-2 xs:p-4 h-[fill-available]"
+                        data-fileInputSelected="">
+
+                        <div class="relative h-full p-4 bg-white rounded-lg max-w-7xl">
+
+                            <button type="button" onclick="document.getElementById('attributeProductImageModal').close()"
+                                class="absolute top-0 right-0 p-2 m-4 text-white bg-gray-500 rounded-full hover:bg-gray-700 focus:outline-accent-600 focus-within:outline-accent-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                    <path
+                                        d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                                </svg>
+                            </button>
+
+                            <h2 class="mt-4 text-2xl font-semibold">Select an Image</h2>
+                            <div class="h-[calc(100%-28px)] w-full overflow-y-scroll">
+                                <div class="grid grid-cols-3 gap-4 pt-2 xs:grid-cols-4 lg:grid-cols-5">
+                                    @foreach ($student->photos as $photo)
+                                        <button type="button"
+                                            onclick="selectImageForProduct('{{ $photo->id }}', '{{ $photo->photo_path }}')"
+                                            class="p-0.5 relative">
+                                            <img src="{{ asset('storage/' . $photo->photo_path) }}" alt="Student Image"
+                                                class="block object-contain bg-gray-300 border-2 border-gray-300 rounded shadow-md cursor-pointer aspect-square">
+                                            <div
+                                                class="absolute inset-0 bg-black bg-opacity-0 rounded hover:bg-opacity-25">
+                                            </div>
+                                        </button>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+                    </dialog>
+
 
 
                     <div class="flex flex-col justify-center my-4" x-data="{ quantity: 1 }">
@@ -270,5 +319,28 @@
         document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
             checkbox.addEventListener('change', updateTotalPrice);
         });
+
+        function selectImageForProduct(imageId, imageUrl) {
+
+            const modal = document.getElementById('attributeProductImageModal');
+            const fileInputSelected = modal.getAttribute('data-fileInputSelected');
+
+            const buttons = document.querySelectorAll(`button[data-attribute-index="${fileInputSelected}"]`);
+            const hiddenInput = document.getElementById('fileInput-' + fileInputSelected);
+            hiddenInput.value = imageId;
+
+            buttons.forEach(button => {
+                button.style.backgroundImage = `url('${imageUrl}')`;
+                button.style.backgroundColor = '#d1d5db';
+                button.textContent = '';
+            });
+
+            modal.close();
+        }
+
+        function openImageModal(fileInputSelected) {
+            document.getElementById('attributeProductImageModal').setAttribute('data-fileInputSelected', fileInputSelected);
+            document.getElementById('attributeProductImageModal').showModal();
+        }
     </script>
 @endsection
