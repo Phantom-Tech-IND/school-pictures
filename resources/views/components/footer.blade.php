@@ -45,8 +45,8 @@
                                     41 921 40 25</a>
                             </li>
                             <li>
-                                <a href="mailto:artline@artline.ch"
-                                    class="text-sm leading-6 text-gray-300 hover:text-white">artline@artline.ch</a>
+                                <a href="mailto:info@artlinefotografie.ch"
+                                    class="text-sm leading-6 text-gray-300 hover:text-white">info@artlinefotografie.ch</a>
                             </li>
                             <li>
                                 <span class="text-sm leading-6 text-gray-300">Mo. + Mi. und Fr. : 13:00 – 17:00</span>
