@@ -23,12 +23,12 @@
                             </div>
                         @endforeach
                     </div>
+                    <p class="m-4 mt-8">{{ $product->additional_information }}</p>
                 </div>
 
                 <!-- Product Details -->
                 <div class="w-full p-4 md:w-1/3">
                     <h2 class="text-2xl font-bold">{{ $product->name }}</h2>
-                    <p class="text-xl text-gray-500">{{ $product->price }} CHF</p>
                     <div class="mt-4">
                         <div class="text-sm text-gray-600">{{ $product->description }}</div>
                     </div>
@@ -128,7 +128,7 @@
                         @if ($attribute['type'] == 'fileInput')
                             <div class="my-4">
                                 <label class="block text-sm font-medium text-gray-700">{{ $attribute['title'] }}</label>
-                                <div class="flex items-center gap-2">
+                                <div class="flex items-center gap-2 isolate">
                                     @if (isset($attribute['fileInputImage']))
                                         <img src="{{ $attribute['fileInputImage'] }}"
                                             class="object-contain w-20 h-20 p-0.5 bg-gray-300 border-2 border-gray-300 rounded-lg" />
@@ -140,22 +140,54 @@
                                     </svg>
                                     <input type="hidden" id="{{ 'fileInput-' . $index }}"
                                         name="{{ 'fileInput-' . $attribute['title'] }}" value="" readonly required>
-                                    <button type="button" onclick="openImageModal({{ $index }})"
-                                        class="w-20 h-20 text-white bg-center bg-no-repeat bg-contain rounded bg-accent-500 hover:bg-accent-700"
-                                        data-attribute-index="{{ $index }}">
-                                        Choose Image
-                                    </button>
+
+                                    <div class="relative">
+                                        <button type="button"
+                                            onclick="openImageModal(event, {{ $index }})"
+                                            class="w-20 h-20 text-white bg-center bg-no-repeat bg-contain rounded bg-accent-500 hover:bg-accent-700"
+                                            data-attribute-index="{{ $index }}">
+                                            <p>Choose Image</p>
+                                        </button>
+                                        <a data-fslightbox='{{ 'zoomImageButton-' . $index }}'
+                                            href="{{ $index }}" id="{{ 'zoomImageButton-' . $index }}"
+                                            type="button"
+                                            class="absolute z-10 hidden p-2 ml-2 text-white rounded -top-5 -right-5 customHoverEffect">
+                                            <svg fill="#000000" class="w-8 h-8" version="1.1" id="Layer_1"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 299.998 299.998"
+                                                xml:space="preserve">
+                                                <g>
+                                                    <g>
+                                                        <g>
+                                                            <path
+                                                                d="M139.414,96.193c-22.673,0-41.056,18.389-41.056,41.062c0,22.678,18.383,41.062,41.056,41.062
+                                                                            c22.678,0,41.059-18.383,41.059-41.062C180.474,114.582,162.094,96.193,139.414,96.193z M159.255,146.971h-12.06v12.06
+                                                                            c0,4.298-3.483,7.781-7.781,7.781c-4.298,0-7.781-3.483-7.781-7.781v-12.06h-12.06c-4.298,0-7.781-3.483-7.781-7.781
+                                                                            c0-4.298,3.483-7.781,7.781-7.781h12.06v-12.063c0-4.298,3.483-7.781,7.781-7.781c4.298,0,7.781,3.483,7.781,7.781v12.063h12.06
+                                                                            c4.298,0,7.781,3.483,7.781,7.781C167.036,143.488,163.555,146.971,159.255,146.971z" />
+                                                            <path
+                                                                d="M149.997,0C67.157,0,0.001,67.158,0.001,149.995s67.156,150.003,149.995,150.003s150-67.163,150-150.003
+                                                                            S232.836,0,149.997,0z M225.438,221.254c-2.371,2.376-5.48,3.561-8.59,3.561s-6.217-1.185-8.593-3.561l-34.145-34.147
+                                                                            c-9.837,6.863-21.794,10.896-34.697,10.896c-33.548,0-60.742-27.196-60.742-60.744c0-33.548,27.194-60.742,60.742-60.742
+                                                                            c33.548,0,60.744,27.194,60.744,60.739c0,11.855-3.408,22.909-9.28,32.256l34.56,34.562
+                                                                            C230.185,208.817,230.185,216.512,225.438,221.254z" />
+                                                        </g>
+                                                    </g>
+                                                </g>
+                                            </svg>
+                                        </a>
+                                    </div>
+
+
                                 </div>
                             </div>
                         @endif
                     @endforeach
-                    {{-- Modal structure using <dialog> --}}
-                    <dialog id="attributeProductImageModal" class="relative bg-transparent p-2 xs:p-4 h-[fill-available]"
-                        data-fileInputSelected="">
 
+                    <dialog id="attributeProductImageModal" class="fixed bg-transparent p-2 xs:p-4 h-[stretch]" data-fileInputSelected="">
                         <div class="relative h-full p-4 bg-white rounded-lg max-w-7xl">
 
-                            <button type="button" onclick="document.getElementById('attributeProductImageModal').close()"
+                            <button type="button" onclick="closeModal()"
                                 class="absolute top-0 right-0 p-2 m-4 text-white bg-gray-500 rounded-full hover:bg-gray-700 focus:outline-accent-600 focus-within:outline-accent-600">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                     fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
@@ -165,25 +197,27 @@
                             </button>
 
                             <h2 class="mt-4 text-2xl font-semibold">Select an Image</h2>
-                            <div class="h-[calc(100%-28px)] w-full overflow-y-scroll">
+                            <div class="h-[calc(100%-48px)] w-full overflow-y-scroll">
                                 <div class="grid grid-cols-3 gap-4 pt-2 xs:grid-cols-4 lg:grid-cols-5">
                                     @foreach ($student->photos as $photo)
-                                        <button type="button"
-                                            onclick="selectImageForProduct('{{ $photo->id }}', '{{ $photo->photo_path }}')"
-                                            class="p-0.5 relative">
-                                            <img src="{{ asset('storage/' . $photo->photo_path) }}" alt="Student Image"
-                                                class="block object-contain bg-gray-300 border-2 border-gray-300 rounded shadow-md cursor-pointer aspect-square">
-                                            <div
-                                                class="absolute inset-0 bg-black bg-opacity-0 rounded hover:bg-opacity-25">
-                                            </div>
-                                        </button>
+                                        <div>
+                                            <button type="button"
+                                                onclick="selectImageForProduct('{{ $photo->id }}', '{{ $photo->photo_path }}')"
+                                                class="p-0.5 relative">
+                                                <img src="{{ asset('storage/' . $photo->photo_path) }}"
+                                                    alt="Student Image"
+                                                    class="block object-contain bg-gray-300 border-2 border-gray-300 rounded shadow-md cursor-pointer aspect-square">
+                                                <div
+                                                    class="absolute inset-0 bg-black bg-opacity-0 rounded hover:bg-opacity-25">
+                                                </div>
+                                            </button>
+                                            <p class="text-sm text-center">{{ basename($photo->photo_path, '.jpg') }}</p>
+                                        </div>
                                     @endforeach
                                 </div>
                             </div>
                         </div>
                     </dialog>
-
-
 
                     <div class="flex flex-col justify-center my-4" x-data="{ quantity: 1 }">
                         <div class="flex items-center gap-2">
@@ -258,6 +292,12 @@
 
         function handleAsyncSubmit(event) {
             event.preventDefault(); // Prevent normal form submission
+
+            const testFormData = new FormData(event.target);
+            const formDataJson = JSON.stringify(Object.fromEntries(testFormData.entries()), null, 2);
+            alert(`Form Data: ${formDataJson}`);
+            return;
+
             if (!validateForm()) {
                 alert('Please correct the errors in the form.');
                 return;
@@ -322,6 +362,7 @@
 
         function selectImageForProduct(imageId, imageUrl) {
 
+
             const modal = document.getElementById('attributeProductImageModal');
             const fileInputSelected = modal.getAttribute('data-fileInputSelected');
 
@@ -329,18 +370,63 @@
             const hiddenInput = document.getElementById('fileInput-' + fileInputSelected);
             hiddenInput.value = imageId;
 
+            const zoomImageButton = document.getElementById('zoomImageButton-' + fileInputSelected);
+            zoomImageButton.classList.remove('hidden');
+            zoomImageButton.href = imageUrl;
+            refreshFsLightbox();
+
             buttons.forEach(button => {
                 button.style.backgroundImage = `url('${imageUrl}')`;
                 button.style.backgroundColor = '#d1d5db';
-                button.textContent = '';
+                button.querySelector('p').textContent = '';
             });
 
-            modal.close();
+            closeModal();
         }
 
-        function openImageModal(fileInputSelected) {
+        function openImageModal(event, fileInputSelected) {
+            event.preventDefault(); // Prevent default if it's attached to a link or button
             document.getElementById('attributeProductImageModal').setAttribute('data-fileInputSelected', fileInputSelected);
             document.getElementById('attributeProductImageModal').showModal();
+            // Save the element that opened the modal to return focus later
+            document.getElementById('attributeProductImageModal').setAttribute('data-invoker', event.target.id);
         }
+
+        function closeModal(event) {
+            if (event) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+
+            const modal = document.getElementById('attributeProductImageModal');
+
+            const scrollPosition = window.scrollY;
+
+            modal.close();
+
+            window.scrollTo(0, scrollPosition);
+        }
+
+        document.addEventListener('click', function(event) {
+            const modal = document.getElementById('attributeProductImageModal');
+            if (event.target === modal) {
+                closeModal(event);
+            }
+        });
     </script>
+
+    <style>
+        .customHoverEffect>svg {
+            fill: rgba(30, 30, 30, 0.8);
+            transition: fill 0.2s ease-in-out;
+        }
+
+        .customHoverEffect:hover>svg {
+            fill: black;
+        }
+
+        dialog {
+            overflow: initial;
+        }
+    </style>
 @endsection
