@@ -110,8 +110,8 @@
                                         <label class="inline-flex items-center">
                                             <input type="checkbox"
                                                 class="form-checkbox checked:bg-accent-600 checked:hover:bg-accent-700 focus:ring-accent-500"
-                                                name="{{ $attribute['title'] . '[' . $option['label'] . ']' }}" value="true"
-                                                data-price="{{ $option['price'] ?? 0 }}"
+                                                name="{{ $attribute['title'] . '[' . $option['label'] . ']' }}"
+                                                value="true" data-price="{{ $option['price'] ?? 0 }}"
                                                 @if ($option['is_required']) required @endif>
                                             <span class="ml-2">{{ $option['label'] }}</span>
                                             @if (isset($option['price']))
@@ -138,7 +138,8 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M9 5l7 7-7 7"></path>
                                     </svg>
-                                    <input type="hidden" id="{{ 'fileInput-' . $index }}" name="{{ 'fileInput-' . $attribute['title'] }}" value="" readonly required>
+                                    <input type="hidden" id="{{ 'fileInput-' . $index }}"
+                                        name="{{ 'fileInput-' . $attribute['title'] }}" value="" readonly required>
                                     <button type="button" onclick="openImageModal({{ $index }})"
                                         class="w-20 h-20 text-white bg-center bg-no-repeat bg-contain rounded bg-accent-500 hover:bg-accent-700"
                                         data-attribute-index="{{ $index }}">
@@ -167,7 +168,7 @@
                             <div class="h-[calc(100%-28px)] w-full overflow-y-scroll">
                                 <div class="grid grid-cols-3 gap-4 pt-2 xs:grid-cols-4 lg:grid-cols-5">
                                     @foreach ($student->photos as $photo)
-                                        <button
+                                        <button type="button"
                                             onclick="selectImageForProduct('{{ $photo->id }}', '{{ $photo->photo_path }}')"
                                             class="p-0.5 relative">
                                             <img src="{{ asset('storage/' . $photo->photo_path) }}" alt="Student Image"
@@ -320,10 +321,6 @@
         });
 
         function selectImageForProduct(imageId, imageUrl) {
-            event.preventDefault();
-            // prevent default este pentru ca sa nu adauge produsul in cos.
-            // sincer, nu stiu cum ai reusit
-            // decomenteaz-o daca vrei sa razi :))))
 
             const modal = document.getElementById('attributeProductImageModal');
             const fileInputSelected = modal.getAttribute('data-fileInputSelected');
