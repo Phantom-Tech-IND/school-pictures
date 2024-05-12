@@ -11,7 +11,7 @@ use App\Models\Offers;
 use App\Models\Product;
 use App\Models\Student;
 use App\Models\User;
-use App\Notifications\ContactFormSubmitted;
+use Filament\Notifications\Notification;
 use Illuminate\Http\Request;
 
 class GuestPanelController extends Controller
@@ -34,11 +34,13 @@ class GuestPanelController extends Controller
     public function postContactForm(StoreMessageRequest $request)
     {
         try {
-
             Message::create($request->validated());
 
-            $admin = User::find(1);
-            $admin->notify(new ContactFormSubmitted($request->validated()));
+            $recipient = User::find(1);
+            Notification::make()
+                ->title('New message from '.$request->input('name'))
+                ->body($request->input('message'))
+                ->sendToDatabase($recipient);
 
             return response()->json([
                 'status' => 'success',
@@ -110,7 +112,7 @@ class GuestPanelController extends Controller
             $student = Student::with('photos') // Eager load photos
                 ->find($studentId);
 
-            if (!$student) {
+            if (! $student) {
                 return redirect()->route('not-available'); // Redirect if no student is found
             }
 

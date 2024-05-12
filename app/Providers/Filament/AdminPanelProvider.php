@@ -29,6 +29,7 @@ class AdminPanelProvider extends PanelProvider
             ->login()
             ->spa()
             ->databaseNotifications()
+            ->databaseNotificationsPolling(60)
             ->colors([
                 'primary' => Color::Amber,
             ])

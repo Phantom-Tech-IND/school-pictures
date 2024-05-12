@@ -75,6 +75,8 @@ I am interested in the offer {{ $offerItem->name }} with price {{ $offerItem->pr
                 class="block w-full rounded-md bg-green-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600">Senden</button>
         </div>
     </form>
+    <div id="successMessage" class="hidden mt-3 text-sm font-medium text-green-600"></div>
+    <div id="errorMessage" class="hidden mt-3 text-sm font-medium text-red-600"></div>
 </div>
 
 
@@ -82,9 +84,12 @@ I am interested in the offer {{ $offerItem->name }} with price {{ $offerItem->pr
     function submitForm(event) {
         event.preventDefault();
 
-        const formData = new FormData(event.target);
+        const form = event.target;
+        const formData = new FormData(form);
         const formObject = Object.fromEntries(formData);
         const prettyJson = JSON.stringify(formObject, null, 2);
+
+        formObject.interests = formObject.interests.split(',');
 
         function validateDate(date) {
             const year = date.split('-')[0];
@@ -101,10 +106,24 @@ I am interested in the offer {{ $offerItem->name }} with price {{ $offerItem->pr
             })
             .then(response => response.json())
             .then(data => {
-                console.log('Success:', data);
+                if (data.status === 'success') {
+                    document.getElementById('successMessage').textContent = data.message;
+                    document.getElementById('successMessage').classList.remove('hidden');
+                    document.getElementById('errorMessage').classList.add('hidden');
+                    form.reset(); // Reset the form
+                    // Manually clear the 'subject' and 'message' fields
+                    document.getElementById('subject').value = '';
+                    document.getElementById('message').value = '';
+                } else {
+                    document.getElementById('errorMessage').textContent = data.message;
+                    document.getElementById('errorMessage').classList.remove('hidden');
+                    document.getElementById('successMessage').classList.add('hidden');
+                }
             })
             .catch((error) => {
-                console.error('Error:', error);
+                document.getElementById('errorMessage').textContent = 'Error: ' + error.message;
+                document.getElementById('errorMessage').classList.remove('hidden');
+                document.getElementById('successMessage').classList.add('hidden');
             });
     }
 </script>
