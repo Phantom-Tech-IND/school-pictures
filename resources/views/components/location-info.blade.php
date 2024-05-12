@@ -1,4 +1,4 @@
-<div class="max-w-xl p-8 mx-auto bg-gray-100 rounded-lg shadow lg:mx-0 lg:max-w-md lg:mr-8">
+<div class="max-w-xl p-8 mx-auto bg-gray-100 rounded-lg shadow lg:mx-0 lg:max-w-xl lg:mr-8">
     <h2 class="mb-2 text-xl font-semibold">Kreative Fotoshootings im Studio und draussen, in Buttisholz</h2>
     <div class="sticky flex flex-col mt-10 top-32">
         <h3 class="mb-4 text-lg font-semibold">ArtLine Fotografie AG</h3>
@@ -17,18 +17,9 @@
         </label>
         <label class="mb-6 font-semibold"> <!-- Adjusted spacing from mb-4 to mb-2 -->
             E-Mail:
-            <a href="mailto:artline@email.com" class="text-green-500 hover:text-green-700 focus:text-green-700">
-                artline@email.com
+            <a href="mailto:info@artlinefotografie.ch" class="text-green-500 hover:text-green-700 focus:text-green-700">
+                info@artlinefotografie.ch
             </a>
         </label>
-        <label class="mb-2 font-semibold"> <!-- Adjusted spacing from mb-4 to mb-2 -->
-            Öffnungszeiten:<br>
-            <div class="flex flex-wrap w-full">
-                <p class="whitespace-nowrap">Mo-Fr: 09:00 - 18:00</p>
-                <p class="mx-2">|</p>
-                <p class="whitespace-nowrap">Sa: 10:00 - 14:00</p>
-            </div>
-        </label>
-        <p class="text-center">Termine nach Vereinbarung</p>
     </div>
 </div>

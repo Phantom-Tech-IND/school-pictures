@@ -1,9 +1,9 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\Filament\GuestPanelController;
-use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,13 +16,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Guest Panel Routes
 Route::controller(GuestPanelController::class)->group(function () {
     Route::get('/', 'index')->name('home');
-    Route::middleware(['auth:student'])->group(function () {
-        Route::get('/shop', 'shop')->name('shop');
-        Route::get('/product', 'product')->name('product');
-        Route::get('/gallery-code', 'galleryCode')->name('gallery-code');
-    });
     Route::get('/not-available', 'notAvailable')->name('not-available');
     Route::get('/contact', 'contact')->name('contact');
     Route::get('/our-offers', 'offers')->name('offers');
@@ -32,8 +28,9 @@ Route::controller(GuestPanelController::class)->group(function () {
     Route::get('/team', 'team')->name('team');
     Route::get('/partners', 'partners')->name('partners');
     Route::get('/view-for-testing-purposes', 'viewForTestingPurposes')->name('view-for-testing-purposes');
+    Route::get('/category/{slug}', 'showCategoryProducts')->name('category.products');
 
-    // Routes for legal and informational pages
+    // Legal and informational pages
     Route::get('/impressum', 'impressum')->name('impressum');
     Route::get('/cookie-policy', 'cookiePolicy')->name('cookie-policy');
     Route::get('/privacy-policy', 'privacyPolicy')->name('privacy-policy');
@@ -41,16 +38,32 @@ Route::controller(GuestPanelController::class)->group(function () {
     Route::get('/haeufig-gestellte-fragen-faq', 'frequentlyAskedQuestions')->name('frequently-asked-questions');
 
     Route::post('/contact/submit', 'postContactForm')->name('contact.submit');
-    Route::get('/category/{slug}', 'showCategoryProducts')->name('category.products');
 });
 
-Route::post('/login', [AuthController::class, 'login'])->name('login');
-Route::middleware(['auth:student'])->group(function () {
-    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
-    Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('add.to.cart');
-    Route::get('/cart', [CartController::class, 'index'])->name('cart');
-    Route::get('/cart/count', [CartController::class, 'countItems'])->name('cart.count');
-    Route::post('/cart/remove/{productId}', [CartController::class, 'removeFromCart'])->name('cart.remove');
-    Route::post('/students/sync-photos', 'StudentController@syncPhotos')->name('students.sync-photos');
-    Route::get('/cart/items', [CartController::class, 'getCartItems'])->name('cart.items');
+// Authentication Routes
+Route::controller(AuthController::class)->group(function () {
+    Route::post('/login', 'login')->name('login');
+    Route::get('/logout', 'logout')->name('logout');
 });
+
+// Student Specific Routes
+Route::middleware(['auth:student'])->group(function () {
+    Route::controller(GuestPanelController::class)->group(function () {
+        Route::get('/shop', 'shop')->name('shop');
+        Route::get('/product', 'product')->name('product');
+        Route::get('/gallery-code', 'galleryCode')->name('gallery-code');
+    });
+
+    Route::post('/students/sync-photos', 'StudentController@syncPhotos')->name('students.sync-photos');
+
+    // Cart Routes
+    Route::controller(CartController::class)->group(function () {
+        Route::post('/add-to-cart', 'addToCart')->name('add.to.cart');
+        Route::get('/cart', 'index')->name('cart');
+        Route::get('/cart/count', 'countItems')->name('cart.count');
+        Route::post('/cart/remove/{productId}', 'removeFromCart')->name('cart.remove');
+        Route::get('/cart/items', 'getCartItems')->name('cart.items');
+        Route::post('/cart/update-quantity/{productId}', 'updateQuantity')->name('cart.update-quantity');
+    });
+});
+
