@@ -26,7 +26,7 @@
                             </div>
                         @endforeach
                     </div>
-                    <div class="m-4 mt-8">
+                    <div class="m-4 mt-8 prose">
                         {!! Str::markdown($product->additional_information) !!}
                     </div>
                 </div>
