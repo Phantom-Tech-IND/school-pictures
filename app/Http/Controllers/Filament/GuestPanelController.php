@@ -3,16 +3,24 @@
 namespace App\Http\Controllers\Filament;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreMessageRequest;
 use App\Models\Category;
 use App\Models\Message;
 use App\Models\OfferItem;
 use App\Models\Offers;
 use App\Models\Product;
 use App\Models\Student;
+use App\Models\User;
+use App\Notifications\ContactFormSubmitted;
 use Illuminate\Http\Request;
 
 class GuestPanelController extends Controller
 {
+    public function login()
+    {
+        return view('welcome');
+    }
+
     public function index(Request $request)
     {
         return view('welcome');
@@ -23,9 +31,26 @@ class GuestPanelController extends Controller
         return view('cart');
     }
 
-    public function postContactForm(Request $request)
+    public function postContactForm(StoreMessageRequest $request)
     {
-        Message::create($request->all());
+        try {
+
+            Message::create($request->validated());
+
+            $admin = User::find(1);
+            $admin->notify(new ContactFormSubmitted($request->validated()));
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Your message has been successfully sent.',
+                'data' => $request->all(),
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Failed to send message. Error: '.$e->getMessage(),
+            ], 500);
+        }
     }
 
     public function notAvailable(Request $request)
@@ -55,7 +80,7 @@ class GuestPanelController extends Controller
     {
         $category = Category::where('slug', $slug)->first();
         $categories = Category::all();
-        if (!$category) {
+        if (! $category) {
             abort(404);
         }
 
@@ -138,7 +163,7 @@ class GuestPanelController extends Controller
         // Retrieve student ID from session
         $studentId = session('student_id');
 
-        if (!$studentId) {
+        if (! $studentId) {
             return redirect()->route('not-available'); // Redirect if no student ID is found in session
         }
 
@@ -146,7 +171,7 @@ class GuestPanelController extends Controller
         $student = Student::with('photos') // Eager load photos
             ->find($studentId);
 
-        if (!$student) {
+        if (! $student) {
             return redirect()->route('not-available'); // Redirect if no student is found
         }
 

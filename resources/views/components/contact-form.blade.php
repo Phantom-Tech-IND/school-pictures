@@ -2,7 +2,9 @@
     <div class="max-w-2xl mx-auto text-center">
         <h2 class="text-2xl font-semibold tracking-tight text-gray-900 xs:text-3xl md:text-4xl">KONTAKTFORMULAR</h2>
     </div>
-    <form id="contactForm" method="POST" onsubmit="submitForm(event)" class="mx-auto mt-8 sm:mt-10">
+    <form id="contactForm" action="{{ route('contact.submit') }}" method="POST" onsubmit="submitForm(event)"
+        class="mx-auto mt-8 sm:mt-10">
+        @csrf
         <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
             <div class="sm:col-span-2">
                 <label for="interests" class="block text-sm font-semibold leading-6 text-gray-900">Optional können Sie
@@ -10,7 +12,7 @@
                     den Bereichen auswählen:</label>
                 @foreach ($offers as $offer)
                     <label class="inline-flex items-center text-sm mt-2.5 mr-2">
-                        <input type="checkbox" name="interests[]" value="{{ $offer->title }}"
+                        <input type="checkbox" name="interests" value="{{ $offer->title }}"
                             class="w-5 h-5 text-green-500 form-checkbox"
                             {{ $offerItem && $offerItem->offer_id == $offer->id ? 'checked' : '' }}>
                         <span class="ml-2">{{ $offer->title }}</span>
@@ -83,6 +85,26 @@ I am interested in the offer {{ $offerItem->name }} with price {{ $offerItem->pr
         const formData = new FormData(event.target);
         const formObject = Object.fromEntries(formData);
         const prettyJson = JSON.stringify(formObject, null, 2);
-        alert(prettyJson);
+
+        function validateDate(date) {
+            const year = date.split('-')[0];
+            return year > 1900 && year < 10000;
+        }
+
+        fetch(event.target.action, {
+                method: 'POST',
+                body: JSON.stringify(formObject),
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
     }
 </script>

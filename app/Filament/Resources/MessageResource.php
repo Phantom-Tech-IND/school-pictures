@@ -4,8 +4,11 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\MessageResource\Pages;
 use App\Models\Message;
+use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\TagsInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\TimePicker;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -34,10 +37,19 @@ class MessageResource extends Resource
                     ->maxLength(255),
                 TextInput::make('email')
                     ->required()
+                    ->email()
                     ->maxLength(255),
-                Textarea::make('text')
+                Textarea::make('message')
+                    ->required()
+                    ->maxLength(10000),
+                TextInput::make('subject')
                     ->required()
                     ->maxLength(255),
+                DatePicker::make('appointment_date')
+                    ->nullable(),
+                TimePicker::make('appointment_time')
+                    ->nullable(),
+                TagsInput::make('interests'),
             ]);
     }
 
@@ -45,12 +57,17 @@ class MessageResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('name'),
-                TextColumn::make('email'),
-                TextColumn::make('text'),
+                TextColumn::make('name')->searchable(),
+                TextColumn::make('email')->searchable(),
+                TextColumn::make('subject')->searchable(),
+                TextColumn::make('message')->limit(50),
+                TextColumn::make('appointment_date'),
+                TextColumn::make('appointment_time'),
                 TextColumn::make('created_at'),
+                TextColumn::make('interests'),
             ])
             ->filters([
+                // Add any filters if necessary
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
