@@ -93,7 +93,10 @@ class ProductResource extends Resource
                             ->visible(fn (Get $get): bool => $get('type') === 'select'),
 
                         Forms\Components\FileUpload::make('fileInputImage')
-                            ->label('Upload Image')
+                            ->label('Helper Image')
+                            ->preserveFilenames()
+                            ->directory('product-helper-image')
+                            ->disk('public')
                             ->visible(fn (Get $get): bool => $get('type') === 'fileInput'),
 
                         Forms\Components\Repeater::make('options')
