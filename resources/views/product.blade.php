@@ -137,7 +137,7 @@
                                 <label class="block text-sm font-medium text-gray-700">{{ $attribute['title'] }}</label>
                                 <div class="flex items-center gap-2 isolate">
                                     @if (isset($attribute['fileInputImage']))
-                                        <img src="{{ $attribute['fileInputImage'] }}"
+                                        <img src="{{ asset('storage/' . $attribute['fileInputImage']) }}"
                                             class="object-contain w-20 h-20 p-0.5 bg-gray-300 border-2 border-gray-300 rounded-lg" />
                                     @endif
                                     <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor"
@@ -155,8 +155,8 @@
                                             <p>Choose Image</p>
                                         </button>
                                         <a data-fslightbox='{{ 'zoomImageButton-' . $index }}'
-                                            href="{{ $index }}" id="{{ 'zoomImageButton-' . $index }}"
-                                            type="button"
+                                            href="{{ asset('storage/' . $index) }}"
+                                            id="{{ 'zoomImageButton-' . $index }}" type="button"
                                             class="absolute z-10 hidden p-2 ml-2 text-white rounded -top-5 -right-5 customHoverEffect">
                                             <svg fill="#000000" class="w-8 h-8" version="1.1" id="Layer_1"
                                                 xmlns="http://www.w3.org/2000/svg"
@@ -177,6 +177,7 @@
                                                                                     c-9.837,6.863-21.794,10.896-34.697,10.896c-33.548,0-60.742-27.196-60.742-60.744c0-33.548,27.194-60.742,60.742-60.742
                                                                                     c33.548,0,60.744,27.194,60.744,60.739c0,11.855-3.408,22.909-9.28,32.256l34.56,34.562
                                                                                     C230.185,208.817,230.185,216.512,225.438,221.254z" />
+
                                                         </g>
                                                     </g>
                                                 </g>
@@ -209,7 +210,7 @@
                                     @foreach ($student->photos as $photo)
                                         <div>
                                             <button type="button"
-                                                onclick="selectImageForProduct('{{ $photo->id }}', '{{ $photo->photo_path }}')"
+                                                onclick="selectImageForProduct('{{ $photo->id }}', '{{ asset('storage/' . $photo->photo_path) }}')"
                                                 class="p-0.5 relative">
                                                 <img src="{{ asset('storage/' . $photo->photo_path) }}"
                                                     alt="Student Image"
