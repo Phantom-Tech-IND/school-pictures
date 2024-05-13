@@ -35,7 +35,7 @@
                 <h1 class="text-4xl font-bold tracking-tight text-gray-900">Our Products</h1>
                 <form action="{{ route('shop') }}" method="GET" class="flex items-center my-4 ">
                     <input type="text" name="search" id="search" placeholder="Search products..." type="text"
-                        name="search" id="search"
+                        id="search"
                         class="block w-full py-2 text-gray-900 border-0 shadow-sm rounded-l-md pr-14 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-accent-600 sm:text-sm sm:leading-6">
                     <button type="submit"
                         class="px-4 py-2 text-white bg-accent rounded-r-md hover:bg-accent-dark">Search</button>
@@ -74,7 +74,6 @@
                     <div class="lg:col-span-3">
                         <div class="max-w-2xl px-4 mx-auto sm:px-6 lg:max-w-7xl lg:px-8">
                             <h2 class="text-xl font-bold text-gray-900">Products list</h2>
-
                             <div
                                 class="grid grid-cols-1 mt-8 gap-y-12 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-3 xl:gap-x-8">
                                 @foreach ($products as $product)
@@ -84,13 +83,14 @@
                                                 <div class="relative w-full overflow-hidden rounded-lg h-72">
                                                     <img src="{{ $product->images && count($product->images) > 0 ? asset('storage/' . $product->images[0]) : asset('images/no-image.jpg') }}"
                                                         alt="{{ $product->type }}"
-                                                        class="object-cover object-center w-full h-full">
+                                                        class="object-contain object-center w-full h-full">
                                                 </div>
                                                 <div class="relative mt-4">
                                                     <h3 class="text-sm font-medium text-gray-900">
                                                         {{ $product->name }}</h3>
                                                     <p class="mt-1 text-sm text-gray-500">
-                                                        {{ Str::limit($product->description, 90) }}
+                                                        {!! Str::limit($product->description, 30) !!}
+                                                    </p>
                                                 </div>
                                                 <div
                                                     class="absolute inset-x-0 top-0 flex items-end justify-end p-4 overflow-hidden rounded-lg h-72">
@@ -110,10 +110,9 @@
                         {{ $products->links() }}
                     </div>
                 </div>
+            </section>
+        </main>
     </div>
-    </section>
-    </main>
-</div>
 </div>
 
 <script>
