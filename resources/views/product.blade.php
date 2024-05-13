@@ -65,7 +65,8 @@
                                     </button>
 
                                     <!-- Hidden input to store the selected value for form submission -->
-                                    <input type="hidden" name="{{ $attribute['title'] }}" x-model="selected.label">
+                                        <input type="hidden" name="{{ $attribute['title'] }}" x-model="selected.label" {{ $attribute['is_required'] ? 'required' : '' }}>
+
 
                                     <ul x-show="open" x-transition:enter="transition ease-out duration-100"
                                         x-transition:enter-start="transform opacity-0 scale-95"
