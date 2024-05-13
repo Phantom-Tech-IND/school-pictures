@@ -130,7 +130,7 @@
                                 <label class="block text-sm font-medium text-gray-700">{{ $attribute['title'] }}</label>
                                 <div class="flex items-center gap-2 isolate">
                                     @if (isset($attribute['fileInputImage']))
-                                        <img src="{{ $attribute['fileInputImage'] }}"
+                                        <img src="{{ asset('storage/' . $attribute['fileInputImage']) }}"
                                             class="object-contain w-20 h-20 p-0.5 bg-gray-300 border-2 border-gray-300 rounded-lg" />
                                     @endif
                                     <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor"
@@ -142,8 +142,7 @@
                                         name="{{ 'fileInput-' . $attribute['title'] }}" value="" readonly required>
 
                                     <div class="relative">
-                                        <button type="button"
-                                            onclick="openImageModal(event, {{ $index }})"
+                                        <button type="button" onclick="openImageModal(event, {{ $index }})"
                                             class="w-20 h-20 text-white bg-center bg-no-repeat bg-contain rounded bg-accent-500 hover:bg-accent-700"
                                             data-attribute-index="{{ $index }}">
                                             <p>Choose Image</p>
@@ -161,16 +160,16 @@
                                                         <g>
                                                             <path
                                                                 d="M139.414,96.193c-22.673,0-41.056,18.389-41.056,41.062c0,22.678,18.383,41.062,41.056,41.062
-                                                                            c22.678,0,41.059-18.383,41.059-41.062C180.474,114.582,162.094,96.193,139.414,96.193z M159.255,146.971h-12.06v12.06
-                                                                            c0,4.298-3.483,7.781-7.781,7.781c-4.298,0-7.781-3.483-7.781-7.781v-12.06h-12.06c-4.298,0-7.781-3.483-7.781-7.781
-                                                                            c0-4.298,3.483-7.781,7.781-7.781h12.06v-12.063c0-4.298,3.483-7.781,7.781-7.781c4.298,0,7.781,3.483,7.781,7.781v12.063h12.06
-                                                                            c4.298,0,7.781,3.483,7.781,7.781C167.036,143.488,163.555,146.971,159.255,146.971z" />
+                                                                                    c22.678,0,41.059-18.383,41.059-41.062C180.474,114.582,162.094,96.193,139.414,96.193z M159.255,146.971h-12.06v12.06
+                                                                                    c0,4.298-3.483,7.781-7.781,7.781c-4.298,0-7.781-3.483-7.781-7.781v-12.06h-12.06c-4.298,0-7.781-3.483-7.781-7.781
+                                                                                    c0-4.298,3.483-7.781,7.781-7.781h12.06v-12.063c0-4.298,3.483-7.781,7.781-7.781c4.298,0,7.781,3.483,7.781,7.781v12.063h12.06
+                                                                                    c4.298,0,7.781,3.483,7.781,7.781C167.036,143.488,163.555,146.971,159.255,146.971z" />
                                                             <path
                                                                 d="M149.997,0C67.157,0,0.001,67.158,0.001,149.995s67.156,150.003,149.995,150.003s150-67.163,150-150.003
-                                                                            S232.836,0,149.997,0z M225.438,221.254c-2.371,2.376-5.48,3.561-8.59,3.561s-6.217-1.185-8.593-3.561l-34.145-34.147
-                                                                            c-9.837,6.863-21.794,10.896-34.697,10.896c-33.548,0-60.742-27.196-60.742-60.744c0-33.548,27.194-60.742,60.742-60.742
-                                                                            c33.548,0,60.744,27.194,60.744,60.739c0,11.855-3.408,22.909-9.28,32.256l34.56,34.562
-                                                                            C230.185,208.817,230.185,216.512,225.438,221.254z" />
+                                                                                    S232.836,0,149.997,0z M225.438,221.254c-2.371,2.376-5.48,3.561-8.59,3.561s-6.217-1.185-8.593-3.561l-34.145-34.147
+                                                                                    c-9.837,6.863-21.794,10.896-34.697,10.896c-33.548,0-60.742-27.196-60.742-60.744c0-33.548,27.194-60.742,60.742-60.742
+                                                                                    c33.548,0,60.744,27.194,60.744,60.739c0,11.855-3.408,22.909-9.28,32.256l34.56,34.562
+                                                                                    C230.185,208.817,230.185,216.512,225.438,221.254z" />
                                                         </g>
                                                     </g>
                                                 </g>
@@ -184,7 +183,8 @@
                         @endif
                     @endforeach
 
-                    <dialog id="attributeProductImageModal" class="fixed bg-transparent p-2 xs:p-4 h-[stretch]" data-fileInputSelected="">
+                    <dialog id="attributeProductImageModal" class="fixed bg-transparent p-2 xs:p-4 h-[stretch]"
+                        data-fileInputSelected="">
                         <div class="relative h-full p-4 bg-white rounded-lg max-w-7xl">
 
                             <button type="button" onclick="closeModal()"
