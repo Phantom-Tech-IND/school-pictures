@@ -60,10 +60,19 @@ class GuestPanelController extends Controller
         return view('not-available');
     }
 
-    public function shop(Request $request)
+    public function webshop(Request $request, $slug = null)
     {
-        $productsQuery = Product::query(); // Start with a base query
         $categories = Category::all(); // Fetch all categories
+        $selectedCategory = null;
+        $productsQuery = Product::query(); // Start with a base query
+
+        if ($slug) {
+            $selectedCategory = Category::where('slug', $slug)->first();
+            if (!$selectedCategory) {
+                abort(404);
+            }
+            $productsQuery = $selectedCategory->products(); // Start with the category's products query
+        }
 
         // Check if a search term is provided and modify the query accordingly
         if ($search = $request->input('search')) {
@@ -75,28 +84,8 @@ class GuestPanelController extends Controller
         return view('webshop', [
             'products' => $products,
             'categories' => $categories,
+            'selectedCategory' => $selectedCategory
         ]);
-    }
-
-    public function showCategoryProducts($slug, Request $request)
-    {
-        $category = Category::where('slug', $slug)->first();
-        $categories = Category::all();
-        if (! $category) {
-            abort(404);
-        }
-
-        // Start with the category's products query
-        $query = $category->products();
-
-        // Check if a search term is provided and modify the query accordingly
-        if ($search = $request->input('search')) {
-            $query->where('name', 'LIKE', "%{$search}%"); // Adjust 'name' if your product name column is different
-        }
-
-        $products = $query->paginate(10);
-
-        return view('category.products', compact('products', 'category', 'categories'));
     }
 
     public function product(Request $request)

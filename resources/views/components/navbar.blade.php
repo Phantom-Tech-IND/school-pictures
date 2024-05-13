@@ -12,8 +12,8 @@
                     <a href="{{ route('home') }}"
                         class="{{ request()->routeIs('home') ? 'text-accent' : ' hover:text-accent' }}  uppercase">Home</a>
                     @auth('student')
-                        <a href="{{ route('shop') }}"
-                            class="{{ request()->routeIs('shop') ? 'text-accent' : ' hover:text-accent' }} uppercase">Webshop</a>
+                        <a href="{{ route('webshop') }}"
+                            class="{{ request()->routeIs('webshop') ? 'text-accent' : ' hover:text-accent' }} uppercase">Webshop</a>
                     @endauth
                     <a href="{{ route('kindergarden') }}"
                         class="{{ request()->routeIs('kindergarden') ? 'text-accent' : ' hover:text-accent' }} uppercase">Kindergarten
@@ -101,8 +101,8 @@
                         : 'relative left-0 font-medium
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         transition-all duration-300
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         hover:pl-0 hover:text-accent hover:-left-2' }}">Home</a>
-                <a href="{{ route('shop') }}"
-                    class="{{ request()->routeIs('shop')
+                <a href="{{ route('webshop') }}"
+                    class="{{ request()->routeIs('webshop')
                         ? 'text-accent font-semibold relative -left-2'
                         : 'relative left-0 font-medium
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         transition-all duration-300
