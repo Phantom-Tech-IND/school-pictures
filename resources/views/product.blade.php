@@ -35,7 +35,7 @@
                 <div class="w-full p-4 md:w-1/3">
                     <h2 class="text-2xl font-bold">{{ $product->name }}</h2>
 
-                    <div class="mt-4 text-sm text-gray-600">
+                    <div class="mt-4 text-sm prose text-gray-600">
                         {!! Str::markdown($product->description) !!}
                     </div>
 

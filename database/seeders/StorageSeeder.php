@@ -10,7 +10,7 @@ class StorageSeeder extends Seeder
     public function run(): void
     {
         $directories = [
-            'offers', 'products', 'product-images'
+            'offers', 'products', 'product-images', 'product-helper-image'
         ];
 
         foreach ($directories as $dir) {
