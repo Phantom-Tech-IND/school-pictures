@@ -60,7 +60,7 @@ Route::middleware(['auth:student'])->group(function () {
     Route::controller(CartController::class)->group(function () {
         Route::post('/add-to-cart', 'addToCart')->name('add.to.cart');
         Route::get('/cart', 'index')->name('cart');
-        Route::get('/cart/count', 'countItems')->name('cart.count');
+        Route::get('/cart/count', 'countDistinctProducts')->name('cart.count');
         Route::post('/cart/remove/{productId}', 'removeFromCart')->name('cart.remove');
         Route::get('/cart/items', 'getCartItems')->name('cart.items');
         Route::post('/cart/update-quantity/{productId}', 'updateQuantity')->name('cart.update-quantity');

@@ -6,100 +6,112 @@ use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
+    private function getCart()
+    {
+        return session()->get('cart', []);
+    }
+
+    private function saveCart($cart)
+    {
+        session()->put('cart', $cart);
+    }
+
+    private function calculateTotalItems($cart)
+    {
+        return array_sum(array_map(function ($item) {
+            return $item['quantity'];
+        }, $cart));
+    }
+
+    public function countDistinctProducts()
+    {
+        $cart = $this->getCart();
+        $distinctProducts = count($cart);
+        return response()->json(['status' => 'success', 'totalItems' => $distinctProducts]);
+    }
+
     public function getCartItems()
     {
-        $cart = session()->get('cart', []);
+        $cart = $this->getCart();
         $productDetails = [];
 
-        foreach ($cart as $productId => $details) {
-            $product = \App\Models\Product::find($productId);
+        foreach ($cart as $index => $details) {
+            $product = \App\Models\Product::find($details['product_id']);
             if ($product) {
-                $productDetails[] = [
-                    'id' => $productId,
-                    'product' => $product,
-                    'quantity' => $details['quantity'],
-                    'options' => $details['options'] ?? [],
-                    'subtotal' => $product->price * $details['quantity'],
-                ];
+                $productDetails[] = $this->formatProductDetails($index, $product, $details);
             }
         }
 
         $subtotal = array_sum(array_column($productDetails, 'subtotal'));
-
         return ['items' => $productDetails, 'subtotal' => $subtotal];
     }
 
-    public function addToCart(Request $request)
+    private function formatProductDetails($index, $product, $details)
+    {
+        return [
+            'index' => $index,
+            'product_id' => $details['product_id'],
+            'product' => $product,
+            'quantity' => $details['quantity'],
+            'options' => $details['options'] ?? [],
+            'subtotal' => $product->price * $details['quantity'],
+        ];
+    }
+
+    public function addToCart(Request $request) // looks fine
     {
         $validated = $request->validate([
             'product_id' => 'required|exists:products,id',
             'quantity' => 'required|integer|min:1',
         ]);
 
-        $cart = session()->get('cart', []);
-        $product_id = $request->product_id;
-        $quantity = $request->quantity;
-        $options = $request->except(['_token', 'product_id', 'quantity']); // Capture other form data as options
+        $cart = $this->getCart();
+        $product_id = $validated['product_id'];
+        $quantity = $validated['quantity'];
+        $options = $request->except(['_token', 'product_id', 'quantity']);
 
-        if (isset($cart[$product_id])) {
-            $cart[$product_id]['quantity'] += $quantity;
-            if (! isset($cart[$product_id]['options'])) {
-                $cart[$product_id]['options'] = [];
-            }
-            $cart[$product_id]['options'] = array_merge($cart[$product_id]['options'], $options);
-        } else {
-            $cart[$product_id] = ['quantity' => $quantity, 'options' => $options];
-        }
+        $nextIndex = count($cart);
+        $cart[$nextIndex] = [
+            'product_id' => $product_id,
+            'quantity' => $quantity,
+            'options' => $options
+        ];
 
-        session()->put('cart', $cart);
-
-        // Calculate the total number of items in the cart for the response
-        $totalItems = array_sum(array_column($cart, 'quantity'));
+        $this->saveCart($cart);
 
         return response()->json([
             'success' => 'Product added to cart successfully!',
-            'totalItems' => $totalItems,
-            'cart' => $cart, // Optionally include cart data or remove this line if not needed
+            'totalItems' => $this->calculateTotalItems($cart),
         ]);
     }
 
-    public function countItems()
+    public function removeFromCart(Request $request, $index)
     {
-        $cart = session()->get('cart', []);
-        $count = array_sum(array_column($cart, 'quantity'));
-
-        return response()->json($count);
-    }
-
-    public function removeFromCart(Request $request, $productId)  // Ensure $productId is passed correctly
-    {
-        $cart = session()->get('cart', []);
-        if (isset($cart[$productId])) {
-            unset($cart[$productId]); // Remove the item from the cart
-            session()->put('cart', $cart); // Update the cart in the session
+        $cart = $this->getCart();
+        if (isset($cart[$index])) {
+            unset($cart[$index]);
+            $this->saveCart($cart);
         } else {
             return response()->json(['error' => 'Product not found in cart'], 404);
         }
 
-        $totalItems = array_sum(array_column($cart, 'quantity')); // Recalculate the total items
-
         return response()->json([
             'success' => 'Product removed from cart successfully!',
-            'totalItems' => $totalItems,
+            'totalItems' => $this->calculateTotalItems($cart),
             'cartItems' => $this->getCartItems(),
         ]);
     }
 
-    public function updateQuantity(Request $request, $productId)
+    public function updateQuantity(Request $request, $index)
     {
         $validated = $request->validate([
             'quantity' => 'required|integer|min:1',
         ]);
 
-        $cart = session()->get('cart', []);
-        if (isset($cart[$productId])) {
-            $cart[$productId]['quantity'] = $validated['quantity'];
-            session()->put('cart', $cart);
+        $cart = $this->getCart();
+        if (isset($cart[$index])) {
+            $cart[$index]['quantity'] = $validated['quantity'];
+            $this->saveCart($cart);
         } else {
             return response()->json(['error' => 'Product not found in cart'], 404);
         }
@@ -112,8 +124,7 @@ class CartController extends Controller
 
     public function index()
     {
-        $cartItems = $this->getCartItems(); // This now returns an array directly.
-
+        $cartItems = $this->getCartItems();
         return view('cart', ['cartItems' => $cartItems]);
     }
 }
