@@ -17,6 +17,7 @@ class Product extends Model
         'images',
         'additional_information',
         'description',
+        'short_description',
         'custom_attributes',
     ];
 

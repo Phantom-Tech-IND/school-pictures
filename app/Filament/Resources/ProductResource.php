@@ -48,6 +48,12 @@ class ProductResource extends Resource
                     ->numeric()
                     ->prefix('CHF')
                     ->required(),
+                Forms\Components\TextInput::make('short_description')
+                    ->label('Short Description')
+                    ->maxLength(80)
+                    ->hint(fn ($state, $component) => $component->getMaxLength() - strlen($state) . '/' . $component->getMaxLength())
+                    ->reactive()
+                    ->columnSpan(2),
                 MarkdownEditor::make('description')
                     ->label('Description')
                     ->columnSpan(2),

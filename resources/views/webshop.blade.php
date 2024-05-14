@@ -91,30 +91,35 @@
                                     class="grid grid-cols-1 mt-8 gap-y-12 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-3 xl:gap-x-8">
                                     @foreach ($products as $product)
                                         <div>
-                                            <a href="{{ route('product', ['id' => $product->id]) }}">
-                                                <div class="relative">
-                                                    <div class="relative w-full overflow-hidden rounded-lg h-72">
+
+                                            <div class="relative">
+                                                <a href="{{ route('product', ['id' => $product->id]) }}"
+                                                    class="relative block overflow-hidden rounded-lg h-72 group">
                                                         <img src="{{ $product->images && count($product->images) > 0 ? asset('storage/' . $product->images[0]) : asset('images/no-image.jpg') }}"
                                                             alt="{{ $product->type }}"
-                                                            class="object-contain object-center w-full h-full">
-                                                    </div>
-                                                    <div class="relative mt-4">
-                                                        <h3 class="text-sm font-medium text-gray-900">
-                                                            {{ $product->name }}</h3>
-                                                        <p class="mt-1 text-sm text-gray-500">
-                                                            {!! Str::limit($product->description, 30) !!}
-                                                        </p>
-                                                    </div>
-                                                    <div
-                                                        class="absolute inset-x-0 top-0 flex items-end justify-end p-4 overflow-hidden rounded-lg h-72">
-                                                        <div aria-hidden="true"
-                                                            class="absolute inset-x-0 bottom-0 opacity-50 h-36 bg-gradient-to-t from-black">
+                                                            class="object-contain object-center w-full h-full transition duration-300 ease-in-out bg-[#726765] group-hover:opacity-75">
+                                                        <div
+                                                            class="absolute inset-0 flex items-center justify-center transition duration-300 ease-in-out bg-black bg-opacity-0 group-hover:bg-opacity-50">
+                                                            <span
+                                                                class="text-lg text-white opacity-0 group-hover:opacity-100">View
+                                                                Product</span>
                                                         </div>
-                                                        <p class="relative text-lg font-semibold text-white">
-                                                            ${{ $product->price }}</p>
-                                                    </div>
+
+                                                </a>
+                                                <div class="flex items-baseline justify-between mx-2 mt-4">
+                                                    <h3 class="font-medium text-gray-900 truncate ">
+                                                        {{ $product->name }}
+                                                    </h3>
+                                                    <h5 class="font-light text-gray-900">${{ $product->price }}</h5>
                                                 </div>
-                                            </a>
+                                                <div class="px-2">
+                                                    <p class="h-[3.75rem] text-sm text-gray-800 break-words line-clamp-3">
+                                                        {{ $product->short_description }}
+                                                    </p>
+                                                </div>
+
+                                            </div>
+
                                         </div>
                                     @endforeach
                                     <!-- More products... -->
