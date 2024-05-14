@@ -351,13 +351,11 @@
                     errors.push(`${attributeName}`);
                     isValid = false;
                     if (selectElement) {
-                        selectElement.classList.remove('ring-indigo-600', 'ring-2');
                         selectElement.classList.add('ring-red-500', 'ring-2');
                     }
                 } else {
                     if (selectElement) {
                         selectElement.classList.remove('ring-red-500', 'ring-2');
-                        selectElement.classList.add('ring-indigo-600', 'ring-2');
                     }
                 }
             });
@@ -379,7 +377,7 @@
             const formDataJson = JSON.stringify(Object.fromEntries(formData.entries()), null, 2);
 
             if (!validateForm(formData)) {
-                // alert(`Form Data: ${formDataJson}`);
+                alert(`Form Data: ${formDataJson}`);
                 return;
             }
 
