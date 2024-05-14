@@ -28,7 +28,6 @@ Route::controller(GuestPanelController::class)->group(function () {
     Route::get('/team', 'team')->name('team');
     Route::get('/partners', 'partners')->name('partners');
     Route::get('/view-for-testing-purposes', 'viewForTestingPurposes')->name('view-for-testing-purposes');
-    Route::get('/category/{slug}', 'showCategoryProducts')->name('category.products');
 
     // Legal and informational pages
     Route::get('/impressum', 'impressum')->name('impressum');
@@ -49,7 +48,7 @@ Route::controller(AuthController::class)->group(function () {
 // Student Specific Routes
 Route::middleware(['auth:student'])->group(function () {
     Route::controller(GuestPanelController::class)->group(function () {
-        Route::get('/shop', 'shop')->name('shop');
+        Route::get('/webshop/{slug?}', 'webshop')->name('webshop');
         Route::get('/product', 'product')->name('product');
         Route::get('/gallery-code', 'galleryCode')->name('gallery-code');
     });
