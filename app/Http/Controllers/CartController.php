@@ -23,11 +23,61 @@ class CartController extends Controller
         }, $cart));
     }
 
+    private function calculateProductTotal($product_id, $selects, $checkboxes)
+    {
+        $product = \App\Models\Product::find($product_id);
+        if (!$product) {
+            return 0; // Product not found, return 0 as total
+        }
+
+        $basePrice = $product->price;
+        $customAttributes = $product->custom_attributes;
+        $optionPrice = 0;
+
+        // Calculate price from selects
+        foreach ($selects as $title => $selectedOption) {
+            // Find the custom attribute based on the title
+            foreach ($customAttributes as $attribute) {
+                if (str_replace(' ', '_', $attribute['title']) === str_replace(' ', '_', $title) && isset($attribute['options'])) {
+                    foreach ($attribute['options'] as $option) {
+                        if (str_replace(' ', '_', $option['label']) === str_replace(' ', '_', $selectedOption) && isset($option['price'])) {
+                            $optionPrice += $option['price'];
+                        }
+                    }
+                }
+            }
+        }
+
+        // Calculate price from checkboxes
+        foreach ($checkboxes as $key => $checkboxSet) {
+            $key = str_replace('_', ' ', $key);
+            foreach ($customAttributes as $attribute) {
+                if ($attribute['title'] === $key) {
+                    foreach ($attribute['options'] as $option) {
+
+                        $optionLabelKey = $option['label'];
+                        if (!isset($option['price']) || $option['price'] == 0) {
+                            continue;
+                        }
+
+                        if (isset($checkboxSet[$optionLabelKey])) {
+                            if ($checkboxSet[$optionLabelKey] === true) {
+                                $optionPrice += $option['price'];
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        $totalPrice = $basePrice + $optionPrice; // Calculate total price including all options and checkboxes
+        return $totalPrice;
+    }
+
     public function countDistinctProducts()
     {
         $cart = $this->getCart();
-        $distinctProducts = count($cart);
-        return response()->json(['status' => 'success', 'totalItems' => $distinctProducts]);
+        return response()->json(['status' => 'success', 'totalItems' => count($cart)]);
     }
 
     public function getCartItems()
@@ -53,12 +103,15 @@ class CartController extends Controller
             'product_id' => $details['product_id'],
             'product' => $product,
             'quantity' => $details['quantity'],
-            'options' => $details['options'] ?? [],
-            'subtotal' => $product->price * $details['quantity'],
+            'selects' => $details['selects'] ?? [],
+            'files' => $details['files'] ?? [],
+            'checkbox' => $details['checkbox'] ?? [],
+            'totalPrice' => $details['totalPrice'],
+            'subtotal' => $details['totalPrice'] * $details['quantity'],
         ];
     }
 
-    public function addToCart(Request $request) // looks fine
+    public function addToCart(Request $request)
     {
         $validated = $request->validate([
             'product_id' => 'required|exists:products,id',
@@ -68,13 +121,34 @@ class CartController extends Controller
         $cart = $this->getCart();
         $product_id = $validated['product_id'];
         $quantity = $validated['quantity'];
-        $options = $request->except(['_token', 'product_id', 'quantity']);
+
+        // Extracting options
+        $allInputs = $request->except(['_token', 'product_id', 'quantity']);
+        $selects = [];
+        $files = [];
+        $checkbox = [];
+
+        foreach ($allInputs as $key => $value) {
+            if (strpos($key, 'fileInput-') === 0) {
+                $files[str_replace('fileInput-', '', $key)] = $value;
+            } elseif (is_array($value)) {
+                $checkbox[$key] = array_map(function ($val) {
+                    return $val === 'true' ? true : false;
+                }, $value);
+            } else {
+                $selects[$key] = $value;
+            }
+        }
 
         $nextIndex = count($cart);
+        $totalPrice = $this->calculateProductTotal($product_id, $selects, $checkbox);
         $cart[$nextIndex] = [
             'product_id' => $product_id,
             'quantity' => $quantity,
-            'options' => $options
+            'selects' => $selects,
+            'files' => $files,
+            'checkbox' => $checkbox,
+            'totalPrice' => $totalPrice
         ];
 
         $this->saveCart($cart);

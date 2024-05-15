@@ -597,7 +597,7 @@
                                                     <a href="#"
                                                         class="font-medium text-gray-700 hover:text-gray-800">{{ $item['product']->name }}</a>
                                                 </h4>
-                                                <p class="mt-1 text-sm text-gray-500">{{ $item['product']->description }}
+                                                <p class="mt-1 text-sm text-gray-500">{{ $item['product']->short_description }}
                                                 </p>
                                             </div>
 
@@ -612,6 +612,7 @@
 
                                                                 let subtotal = response.data.cartItems.subtotal;
                                                                 document.getElementById('subtotal').textContent = `${subtotal.toFixed(2)}`;
+                                                                window.updateCartCount();
                                                             })
                                                             .catch(error => {
                                                                 alert('Failed to remove product!');
@@ -631,7 +632,7 @@
 
                                         <div class="flex items-end justify-between flex-1 pt-2">
                                             <p class="mt-1 text-sm font-medium text-gray-900">
-                                                {{ number_format($item['product']->price, 2) }} CHF</p>
+                                                {{ number_format($item['totalPrice'], 2) }} CHF</p>
 
                                             <div class="ml-4" x-data="{ quantity: {{ $item['quantity'] }} }">
                                                 <label for="quantity-{{ $item['index'] }}" class="sr-only">Quantity</label>
@@ -742,7 +743,7 @@
                 })
                 .then(response => {
                     const items = response.data.cartItems.items;
-                    const item = items.find(item => item.id === productId);
+                    const item = items.find(item => item.index === productId);
                     let subtotal = response.data.cartItems.subtotal;
 
                     quantityInput.value = item.quantity;

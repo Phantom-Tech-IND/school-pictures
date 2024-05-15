@@ -377,7 +377,7 @@
             const formDataJson = JSON.stringify(Object.fromEntries(formData.entries()), null, 2);
 
             if (!validateForm(formData)) {
-                // alert(`Form Data: ${formDataJson}`);
+                alert(`Form Data: ${formDataJson}`);
                 return;
             }
 
