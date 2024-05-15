@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedInteger('price');
             $table->string('images')->nullable();
             $table->text('description')->nullable();
+            $table->string('short_description', 80)->nullable();
             $table->text('additional_information')->nullable();
             $table->timestamps();
             $table->json('custom_attributes')->nullable();

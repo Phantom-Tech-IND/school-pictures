@@ -22,6 +22,7 @@ class ProductSeeder extends Seeder
                 'name' => $product->name,
                 'category_id' => $product->category_id,
                 'description' => $product->description,
+                'short_description' => $product->short_description,
                 'price' => $product->price,
                 'images' => json_decode($product->images), // Assuming you want the first image
                 'product_type' => $product->product_type,
