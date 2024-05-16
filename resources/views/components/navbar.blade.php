@@ -50,8 +50,7 @@
                         </div>
                     </div>
                     <a href="{{ route('contact') }}"
-                        class="{{ request()->routeIs('contact') ? 'text-accent' : ' hover:text-accent' }} uppercase">Unsere
-                        Kontakt</a>
+                        class="{{ request()->routeIs('contact') ? 'text-accent' : ' hover:text-accent' }} uppercase">Unsere Kontakt</a>
                     @auth('student')
                         <a href="javascript:void(0);" onclick="toggleSlideOverCart()">
                             <button class="flex pl-4 border-l-2 border-accent-500">
@@ -146,7 +145,7 @@
                 fetch('{{ route('cart.count') }}')
                     .then(response => response.json())
                     .then(data => {
-                        document.getElementById('cart-count').textContent = data;
+                        document.getElementById('cart-count').textContent = data['totalItems'];
                     })
                     .catch(error => console.error('Error fetching cart count:', error));
             }
