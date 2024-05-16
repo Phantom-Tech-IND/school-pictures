@@ -374,10 +374,8 @@
             const form = event.target;
             const url = form.action;
             const formData = new FormData(form);
-            const formDataJson = JSON.stringify(Object.fromEntries(formData.entries()), null, 2);
 
             if (!validateForm(formData)) {
-                alert(`Form Data: ${formDataJson}`);
                 return;
             }
 
