@@ -2,8 +2,13 @@
 @section('content')
     <form onsubmit="handleAsyncSubmit(event)" method="POST" action="{{ route('add.to.cart') }}" id="myForm">
         @csrf
+
+        <!-- Toast Notification for displaying validation messages -->
+        <div id="toastNotification"
+            class="fixed z-50 hidden max-w-sm p-4 text-red-700 transition-transform duration-500 bg-red-100 border-l-4 border-red-500 rounded shadow-lg bottom-10 right-10">
+            <p id="toastMessage">Some message here</p>
+        </div>
         <input type="hidden" name="product_id" value="{{ $product->id }}">
-        <input type="hidden" name="quantity" x-model="quantity">
         <div class="px-4 mx-auto max-w-7xl">
             <div class="flex flex-wrap">
                 <!-- Image Gallery -->
@@ -44,13 +49,19 @@
                         {{-- selector --}}
                         @if ($attribute['type'] == 'select')
                             <div x-data="{ open: false, selected: { label: 'Select an option', price: 0 } }">
-                                <label id="listbox-label"
-                                    class="block pt-4 font-medium leading-6 text-gray-900">{{ $attribute['title'] }}</label>
+                                <label id="listbox-label-{{ $attribute['title'] }}"
+                                    class="block pt-4 font-medium leading-6 text-gray-900">
+                                    {{ $attribute['title'] }}
+                                    @if ($attribute['is_required'])
+                                        <span class="text-red-500">*</span>
+                                    @endif
+                                </label>
                                 <p class="text-sm text-gray-600">{{ $attribute['additional_info'] }}</p>
                                 <div class="relative mt-2">
                                     <button @click="open = !open" type="button"
                                         class="relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                        :aria-expanded="open" aria-haspopup="listbox" aria-labelledby="listbox-label">
+                                        :aria-expanded="open" aria-haspopup="listbox"
+                                        aria-labelledby="listbox-label-{{ $attribute['title'] }}">
                                         <span class="block truncate"
                                             x-text="selected.label + (selected.price ? ' - ' + selected.price + ' CHF' : '')"></span>
                                         <span class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
@@ -75,7 +86,8 @@
                                         x-transition:leave-start="transform opacity-100 scale-100"
                                         x-transition:leave-end="transform opacity-0 scale-95"
                                         class="absolute z-10 w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
-                                        tabindex="-1" role="listbox" aria-labelledby="listbox-label"
+                                        tabindex="-1" role="listbox"
+                                        aria-labelledby="listbox-label-{{ $attribute['title'] }}"
                                         @click.away="open = false">
                                         @foreach ($attribute['options'] as $option)
                                             <li @click="selected = { label: '{{ $option['label'] }}', price: {{ $option['price'] ?? 0 }} }; open = false"
@@ -111,9 +123,17 @@
                         {{-- checkbox --}}
                         @if ($attribute['type'] == 'checkbox')
                             <div class="mt-4">
-                                <label class="block text-sm font-medium text-gray-700">{{ $attribute['title'] }}</label>
+                                <label class="block text-sm font-medium text-gray-700">
+                                    {{ $attribute['title'] }}
+                                    @if ($attribute['is_required'])
+                                        <span class="text-red-500">*</span>
+                                    @endif
+                                </label>
                                 @foreach ($attribute['options'] as $option)
                                     <div class="mt-2">
+                                        <!-- Hidden input for false value -->
+                                        <input type="hidden"
+                                            name="{{ $attribute['title'] . '[' . $option['label'] . ']' }}" value="false">
                                         <label class="inline-flex items-center">
                                             <input type="checkbox"
                                                 class="form-checkbox checked:bg-accent-600 checked:hover:bg-accent-700 focus:ring-accent-500"
@@ -134,7 +154,10 @@
                         {{-- Existing file input section to be replaced --}}
                         @if ($attribute['type'] == 'fileInput')
                             <div class="my-4">
-                                <label class="block text-sm font-medium text-gray-700">{{ $attribute['title'] }}</label>
+                                <label class="block text-sm font-medium text-gray-700">
+                                    {{ $attribute['title'] }}
+                                    <span class="text-red-500">*</span>
+                                </label>
                                 <div class="flex items-center gap-2 isolate">
                                     @if (isset($attribute['fileInputImage']))
                                         <img src="{{ asset('storage/' . $attribute['fileInputImage']) }}"
@@ -167,16 +190,16 @@
                                                         <g>
                                                             <path
                                                                 d="M139.414,96.193c-22.673,0-41.056,18.389-41.056,41.062c0,22.678,18.383,41.062,41.056,41.062
-                                                                                                c22.678,0,41.059-18.383,41.059-41.062C180.474,114.582,162.094,96.193,139.414,96.193z M159.255,146.971h-12.06v12.06
-                                                                                                c0,4.298-3.483,7.781-7.781,7.781c-4.298,0-7.781-3.483-7.781-7.781v-12.06h-12.06c-4.298,0-7.781-3.483-7.781-7.781
-                                                                                                c0-4.298,3.483-7.781,7.781-7.781h12.06v-12.063c0-4.298,3.483-7.781,7.781-7.781c4.298,0,7.781,3.483,7.781,7.781v12.063h12.06
-                                                                                                c4.298,0,7.781,3.483,7.781,7.781C167.036,143.488,163.555,146.971,159.255,146.971z" />
+                                                                                    c22.678,0,41.059-18.383,41.059-41.062C180.474,114.582,162.094,96.193,139.414,96.193z M159.255,146.971h-12.06v12.06
+                                                                                    c0,4.298-3.483,7.781-7.781,7.781c-4.298,0-7.781-3.483-7.781-7.781v-12.06h-12.06c-4.298,0-7.781-3.483-7.781-7.781
+                                                                                    c0-4.298,3.483-7.781,7.781-7.781h12.06v-12.063c0-4.298,3.483-7.781,7.781-7.781c4.298,0,7.781,3.483,7.781,7.781v12.063h12.06
+                                                                                    c4.298,0,7.781,3.483,7.781,7.781C167.036,143.488,163.555,146.971,159.255,146.971z" />
                                                             <path
                                                                 d="M149.997,0C67.157,0,0.001,67.158,0.001,149.995s67.156,150.003,149.995,150.003s150-67.163,150-150.003
-                                                                                                S232.836,0,149.997,0z M225.438,221.254c-2.371,2.376-5.48,3.561-8.59,3.561s-6.217-1.185-8.593-3.561l-34.145-34.147
-                                                                                                c-9.837,6.863-21.794,10.896-34.697,10.896c-33.548,0-60.742-27.196-60.742-60.744c0-33.548,27.194-60.742,60.742-60.742
-                                                                                                c33.548,0,60.744,27.194,60.744,60.739c0,11.855-3.408,22.909-9.28,32.256l34.56,34.562
-                                                                                                C230.185,208.817,230.185,216.512,225.438,221.254z" />
+                                                                                    S232.836,0,149.997,0z M225.438,221.254c-2.371,2.376-5.48,3.561-8.59,3.561s-6.217-1.185-8.593-3.561l-34.145-34.147
+                                                                                    c-9.837,6.863-21.794,10.896-34.697,10.896c-33.548,0-60.742-27.196-60.742-60.744c0-33.548,27.194-60.742,60.742-60.742
+                                                                                    c33.548,0,60.744,27.194,60.744,60.739c0,11.855-3.408,22.909-9.28,32.256l34.56,34.562
+                                                                                    C230.185,208.817,230.185,216.512,225.438,221.254z" />
 
                                                         </g>
                                                     </g>
@@ -276,24 +299,71 @@
     </form>
 
     <script>
-        function validateForm() {
+        function displayToast(message) {
+            const toast = document.getElementById('toastNotification');
+            const toastMessage = document.getElementById('toastMessage');
+            toastMessage.innerText = message;
+            toast.classList.remove('hidden');
+            toast.classList.add('block');
+
+            // Automatically hide the toast after 5 seconds
+            setTimeout(() => {
+                toast.classList.remove('block');
+                toast.classList.add('hidden');
+            }, 3000);
+        }
+
+        function validateForm(formData) {
             let isValid = true;
+            let errors = [];
 
-            // Validate product ID
-            const productId = document.querySelector('input[name="product_id"]').value;
-            if (!productId) {
-                console.error('Product ID is required');
+            // Example validation for product_id to ensure it is not empty
+            if (!formData.get('product_id')) {
+                errors.push('Product ID is required.');
                 isValid = false;
             }
 
-            // Validate quantity
-            const quantity = parseInt(document.querySelector('[x-bind\\:value="quantity"]').value, 10);
-            if (isNaN(quantity) || quantity < 1) {
-                console.error('Quantity must be at least 1');
+            // Example validation for quantity to ensure it is a number and greater than 0
+            const quantity = formData.get('quantity');
+            if (!quantity || isNaN(quantity) || parseInt(quantity) <= 0) {
+                errors.push('Quantity must be a positive number. Quantity: ' + quantity);
                 isValid = false;
             }
 
-            // Add more validations as needed
+            // Validate select inputs and file inputs if they are required
+            document.querySelectorAll('input[type="hidden"][required]').forEach(input => {
+                const selectValue = formData.get(input.name);
+                let selectElement;
+                const isFileInput = input.id.startsWith(
+                    'fileInput-'); // Check if it's a file input based on ID convention
+
+                if (isFileInput) {
+                    // Target the button for file inputs using data-attribute-index
+                    const index = input.id.split('-')[1]; // Assuming the format is 'fileInput-INDEX'
+                    selectElement = document.querySelector(`button[data-attribute-index="${index}"]`);
+                } else {
+                    // Target the button for select inputs
+                    selectElement = document.querySelector(`button[aria-labelledby="listbox-label-${input.name}"]`);
+                }
+
+                if (!selectValue || selectValue === 'Select an option' || (isFileInput && selectValue === '')) {
+                    const attributeName = isFileInput ? input.name.replace('fileInput-', '') : input.name;
+                    errors.push(`${attributeName}`);
+                    isValid = false;
+                    if (selectElement) {
+                        selectElement.classList.add('ring-red-500', 'ring-2');
+                    }
+                } else {
+                    if (selectElement) {
+                        selectElement.classList.remove('ring-red-500', 'ring-2');
+                    }
+                }
+            });
+
+            // Display errors if any
+            if (!isValid) {
+                displayToast('All the * fields are required:\n' + errors.join('\n'));
+            }
 
             return isValid;
         }
@@ -301,19 +371,13 @@
         function handleAsyncSubmit(event) {
             event.preventDefault(); // Prevent normal form submission
 
-            const testFormData = new FormData(event.target);
-            const formDataJson = JSON.stringify(Object.fromEntries(testFormData.entries()), null, 2);
-            alert(`Form Data: ${formDataJson}`);
-            return;
-
-            if (!validateForm()) {
-                alert('Please correct the errors in the form.');
-                return;
-            }
-
             const form = event.target;
             const url = form.action;
             const formData = new FormData(form);
+
+            if (!validateForm(formData)) {
+                return;
+            }
 
             fetch(url, {
                     method: 'POST',

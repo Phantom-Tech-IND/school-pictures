@@ -584,7 +584,7 @@
                         <h3 class="sr-only">Items in your cart</h3>
                         <ul id="cart-items" role="list" class="divide-y divide-gray-200">
                             @foreach ($cartItems['items'] as $item)
-                                <li id="cart-item-{{ $item['id'] }}" class="flex px-4 py-6 sm:px-6">
+                                <li id="cart-item-{{ $item['index'] }}" class="flex px-4 py-6 sm:px-6">
                                     <div class="flex-shrink-0">
                                         <img src="{{ $item['product']->images[0] }}" alt="{{ $item['product']->name }}"
                                             class="w-20 rounded-md">
@@ -597,21 +597,22 @@
                                                     <a href="#"
                                                         class="font-medium text-gray-700 hover:text-gray-800">{{ $item['product']->name }}</a>
                                                 </h4>
-                                                <p class="mt-1 text-sm text-gray-500">{{ $item['product']->description }}
+                                                <p class="mt-1 text-sm text-gray-500">{{ $item['product']->short_description }}
                                                 </p>
                                             </div>
 
                                             <div class="flex-shrink-0 flow-root ml-4">
-                                                <button type="button" data-product-id="{{ $item['id'] }}"
+                                                <button type="button" data-product-id="{{ $item['index'] }}"
                                                     class="-m-2.5 flex items-center justify-center bg-white p-2.5 text-gray-400 hover:text-gray-500"
                                                     onclick="
-                                                        axios.post('/cart/remove/' + {{ $item['id'] }})
+                                                        axios.post('/cart/remove/' + {{ $item['index'] }})
                                                             .then(response => {
-                                                                const itemElement = document.getElementById('cart-item-' + {{ $item['id'] }});
+                                                                const itemElement = document.getElementById('cart-item-' + {{ $item['index'] }});
                                                                 if (itemElement) { itemElement.remove(); }
 
                                                                 let subtotal = response.data.cartItems.subtotal;
                                                                 document.getElementById('subtotal').textContent = `${subtotal.toFixed(2)}`;
+                                                                window.updateCartCount();
                                                             })
                                                             .catch(error => {
                                                                 alert('Failed to remove product!');
@@ -631,20 +632,20 @@
 
                                         <div class="flex items-end justify-between flex-1 pt-2">
                                             <p class="mt-1 text-sm font-medium text-gray-900">
-                                                {{ number_format($item['product']->price, 2) }} CHF</p>
+                                                {{ number_format($item['totalPrice'], 2) }} CHF</p>
 
                                             <div class="ml-4" x-data="{ quantity: {{ $item['quantity'] }} }">
-                                                <label for="quantity-{{ $item['id'] }}" class="sr-only">Quantity</label>
+                                                <label for="quantity-{{ $item['index'] }}" class="sr-only">Quantity</label>
                                                 <div class="flex items-center border border-gray-300 rounded-md shadow-sm">
                                                     <button type="button"
-                                                        @click="updateQuantity(-1, {{ $item['id'] }})"
+                                                        @click="updateQuantity(-1, {{ $item['index'] }})"
                                                         class="p-2 text-base font-medium text-gray-700 focus:outline-none focus:border-accent-500 focus:ring-1 focus:ring-accent-500 sm:text-lg">-</button>
-                                                    <input id="quantity-{{ $item['id'] }}" name="quantity"
+                                                    <input id="quantity-{{ $item['index'] }}" name="quantity"
                                                         type="text" x-model="quantity"
                                                         class="w-12 text-base font-medium text-center text-gray-700 border-none focus:outline-none focus:ring-0 sm:text-sm"
                                                         readonly disabled>
                                                     <button type="button"
-                                                        @click="updateQuantity(1, {{ $item['id'] }})"
+                                                        @click="updateQuantity(1, {{ $item['index'] }})"
                                                         class="p-2 text-base font-medium text-gray-700 focus:outline-none focus:border-accent-500 focus:ring-1 focus:ring-accent-500 sm:text-lg">+</button>
                                                 </div>
                                             </div>
@@ -742,7 +743,7 @@
                 })
                 .then(response => {
                     const items = response.data.cartItems.items;
-                    const item = items.find(item => item.id === productId);
+                    const item = items.find(item => item.index === productId);
                     let subtotal = response.data.cartItems.subtotal;
 
                     quantityInput.value = item.quantity;
