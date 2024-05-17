@@ -41,13 +41,9 @@ class AdminPanelProvider extends PanelProvider
                 Pages\Dashboard::class,
             ])
             ->widgets([
-                \Filament\Widgets\AccountWidget::class,
-                \Filament\Widgets\FilamentInfoWidget::class,
+                Widgets\ThreeInOneStatsWidget::class,
                 Widgets\RevenueWidget::class,
-                Widgets\NewCustomersWidget::class,
-                Widgets\NewOrdersWidget::class,
                 Widgets\OrdersPerMonthWidget::class,
-                Widgets\TotalCustomersWidget::class,
                 Widgets\LatestOrdersListWidget::class,
             ])
             ->middleware([
