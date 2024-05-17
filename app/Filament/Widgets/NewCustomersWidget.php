@@ -11,19 +11,26 @@ class NewCustomersWidget extends BaseWidget
 {
     protected function getStats(): array
     {
-        $today = Carbon::today();
-        $startOfMonth = Carbon::now()->startOfMonth();
+        $now = Carbon::now();
+        $startOfLast30Days = $now->copy()->subDays(30);
+        $startOfLast60Days = $now->copy()->subDays(60);
 
-        $newContactsToday = Contact::whereDate('created_at', $today)->count();
-        $newContactsThisMonth = Contact::whereBetween('created_at', [$startOfMonth, now()])->count();
+        $newCustomersLast30Days = Contact::whereBetween('created_at', [$startOfLast30Days, $now])->count();
+        $newCustomers30To60Days = Contact::whereBetween('created_at', [$startOfLast60Days, $startOfLast30Days])->count();
+
+        $difference = $newCustomersLast30Days - $newCustomers30To60Days;
+        $percentageChange = $newCustomers30To60Days > 0 ? round(($difference / $newCustomers30To60Days) * 100) : 0;
+
+        $description = sprintf("%+d%% compared to last month", $percentageChange);
+        $color = $percentageChange >= 0 ? 'success' : 'danger';
+        $descriptionIcon = $percentageChange >= 0 ? 'feathericon-trending-up' : 'feathericon-trending-down';
+
         return [
-            Stat::make('New Contacts Today', $newContactsToday)
-                ->description('Registered today')
-                ->color('success'),
-            Stat::make('New Contacts This Month', $newContactsThisMonth)
-                ->value($newContactsThisMonth)
-                ->description('Registered this month')
-                ->color('primary'),
+            Stat::make('New Customers This Month', $newCustomersLast30Days)
+                ->description($description)
+                ->descriptionIcon($descriptionIcon)
+                ->color($color)
+                ->icon('heroicon-o-user-group'),
         ];
     }
 }
