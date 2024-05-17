@@ -19,7 +19,11 @@ class MessageFactory extends Factory
         return [
             'name' => $this->faker->name,
             'email' => $this->faker->unique()->safeEmail,
-            'text' => $this->faker->paragraph,
+            'message' => $this->faker->text,
+            'subject' => $this->faker->sentence,
+            'appointment_date' => $this->faker->date,
+            'appointment_time' => $this->faker->time,
+            'interests' => json_encode($this->faker->words(5)),
         ];
     }
 }

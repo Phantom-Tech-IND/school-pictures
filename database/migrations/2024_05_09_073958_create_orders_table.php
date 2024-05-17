@@ -12,12 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('orders', function (Blueprint $table) {
+            $table->id();
             $table->uuid('uuid');
             $table->decimal('amount', 10, 2);
             $table->timestamp('time');
             $table->string('status');
+            $table->index('status');
             $table->string('invoice');
             $table->foreignId('contact_id')->constrained('contacts');
+            $table->timestamps();
         });
     }
 

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->enum('product_type', ['personal', 'school']);
-            $table->unsignedInteger('price');
+            $table->decimal('price', 8, 2);
             $table->string('images')->nullable();
             $table->text('description')->nullable();
             $table->string('short_description', 80)->nullable();
