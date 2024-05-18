@@ -2,12 +2,14 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Resources\ContactRelationManagerResource\RelationManagers\ContactsRelationManager;
 use App\Filament\Resources\OrderResource\Pages;
 use App\Models\Order;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
 class OrderResource extends Resource
@@ -17,6 +19,13 @@ class OrderResource extends Resource
     protected static ?string $navigationGroup = 'Customer';
 
     protected static ?string $navigationIcon = 'heroicon-c-shopping-bag';
+
+    public static function getNavigationBadge(): ?string
+    {
+        $count = static::getModel()::count();
+
+        return $count > 100 ? '100+' : (string) $count;
+    }
 
     public static function form(Form $form): Form
     {
@@ -33,17 +42,36 @@ class OrderResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('uuid'),
-                Tables\Columns\TextColumn::make('amount')->money('usd'),
-                Tables\Columns\TextColumn::make('status'),
-                Tables\Columns\TextColumn::make('time')->dateTime(),
-                Tables\Columns\TextColumn::make('invoice'),
-                Tables\Columns\TextColumn::make('contact.name')->label('Contact Name'),
-                Tables\Columns\TextColumn::make('contact.email')->label('Contact Email'),
-                Tables\Columns\TextColumn::make('contact.phone')->label('Contact Phone'),
+                TextColumn::make('contact.name')
+                    ->label('Contact Name'),
+                TextColumn::make('contact.email')
+                    ->label('Contact Email')
+                    ->url(fn ($record) => 'mailto:'.$record->contact->email)
+                    ->openUrlInNewTab(),
+                TextColumn::make('time')
+                    ->dateTime()
+                    ->date('d M Y'),
+                TextColumn::make('amount')
+                    ->money('CHF'),
+                TextColumn::make('status')
+                    ->label('Status')
+                    ->badge(function (Order $record) {
+                        return $record->status;
+                    })
+                    ->colors([
+                        'success' => 'completed',
+                        'danger' => 'cancelled',
+                        'warning' => 'pending',
+                        'info' => 'processing',
+                    ]),
+                TextColumn::make('invoice')
+                    ->label('Invoice'),
+                TextColumn::make('contact.phone')
+                    ->label('Contact Phone')
+                    ->url(fn ($record) => 'tel:'.$record->contact->phone)
+                    ->openUrlInNewTab(),
             ])
             ->filters([
-                //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -59,6 +87,7 @@ class OrderResource extends Resource
     {
         return [
             //
+            ContactsRelationManager::class,
         ];
     }
 
