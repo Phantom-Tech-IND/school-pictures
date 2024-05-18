@@ -2,22 +2,20 @@
 
 namespace App\Filament\Widgets;
 
-use Filament\Widgets\TableWidget;
-
+use App\Filament\Resources\OrderResource\Pages\EditOrder;
+use App\Models\Order;
 use Filament\Forms\Components\DatePicker;
 use Filament\Tables\Columns\BadgeColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
-
+use Filament\Widgets\TableWidget;
 use Illuminate\Database\Eloquent\Builder;
-
-use App\Models\Order;
 
 class LatestOrdersListWidget extends TableWidget
 {
-    protected int | string | array $columnSpan = 'full';
+    protected int|string|array $columnSpan = 'full';
 
     public function table(Table $table): Table
     {
@@ -71,7 +69,10 @@ class LatestOrdersListWidget extends TableWidget
                                 $data['created_until'],
                                 fn (Builder $query, $date): Builder => $query->whereDate('created_at', '<=', $date)
                             );
-                    })
-            ]);
+                    }),
+            ])->recordUrl(function (Order $record): string {
+                return EditOrder::getUrl([$record->id]);
+            });
+
     }
 }

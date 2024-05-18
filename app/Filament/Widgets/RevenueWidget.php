@@ -1,10 +1,10 @@
-<?php declare(strict_types=1);
+<?php
 
 namespace App\Filament\Widgets;
 
-use Filament\Widgets\ChartWidget;
 use App\Models\Order;
 use Carbon\Carbon;
+use Filament\Widgets\ChartWidget;
 
 class RevenueWidget extends ChartWidget
 {
@@ -14,19 +14,17 @@ class RevenueWidget extends ChartWidget
     {
         $startDate = Carbon::now()->subDays(30);
         $endDate = Carbon::now();
-        
-        $data = [];
 
-        for ($date = clone $startDate; $date->lte($endDate); $date->addDay()) {
+        for ($date = $startDate->clone(); $date->lte($endDate); $date->addDay()) {
             $data[$date->format('Y-m-d')] = ['x' => $date->format('Y-m-d'), 'y' => 0];
         }
 
         $orders = Order::whereBetween('created_at', [$startDate, $endDate])
-                       ->orderBy('created_at')
-                       ->get()
-                       ->groupBy(function ($date) {
-                           return Carbon::parse($date->created_at)->format('Y-m-d'); // grouping by day
-                       });
+            ->orderBy('created_at')
+            ->get()
+            ->groupBy(function ($date) {
+                return Carbon::parse($date->created_at)->format('Y-m-d'); // grouping by day
+            });
 
         foreach ($orders as $date => $dailyOrders) {
             $dailyTotal = $dailyOrders->sum('amount');
