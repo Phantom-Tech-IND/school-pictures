@@ -2,16 +2,20 @@
 
 namespace App\Filament\Widgets;
 
-use App\Models\Order; // Corrected import for Order model
-use Filament\Tables;
-use Filament\Tables\Columns\BadgeColumn; // Import BadgeColumn
-use Filament\Tables\Columns\TextColumn; // Corrected import for TextColumn
-use Filament\Tables\Filters\SelectFilter; // Import SelectFilter
-use Filament\Tables\Table;
-use Filament\Widgets\TableWidget as BaseWidget;
-use Filament\Tables\Enums\FiltersLayout;
+use Filament\Widgets\TableWidget;
 
-class LatestOrdersListWidget extends BaseWidget
+use Filament\Forms\Components\DatePicker;
+use Filament\Tables\Columns\BadgeColumn;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\Filter;
+use Filament\Tables\Filters\SelectFilter;
+use Filament\Tables\Table;
+
+use Illuminate\Database\Eloquent\Builder;
+
+use App\Models\Order;
+
+class LatestOrdersListWidget extends TableWidget
 {
     protected int | string | array $columnSpan = 'full';
 
@@ -19,7 +23,7 @@ class LatestOrdersListWidget extends BaseWidget
     {
         return $table
             ->query(
-                Order::query()->latest()->with('contact')
+                Order::query()->with('contact')
             )
             ->columns([
                 TextColumn::make('created_at')
@@ -49,7 +53,25 @@ class LatestOrdersListWidget extends BaseWidget
                         'cancelled' => 'Cancelled',
                         'pending' => 'Pending',
                         'processing' => 'Processing',
+                    ]),
+                Filter::make('created_at')
+                    ->form([
+                        DatePicker::make('created_from')
+                            ->placeholder('From Date'),
+                        DatePicker::make('created_until')
+                            ->placeholder('To Date'),
                     ])
-            ], layout: FiltersLayout::AboveContent);
+                    ->query(function (Builder $query, array $data): Builder {
+                        return $query
+                            ->when(
+                                $data['created_from'],
+                                fn (Builder $query, $date): Builder => $query->whereDate('created_at', '>=', $date)
+                            )
+                            ->when(
+                                $data['created_until'],
+                                fn (Builder $query, $date): Builder => $query->whereDate('created_at', '<=', $date)
+                            );
+                    })
+            ]);
     }
 }
