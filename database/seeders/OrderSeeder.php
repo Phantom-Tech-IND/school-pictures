@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
-use App\Models\Order; // Ensure the Order model is imported
+use App\Models\Contact;
+use App\Models\Order;
+use Illuminate\Database\Seeder; // Ensure the Order model is imported
 
 class OrderSeeder extends Seeder
 {
@@ -13,6 +13,10 @@ class OrderSeeder extends Seeder
      */
     public function run(): void
     {
-        Order::factory(50)->create(); // Creates 50 order records
+        $contacts = Contact::all();
+        Order::factory(50)->create()->each(function ($order) use ($contacts) {
+            $order->contact_id = $contacts->random()->id;
+            $order->save();
+        }); // Creates 50 order records
     }
 }
