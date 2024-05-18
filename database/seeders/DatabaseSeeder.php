@@ -31,7 +31,6 @@ class DatabaseSeeder extends Seeder
             OfferItemSeeder::class,
             ProductSeeder::class,
             StudentSeeder::class,
-            OrderSeeder::class,
         ]);
 
     }
