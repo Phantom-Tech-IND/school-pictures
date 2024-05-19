@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
@@ -63,6 +64,43 @@ class CartController extends Controller
         ]);
     }
 
+    public function createPaymentForm()
+    {
+        $instanceName = 'https://adriansasu.payrexx.com';
+        $secret = '6rIF7j6kJgYixrV7QPlFfdmq33WZZ9';
+
+        try {
+            $payrexx = new \Payrexx\Payrexx($instanceName, $secret);
+
+            $gateway = new \Payrexx\Models\Request\Gateway();
+            $gateway->setAmount(100 * 100); // Amount in cents (100 CHF)
+            $gateway->setVatRate(7.70); // VAT rate
+            $gateway->setCurrency('CHF'); // Currency
+
+            $response = $payrexx->create($gateway);
+
+            echo '<pre>';
+            print_r($response);
+            echo '</pre>';
+
+            if ($response && isset($response->links)) {
+                $paymentUrl = $response->links[0]->url;
+
+                return $paymentUrl;
+            } else {
+                throw new Exception('No link found in the response');
+            }
+        } catch (\Payrexx\PayrexxException $e) {
+            error_log('PayrexxException: '.$e->getMessage());
+
+            return redirect()->back()->with('error', $e->getMessage());
+        } catch (Exception $e) {
+            error_log('Exception: '.$e->getMessage());
+
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+    }
+
     public function countItems()
     {
         $cart = session()->get('cart', []);
@@ -113,7 +151,8 @@ class CartController extends Controller
     public function index()
     {
         $cartItems = $this->getCartItems(); // This now returns an array directly.
+        $paymentUrl = $this->createPaymentForm();
 
-        return view('cart', ['cartItems' => $cartItems]);
+        return view('cart', ['cartItems' => $cartItems, 'paymentUrl' => $paymentUrl]);
     }
 }

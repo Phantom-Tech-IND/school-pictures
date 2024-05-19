@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\Filament\GuestPanelController;
+use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -45,8 +46,10 @@ Route::controller(GuestPanelController::class)->group(function () {
 });
 
 Route::post('/login', [AuthController::class, 'login'])->name('login');
+Route::post('/payment', [PaymentController::class, 'createPaymentForm'])->name('payment.create');
 Route::middleware(['auth:student'])->group(function () {
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::get('/payment', [PaymentController::class, 'createPaymentForm'])->name('payment.create');
     Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('add.to.cart');
     Route::get('/cart', [CartController::class, 'index'])->name('cart');
     Route::get('/cart/count', [CartController::class, 'countItems'])->name('cart.count');
