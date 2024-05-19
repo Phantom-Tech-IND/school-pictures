@@ -66,7 +66,7 @@ class CartController extends Controller
 
     public function createPaymentForm()
     {
-        $instanceName = 'https://adriansasu.payrexx.com';
+        $instanceName = 'adriansasu';
         $secret = '6rIF7j6kJgYixrV7QPlFfdmq33WZZ9';
 
         try {
@@ -79,11 +79,14 @@ class CartController extends Controller
 
             $response = $payrexx->create($gateway);
 
+            dd($response);
+
             echo '<pre>';
             print_r($response);
             echo '</pre>';
 
             if ($response && isset($response->links)) {
+
                 $paymentUrl = $response->links[0]->url;
 
                 return $paymentUrl;
