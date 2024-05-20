@@ -5,12 +5,12 @@
     @endguest
 
     @auth('student')
-        <div class="flex items-center mx-auto max-w-7xl lg:px-8 font-bold justify-between text-white gap-4">
+        <div class="flex items-center justify-between gap-4 mx-auto font-bold text-white max-w-7xl lg:px-8">
             <a href="{{ route('gallery-code') }}"
-                class="cursor-pointer flex gap-2 hover:text-accent-100"><x-heroicon-s-rectangle-stack class="w-6 h-6" />
+                class="flex gap-2 cursor-pointer hover:text-accent-100"><x-heroicon-s-rectangle-stack class="w-6 h-6" />
                 Go
                 back to gallery</a>
-            <a href="{{ route('logout') }}" class="cursor-pointer hover:text-accent-100 flex gap-2 align-middle">Logout
+            <a href="{{ route('logout') }}" class="flex gap-2 align-middle cursor-pointer hover:text-accent-100">Logout
                 <x-heroicon-s-arrow-left-on-rectangle class="w-6 h-6 font-bold stroke-current" /></a>
         </div>
     @endauth
@@ -23,18 +23,22 @@
                     Galerie Code Anmeldung</h2>
                 <p class="mb-4 text-center">Um die Bilder Ihres Shootings betrachten zu können, sowie für
                     Nachbestellungen und Fotoprodukte, melden Sie sich bitte mit Ihrem Galerie-Code an.</p>
-                <form action="{{ route('login') }}" method="POST" class="my-4">
+                <form action="{{ route('login') }}" method="POST" class="my-4" onsubmit="return beforeFormSubmit(event)">
                     @csrf
                     <div class="flex flex-wrap">
                         <label class="w-full text-sm" for="name">Children-Code:</label>
                         <input type="text" name="name"
-                            class="w-full p-2 border  focus:outline-2 focus:outline-accent-500 focus:ring-2 focus:ring-accent-500 rounded-sm"
+                            class="w-full p-2 border rounded-sm focus:outline-2 focus:outline-accent-500 focus:ring-2 focus:ring-accent-500"
                             placeholder="Gallery Code">
-                        <label class="w-full text-sm mt-4" for="birth_date">Child's Birth-Date:</label>
-                        <input type="date" name="birth_date"
-                            class="w-full p-2 border  focus:outline-2 focus:outline-accent-500 focus:ring-2 focus:ring-accent-500 rounded-sm"
-                            placeholder="Select Date">
-                        <button type="submit" class="w-full mt-4 p-2 text-white rounded  bg-accent"
+                        <label class="w-full mt-4 text-sm" for="birth_date">Child's Birth-Date:</label>
+                        <input type="text" name="birth_date"
+                            class="w-full p-2 border rounded-sm focus:outline-2 focus:outline-accent-500 focus:ring-2 focus:ring-accent-500"
+                            placeholder="Enter Birth Date (DD/MM/YYYY)"
+                            pattern="\d{2}/\d{2}/\d{4}"
+                            minlength="10"
+                            maxlength="10"
+                            oninput="formatDateInput(this)">
+                        <button type="submit" class="w-full p-2 mt-4 text-white rounded bg-accent"
                             @click="showDialog = false">Login</button>
                     </div>
                 </form>
@@ -53,3 +57,34 @@
         display: none !important;
     }
 </style>
+
+<script>
+function formatDateInput(input) {
+    let value = input.value.replace(/[^\d]/g, '');
+    if (value.length > 2) {
+        value = value.slice(0, 2) + '/' + value.slice(2);
+    }
+    if (value.length > 5) {
+        value = value.slice(0, 5) + '/' + value.slice(5);
+    }
+    input.value = value;
+}
+
+function beforeFormSubmit(event) {
+    const birthDateInput = event.target.birth_date.value;
+    const parts = birthDateInput.split('/');
+    if (parts.length === 3) {
+        // Assuming the format is DD/MM/YYYY
+        const formattedDate = `${parts[2]}-${parts[1]}-${parts[0]}`; // Convert to YYYY-MM-DD
+        const date = new Date(formattedDate);
+        if (!isNaN(date.getTime())) {
+            event.target.birth_date.value = date.toISOString().split('T')[0];
+
+            return true; // Allow form submission if date is valid
+        }
+    }
+    return false; // Prevent form submission on error
+}
+</script>
+
+
