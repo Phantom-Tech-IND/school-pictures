@@ -8,8 +8,8 @@
         'title' => $student->name,
         'image' => '/minimalistic-loft-photo-studio-scaled.jpg',
     ])
-    <div class="bg-white px-6 py-24 sm:py-32 lg:px-8">
-        <div class="mx-auto max-w-4xl text-center">
+    <div class="px-6 py-24 bg-white sm:py-8 lg:px-8">
+        <div class="max-w-4xl mx-auto text-center">
             <h2 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">Fotoshooting
                 im Kindergarten Buttisholz</h2>
             <p class="mt-6 text-lg leading-8 text-gray-600">Herzlich willkommen in Ihrer privaten Online Galerie. Besten
@@ -17,23 +17,23 @@
         </div>
     </div>
 
-    <div class="px-6 mx-auto max-w-7xl lg:px-8">
-        <div class="gap-3 mx-auto space-y-3 columns-2 xs:columns-3 max-w-7xl pb-28">
+    <div class="px-6 mx-auto mb-6 max-w-7xl lg:px-8">
+        <div class="grid grid-cols-2 gap-3 py-6 mx-auto max-w-7xl xs:grid-cols-3">
             @foreach ($student->photos as $photo)
-                <div class="bg-black break-inside-avoid group">
+                <div class="relative bg-black break-inside-avoid group aspect-square" style="margin-top: 0">
                     <a href="{{ asset('storage/' . $photo->photo_path) }}" data-fslightbox="gallery">
                         <img src="{{ asset('storage/' . $photo->photo_path) }}" alt=""
-                            class="transition-opacity duration-300 bg-black group-hover:opacity-50">
+                            class="object-cover w-full h-full transition-opacity duration-300 bg-black group-hover:opacity-50">
                     </a>
                 </div>
             @endforeach
         </div>
     </div>
 
-    <div class="bg-accent text-white py-14 ">
-        <div class="mx-auto max-w-7xl px-6 lg:px-8">
-            <div class="mx-auto max-w-4xl lg:mx-0">
-                <h2 class="text-4xl font-bold tracking-tight  ">ENTDECKEN SIE HIER DAS PASSENDE
+    <div class="py-8 text-white bg-accent ">
+        <div class="px-6 mx-auto max-w-7xl lg:px-8">
+            <div class="max-w-4xl mx-auto lg:mx-0">
+                <h2 class="text-4xl font-bold tracking-tight ">ENTDECKEN SIE HIER DAS PASSENDE
                     PRODUKT FÜR IHRE WÜNSCHE. </h2>
                 <p class="mt-6 text-lg leading-8 ">Alle Preise exkl. MwSt. Die Steuer wird im Warenkorb
                     berechnet und angezeigt.</p>
@@ -41,31 +41,39 @@
         </div>
     </div>
 
-    <div class="bg-white mt-12">
-        <div class="mx-auto max-w-2xl px-4  sm:px-6  lg:max-w-7xl lg:px-8">
-            <h2 class="sr-only">Products</h2>
-            <div class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
-                @foreach ($products as $product)
-                    <a href="{{ route('product', ['id' => $product->id]) }}" class="group">
+
+    <div class="max-w-2xl px-4 mx-auto mt-16 sm:px-6 lg:max-w-7xl lg:px-8">
+        <h2 class="sr-only">Products</h2>
+        <div class="grid grid-cols-1 mt-8 gap-y-12 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
+            @foreach ($products as $product)
+                <div class="relative">
+                    <a href="{{ route('product', ['id' => $product->id]) }}"
+                        class="relative block overflow-hidden rounded-lg h-60 sm:h-72 group">
+                        <img src="{{ $product->images && count($product->images) > 0 ? asset('storage/' . $product->images[0]) : asset('images/no-image.jpg') }}"
+                            alt="{{ $product->type }}"
+                            class="object-contain object-center w-full h-full transition duration-300 ease-in-out bg-[#726765] group-hover:opacity-75">
                         <div
-                            class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
-                            @if (count($product->images) > 0)
-                                <!-- Check if there are images -->
-                                <img src="{{ asset('storage/' . $product->images[0]) }}" alt="{{ $product->name }}"
-                                    class="h-full w-full object-cover object-center group-hover:opacity-75">
-                            @else
-                                <img src="https://via.placeholder.com/150" alt="Default Image"
-                                    class="h-full w-full object-cover object-center group-hover:opacity-75">
-                            @endif
+                            class="absolute inset-0 flex items-center justify-center transition duration-300 ease-in-out bg-black bg-opacity-0 group-hover:bg-opacity-50">
+                            <span class="text-lg text-white opacity-0 group-hover:opacity-100">View
+                                Product</span>
                         </div>
-                        <h3 class="mt-4 text-sm text-gray-700">{{ $product->name }}</h3>
-                        <p class="mt-1 text-lg font-medium text-gray-900">${{ number_format($product->price, 2) }}</p>
+
                     </a>
-                @endforeach
+                    <div class="flex items-baseline justify-between mx-2 mt-4">
+                        <h3 class="font-medium text-gray-900 truncate ">
+                            {{ $product->name }}
+                        </h3>
+                        <h5 class="font-light text-gray-900">${{ $product->price }}</h5>
+                    </div>
+                    <div class="px-2">
+                        <p class="h-[3.75rem] text-sm text-gray-800 break-words line-clamp-3">
+                            {{ $product->short_description }}
+                        </p>
+                    </div>
 
-
-                <!-- More products... -->
-            </div>
+                </div>
+            @endforeach
+            <!-- More products... -->
         </div>
     </div>
 @endsection

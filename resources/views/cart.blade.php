@@ -477,7 +477,7 @@
                         </div>
                     </div>
 
-                    <div class="pt-10 mt-10 border-t border-gray-200" x-data="{ deliveryMethod: 'Standard' }">
+                    {{-- <div class="pt-10 mt-10 border-t border-gray-200" x-data="{ deliveryMethod: 'Standard' }">
                         <fieldset>
                             <legend class="text-lg font-medium text-gray-900">Delivery method</legend>
 
@@ -557,7 +557,7 @@
                             document.getElementById('delivery-method-express').addEventListener('click', updateShippingCost);
                             document.getElementById('delivery-method-standard').addEventListener('click', updateShippingCost);
                         </script>
-                    </div>
+                    </div> --}}
 
                     <div class="pt-10 mt-10 border-t border-gray-200" x-data="{ comment: '', commentLength: 0 }">
                         <h2 class="text-lg font-medium text-gray-900">Comments</h2>
@@ -695,28 +695,31 @@
                         <div class="px-4 py-6 space-y-6 border-t border-gray-200 sm:px-6">
                             <h2 class="text-lg font-medium text-gray-900">Payment</h2>
 
-                            <fieldset class="mt-4">
+                            <fieldset class="mt-4" x-data="{ paymentType: 'credit_twint' }">
                                 <legend class="sr-only">Payment type</legend>
                                 <div class="space-y-4 sm:flex sm:items-center sm:space-x-10 sm:space-y-0">
                                     <div class="flex items-center">
-                                        <input id="twint" name="payment-type" type="radio" value="twint"
-                                            checked class="w-4 h-4 border-gray-300 text-accent-600 focus:ring-accent-500">
-                                        <label for="twint"
-                                            class="block ml-3 text-sm font-medium text-gray-700">Twint</label>
+                                        <input id="credit_twint" name="payment_type" type="radio" value="credit_twint"
+                                            x-model="paymentType" checked class="w-4 h-4 border-gray-300 text-accent-600 focus:ring-accent-500">
+                                        <label for="credit_twint"
+                                            class="block ml-3 text-sm font-medium text-gray-700">Credit cards / TWINT</label>
                                     </div>
                                     <div class="flex items-center">
-                                        <input id="direct-card" name="payment-type" type="radio" value="direct-card"
-                                            class="w-4 h-4 border-gray-300 text-accent-600 focus:ring-accent-500">
-                                        <label for="direct-card"
-                                            class="block ml-3 text-sm font-medium text-gray-700">Direct card</label>
+                                        <input id="bank_transfer" name="payment_type" type="radio" value="bank_transfer"
+                                            x-model="paymentType" class="w-4 h-4 border-gray-300 text-accent-600 focus:ring-accent-500">
+                                        <label for="bank_transfer"
+                                            class="block ml-3 text-sm font-medium text-gray-700">Bank transfer/advance payment</label>
                                     </div>
                                 </div>
+                                <p x-show="paymentType === 'bank_transfer'" class="mt-2 text-sm text-gray-500">
+                                    Transfer directly to our bank account. Please use your order number as the reference. Your order will be processed only after the funds have been received in our account. You will receive our bank details upon confirming your order.
+                                </p>
                             </fieldset>
                         </div>
                         <div class="px-4 py-6 border-t border-gray-200 sm:px-6">                         
                             <button
                                 onclick="{{ $paymentUrl }}"
-                                class="w-full px-4 py-3 text-base font-medium text-white border border-transparent rounded-md shadow-sm  btn-zahls-modal bg-accent-600 hover:bg-accent-700 focus:outline-none focus:ring-2 focus:ring-accent-500 focus:ring-offset-2 focus:ring-offset-gray-50">Confirm
+                                class="w-full px-4 py-3 text-base font-medium text-white border border-transparent rounded-md shadow-sm btn-zahls-modal bg-accent-600 hover:bg-accent-700 focus:outline-none focus:ring-2 focus:ring-accent-500 focus:ring-offset-2 focus:ring-offset-gray-50">Confirm
                                 order</button>
                         </div>
                     </div>
