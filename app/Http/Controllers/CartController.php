@@ -26,8 +26,8 @@ class CartController extends Controller
 
     public function createPaymentForm()
     {
-        $instanceName = 'adriansasu';
-        $secret = '6rIF7j6kJgYixrV7QPlFfdmq33WZZ9';
+        $instanceName = env('PAYMENT_INSTANCE_NAME');
+        $secret = env('PAYMENT_SECRET');
 
         $cartItems = $this->getCartItems();
         // dd($cartItems);

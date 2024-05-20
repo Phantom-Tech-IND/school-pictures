@@ -716,7 +716,7 @@
                         <div class="px-4 py-6 border-t border-gray-200 sm:px-6">                         
                             <button
                                 onclick="{{ $paymentUrl }}"
-                                class=" btn-zahls-modal w-full px-4 py-3 text-base font-medium text-white border border-transparent rounded-md shadow-sm bg-accent-600 hover:bg-accent-700 focus:outline-none focus:ring-2 focus:ring-accent-500 focus:ring-offset-2 focus:ring-offset-gray-50">Confirm
+                                class="w-full px-4 py-3 text-base font-medium text-white border border-transparent rounded-md shadow-sm  btn-zahls-modal bg-accent-600 hover:bg-accent-700 focus:outline-none focus:ring-2 focus:ring-accent-500 focus:ring-offset-2 focus:ring-offset-gray-50">Confirm
                                 order</button>
                         </div>
                     </div>
@@ -724,6 +724,7 @@
             </form>
         </div>
     </div>
+        
 @endsection
 <!-- Anchor tag should be here because modal does not answare without it -->
 <a class="btn-zahls btn-zahls-modal" href="{{ $paymentUrl }}" style="display: none;"> </a>
