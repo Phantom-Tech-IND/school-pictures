@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
@@ -23,10 +24,45 @@ class CartController extends Controller
         }, $cart));
     }
 
+    public function createPaymentForm()
+    {
+        $instanceName = 'adriansasu';
+        $secret = '6rIF7j6kJgYixrV7QPlFfdmq33WZZ9';
+
+        $cartItems = $this->getCartItems();
+        // dd($cartItems);
+
+        try {
+            $payrexx = new \Payrexx\Payrexx($instanceName, $secret, '', 'zahls.ch');
+
+            $gateway = new \Payrexx\Models\Request\Gateway();
+            $gateway->setAmount(($cartItems['subtotal'] * 100));
+            $gateway->setCurrency('CHF');
+
+            $response = $payrexx->create($gateway);
+
+            if ($response && ! empty($response->getLink())) {
+                $paymentUrl = $response->getLink();
+
+                return $paymentUrl;
+            } else {
+                throw new Exception('No link found in the response');
+            }
+        } catch (\Payrexx\PayrexxException $e) {
+            error_log('PayrexxException: '.$e->getMessage());
+
+            return redirect()->back()->with('error', $e->getMessage());
+        } catch (Exception $e) {
+            error_log('Exception: '.$e->getMessage());
+
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+    }
+
     private function calculateProductTotal($product_id, $selects, $checkboxes)
     {
         $product = \App\Models\Product::find($product_id);
-        if (!$product) {
+        if (! $product) {
             return 0; // Product not found, return 0 as total
         }
 
@@ -56,7 +92,7 @@ class CartController extends Controller
                     foreach ($attribute['options'] as $option) {
 
                         $optionLabelKey = $option['label'];
-                        if (!isset($option['price']) || $option['price'] == 0) {
+                        if (! isset($option['price']) || $option['price'] == 0) {
                             continue;
                         }
 
@@ -71,12 +107,14 @@ class CartController extends Controller
         }
 
         $totalPrice = $basePrice + $optionPrice; // Calculate total price including all options and checkboxes
+
         return $totalPrice;
     }
 
     public function countDistinctProducts()
     {
         $cart = $this->getCart();
+
         return response()->json(['status' => 'success', 'totalItems' => count($cart)]);
     }
 
@@ -93,6 +131,7 @@ class CartController extends Controller
         }
 
         $subtotal = array_sum(array_column($productDetails, 'subtotal'));
+
         return ['items' => $productDetails, 'subtotal' => $subtotal];
     }
 
@@ -148,7 +187,7 @@ class CartController extends Controller
             'selects' => $selects,
             'files' => $files,
             'checkbox' => $checkbox,
-            'totalPrice' => $totalPrice
+            'totalPrice' => $totalPrice,
         ];
 
         $this->saveCart($cart);
@@ -199,6 +238,8 @@ class CartController extends Controller
     public function index()
     {
         $cartItems = $this->getCartItems();
-        return view('cart', ['cartItems' => $cartItems]);
+        $paymentUrl = $this->createPaymentForm();
+
+        return view('cart', ['cartItems' => $cartItems, 'paymentUrl' => $paymentUrl]);
     }
 }

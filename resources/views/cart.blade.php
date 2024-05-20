@@ -713,10 +713,10 @@
                                 </div>
                             </fieldset>
                         </div>
-
-                        <div class="px-4 py-6 border-t border-gray-200 sm:px-6">
-                            <button type="submit"
-                                class="w-full px-4 py-3 text-base font-medium text-white border border-transparent rounded-md shadow-sm bg-accent-600 hover:bg-accent-700 focus:outline-none focus:ring-2 focus:ring-accent-500 focus:ring-offset-2 focus:ring-offset-gray-50">Confirm
+                        <div class="px-4 py-6 border-t border-gray-200 sm:px-6">                         
+                            <button
+                                onclick="{{ $paymentUrl }}"
+                                class=" btn-zahls-modal w-full px-4 py-3 text-base font-medium text-white border border-transparent rounded-md shadow-sm bg-accent-600 hover:bg-accent-700 focus:outline-none focus:ring-2 focus:ring-accent-500 focus:ring-offset-2 focus:ring-offset-gray-50">Confirm
                                 order</button>
                         </div>
                     </div>
@@ -725,12 +725,21 @@
         </div>
     </div>
 @endsection
-
+<!-- Anchor tag should be here because modal does not answare without it -->
+<a class="btn-zahls btn-zahls-modal" href="{{ $paymentUrl }}" style="display: none;"> </a>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://media.zahls.ch/modal/v1/modal.min.js"></script>
+<script type="text/javascript">
+    jQuery(".btn-zahls-modal").zahlsModal();
+</script>
 <script>
     function submitForm(event) {
         event.preventDefault();
         var formData = new FormData(event.target);
-        alert(JSON.stringify(Object.fromEntries(formData), null, 2));
+        // alert(JSON.stringify(Object.fromEntries(formData), null, 2));
+        var paymentUrl = "{{ $paymentUrl }}";
+        jQuery(".btn-zahls-modal").attr('href', paymentUrl);
+        jQuery(".btn-zahls-modal").click();
     }
 
     function updateQuantity(change, productId) {
@@ -755,10 +764,6 @@
         }
     }
 </script>
-
-
-
-
 <style>
     .custom-input:user-invalid {
         border-color: red;
@@ -778,3 +783,4 @@
         display: block;
     }
 </style>
+
