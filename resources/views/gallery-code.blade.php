@@ -8,7 +8,7 @@
         'title' => $student->name,
         'image' => '/minimalistic-loft-photo-studio-scaled.jpg',
     ])
-    <div class="px-6 py-24 bg-white sm:py-8 lg:px-8">
+    <div class="px-6 pt-12 bg-white sm:py-8 lg:px-8">
         <div class="max-w-4xl mx-auto text-center">
             <h2 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">Fotoshooting
                 im Kindergarten Buttisholz</h2>
@@ -18,7 +18,7 @@
     </div>
 
     <div class="px-6 mx-auto mb-6 max-w-7xl lg:px-8">
-        <div class="grid grid-cols-2 gap-3 py-6 mx-auto max-w-7xl xs:grid-cols-3">
+        <div class="grid grid-cols-3 gap-3 py-6 mx-auto max-w-7xl xs:grid-cols-4 lg:grid-cols-5">
             @foreach ($student->photos as $photo)
                 <div class="relative bg-black break-inside-avoid group aspect-square" style="margin-top: 0">
                     <a href="{{ asset('storage/' . $photo->photo_path) }}" data-fslightbox="gallery">

@@ -169,7 +169,14 @@ class CartController extends Controller
 
         foreach ($allInputs as $key => $value) {
             if (strpos($key, 'fileInput-') === 0) {
-                $files[str_replace('fileInput-', '', $key)] = $value;
+                $photoId = str_replace('fileInput-', '', $key);
+                $photo = \App\Models\StudentPhoto::find($value);
+                if ($photo) {
+                    $files[$photoId] = [
+                        'id' => $value,
+                        'href' => $photo->photo_path,
+                    ];
+                }
             } elseif (is_array($value)) {
                 $checkbox[$key] = array_map(function ($val) {
                     return $val === 'true' ? true : false;
