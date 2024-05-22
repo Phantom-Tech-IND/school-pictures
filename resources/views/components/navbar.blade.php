@@ -50,7 +50,8 @@
                         </div>
                     </div>
                     <a href="{{ route('contact') }}"
-                        class="{{ request()->routeIs('contact') ? 'text-accent' : ' hover:text-accent' }} uppercase">Unsere Kontakt</a>
+                        class="{{ request()->routeIs('contact') ? 'text-accent' : ' hover:text-accent' }} uppercase">Unsere
+                        Kontakt</a>
                     @auth('student')
                         <a href="javascript:void(0);" onclick="toggleSlideOverCart()">
                             <button class="flex pl-4 border-l-2 border-accent-500">
@@ -62,7 +63,19 @@
                     @endauth
                 </div>
             </div>
-            <div class="xl:hidden">
+            <div class="flex gap-8 xl:hidden">
+                @auth('student')
+                    <a href="javascript:void(0);" onclick="toggleSlideOverCart()"
+                        class="{{ request()->routeIs('cart')
+                            ? 'text-accent font-semibold relative -left-2'
+                            : 'relative left-0 font-medium transition-all duration-300 hover:pl-0 hover:text-accent' }}">
+                        <button class="flex gap-2">
+                            <x-heroicon-o-shopping-cart class="relative w-5 h-5" />
+                            <span class="">Cart<span data-id="cart-count"
+                                    class="text-xs align-top bold">0</span></span>
+                        </button>
+                    </a>
+                @endauth
                 <button @click="open = !open" class="text-black focus:outline-none">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                         xmlns="http://www.w3.org/2000/svg">
@@ -90,36 +103,29 @@
                 <a href="{{ route('kindergarden') }}"
                     class="{{ request()->routeIs('kindergarden')
                         ? 'text-accent font-semibold relative -left-2'
-                        : 'relative left-0 font-medium transition-all duration-300 hover:pl-0 hover:text-accent hover:-left-2' }}">Kindergarten und Schulfotografie</a>
+                        : 'relative left-0 font-medium transition-all duration-300 hover:pl-0 hover:text-accent hover:-left-2' }}">Kindergarten
+                    und Schulfotografie</a>
                 <a href="{{ route('offers') }}"
                     class="{{ request()->routeIs('offers')
                         ? 'text-accent font-semibold relative -left-2'
-                        : 'relative left-0 font-medium transition-all duration-300 hover:pl-0 hover:text-accent hover:-left-2' }}">Unsere angebote</a>
+                        : 'relative left-0 font-medium transition-all duration-300 hover:pl-0 hover:text-accent hover:-left-2' }}">Unsere
+                    angebote</a>
                 <a href="{{ route('team') }}"
                     class="{{ request()->routeIs('team')
                         ? 'text-accent font-semibold relative -left-2'
-                        : 'relative left-0 font-medium transition-all duration-300 hover:pl-0 hover:text-accent hover:-left-2' }}">Unsere Team</a>
+                        : 'relative left-0 font-medium transition-all duration-300 hover:pl-0 hover:text-accent hover:-left-2' }}">Unsere
+                    Team</a>
                 <a href="{{ route('partners') }}"
                     class="{{ request()->routeIs('partners')
                         ? 'text-accent font-semibold relative -left-2'
-                        : 'relative left-0 font-medium transition-all duration-300 hover:pl-0 hover:text-accent hover:-left-2' }}">Unsere Partnerseiten</a>
+                        : 'relative left-0 font-medium transition-all duration-300 hover:pl-0 hover:text-accent hover:-left-2' }}">Unsere
+                    Partnerseiten</a>
                 <a href="{{ route('contact') }}"
                     class="{{ request()->routeIs('contact')
                         ? 'text-accent font-semibold relative -left-2'
-                        : 'relative left-0 font-medium transition-all duration-300 hover:pl-0 hover:text-accent hover:-left-2' }}">Unsere Kontakt</a>
-                @auth('student')
-                <a href="javascript:void(0);"
-                    onclick="toggleSlideOverCart()"
-                    class="{{ request()->routeIs('cart')
-                        ? 'text-accent font-semibold relative -left-2'
-                        : 'relative left-0 font-medium transition-all duration-300 hover:pl-0 hover:text-accent hover:-left-2' }}"
-                >
-                    <button class="flex gap-2">
-                        <x-heroicon-o-shopping-cart class="relative w-5 h-5" />
-                        <span class="">Cart<span data-id="cart-count" class="text-xs align-top bold">0</span></span> 
-                    </button>
-                </a>
-            @endauth
+                        : 'relative left-0 font-medium transition-all duration-300 hover:pl-0 hover:text-accent hover:-left-2' }}">Unsere
+                    Kontakt</a>
+                
             </nav>
         </div>
     </div>
@@ -143,7 +149,8 @@
                 fetch('{{ route('cart.count') }}')
                     .then(response => response.json())
                     .then(data => {
-                        document.querySelectorAll('[data-id="cart-count"]').forEach(element => element.textContent = data['totalItems']);
+                        document.querySelectorAll('[data-id="cart-count"]').forEach(element => element
+                            .textContent = data['totalItems']);
                     })
                     .catch(error => console.error('Error fetching cart count:', error));
             }

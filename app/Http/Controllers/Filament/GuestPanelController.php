@@ -13,21 +13,34 @@ use App\Models\Student;
 use App\Models\User;
 use Filament\Notifications\Notification;
 use Illuminate\Http\Request;
+use Artesaos\SEOTools\Facades\SEOTools;
 
 class GuestPanelController extends Controller
 {
     public function login()
     {
+        // Set SEO tags
+        SEOTools::setTitle('Login');
+        SEOTools::setDescription('Login to access your account.');
+
         return view('welcome');
     }
 
     public function index(Request $request)
     {
+        // Set SEO tags
+        SEOTools::setTitle('Home');
+        SEOTools::setDescription('Welcome to our website.');
+
         return view('welcome');
     }
 
     public function cart(Request $request)
     {
+        // Set SEO tags
+        SEOTools::setTitle('Cart');
+        SEOTools::setDescription('View and manage your cart items.');
+
         return view('cart');
     }
 
@@ -64,6 +77,10 @@ class GuestPanelController extends Controller
 
     public function notAvailable(Request $request)
     {
+        // Set SEO tags
+        SEOTools::setTitle('Not Available');
+        SEOTools::setDescription('The requested page is not available.');
+
         return view('not-available');
     }
 
@@ -88,6 +105,10 @@ class GuestPanelController extends Controller
 
         $products = $productsQuery->paginate(10);
 
+        // Set SEO tags
+        SEOTools::setTitle('Webshop');
+        SEOTools::setDescription('Browse our products.');
+
         return view('webshop', [
             'products' => $products,
             'categories' => $categories,
@@ -105,6 +126,11 @@ class GuestPanelController extends Controller
         if ($productId && $studentId) {
             $product = Product::where('id', $productId)->first();
 
+            if ($product) {
+                SEOTools::setTitle($product->name);
+                SEOTools::setDescription($product->description);
+            }
+
             $student = Student::with('photos') // Eager load photos
                 ->find($studentId);
 
@@ -120,17 +146,29 @@ class GuestPanelController extends Controller
 
     public function team(Request $request)
     {
+        // Set SEO tags
+        SEOTools::setTitle('Our Team');
+        SEOTools::setDescription('Meet our team members.');
+
         return view('team');
     }
 
     public function kindergarden(Request $request)
     {
+        // Set SEO tags
+        SEOTools::setTitle('Kindergarden');
+        SEOTools::setDescription('Learn more about our kindergarden services.');
+
         return view('kindergarden');
     }
 
     public function offers(Request $request)
     {
         $offers = Offers::all();
+
+        // Set SEO tags
+        SEOTools::setTitle('Offers');
+        SEOTools::setDescription('View our current offers.');
 
         return view('offers', compact('offers'));
     }
@@ -139,16 +177,28 @@ class GuestPanelController extends Controller
     {
         $offer = Offers::where('id', $id)->first();
 
+        // Set SEO tags
+        SEOTools::setTitle($offer->title);
+        SEOTools::setDescription($offer->description);
+
         return view('offer', compact('offer'));
     }
 
     public function about(Request $request)
     {
+        // Set SEO tags
+        SEOTools::setTitle('About Us');
+        SEOTools::setDescription('Learn more about our company and team.');
+
         return view('about');
     }
 
     public function partners(Request $request)
     {
+        // Set SEO tags
+        SEOTools::setTitle('Our Partners');
+        SEOTools::setDescription('Meet our partners.');
+
         return view('partners');
     }
 
@@ -161,6 +211,10 @@ class GuestPanelController extends Controller
         if ($offerItemId) {
             $offerItem = OfferItem::find($offerItemId);
         }
+
+        // Set SEO tags
+        SEOTools::setTitle('Contact Us');
+        SEOTools::setDescription('Get in touch with us.');
 
         return view('contact', compact('offers', 'offerItem'));
     }
@@ -179,8 +233,14 @@ class GuestPanelController extends Controller
             ->find($studentId);
 
         if (! $student) {
+            SEOTools::setTitle('Student Not Found');
+            SEOTools::setDescription('The requested student gallery is not available.');
             return redirect()->route('not-available'); // Redirect if no student is found
         }
+
+        // Set dynamic SEO tags based on the student's name or a specific attribute
+        SEOTools::setTitle('Gallery for ' . $student->name);
+        SEOTools::setDescription('View the gallery of ' . $student->name . ' including various photos and projects.');
 
         // Fetch all products of type 'school'
         $products = Product::all();
@@ -190,32 +250,56 @@ class GuestPanelController extends Controller
 
     public function upload()
     {
+        // Set SEO tags
+        SEOTools::setTitle('Upload');
+        SEOTools::setDescription('Upload your files here.');
+
         return view('filament.guest.upload');
     }
 
     public function impressum()
     {
+        // Set SEO tags
+        SEOTools::setTitle('Impressum');
+        SEOTools::setDescription('Legal information about our website.');
+
         return view('impressum');
     }
 
     public function cookiePolicy()
     {
+        // Set SEO tags
+        SEOTools::setTitle('Cookie Policy');
+        SEOTools::setDescription('Information about our cookie policy.');
+
         return view('cookie-policy');
     }
 
     public function privacyPolicy()
     {
+        // Set SEO tags
+        SEOTools::setTitle('Privacy Policy');
+        SEOTools::setDescription('Information about our privacy policy.');
+
         return view('privacy-policy');
     }
 
     public function generalTermsAndConditions()
     {
+        // Set SEO tags
+        SEOTools::setTitle('General Terms and Conditions');
+        SEOTools::setDescription('Information about our general terms and conditions.');
+
         return view('general-terms-and-conditions');
     }
 
     public function frequentlyAskedQuestions()
     {
         $tabs = \App\Constants\Constants::FAQ_TABS;
+
+        // Set SEO tags
+        SEOTools::setTitle('Frequently Asked Questions');
+        SEOTools::setDescription('Find answers to frequently asked questions.');
 
         return view('frequently-asked-questions', compact('tabs'));
     }

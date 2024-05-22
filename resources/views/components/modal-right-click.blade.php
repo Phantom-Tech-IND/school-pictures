@@ -21,12 +21,14 @@
 <style>
     #disable-right-click-modal {
         transition: opacity 300ms ease-out, transform 300ms ease-out;
+        pointer-events: none;
         opacity: 0;
         transform: translateY(-20px) scale(0.9);
     }
 
     #disable-right-click-modal[open] {
         transition: opacity 300ms ease-out, transform 300ms ease-out;
+        pointer-events: auto;
         opacity: 1;
         transform: translateY(0) scale(1);
     }
