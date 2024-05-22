@@ -249,4 +249,14 @@ class CartController extends Controller
 
         return view('cart', ['cartItems' => $cartItems]);
     }
+
+    public function paymentSuccess()
+    {
+        return view('payment-success');
+    }
+
+    public function paymentFailed()
+    {
+        return view('payment-failed');
+    }
 }
