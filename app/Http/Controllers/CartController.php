@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Exception;
 use Illuminate\Http\Request;
+use Artesaos\SEOTools\Facades\SEOTools;
 
 class CartController extends Controller
 {
@@ -247,16 +248,28 @@ class CartController extends Controller
     {
         $cartItems = $this->getCartItems();
 
+        // Set SEO tags
+        SEOTools::setTitle('Your Cart');
+        SEOTools::setDescription('View and manage the items in your cart.');
+
         return view('cart', ['cartItems' => $cartItems]);
     }
 
     public function paymentSuccess()
     {
+        // Set SEO tags
+        SEOTools::setTitle('Payment Success');
+        SEOTools::setDescription('Your payment was successful.');
+
         return view('payment-success');
     }
 
     public function paymentFailed()
     {
+        // Set SEO tags
+        SEOTools::setTitle('Payment Failed');
+        SEOTools::setDescription('Your payment failed. Please try again.');
+
         return view('payment-failed');
     }
 }
