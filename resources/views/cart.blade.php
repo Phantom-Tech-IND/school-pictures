@@ -680,23 +680,6 @@
                                         <div class="flex items-end justify-between flex-1 pt-2">
                                             <p class="pb-2 mt-1 text-sm font-medium text-gray-900">
                                                 {{ number_format($item['totalPrice'], 2) }} CHF</p>
-
-                                            <div class="ml-4" x-data="{ quantity: {{ $item['quantity'] }} }">
-                                                <label for="quantity-{{ $item['index'] }}"
-                                                    class="sr-only">Quantity</label>
-                                                <div class="flex items-center border border-gray-300 rounded-md shadow-sm">
-                                                    <button type="button"
-                                                        @click="updateQuantity(-1, {{ $item['index'] }})"
-                                                        class="p-2 text-base font-medium text-gray-700 focus:outline-none focus:border-accent-500 focus:ring-1 focus:ring-accent-500 sm:text-lg">-</button>
-                                                    <input id="quantity-{{ $item['index'] }}" name="quantity"
-                                                        type="text" x-model="quantity"
-                                                        class="w-12 text-base font-medium text-center text-gray-700 border-none focus:outline-none focus:ring-0 sm:text-sm"
-                                                        readonly disabled>
-                                                    <button type="button"
-                                                        @click="updateQuantity(1, {{ $item['index'] }})"
-                                                        class="p-2 text-base font-medium text-gray-700 focus:outline-none focus:border-accent-500 focus:ring-1 focus:ring-accent-500 sm:text-lg">+</button>
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
                                 </li>
@@ -709,10 +692,10 @@
                                 <dd class="text-sm font-medium text-gray-900"><span
                                         id="subtotal">{{ number_format($cartItems['subtotal'], 2) }}</span> CHF</dd>
                             </div>
-                            <div class="flex items-center justify-between">
+                            {{-- <div class="flex items-center justify-between">
                                 <dt class="text-sm">Shipping</dt>
                                 <dd class="text-sm font-medium text-gray-900"><span id="shipping">0</span> CHF</dd>
-                            </div>
+                            </div> --}}
                             <div class="flex items-center justify-between">
                                 <dt class="text-sm">Taxes</dt>
                                 <dd class="text-sm font-medium text-gray-900"><span id="taxes">0</span> CHF</dd>
@@ -759,7 +742,7 @@
                                             value="bank_transfer" x-model="paymentType"
                                             class="w-4 h-4 border-gray-300 text-accent-600 focus:ring-accent-500">
                                         <label for="bank_transfer"
-                                            class="block ml-3 text-sm font-medium text-gray-700">Bank transfer/advance
+                                            class="block ml-3 text-sm font-medium text-gray-700">Bank transfer/advanced
                                             payment</label>
                                     </div>
                                 </div>

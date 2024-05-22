@@ -1,4 +1,4 @@
-<div class="w-full h-[50lvh] bg-center relative bg-cover"
+<div class="w-full h-[50lvh] bg-top relative bg-cover"
     style="background-image: url('{{ asset($image) }}');">
     <div class="absolute inset-0 w-full h-full bg-black bg-opacity-10">
     </div>
