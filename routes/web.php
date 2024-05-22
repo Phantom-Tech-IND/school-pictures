@@ -60,5 +60,8 @@ Route::middleware(['auth:student'])->group(function () {
         Route::post('/cart/remove/{productId}', 'removeFromCart')->name('cart.remove');
         Route::get('/cart/items', 'getCartItems')->name('cart.items');
         Route::post('/cart/update-quantity/{productId}', 'updateQuantity')->name('cart.update-quantity');
+        
+        Route::get('/payment-success', 'paymentSuccess')->name('payment-success');
+        Route::get('/payment-failed', 'paymentFailed')->name('payment-failed');
     });
 });

@@ -21,6 +21,21 @@ export default {
                     800: "#4e6a0c",
                     900: "#2f4507", // Darkest shade
                 },
+                danger: {
+                    DEFAULT: "#db0000",
+                    50: "#fff0f0",
+                    100: "#ffdddd",
+                    200: "#ffc1c1",
+                    300: "#ff9595",
+                    400: "#ff5959",
+                    500: "#ff2626",
+                    600: "#fc0606",
+                    700: "#db0000",
+                    800: "#af0505",
+                    900: "#900c0c",
+                    950: "#500000",
+                },
+                
                 white: "#FFFFFF",
                 darkgrey: "#595959",
                 transparentblack: "#00000000",
