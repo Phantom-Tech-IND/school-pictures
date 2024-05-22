@@ -771,6 +771,9 @@
         if (response.ok) {
             const data = await response.json();
             console.log(data);
+            if (paymentType === 'bank_transfer') {
+                window.location.href = '{{ route('payment-success') }}';
+            }
             if (data.paymentUrl) {
                 window.location.href = data.paymentUrl;
             } else {
@@ -779,6 +782,7 @@
         } else {
             const errorData = await response.json();
             throw new Error(errorData.error || 'An error occurred while processing your request.');
+            window.location.href = '{{ route('payment-failed') }}';
         }
     }
 
