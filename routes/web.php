@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\Filament\GuestPanelController;
 use Illuminate\Support\Facades\Route;
+use Spatie\Sitemap\SitemapGenerator;
 
 /*
 |--------------------------------------------------------------------------
@@ -64,4 +65,13 @@ Route::middleware(['auth:student'])->group(function () {
         Route::get('/payment-success', 'paymentSuccess')->name('payment-success');
         Route::get('/payment-failed', 'paymentFailed')->name('payment-failed');
     });
+});
+
+Route::get('robots.txt', function () {
+    $robotsContent = "User-agent: *\nDisallow: /private/\nDisallow: /tmp/\nDisallow: /cache/\nDisallow: /admin/\n\nSitemap: " . url('sitemap.xml');
+    return response($robotsContent, 200)->header('Content-Type', 'text/plain');
+});
+
+Route::get('sitemap.xml', function () {
+    return response()->file(public_path('sitemap.xml'), ['Content-Type' => 'application/xml']);
 });
