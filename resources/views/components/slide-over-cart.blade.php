@@ -81,7 +81,6 @@
     }
 
     function removeFromCart(productId) {
-        console.log('removeFromCart', productId);
         fetch(`/cart/remove/${productId}`, {
                 method: 'POST',
                 headers: {

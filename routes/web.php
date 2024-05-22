@@ -29,7 +29,6 @@ Route::controller(GuestPanelController::class)->group(function () {
     Route::get('/partners', 'partners')->name('partners');
     Route::get('/view-for-testing-purposes', 'viewForTestingPurposes')->name('view-for-testing-purposes');
 
-    // Legal and informational pages
     Route::get('/impressum', 'impressum')->name('impressum');
     Route::get('/cookie-policy', 'cookiePolicy')->name('cookie-policy');
     Route::get('/privacy-policy', 'privacyPolicy')->name('privacy-policy');
@@ -39,13 +38,11 @@ Route::controller(GuestPanelController::class)->group(function () {
     Route::post('/contact/submit', 'postContactForm')->name('contact.submit')->middleware('throttle:1,0.1');
 });
 
-// Authentication Routes
 Route::controller(AuthController::class)->group(function () {
     Route::post('/login', 'login')->name('login');
     Route::get('/logout', 'logout')->name('logout');
 });
 
-// Student Specific Routes
 Route::middleware(['auth:student'])->group(function () {
     Route::controller(GuestPanelController::class)->group(function () {
         Route::get('/webshop/{slug?}', 'webshop')->name('webshop');
@@ -55,10 +52,10 @@ Route::middleware(['auth:student'])->group(function () {
 
     Route::post('/students/sync-photos', 'StudentController@syncPhotos')->name('students.sync-photos');
 
-    // Cart Routes
     Route::controller(CartController::class)->group(function () {
         Route::post('/add-to-cart', 'addToCart')->name('add.to.cart');
         Route::get('/cart', 'index')->name('cart');
+        Route::post('/cart/payment', 'createPaymentForm')->name('cart.payment');
         Route::get('/cart/count', 'countDistinctProducts')->name('cart.count');
         Route::post('/cart/remove/{productId}', 'removeFromCart')->name('cart.remove');
         Route::get('/cart/items', 'getCartItems')->name('cart.items');

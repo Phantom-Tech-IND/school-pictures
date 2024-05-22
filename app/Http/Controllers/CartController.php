@@ -30,7 +30,6 @@ class CartController extends Controller
         $secret = env('PAYMENT_SECRET');
 
         $cartItems = $this->getCartItems();
-        // dd($cartItems);
 
         try {
             $payrexx = new \Payrexx\Payrexx($instanceName, $secret, '', 'zahls.ch');
@@ -38,24 +37,26 @@ class CartController extends Controller
             $gateway = new \Payrexx\Models\Request\Gateway();
             $gateway->setAmount(($cartItems['subtotal'] * 100));
             $gateway->setCurrency('CHF');
-
+            $gateway->setSuccessRedirectUrl(url('/cart'));
+            $gateway->setCancelRedirectUrl(url('/cart'));
+            $gateway->setFailedRedirectUrl(url('/cart'));
             $response = $payrexx->create($gateway);
 
             if ($response && ! empty($response->getLink())) {
                 $paymentUrl = $response->getLink();
 
-                return $paymentUrl;
+                return response()->json(['paymentUrl' => $paymentUrl]);
             } else {
                 throw new Exception('No link found in the response');
             }
         } catch (\Payrexx\PayrexxException $e) {
             error_log('PayrexxException: '.$e->getMessage());
 
-            return redirect()->back()->with('error', $e->getMessage());
+            return response()->json(['error' => $e->getMessage()], 500);
         } catch (Exception $e) {
             error_log('Exception: '.$e->getMessage());
 
-            return redirect()->back()->with('error', $e->getMessage());
+            return response()->json(['error' => $e->getMessage()], 500);
         }
     }
 
@@ -245,8 +246,7 @@ class CartController extends Controller
     public function index()
     {
         $cartItems = $this->getCartItems();
-        $paymentUrl = $this->createPaymentForm();
 
-        return view('cart', ['cartItems' => $cartItems, 'paymentUrl' => $paymentUrl]);
+        return view('cart', ['cartItems' => $cartItems]);
     }
 }

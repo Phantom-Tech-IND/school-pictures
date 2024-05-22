@@ -6,6 +6,7 @@
             <h2 class="sr-only">Checkout</h2>
 
             <form onsubmit="submitForm(event)" class="lg:grid lg:grid-cols-2 lg:gap-x-12 xl:gap-x-16">
+                @csrf
                 <div>
                     <div>
                         <h2 class="text-lg font-medium text-gray-900">Contact information</h2>
@@ -19,7 +20,6 @@
                             </div>
                             <div class="relative mt-1">
                                 <input type="email" id="email-address" name="email-address" required
-                                    pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
                                     title="Please enter a valid email address" autocomplete="email"
                                     placeholder="you@example.com"
                                     class="block w-full border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring-accent-500 sm:text-sm custom-input">
@@ -606,7 +606,7 @@
                                                     <img src="{{ head($item['files'])['href'] }}"
                                                         alt="First Additional Image"
                                                         class="object-cover w-16 transition duration-300 ease-in-out transform rounded-md aspect-square group-hover:scale-110">
-                                                    @foreach(array_slice($item['files'], 1) as $file)
+                                                    @foreach (array_slice($item['files'], 1) as $file)
                                                         <a href="{{ $file['href'] }}"
                                                             data-fslightbox="gallery-{{ $item['index'] }}"
                                                             aria-hidden="true"></a>
@@ -709,7 +709,7 @@
                         <script>
                             function updateTotal() {
                                 const subtotal = parseFloat(document.getElementById('subtotal').textContent);
-                                const shipping = parseFloat(document.getElementById('shipping').textContent);
+                                // const shipping = parseFloat(document.getElementById('shipping').textContent);
                                 const taxes = parseFloat(document.getElementById('taxes').textContent);
 
                                 const total = subtotal + shipping + taxes;
@@ -718,7 +718,7 @@
 
                             // Event listeners to update total when subtotal, shipping, or taxes change
                             document.getElementById('subtotal').addEventListener('DOMSubtreeModified', updateTotal);
-                            document.getElementById('shipping').addEventListener('DOMSubtreeModified', updateTotal);
+                            // document.getElementById('shipping').addEventListener('DOMSubtreeModified', updateTotal);
                             document.getElementById('taxes').addEventListener('DOMSubtreeModified', updateTotal);
                         </script>
 
@@ -734,7 +734,7 @@
                                             x-model="paymentType" checked
                                             class="w-4 h-4 border-gray-300 text-accent-600 focus:ring-accent-500">
                                         <label for="credit_twint"
-                                            class="block ml-3 text-sm font-medium text-gray-700">Credit cards /
+                                            class="block ml-3 text-sm font-medium text-gray-700">Credit card /
                                             TWINT</label>
                                     </div>
                                     <div class="flex items-center">
@@ -754,7 +754,7 @@
                             </fieldset>
                         </div>
                         <div class="px-4 py-6 border-t border-gray-200 sm:px-6">
-                            <button onclick="{{ $paymentUrl }}"
+                            <button
                                 class="w-full px-4 py-3 text-base font-medium text-white border border-transparent rounded-md shadow-sm btn-zahls-modal bg-accent-600 hover:bg-accent-700 focus:outline-none focus:ring-2 focus:ring-accent-500 focus:ring-offset-2 focus:ring-offset-gray-50">Confirm
                                 order</button>
                         </div>
@@ -764,46 +764,44 @@
         </div>
     </div>
 @endsection
-<!-- Anchor tag should be here because modal does not answare without it -->
-<a class="btn-zahls btn-zahls-modal" href="{{ $paymentUrl }}" style="display: none;"> </a>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
-    integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg=="
-    crossorigin="anonymous"></script>
-<script type="text/javascript" src="https://media.zahls.ch/modal/v1/modal.min.js"></script>
-<script type="text/javascript">
-    jQuery(".btn-zahls-modal").zahlsModal();
-</script>
 <script>
-    function submitForm(event) {
+    const submitForm = async (event) => {
         event.preventDefault();
-        var formData = new FormData(event.target);
-        // alert(JSON.stringify(Object.fromEntries(formData), null, 2));
-        var paymentUrl = "{{ $paymentUrl }}";
-        jQuery(".btn-zahls-modal").attr('href', paymentUrl);
-        jQuery(".btn-zahls-modal").click();
-    }
+        const formData = new FormData(event.target);
+        const csrfToken = formData.get('_token');
 
-    function updateQuantity(change, productId) {
-        var quantityInput = document.getElementById('quantity-' + productId);
-        var currentQuantity = parseInt(quantityInput.value);
-        var newQuantity = currentQuantity + change;
-        if (newQuantity > 0) {
-            axios.post('/cart/update-quantity/' + productId, {
-                    quantity: newQuantity
-                })
-                .then(response => {
-                    const items = response.data.cartItems.items;
-                    const item = items.find(item => item.index === productId);
-                    let subtotal = response.data.cartItems.subtotal;
+        const response = await fetch('{{ route('cart.payment') }}', {
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': csrfToken
+            },
+            body: formData
+        });
 
-                    quantityInput.value = item.quantity;
-                    document.getElementById('subtotal').textContent = `${subtotal.toFixed(2)}`;
-                })
-                .catch(error => {
-                    /* Handle error */
-                });
+        if (response.ok) {
+            const data = await response.json();
+            if (data.paymentUrl) {
+                window.location.href = data.paymentUrl;
+            } else {
+                throw new Error('Payment URL not found in the response.');
+            }
+        } else {
+            const errorData = await response.json();
+            throw new Error(errorData.error || 'An error occurred while processing your request.');
         }
     }
+
+    const updateTotal = async () => {
+        const subtotal = parseFloat(document.getElementById('subtotal').textContent);
+        const taxes = parseFloat(document.getElementById('taxes').textContent);
+        // If you have a shipping cost, uncomment the following line and ensure the shipping element exists
+        // const shipping = parseFloat(document.getElementById('shipping').textContent);
+
+        // Calculate the total
+        const total = subtotal + taxes; // + shipping; // Include shipping if applicable
+        document.getElementById('total').textContent = total.toFixed(2);
+    }
+    document.addEventListener('DOMContentLoaded', updateTotal);
 </script>
 <style>
     .custom-input:user-invalid {
