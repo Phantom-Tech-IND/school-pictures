@@ -65,7 +65,8 @@
 
                             <div class="input-component">
                                 <div class="flex justify-between">
-                                    <label for="last-name" class="block text-sm font-medium text-gray-700">Last name<span class="pl-1 text-red-600">*</span></label>
+                                    <label for="last-name" class="block text-sm font-medium text-gray-700">Last name<span
+                                            class="pl-1 text-red-600">*</span></label>
                                     <p class="hidden text-sm text-red-600 input-error-message" id="last-name-error">Not a
                                         valid last name</p>
                                 </div>
@@ -108,13 +109,15 @@
 
                             <div class="sm:col-span-2 input-component">
                                 <div class="flex justify-between">
-                                    <label for="address" class="block text-sm font-medium text-gray-700">Address<span class="pl-1 text-red-600">*</span></label>
+                                    <label for="address" class="block text-sm font-medium text-gray-700">Address<span
+                                            class="pl-1 text-red-600">*</span></label>
                                     <p class="hidden text-sm text-red-600 input-error-message" id="address-error">Not a
                                         valid address</p>
                                 </div>
                                 <div class="relative mt-1">
                                     <input type="text" name="address" id="address" required
-                                        autocomplete="street-address" placeholder="1234 Main St" title="Please enter a valid address"
+                                        autocomplete="street-address" placeholder="1234 Main St"
+                                        title="Please enter a valid address"
                                         class="block w-full border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring-accent-500 sm:text-sm custom-input">
                                     <div
                                         class="absolute inset-y-0 right-0 items-center hidden pr-3 pointer-events-none input-error-icon">
@@ -152,13 +155,15 @@
 
                             <div class="input-component">
                                 <div class="flex justify-between">
-                                    <label for="city" class="block text-sm font-medium text-gray-700">City<span class="pl-1 text-red-600">*</span></label>
+                                    <label for="city" class="block text-sm font-medium text-gray-700">City<span
+                                            class="pl-1 text-red-600">*</span></label>
                                     <p class="hidden text-sm text-red-600 input-error-message" id="city-error">Not a valid
                                         city</p>
                                 </div>
                                 <div class="relative mt-1">
                                     <input type="text" name="city" id="city" required
-                                        autocomplete="address-level2" placeholder="Anytown" title="Please enter a valid city"
+                                        autocomplete="address-level2" placeholder="Anytown"
+                                        title="Please enter a valid city"
                                         class="block w-full border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring-accent-500 sm:text-sm custom-input">
                                     <div
                                         class="absolute inset-y-0 right-0 items-center hidden pr-3 pointer-events-none input-error-icon">
@@ -229,8 +234,8 @@
                                 </div>
                                 <div class="relative mt-1">
                                     <input type="text" name="postal-code" id="postal-code" required
-                                        autocomplete="postal-code" placeholder="Postal Code"
-                                        pattern="^\d{4}$" title="Please enter a valid postal code"
+                                        autocomplete="postal-code" placeholder="Postal Code" pattern="^\d{4}$"
+                                        title="Please enter a valid postal code"
                                         class="block w-full border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring-accent-500 sm:text-sm custom-input">
                                     <div
                                         class="absolute inset-y-0 right-0 items-center hidden pr-3 pointer-events-none input-error-icon">
@@ -246,15 +251,15 @@
 
                             <div class="sm:col-span-2 input-component">
                                 <div class="flex justify-between">
-                                    <label for="phone" class="block text-sm font-medium text-gray-700">Phone<span class="pl-1 text-red-600">*</span></label>
+                                    <label for="phone" class="block text-sm font-medium text-gray-700">Phone<span
+                                            class="pl-1 text-red-600">*</span></label>
                                     <p class="hidden text-sm text-red-600 input-error-message" id="phone-error">Not a
                                         valid phone number</p>
                                 </div>
                                 <div class="relative mt-1">
                                     <input type="tel" name="phone" id="phone" required
                                         pattern="^\+?[0-9]{1,15}$" title="Please enter a valid phone number"
-                                        autocomplete="tel"
-                                        placeholder="Enter your phone number"
+                                        autocomplete="tel" placeholder="Enter your phone number"
                                         oninput="this.value = this.value.replace(/[^0-9+]/g, '').replace(/(\..*)\./g, '$1');"
                                         inputmode="tel"
                                         class="block w-full border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring-accent-500 sm:text-sm custom-input">
@@ -298,7 +303,8 @@
                                 <div class="sm:col-span-2 input-component">
                                     <div class="flex justify-between">
                                         <label for="shipping-address"
-                                            class="block text-sm font-medium text-gray-700">Address<span class="pl-1 text-red-600">*</span></label>
+                                            class="block text-sm font-medium text-gray-700">Address<span
+                                                class="pl-1 text-red-600">*</span></label>
                                         <p class="hidden text-sm text-red-600 input-error-message"
                                             id="shipping-address-error">Not a valid address</p>
                                     </div>
@@ -345,7 +351,8 @@
                                 <div class="input-component">
                                     <div class="flex justify-between">
                                         <label for="shipping-city"
-                                            class="block text-sm font-medium text-gray-700">City<span class="pl-1 text-red-600">*</span></label>
+                                            class="block text-sm font-medium text-gray-700">City<span
+                                                class="pl-1 text-red-600">*</span></label>
                                         <p class="hidden text-sm text-red-600 input-error-message"
                                             id="shipping-city-error">Not a valid city</p>
                                     </div>
@@ -403,8 +410,7 @@
                                     </div>
                                     <div class="relative mt-1">
                                         <input type="text" name="shipping-region" id="shipping-region"
-                                            autocomplete="address-level1"
-                                            placeholder="State / Province"
+                                            autocomplete="address-level1" placeholder="State / Province"
                                             class="block w-full border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring-accent-500 sm:text-sm custom-input">
                                         <div
                                             class="absolute inset-y-0 right-0 items-center hidden pr-3 pointer-events-none input-error-icon">
@@ -431,8 +437,8 @@
                                     <div class="relative mt-1">
                                         <input type="text" name="shipping-postal-code" id="shipping-postal-code"
                                             :required="sameAsBilling === 'false'" autocomplete="postal-code"
-                                            placeholder="Postal Code"
-                                            pattern="^\d{4}$" title="Please enter a valid postal code"
+                                            placeholder="Postal Code" pattern="^\d{4}$"
+                                            title="Please enter a valid postal code"
                                             class="block w-full border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring-accent-500 sm:text-sm custom-input">
                                         <div
                                             class="absolute inset-y-0 right-0 items-center hidden pr-3 pointer-events-none input-error-icon">
@@ -449,7 +455,8 @@
                                 <div class="sm:col-span-2 input-component">
                                     <div class="flex justify-between">
                                         <label for="shipping-phone"
-                                            class="block text-sm font-medium text-gray-700">Phone<span class="pl-1 text-red-600">*</span></label>
+                                            class="block text-sm font-medium text-gray-700">Phone<span
+                                                class="pl-1 text-red-600">*</span></label>
                                         <p class="hidden text-sm text-red-600 input-error-message"
                                             id="shipping-phone-error">Not a
                                             valid phone number</p>
@@ -477,7 +484,7 @@
                         </div>
                     </div>
 
-                    <div class="pt-10 mt-10 border-t border-gray-200" x-data="{ deliveryMethod: 'Standard' }">
+                    {{-- <div class="pt-10 mt-10 border-t border-gray-200" x-data="{ deliveryMethod: 'Standard' }">
                         <fieldset>
                             <legend class="text-lg font-medium text-gray-900">Delivery method</legend>
 
@@ -557,7 +564,7 @@
                             document.getElementById('delivery-method-express').addEventListener('click', updateShippingCost);
                             document.getElementById('delivery-method-standard').addEventListener('click', updateShippingCost);
                         </script>
-                    </div>
+                    </div> --}}
 
                     <div class="pt-10 mt-10 border-t border-gray-200" x-data="{ comment: '', commentLength: 0 }">
                         <h2 class="text-lg font-medium text-gray-900">Comments</h2>
@@ -585,20 +592,60 @@
                         <ul id="cart-items" role="list" class="divide-y divide-gray-200">
                             @foreach ($cartItems['items'] as $item)
                                 <li id="cart-item-{{ $item['index'] }}" class="flex px-4 py-6 sm:px-6">
-                                    <div class="flex-shrink-0">
-                                        <img src="{{ $item['product']->images[0] }}" alt="{{ $item['product']->name }}"
-                                            class="w-20 rounded-md">
+                                    <div class="flex flex-col items-end justify-between flex-shrink-0 gap-4">
+                                        <a href="{{ route('product', ['id' => $item['product']->id]) }}" class="group">
+                                            <img src="{{ $item['product']->images[0] }}"
+                                                alt="{{ $item['product']->name }}"
+                                                class="w-20 transition duration-300 ease-in-out transform rounded-md group-hover:scale-110">
+                                        </a>
+
+                                        @if (!empty($item['files']))
+                                            <div class="relative">
+                                                <a href="{{ head($item['files'])['href'] }}"
+                                                    data-fslightbox="gallery-{{ $item['index'] }}" class="group">
+                                                    <img src="{{ head($item['files'])['href'] }}"
+                                                        alt="First Additional Image"
+                                                        class="object-cover w-16 transition duration-300 ease-in-out transform rounded-md aspect-square group-hover:scale-110">
+                                                    @foreach(array_slice($item['files'], 1) as $file)
+                                                        <a href="{{ $file['href'] }}"
+                                                            data-fslightbox="gallery-{{ $item['index'] }}"
+                                                            aria-hidden="true"></a>
+                                                    @endforeach
+                                                </a>
+                                                <div
+                                                    class="absolute -top-2 -right-2 inline-block text-white bg-green-500 leading-[0] text-xs rounded-full">
+                                                    <span class="inline-block py-[50%] mx-1.5">
+                                                        {{ count($item['files']) }}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        @endif
                                     </div>
 
                                     <div class="flex flex-col flex-1 ml-6">
                                         <div class="flex">
                                             <div class="flex-1 min-w-0">
                                                 <h4 class="text-sm">
-                                                    <a href="#"
-                                                        class="font-medium text-gray-700 hover:text-gray-800">{{ $item['product']->name }}</a>
+                                                    <a href="{{ route('product', ['id' => $item['product']->id]) }}"
+                                                        class="font-medium text-gray-700 transition-all ease-in-out duration-250 hover:text-gray-800 hover:font-semibold">{{ $item['product']->name }}</a>
                                                 </h4>
-                                                <p class="mt-1 text-sm text-gray-500">{{ $item['product']->short_description }}
-                                                </p>
+                                                <p class="mt-1 text-sm text-gray-500">
+                                                    {{ $item['product']->short_description }}
+                                                <ul class="mt-2 text-sm text-gray-500 list-disc list-inside">
+                                                    @if ($item['selects'])
+                                                        @foreach ($item['selects'] as $selectValue)
+                                                            <li>{{ $selectValue }}</li>
+                                                        @endforeach
+                                                    @endif
+
+                                                    @if ($item['checkbox'])
+                                                        @foreach ($item['checkbox'] as $checkboxTitle => $checkboxValues)
+                                                            @if (in_array(true, $checkboxValues, true))
+                                                                <li>{{ $checkboxTitle }}</li>
+                                                            @endif
+                                                        @endforeach
+                                                    @endif
+                                                </ul>
                                             </div>
 
                                             <div class="flex-shrink-0 flow-root ml-4">
@@ -631,24 +678,8 @@
                                         </div>
 
                                         <div class="flex items-end justify-between flex-1 pt-2">
-                                            <p class="mt-1 text-sm font-medium text-gray-900">
+                                            <p class="pb-2 mt-1 text-sm font-medium text-gray-900">
                                                 {{ number_format($item['totalPrice'], 2) }} CHF</p>
-
-                                            <div class="ml-4" x-data="{ quantity: {{ $item['quantity'] }} }">
-                                                <label for="quantity-{{ $item['index'] }}" class="sr-only">Quantity</label>
-                                                <div class="flex items-center border border-gray-300 rounded-md shadow-sm">
-                                                    <button type="button"
-                                                        @click="updateQuantity(-1, {{ $item['index'] }})"
-                                                        class="p-2 text-base font-medium text-gray-700 focus:outline-none focus:border-accent-500 focus:ring-1 focus:ring-accent-500 sm:text-lg">-</button>
-                                                    <input id="quantity-{{ $item['index'] }}" name="quantity"
-                                                        type="text" x-model="quantity"
-                                                        class="w-12 text-base font-medium text-center text-gray-700 border-none focus:outline-none focus:ring-0 sm:text-sm"
-                                                        readonly disabled>
-                                                    <button type="button"
-                                                        @click="updateQuantity(1, {{ $item['index'] }})"
-                                                        class="p-2 text-base font-medium text-gray-700 focus:outline-none focus:border-accent-500 focus:ring-1 focus:ring-accent-500 sm:text-lg">+</button>
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
                                 </li>
@@ -661,10 +692,10 @@
                                 <dd class="text-sm font-medium text-gray-900"><span
                                         id="subtotal">{{ number_format($cartItems['subtotal'], 2) }}</span> CHF</dd>
                             </div>
-                            <div class="flex items-center justify-between">
+                            {{-- <div class="flex items-center justify-between">
                                 <dt class="text-sm">Shipping</dt>
                                 <dd class="text-sm font-medium text-gray-900"><span id="shipping">0</span> CHF</dd>
-                            </div>
+                            </div> --}}
                             <div class="flex items-center justify-between">
                                 <dt class="text-sm">Taxes</dt>
                                 <dd class="text-sm font-medium text-gray-900"><span id="taxes">0</span> CHF</dd>
@@ -680,11 +711,11 @@
                                 const subtotal = parseFloat(document.getElementById('subtotal').textContent);
                                 const shipping = parseFloat(document.getElementById('shipping').textContent);
                                 const taxes = parseFloat(document.getElementById('taxes').textContent);
-                        
+
                                 const total = subtotal + shipping + taxes;
                                 document.getElementById('total').textContent = `${total.toFixed(2)}`;
                             }
-                        
+
                             // Event listeners to update total when subtotal, shipping, or taxes change
                             document.getElementById('subtotal').addEventListener('DOMSubtreeModified', updateTotal);
                             document.getElementById('shipping').addEventListener('DOMSubtreeModified', updateTotal);
@@ -695,28 +726,36 @@
                         <div class="px-4 py-6 space-y-6 border-t border-gray-200 sm:px-6">
                             <h2 class="text-lg font-medium text-gray-900">Payment</h2>
 
-                            <fieldset class="mt-4">
+                            <fieldset class="mt-4" x-data="{ paymentType: 'credit_twint' }">
                                 <legend class="sr-only">Payment type</legend>
                                 <div class="space-y-4 sm:flex sm:items-center sm:space-x-10 sm:space-y-0">
                                     <div class="flex items-center">
-                                        <input id="twint" name="payment-type" type="radio" value="twint"
-                                            checked class="w-4 h-4 border-gray-300 text-accent-600 focus:ring-accent-500">
-                                        <label for="twint"
-                                            class="block ml-3 text-sm font-medium text-gray-700">Twint</label>
+                                        <input id="credit_twint" name="payment_type" type="radio" value="credit_twint"
+                                            x-model="paymentType" checked
+                                            class="w-4 h-4 border-gray-300 text-accent-600 focus:ring-accent-500">
+                                        <label for="credit_twint"
+                                            class="block ml-3 text-sm font-medium text-gray-700">Credit cards /
+                                            TWINT</label>
                                     </div>
                                     <div class="flex items-center">
-                                        <input id="direct-card" name="payment-type" type="radio" value="direct-card"
+                                        <input id="bank_transfer" name="payment_type" type="radio"
+                                            value="bank_transfer" x-model="paymentType"
                                             class="w-4 h-4 border-gray-300 text-accent-600 focus:ring-accent-500">
-                                        <label for="direct-card"
-                                            class="block ml-3 text-sm font-medium text-gray-700">Direct card</label>
+                                        <label for="bank_transfer"
+                                            class="block ml-3 text-sm font-medium text-gray-700">Bank transfer/advanced
+                                            payment</label>
                                     </div>
                                 </div>
+                                <p x-show="paymentType === 'bank_transfer'" class="mt-2 text-sm text-gray-500">
+                                    Transfer directly to our bank account. Please use your order number as the reference.
+                                    Your order will be processed only after the funds have been received in our account. You
+                                    will receive our bank details upon confirming your order.
+                                </p>
                             </fieldset>
                         </div>
-                        <div class="px-4 py-6 border-t border-gray-200 sm:px-6">                         
-                            <button
-                                onclick="{{ $paymentUrl }}"
-                                class="w-full px-4 py-3 text-base font-medium text-white border border-transparent rounded-md shadow-sm  btn-zahls-modal bg-accent-600 hover:bg-accent-700 focus:outline-none focus:ring-2 focus:ring-accent-500 focus:ring-offset-2 focus:ring-offset-gray-50">Confirm
+                        <div class="px-4 py-6 border-t border-gray-200 sm:px-6">
+                            <button onclick="{{ $paymentUrl }}"
+                                class="w-full px-4 py-3 text-base font-medium text-white border border-transparent rounded-md shadow-sm btn-zahls-modal bg-accent-600 hover:bg-accent-700 focus:outline-none focus:ring-2 focus:ring-accent-500 focus:ring-offset-2 focus:ring-offset-gray-50">Confirm
                                 order</button>
                         </div>
                     </div>
@@ -724,11 +763,12 @@
             </form>
         </div>
     </div>
-        
 @endsection
 <!-- Anchor tag should be here because modal does not answare without it -->
 <a class="btn-zahls btn-zahls-modal" href="{{ $paymentUrl }}" style="display: none;"> </a>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+    integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg=="
+    crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://media.zahls.ch/modal/v1/modal.min.js"></script>
 <script type="text/javascript">
     jQuery(".btn-zahls-modal").zahlsModal();
@@ -784,4 +824,3 @@
         display: block;
     }
 </style>
-

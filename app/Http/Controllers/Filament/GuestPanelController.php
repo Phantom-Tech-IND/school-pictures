@@ -176,7 +176,7 @@ class GuestPanelController extends Controller
         }
 
         // Fetch all products of type 'school'
-        $products = Product::where('product_type', 'school')->get();
+        $products = Product::all();
 
         return view('gallery-code', compact('student', 'products'));
     }

@@ -55,7 +55,7 @@
                         <a href="javascript:void(0);" onclick="toggleSlideOverCart()">
                             <button class="flex pl-4 border-l-2 border-accent-500">
                                 <x-heroicon-o-shopping-cart class="relative w-5 h-5" />
-                                <span id="cart-count"
+                                <span data-id="cart-count"
                                     class="absolute right-0 w-4 p-1 text-sm rounded-md text-accent bold top-4">0</span>
                             </button>
                         </a>
@@ -74,21 +74,6 @@
             </div>
         </nav>
 
-
-        {{-- 
-            Alex, te rog, poti sa o rezolvi tu ca nu stiu de ce nu merge
-            La sfarsitul animatiei, in loc ca modalul sa fie 50% opacity, este 100% opacity.
-            Ori o rezolvi ori o poti sterge
-        --}}
-        {{-- <div class="fixed top-0 left-0 w-full h-full transition-opacity bg-black"
-            x-show="open"
-            x-transition:enter="transition-opacity ease-out duration-300"
-            x-transition:enter-start="opacity-0"
-            x-transition:enter-end="opacity-50"
-            x-transition:leave="transition-opacity ease-in duration-300"
-            x-transition:leave-start="opacity-50"
-            x-transition:leave-end="opacity-0">
-        </div> --}}
         <div x-show="open" @click.away="open = false" x-transition:enter="ease-out duration-300"
             x-transition:enter-start="opacity-0 -right-full" x-transition:enter-end="opacity-100 right-0"
             x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100 right-0"
@@ -122,6 +107,19 @@
                     class="{{ request()->routeIs('contact')
                         ? 'text-accent font-semibold relative -left-2'
                         : 'relative left-0 font-medium transition-all duration-300 hover:pl-0 hover:text-accent hover:-left-2' }}">Unsere Kontakt</a>
+                @auth('student')
+                <a href="javascript:void(0);"
+                    onclick="toggleSlideOverCart()"
+                    class="{{ request()->routeIs('cart')
+                        ? 'text-accent font-semibold relative -left-2'
+                        : 'relative left-0 font-medium transition-all duration-300 hover:pl-0 hover:text-accent hover:-left-2' }}"
+                >
+                    <button class="flex gap-2">
+                        <x-heroicon-o-shopping-cart class="relative w-5 h-5" />
+                        <span class="">Cart<span data-id="cart-count" class="text-xs align-top bold">0</span></span> 
+                    </button>
+                </a>
+            @endauth
             </nav>
         </div>
     </div>
@@ -145,7 +143,7 @@
                 fetch('{{ route('cart.count') }}')
                     .then(response => response.json())
                     .then(data => {
-                        document.getElementById('cart-count').textContent = data['totalItems'];
+                        document.querySelectorAll('[data-id="cart-count"]').forEach(element => element.textContent = data['totalItems']);
                     })
                     .catch(error => console.error('Error fetching cart count:', error));
             }
