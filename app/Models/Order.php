@@ -10,7 +10,13 @@ class Order extends Model
     use HasFactory;
 
     protected $fillable = [
-        'uuid', 'amount', 'time', 'status', 'invoice', 'contact_id',
+        'amount', 'time', 'status', 'invoice', 'contact_id', 'payment_method', 'payment_status',
+        'address_same_as_billing', 'billing_address', 'shipping_address',
+    ];
+
+    protected $casts = [
+        'billing_address' => 'array',
+        'shipping_address' => 'array',
     ];
 
     public function contact()

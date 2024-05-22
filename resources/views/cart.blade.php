@@ -706,22 +706,6 @@
                             </div>
                         </dl>
 
-                        <script>
-                            function updateTotal() {
-                                const subtotal = parseFloat(document.getElementById('subtotal').textContent);
-                                // const shipping = parseFloat(document.getElementById('shipping').textContent);
-                                const taxes = parseFloat(document.getElementById('taxes').textContent);
-
-                                const total = subtotal + shipping + taxes;
-                                document.getElementById('total').textContent = `${total.toFixed(2)}`;
-                            }
-
-                            // Event listeners to update total when subtotal, shipping, or taxes change
-                            document.getElementById('subtotal').addEventListener('DOMSubtreeModified', updateTotal);
-                            // document.getElementById('shipping').addEventListener('DOMSubtreeModified', updateTotal);
-                            document.getElementById('taxes').addEventListener('DOMSubtreeModified', updateTotal);
-                        </script>
-
                         <!-- Payment -->
                         <div class="px-4 py-6 space-y-6 border-t border-gray-200 sm:px-6">
                             <h2 class="text-lg font-medium text-gray-900">Payment</h2>
@@ -769,8 +753,14 @@
         event.preventDefault();
         const formData = new FormData(event.target);
         const csrfToken = formData.get('_token');
+        const paymentType = formData.get('payment_type');
 
-        const response = await fetch('{{ route('cart.payment') }}', {
+        let apiEndpoint = '{{ route('cart.payment') }}';
+        if (paymentType === 'bank_transfer') {
+            apiEndpoint = '{{ route('cart.payment.bank_transfer') }}';
+        }
+
+        const response = await fetch(apiEndpoint, {
             method: 'POST',
             headers: {
                 'X-CSRF-TOKEN': csrfToken
@@ -780,6 +770,7 @@
 
         if (response.ok) {
             const data = await response.json();
+            console.log(data);
             if (data.paymentUrl) {
                 window.location.href = data.paymentUrl;
             } else {
@@ -794,14 +785,13 @@
     const updateTotal = async () => {
         const subtotal = parseFloat(document.getElementById('subtotal').textContent);
         const taxes = parseFloat(document.getElementById('taxes').textContent);
-        // If you have a shipping cost, uncomment the following line and ensure the shipping element exists
-        // const shipping = parseFloat(document.getElementById('shipping').textContent);
-
-        // Calculate the total
-        const total = subtotal + taxes; // + shipping; // Include shipping if applicable
+        const total = subtotal + taxes;
         document.getElementById('total').textContent = total.toFixed(2);
     }
-    document.addEventListener('DOMContentLoaded', updateTotal);
+
+    document.addEventListener('DOMContentLoaded', () => {
+        updateTotal();
+    });
 </script>
 <style>
     .custom-input:user-invalid {

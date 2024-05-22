@@ -22,6 +22,8 @@ Route::controller(GuestPanelController::class)->group(function () {
     Route::get('/not-available', 'notAvailable')->name('not-available');
     Route::get('/contact', 'contact')->name('contact');
     Route::get('/our-offers', 'offers')->name('offers');
+    Route::post('/webhook-zahls', 'webhookZahls')->name('webhook-zahls')
+        ->middleware('verify.zahls.origin');
     Route::get('/offer/{id}', 'offer')->name('offer');
     Route::get('/kindergarten-und-schulfotografie', 'kindergarden')->name('kindergarden');
     Route::get('/upload', 'upload');
@@ -56,6 +58,7 @@ Route::middleware(['auth:student'])->group(function () {
         Route::post('/add-to-cart', 'addToCart')->name('add.to.cart');
         Route::get('/cart', 'index')->name('cart');
         Route::post('/cart/payment', 'createPaymentForm')->name('cart.payment');
+        Route::post('/cart/payment/bank', 'createBankPayment')->name('cart.payment.bank_transfer');
         Route::get('/cart/count', 'countDistinctProducts')->name('cart.count');
         Route::post('/cart/remove/{productId}', 'removeFromCart')->name('cart.remove');
         Route::get('/cart/items', 'getCartItems')->name('cart.items');

@@ -24,6 +24,29 @@ class CartController extends Controller
         }, $cart));
     }
 
+    public function createBankPayment(Request $request)
+    {
+        $data = $request->all();
+
+        $contactData = [
+            'name' => $data['first-name'].' '.$data['last-name'],
+            'email' => $data['email-address'],
+            'phone' => $data['phone'],
+        ];
+        $orderData = [
+            'uuid' => (string) \Illuminate\Support\Str::uuid(),
+            'amount' => $data['amount'] ?? 0, // Assuming amount is part of the data
+            'time' => now(),
+            'status' => 'pending', // Default status
+            'invoice' => $data['invoice'] ?? null, // Assuming invoice is part of the data
+            'payment_method' => $data['payment_type'],
+            'payment_status' => 'unpaid', // Default payment status
+
+        ];
+
+        return response()->json(['data' => $request->all()]);
+    }
+
     public function createPaymentForm()
     {
         $instanceName = env('PAYMENT_INSTANCE_NAME');
@@ -64,16 +87,14 @@ class CartController extends Controller
     {
         $product = \App\Models\Product::find($product_id);
         if (! $product) {
-            return 0; // Product not found, return 0 as total
+            return 0;
         }
 
         $basePrice = $product->price;
         $customAttributes = $product->custom_attributes;
         $optionPrice = 0;
 
-        // Calculate price from selects
         foreach ($selects as $title => $selectedOption) {
-            // Find the custom attribute based on the title
             foreach ($customAttributes as $attribute) {
                 if (str_replace(' ', '_', $attribute['title']) === str_replace(' ', '_', $title) && isset($attribute['options'])) {
                     foreach ($attribute['options'] as $option) {
@@ -85,7 +106,6 @@ class CartController extends Controller
             }
         }
 
-        // Calculate price from checkboxes
         foreach ($checkboxes as $key => $checkboxSet) {
             $key = str_replace('_', ' ', $key);
             foreach ($customAttributes as $attribute) {
@@ -107,7 +127,7 @@ class CartController extends Controller
             }
         }
 
-        $totalPrice = $basePrice + $optionPrice; // Calculate total price including all options and checkboxes
+        $totalPrice = $basePrice + $optionPrice;
 
         return $totalPrice;
     }

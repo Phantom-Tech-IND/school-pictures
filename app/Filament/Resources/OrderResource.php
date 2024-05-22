@@ -5,8 +5,12 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\ContactRelationManagerResource\RelationManagers\ContactsRelationManager;
 use App\Filament\Resources\OrderResource\Pages;
 use App\Models\Order;
+use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
@@ -31,10 +35,53 @@ class OrderResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('uuid'),
-                TextInput::make('amount'),
-                TextInput::make('status'),
-                TextInput::make('invoice'),
+                Select::make('contact_id')
+                    ->required()
+                    ->searchable()
+                    ->preload()
+                    ->native(false)
+                    ->relationship('contact', 'name'),
+                TextInput::make('amount')->prefix('CHF')->required(),
+                Select::make('status')
+                    ->default('pending')
+                    ->required()
+                    ->native(false)
+                    ->options(['pending', 'completed', 'cancelled']),
+                TextInput::make('invoice')
+                    ->prefix('id'),
+
+                Select::make('payment_method')
+                    ->options(['card', 'bank_transfer'])
+                    ->native(false)
+                    ->required(),
+                Select::make('payment_status')
+                    ->options(['paid', 'unpaid'])
+                    ->native(false)
+                    ->required(),
+                Toggle::make('address_same_as_billing')
+                    ->live()
+                    ->default(true)
+                    ->columnSpanFull()
+                    ->label('Shipping address same as billing'),
+                Repeater::make('billing_address')
+                    ->collapsed()
+                    ->addable(false)
+                    ->schema([
+                        TextInput::make('street')->required(),
+                        TextInput::make('zip')->required(),
+                        TextInput::make('city')->required(),
+                        TextInput::make('country')->required(),
+                    ]),
+
+                Repeater::make('shipping_address')
+                    ->collapsed()
+                    ->addable(false)
+                    ->schema([
+                        TextInput::make('street')->required(),
+                        TextInput::make('zip')->required(),
+                        TextInput::make('city')->required(),
+                        TextInput::make('country')->required(),
+                    ])->hidden(fn (Get $get) => $get('address_same_as_billing') === true),
             ]);
     }
 

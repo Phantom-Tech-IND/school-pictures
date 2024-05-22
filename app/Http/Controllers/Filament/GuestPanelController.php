@@ -31,6 +31,13 @@ class GuestPanelController extends Controller
         return view('cart');
     }
 
+    public function webhookZahls(Request $request)
+    {
+        $data = $request->all();
+
+        return response()->json(['data' => $data]);
+    }
+
     public function postContactForm(StoreMessageRequest $request)
     {
         try {
@@ -68,7 +75,7 @@ class GuestPanelController extends Controller
 
         if ($slug) {
             $selectedCategory = Category::where('slug', $slug)->first();
-            if (!$selectedCategory) {
+            if (! $selectedCategory) {
                 abort(404);
             }
             $productsQuery = $selectedCategory->products(); // Start with the category's products query
@@ -84,7 +91,7 @@ class GuestPanelController extends Controller
         return view('webshop', [
             'products' => $products,
             'categories' => $categories,
-            'selectedCategory' => $selectedCategory
+            'selectedCategory' => $selectedCategory,
         ]);
     }
 
