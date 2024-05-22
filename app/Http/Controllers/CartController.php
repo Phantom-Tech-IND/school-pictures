@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Contact;
+use App\Models\Order;
+use Artesaos\SEOTools\Facades\SEOTools;
 use Exception;
 use Illuminate\Http\Request;
-use Artesaos\SEOTools\Facades\SEOTools;
 
 class CartController extends Controller
 {
@@ -29,23 +31,57 @@ class CartController extends Controller
     {
         $data = $request->all();
 
+        $cart = $this->getCartItems();
+
         $contactData = [
             'name' => $data['first-name'].' '.$data['last-name'],
             'email' => $data['email-address'],
             'phone' => $data['phone'],
         ];
-        $orderData = [
-            'uuid' => (string) \Illuminate\Support\Str::uuid(),
-            'amount' => $data['amount'] ?? 0, // Assuming amount is part of the data
-            'time' => now(),
-            'status' => 'pending', // Default status
-            'invoice' => $data['invoice'] ?? null, // Assuming invoice is part of the data
-            'payment_method' => $data['payment_type'],
-            'payment_status' => 'unpaid', // Default payment status
 
+        $billingAddress = [
+            'address' => $data['address'] ?? '',
+            'city' => $data['city'] ?? '',
+            'zip' => $data['postal-code'] ?? '',
+            'country' => $data['country'] ?? '',
+            'region' => $data['region'] ?? '',
         ];
 
-        return response()->json(['data' => $request->all()]);
+        $shippingAddress = [
+            'address' => $data['shipping-address'] ?? '',
+            'city' => $data['shipping-city'] ?? '',
+            'zip' => $data['shipping-postal-code'] ?? '',
+            'country' => $data['shipping-country'] ?? '',
+            'region' => $data['shipping-region'] ?? '',
+        ];
+
+        // return response()->json(['billingAddress' => $billingAddress, 'shippingAddress' => $shippingAddress]);
+        $orderData = [
+            'amount' => $cart['subtotal'],
+            'status' => 'pending',
+            'invoice' => '',
+            'payment_method' => $data['payment_type'],
+            'payment_status' => 'unpaid',
+            'address_same_as_billing' => filter_var($data['address-same-as-billing'], FILTER_VALIDATE_BOOLEAN),
+            'billing_address' => [$billingAddress],
+            'shipping_address' => [$shippingAddress],
+        ];
+
+        try {
+            $contact = Contact::firstOrCreate($contactData);
+            $orderData['contact_id'] = $contact->id;
+
+            // return response()->json(['order' => $orderData]);
+            Order::create($orderData);
+
+            return response()->json([
+                'success' => 'Order created successfully!',
+                'totalItems' => $this->calculateTotalItems($this->getCart()),
+                'cartItems' => $this->getCartItems(),
+            ]);
+        } catch (Exception $e) {
+            return response()->json(['error' => 'Failed to create order: '.$e->getMessage()], 500);
+        }
     }
 
     public function createPaymentForm()

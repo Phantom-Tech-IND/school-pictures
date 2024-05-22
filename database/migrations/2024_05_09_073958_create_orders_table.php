@@ -14,15 +14,13 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->decimal('amount', 10, 2);
-            $table->timestamp('time');
-            $table->string('status');
-            $table->index('status');
+            $table->enum('status', ['pending', 'completed']);
             $table->string('invoice')->nullable();
+            $table->json('billing_address')->nullable();
+            $table->json('shipping_address')->nullable();
             $table->enum('payment_method', ['card', 'bank_transfer']);
             $table->enum('payment_status', ['paid', 'unpaid']);
             $table->boolean('address_same_as_billing')->default(0);
-            $table->json('billing_address')->nullable();
-            $table->json('shipping_address')->nullable();
             $table->foreignId('contact_id')->constrained('contacts');
             $table->timestamps();
         });

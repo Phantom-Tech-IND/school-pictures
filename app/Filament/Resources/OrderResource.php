@@ -46,7 +46,7 @@ class OrderResource extends Resource
                     ->default('pending')
                     ->required()
                     ->native(false)
-                    ->options(['pending', 'completed', 'cancelled']),
+                    ->options(['pending', 'completed']),
                 TextInput::make('invoice')
                     ->prefix('id'),
 
@@ -67,20 +67,22 @@ class OrderResource extends Resource
                     ->collapsed()
                     ->addable(false)
                     ->schema([
-                        TextInput::make('street')->required(),
-                        TextInput::make('zip')->required(),
-                        TextInput::make('city')->required(),
-                        TextInput::make('country')->required(),
+                        TextInput::make('address')->nullable(),
+                        TextInput::make('zip')->nullable(),
+                        TextInput::make('city')->nullable(),
+                        TextInput::make('country')->nullable(),
+                        TextInput::make('region')->nullable(),
                     ]),
 
                 Repeater::make('shipping_address')
                     ->collapsed()
                     ->addable(false)
                     ->schema([
-                        TextInput::make('street')->required(),
-                        TextInput::make('zip')->required(),
-                        TextInput::make('city')->required(),
-                        TextInput::make('country')->required(),
+                        TextInput::make('address')->nullable(),
+                        TextInput::make('zip')->nullable(),
+                        TextInput::make('city')->nullable(),
+                        TextInput::make('country')->nullable(),
+                        TextInput::make('region')->nullable(),
                     ])->hidden(fn (Get $get) => $get('address_same_as_billing') === true),
             ]);
     }
@@ -95,21 +97,26 @@ class OrderResource extends Resource
                     ->label('Contact Email')
                     ->url(fn ($record) => 'mailto:'.$record->contact->email)
                     ->openUrlInNewTab(),
-                TextColumn::make('time')
-                    ->dateTime()
-                    ->date('d M Y'),
                 TextColumn::make('amount')
                     ->money('CHF'),
-                TextColumn::make('status')
-                    ->label('Status')
+                TextColumn::make('payment_status')
+                    ->label('Payment Status')
                     ->badge(function (Order $record) {
                         return $record->status;
                     })
                     ->colors([
-                        'success' => 'completed',
-                        'danger' => 'cancelled',
-                        'warning' => 'pending',
-                        'info' => 'processing',
+                        'success' => 'paid',
+                        'danger' => 'unpaid',
+                    ]),
+
+                TextColumn::make('payment_method')
+                    ->label('Payment Method')
+                    ->badge(function (Order $record) {
+                        return $record->payment_method;
+                    })
+                    ->colors([
+                        'success' => 'card',
+                        'info' => 'bank_transfer',
                     ]),
                 TextColumn::make('invoice')
                     ->label('Invoice'),

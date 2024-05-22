@@ -24,10 +24,6 @@ class OrdersRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('uuid')
             ->columns([
-                Tables\Columns\TextColumn::make('time')
-                    ->label('Date')
-                    ->dateTime()
-                    ->date('d M Y'),
                 Tables\Columns\TextColumn::make('amount')
                     ->money('CHF'),
                 Tables\Columns\TextColumn::make('status')
@@ -41,8 +37,7 @@ class OrdersRelationManager extends RelationManager
                         'warning' => 'pending',
                         'info' => 'processing',
                     ]),
-                Tables\Columns\TextColumn::make('invoice')
-                    ->label('Invoice'),
+
             ])
             ->filters([
                 //
@@ -55,7 +50,7 @@ class OrdersRelationManager extends RelationManager
             ->bulkActions([
             ])
             ->recordUrl(function ($record): string {
-                return EditOrder::getUrl([$record->uuid]);
+                return EditOrder::getUrl([$record->id]);
             });
     }
 }

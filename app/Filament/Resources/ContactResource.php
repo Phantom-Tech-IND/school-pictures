@@ -33,7 +33,7 @@ class ContactResource extends Resource
                 TextInput::make('name')->required(),
                 TextInput::make('email')
                     ->email()->required(),
-                TextInput::make('phone'),
+                TextInput::make('phone')->required(),
             ]);
     }
 
