@@ -5,15 +5,17 @@ namespace App\Http\Controllers\Filament;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreMessageRequest;
 use App\Models\Category;
+use App\Models\Invoice;
 use App\Models\Message;
 use App\Models\OfferItem;
 use App\Models\Offers;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\Student;
 use App\Models\User;
+use Artesaos\SEOTools\Facades\SEOTools;
 use Filament\Notifications\Notification;
 use Illuminate\Http\Request;
-use Artesaos\SEOTools\Facades\SEOTools;
 
 class GuestPanelController extends Controller
 {
@@ -42,6 +44,41 @@ class GuestPanelController extends Controller
         SEOTools::setDescription('View and manage your cart items.');
 
         return view('cart');
+    }
+
+    public function webhookZahls(Request $request)
+    {
+
+        $data = $request->input('transaction');
+        if (! $data) {
+            return response()->json(['status' => 'error', 'message' => 'Invalid transaction data'], 400);
+        }
+
+        $invoiceData = $data['invoice'] ?? null;
+        $referenceId = $data['referenceId'] ?? null;
+
+        if (! $invoiceData || ! $referenceId) {
+            return response()->json(['status' => 'error', 'message' => 'Missing invoice or reference ID'], 400);
+        }
+
+        // Find the order by referenceId
+        $order = Order::where('id', $referenceId)->firstOrFail();
+        $order->update([
+            'payment_status' => 'paid',
+        ]);
+
+        $invoice = new Invoice([
+            'products' => $invoiceData['products'] ?? [],
+            'discount' => $invoiceData['discount'] ?? [],
+            'currency' => $invoiceData['currency'] ?? 'CHF',
+            'original_amount' => $invoiceData['originalAmount'] / 100 ?? 0,
+            'refunded_amount' => $invoiceData['refundedAmount'] ?? 0,
+            'custom_fields' => $invoiceData['custom_fields'] ?? [],
+        ]);
+
+        $order->invoice()->save($invoice);
+
+        return response()->json(['status' => 'success', 'data' => $data]);
     }
 
     public function postContactForm(StoreMessageRequest $request)
@@ -85,7 +122,7 @@ class GuestPanelController extends Controller
 
         if ($slug) {
             $selectedCategory = Category::where('slug', $slug)->first();
-            if (!$selectedCategory) {
+            if (! $selectedCategory) {
                 abort(404);
             }
             $productsQuery = $selectedCategory->products(); // Start with the category's products query
@@ -105,7 +142,7 @@ class GuestPanelController extends Controller
         return view('webshop', [
             'products' => $products,
             'categories' => $categories,
-            'selectedCategory' => $selectedCategory
+            'selectedCategory' => $selectedCategory,
         ]);
     }
 
@@ -228,12 +265,13 @@ class GuestPanelController extends Controller
         if (! $student) {
             SEOTools::setTitle('Student Not Found');
             SEOTools::setDescription('The requested student gallery is not available.');
+
             return redirect()->route('not-available'); // Redirect if no student is found
         }
 
         // Set dynamic SEO tags based on the student's name or a specific attribute
-        SEOTools::setTitle('Gallery for ' . $student->name);
-        SEOTools::setDescription('View the gallery of ' . $student->name . ' including various photos and projects.');
+        SEOTools::setTitle('Gallery for '.$student->name);
+        SEOTools::setDescription('View the gallery of '.$student->name.' including various photos and projects.');
 
         // Fetch all products of type 'school'
         $products = Product::all();

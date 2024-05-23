@@ -24,3 +24,21 @@
         </div>
     </div>
 @endsection
+
+
+<meta name="csrf-token" content="{{ csrf_token() }}">
+<script>
+    document.addEventListener('DOMContentLoaded', async () => {
+        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+        const forgetCart = await fetch('{{ route('cart.forget') }}', {
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': csrfToken
+            },
+        });
+
+        if (!forgetCart.ok) {
+            throw new Error('Failed to forget cart!');
+        }
+    });
+</script>

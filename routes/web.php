@@ -4,7 +4,6 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\Filament\GuestPanelController;
 use Illuminate\Support\Facades\Route;
-use Spatie\Sitemap\SitemapGenerator;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +22,8 @@ Route::controller(GuestPanelController::class)->group(function () {
     Route::get('/not-available', 'notAvailable')->name('not-available');
     Route::get('/contact', 'contact')->name('contact');
     Route::get('/our-offers', 'offers')->name('offers');
+    Route::post('/webhook-zahls', 'webhookZahls')->name('webhook-zahls')
+        ->middleware('verify.zahls.origin');
     Route::get('/offer/{id}', 'offer')->name('offer');
     Route::get('/kindergarten-und-schulfotografie', 'kindergarden')->name('kindergarden');
     Route::get('/upload', 'upload');
@@ -56,19 +57,22 @@ Route::middleware(['auth:student'])->group(function () {
     Route::controller(CartController::class)->group(function () {
         Route::post('/add-to-cart', 'addToCart')->name('add.to.cart');
         Route::get('/cart', 'index')->name('cart');
+        Route::post('/cart/forget', 'forgetCart')->name('cart.forget');
         Route::post('/cart/payment', 'createPaymentForm')->name('cart.payment');
+        Route::post('/cart/payment/bank', 'createBankPayment')->name('cart.payment.bank_transfer');
         Route::get('/cart/count', 'countDistinctProducts')->name('cart.count');
         Route::post('/cart/remove/{productId}', 'removeFromCart')->name('cart.remove');
         Route::get('/cart/items', 'getCartItems')->name('cart.items');
         Route::post('/cart/update-quantity/{productId}', 'updateQuantity')->name('cart.update-quantity');
-        
+
         Route::get('/payment-success', 'paymentSuccess')->name('payment-success');
         Route::get('/payment-failed', 'paymentFailed')->name('payment-failed');
     });
 });
 
 Route::get('robots.txt', function () {
-    $robotsContent = "User-agent: *\nDisallow: /private/\nDisallow: /tmp/\nDisallow: /cache/\nDisallow: /admin/\n\nSitemap: " . url('sitemap.xml');
+    $robotsContent = "User-agent: *\nDisallow: /private/\nDisallow: /tmp/\nDisallow: /cache/\nDisallow: /admin/\n\nSitemap: ".url('sitemap.xml');
+
     return response($robotsContent, 200)->header('Content-Type', 'text/plain');
 });
 

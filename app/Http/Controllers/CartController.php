@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Contact;
+use App\Models\Order;
+use Artesaos\SEOTools\Facades\SEOTools;
 use Exception;
 use Illuminate\Http\Request;
-use Artesaos\SEOTools\Facades\SEOTools;
 
 class CartController extends Controller
 {
@@ -25,22 +27,86 @@ class CartController extends Controller
         }, $cart));
     }
 
-    public function createPaymentForm()
+    public function createBankPayment(Request $request)
+    {
+        $data = $request->all();
+        $cart = $this->getCartItems();
+
+        $contactData = [
+            'name' => $data['first-name'].' '.$data['last-name'],
+            'email' => $data['email-address'],
+            'phone' => $data['phone'],
+        ];
+
+        $billingAddress = [
+            'address' => $data['address'] ?? '',
+            'city' => $data['city'] ?? '',
+            'zip' => $data['postal-code'] ?? '',
+            'country' => $data['country'] ?? '',
+            'region' => $data['region'] ?? '',
+        ];
+
+        $shippingAddress = [
+            'address' => $data['shipping-address'] ?? '',
+            'city' => $data['shipping-city'] ?? '',
+            'zip' => $data['shipping-postal-code'] ?? '',
+            'country' => $data['shipping-country'] ?? '',
+            'region' => $data['shipping-region'] ?? '',
+        ];
+
+        $orderData = [
+            'amount' => $cart['subtotal'],
+            'status' => 'pending',
+            'invoice' => '',
+            'payment_method' => $data['payment_type'],
+            'payment_status' => 'unpaid',
+            'address_same_as_billing' => filter_var($data['address-same-as-billing'], FILTER_VALIDATE_BOOLEAN),
+            'billing_address' => [$billingAddress],
+            'shipping_address' => [$shippingAddress],
+        ];
+
+        try {
+            $contact = Contact::firstOrCreate($contactData);
+            $orderData['contact_id'] = $contact->id;
+
+            if ($data['payment_type'] === 'bank_transfer') {
+                Order::create($orderData);
+
+                return response()->json([
+                    'success' => 'Order created successfully!',
+                    'totalItems' => $this->calculateTotalItems($this->getCart()),
+                    'cartItems' => $this->getCartItems(),
+                ]);
+            } else {
+                return $this->createPaymentForm($cart, $orderData, $contact);
+            }
+        } catch (Exception $e) {
+            return response()->json(['error' => 'Failed to create order: '.$e->getMessage()], 500);
+        }
+    }
+
+    public function createPaymentForm($cart, $orderData, $contact)
     {
         $instanceName = env('PAYMENT_INSTANCE_NAME');
         $secret = env('PAYMENT_SECRET');
 
-        $cartItems = $this->getCartItems();
-
+        $order = Order::create($orderData);
         try {
             $payrexx = new \Payrexx\Payrexx($instanceName, $secret, '', 'zahls.ch');
 
             $gateway = new \Payrexx\Models\Request\Gateway();
-            $gateway->setAmount(($cartItems['subtotal'] * 100));
+            $gateway->setAmount(($cart['subtotal'] * 100));
             $gateway->setCurrency('CHF');
-            $gateway->setSuccessRedirectUrl(url('/cart'));
+            $gateway->setSuccessRedirectUrl(url('/payment-success'));
             $gateway->setCancelRedirectUrl(url('/cart'));
-            $gateway->setFailedRedirectUrl(url('/cart'));
+            $gateway->setFailedRedirectUrl(url('/payment-failed'));
+
+            $gateway->setReferenceId($order->id);
+
+            $gateway->addField('forename', $contact->name);
+            $gateway->addField('email', $contact->email);
+            $gateway->addField('phone', $contact->phone);
+
             $response = $payrexx->create($gateway);
 
             if ($response && ! empty($response->getLink())) {
@@ -65,16 +131,14 @@ class CartController extends Controller
     {
         $product = \App\Models\Product::find($product_id);
         if (! $product) {
-            return 0; // Product not found, return 0 as total
+            return 0;
         }
 
         $basePrice = $product->price;
         $customAttributes = $product->custom_attributes;
         $optionPrice = 0;
 
-        // Calculate price from selects
         foreach ($selects as $title => $selectedOption) {
-            // Find the custom attribute based on the title
             foreach ($customAttributes as $attribute) {
                 if (str_replace(' ', '_', $attribute['title']) === str_replace(' ', '_', $title) && isset($attribute['options'])) {
                     foreach ($attribute['options'] as $option) {
@@ -86,7 +150,6 @@ class CartController extends Controller
             }
         }
 
-        // Calculate price from checkboxes
         foreach ($checkboxes as $key => $checkboxSet) {
             $key = str_replace('_', ' ', $key);
             foreach ($customAttributes as $attribute) {
@@ -108,7 +171,7 @@ class CartController extends Controller
             }
         }
 
-        $totalPrice = $basePrice + $optionPrice; // Calculate total price including all options and checkboxes
+        $totalPrice = $basePrice + $optionPrice;
 
         return $totalPrice;
     }
@@ -271,5 +334,16 @@ class CartController extends Controller
         SEOTools::setDescription('Your payment failed. Please try again.');
 
         return view('payment-failed');
+    }
+
+    public function forgetCart()
+    {
+        session()->forget('cart');
+
+        return response()->json([
+            'success' => 'Cart cleared successfully!',
+            'totalItems' => 0,
+            'cartItems' => [],
+        ]);
     }
 }
