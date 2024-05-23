@@ -710,15 +710,15 @@
                         <div class="px-4 py-6 space-y-6 border-t border-gray-200 sm:px-6">
                             <h2 class="text-lg font-medium text-gray-900">Payment</h2>
 
-                            <fieldset class="mt-4" x-data="{ paymentType: 'credit_twint' }">
+                            <fieldset class="mt-4" x-data="{ paymentType: 'card' }">
                                 <legend class="sr-only">Payment type</legend>
                                 <div class="space-y-4 sm:flex sm:items-center sm:space-x-10 sm:space-y-0">
                                     <div class="flex items-center">
-                                        <input id="credit_twint" name="payment_type" type="radio" value="credit_twint"
+                                        <input id="card" name="payment_type" type="radio" value="card"
                                             x-model="paymentType" checked
                                             class="w-4 h-4 border-gray-300 text-accent-600 focus:ring-accent-500">
-                                        <label for="credit_twint"
-                                            class="block ml-3 text-sm font-medium text-gray-700">Credit card /
+                                        <label for="card" class="block ml-3 text-sm font-medium text-gray-700">Credit
+                                            card /
                                             TWINT</label>
                                     </div>
                                     <div class="flex items-center">
@@ -755,47 +755,46 @@
         const csrfToken = formData.get('_token');
         const paymentType = formData.get('payment_type');
 
-        let apiEndpoint = '{{ route('cart.payment') }}';
-        if (paymentType === 'bank_transfer') {
-            apiEndpoint = '{{ route('cart.payment.bank_transfer') }}';
-        }
+        const apiEndpoint = '{{ route('cart.payment.bank_transfer') }}'
 
-        const response = await fetch(apiEndpoint, {
-            method: 'POST',
-            headers: {
-                'X-CSRF-TOKEN': csrfToken
-            },
-            body: formData
-        });
+        try {
+            const response = await fetch(apiEndpoint, {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': csrfToken
+                },
+                body: formData
+            });
 
-        if (response.ok) {
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error || 'An error occurred while processing your request.');
+            }
+
             const data = await response.json();
-            console.log(data);
+
+
             if (paymentType === 'bank_transfer') {
                 window.location.href = '{{ route('payment-success') }}';
-            }
-            if (data.paymentUrl) {
+            } else if (data.paymentUrl) {
                 window.location.href = data.paymentUrl;
             } else {
                 throw new Error('Payment URL not found in the response.');
             }
-        } else {
-            const errorData = await response.json();
-            throw new Error(errorData.error || 'An error occurred while processing your request.');
+        } catch (error) {
+            console.error('Error:', error);
             window.location.href = '{{ route('payment-failed') }}';
         }
-    }
+    };
 
-    const updateTotal = async () => {
+    const updateTotal = () => {
         const subtotal = parseFloat(document.getElementById('subtotal').textContent);
         const taxes = parseFloat(document.getElementById('taxes').textContent);
         const total = subtotal + taxes;
         document.getElementById('total').textContent = total.toFixed(2);
-    }
+    };
 
-    document.addEventListener('DOMContentLoaded', () => {
-        updateTotal();
-    });
+    document.addEventListener('DOMContentLoaded', updateTotal);
 </script>
 <style>
     .custom-input:user-invalid {

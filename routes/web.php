@@ -57,6 +57,7 @@ Route::middleware(['auth:student'])->group(function () {
     Route::controller(CartController::class)->group(function () {
         Route::post('/add-to-cart', 'addToCart')->name('add.to.cart');
         Route::get('/cart', 'index')->name('cart');
+        Route::post('/cart/forget', 'forgetCart')->name('cart.forget');
         Route::post('/cart/payment', 'createPaymentForm')->name('cart.payment');
         Route::post('/cart/payment/bank', 'createBankPayment')->name('cart.payment.bank_transfer');
         Route::get('/cart/count', 'countDistinctProducts')->name('cart.count');

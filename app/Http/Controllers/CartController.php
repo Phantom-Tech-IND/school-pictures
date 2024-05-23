@@ -30,7 +30,6 @@ class CartController extends Controller
     public function createBankPayment(Request $request)
     {
         $data = $request->all();
-
         $cart = $this->getCartItems();
 
         $contactData = [
@@ -55,7 +54,6 @@ class CartController extends Controller
             'region' => $data['shipping-region'] ?? '',
         ];
 
-        // return response()->json(['billingAddress' => $billingAddress, 'shippingAddress' => $shippingAddress]);
         $orderData = [
             'amount' => $cart['subtotal'],
             'status' => 'pending',
@@ -71,35 +69,44 @@ class CartController extends Controller
             $contact = Contact::firstOrCreate($contactData);
             $orderData['contact_id'] = $contact->id;
 
-            // return response()->json(['order' => $orderData]);
-            Order::create($orderData);
+            if ($data['payment_type'] === 'bank_transfer') {
+                Order::create($orderData);
 
-            return response()->json([
-                'success' => 'Order created successfully!',
-                'totalItems' => $this->calculateTotalItems($this->getCart()),
-                'cartItems' => $this->getCartItems(),
-            ]);
+                return response()->json([
+                    'success' => 'Order created successfully!',
+                    'totalItems' => $this->calculateTotalItems($this->getCart()),
+                    'cartItems' => $this->getCartItems(),
+                ]);
+            } else {
+                return $this->createPaymentForm($cart, $orderData, $contact);
+            }
         } catch (Exception $e) {
             return response()->json(['error' => 'Failed to create order: '.$e->getMessage()], 500);
         }
     }
 
-    public function createPaymentForm()
+    public function createPaymentForm($cart, $orderData, $contact)
     {
         $instanceName = env('PAYMENT_INSTANCE_NAME');
         $secret = env('PAYMENT_SECRET');
 
-        $cartItems = $this->getCartItems();
-
+        $order = Order::create($orderData);
         try {
             $payrexx = new \Payrexx\Payrexx($instanceName, $secret, '', 'zahls.ch');
 
             $gateway = new \Payrexx\Models\Request\Gateway();
-            $gateway->setAmount(($cartItems['subtotal'] * 100));
+            $gateway->setAmount(($cart['subtotal'] * 100));
             $gateway->setCurrency('CHF');
-            $gateway->setSuccessRedirectUrl(url('/cart'));
+            $gateway->setSuccessRedirectUrl(url('/payment-success'));
             $gateway->setCancelRedirectUrl(url('/cart'));
-            $gateway->setFailedRedirectUrl(url('/cart'));
+            $gateway->setFailedRedirectUrl(url('/payment-failed'));
+
+            $gateway->setReferenceId($order->id);
+
+            $gateway->addField('forename', $contact->name);
+            $gateway->addField('email', $contact->email);
+            $gateway->addField('phone', $contact->phone);
+
             $response = $payrexx->create($gateway);
 
             if ($response && ! empty($response->getLink())) {
@@ -327,5 +334,16 @@ class CartController extends Controller
         SEOTools::setDescription('Your payment failed. Please try again.');
 
         return view('payment-failed');
+    }
+
+    public function forgetCart()
+    {
+        session()->forget('cart');
+
+        return response()->json([
+            'success' => 'Cart cleared successfully!',
+            'totalItems' => 0,
+            'cartItems' => [],
+        ]);
     }
 }

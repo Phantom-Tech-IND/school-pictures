@@ -18,8 +18,6 @@ use Filament\Tables\Table;
 
 class OrderResource extends Resource
 {
-    protected static ?string $model = Order::class;
-
     protected static ?string $navigationGroup = 'Customer';
 
     protected static ?string $navigationIcon = 'heroicon-c-shopping-bag';
@@ -47,7 +45,7 @@ class OrderResource extends Resource
                     ->required()
                     ->native(false)
                     ->options(['pending', 'completed']),
-                TextInput::make('invoice')
+                TextInput::make('invoice.id')
                     ->prefix('id'),
 
                 Select::make('payment_method')
@@ -92,15 +90,20 @@ class OrderResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('contact.name')
+                    ->searchable()
                     ->label('Contact Name'),
                 TextColumn::make('contact.email')
                     ->label('Contact Email')
+                    ->searchable()
                     ->url(fn ($record) => 'mailto:'.$record->contact->email)
                     ->openUrlInNewTab(),
                 TextColumn::make('amount')
+                    ->sortable()
+                    ->searchable()
                     ->money('CHF'),
                 TextColumn::make('payment_status')
                     ->label('Payment Status')
+                    ->sortable()
                     ->badge(function (Order $record) {
                         return $record->status;
                     })
@@ -110,6 +113,7 @@ class OrderResource extends Resource
                     ]),
 
                 TextColumn::make('payment_method')
+                    ->sortable()
                     ->label('Payment Method')
                     ->badge(function (Order $record) {
                         return $record->payment_method;
@@ -118,14 +122,28 @@ class OrderResource extends Resource
                         'success' => 'card',
                         'info' => 'bank_transfer',
                     ]),
-                TextColumn::make('invoice')
+                TextColumn::make('Invoice.id')
+                    ->searchable()
+                    ->openUrlInNewTab()
                     ->label('Invoice'),
                 TextColumn::make('contact.phone')
+                    ->searchable()
                     ->label('Contact Phone')
                     ->url(fn ($record) => 'tel:'.$record->contact->phone)
                     ->openUrlInNewTab(),
             ])
             ->filters([
+                Tables\Filters\SelectFilter::make('payment_method')
+                    ->options([
+                        'card' => 'Card',
+                        'bank_transfer' => 'Bank Transfer',
+                    ]),
+                Tables\Filters\SelectFilter::make('payment_status')
+                    ->options([
+                        'paid' => 'Paid',
+                        'unpaid' => 'Unpaid',
+                    ]),
+
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
