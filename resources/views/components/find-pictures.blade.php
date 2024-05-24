@@ -14,8 +14,8 @@
                 <x-heroicon-s-arrow-left-on-rectangle class="w-6 h-6 font-bold stroke-current" /></a>
         </div>
     @endauth
-    <div x-show="showDialog" class="fixed inset-0 p-4 bg-black bg-opacity-50" @click="showDialog = false">
-        <div @click.stop class="flex items-center justify-center min-h-screen">
+    <div x-show="showDialog" class="fixed inset-0 z-10 p-4 bg-black bg-opacity-50" @click="showDialog = false">
+        <div class="flex items-center justify-center min-h-screen">
             <div class="relative max-w-lg p-8 bg-white rounded-lg" @click="event.stopPropagation()">
                 <button @click="showDialog = false"
                     class="absolute top-0 right-0 z-40 mt-4 mr-4 text-xl font-semibold leading-none cursor-pointer text-accent">&times;</button>
