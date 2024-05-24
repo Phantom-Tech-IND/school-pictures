@@ -36,9 +36,9 @@ class AuthController extends Controller
             SEOTools::setTitle('Gallery Code');
             SEOTools::setDescription('View your gallery using the code.');
 
-            return redirect()->intended('/gallery-code');
+            return response()->json(['redirect' => '/gallery-code']);
         } else {
-            return back()->withErrors(['welcome' => 'The provided credentials do not match our records.']);
+            return response()->json(['error' => 'The provided credentials do not match our records.'], 404);
         }
     }
 }
