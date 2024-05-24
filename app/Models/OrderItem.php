@@ -11,6 +11,16 @@ class OrderItem extends Model
 
 	protected $fillable = ['order_id', 'product_id', 'quantity', 'price', 'options'];
 
+	public function getOptionsAttribute($value)
+	{
+		return json_decode($value, true);
+	}
+
+	public function getOptionsSelectsAttribute($value)
+	{
+		return json_decode($value, true)['selects'];
+	}
+
 	public function order()
 	{
 		return $this->belongsTo(Order::class);
@@ -22,18 +32,19 @@ class OrderItem extends Model
 	}
 }
 
-// "selects" => array:1 [▼
+
+
+// "selects" => [
 // 	"FOTOFARBE" => "Sepia"
 // ]
-// "files" => array:1 [▼
-// 	"Bild_auswählen" => array:2 [▼
+// "files" => [
+// 	"Bild_auswählen" => [
 // 		"id" => "5"
 // 		"href" => "/media/kindergarden/KLB_7505_900px.jpg"
 // 	]
 // ]
-// "checkbox" => array:3 [▼
+// "checkbox" => [
 // 	"Junior" => "True"
 // 	"Nsa" => "False"
 // 	"Hulala" => "True"
 // ]
-

@@ -110,44 +110,8 @@ class OrderResource extends Resource
                                     ->prefix('CHF')
                                     ->disabled(true),
                             ]),
-                        Card::make()
-                            ->schema([
-                                MarkdownEditor::make('options')
-                                    ->disabled(true)
-                                    ->afterStateHydrated(function ($component, $state) {
-                                        if ($state) {
-                                            $data = json_decode($state, true);
-                                            $markdown = "";
-
-                                            // Handle 'selects'
-                                            if (isset($data['selects'])) {
-                                                foreach ($data['selects'] as $key => $value) {
-                                                    $markdown .= "**{$key}:** {$value}\n";
-                                                }
-                                            }
-
-                                            // Handle 'checkbox'
-                                            if (isset($data['checkbox'])) {
-                                                foreach ($data['checkbox'] as $group => $checkboxes) {
-                                                    $markdown .= "**{$group}:**\n";
-                                                    foreach ($checkboxes as $label => $checked) {
-                                                        $checkMark = $checked ? 'x' : ' ';
-                                                        $markdown .= "- [{$checkMark}] {$label}\n";
-                                                    }
-                                                }
-                                            }
-
-                                            // Handle 'files'
-                                            if (isset($data['files'])) {
-                                                foreach ($data['files'] as $key => $file) {
-                                                    $markdown .= "![{$key}]({$file['href']})\n";
-                                                }
-                                            }
-
-                                            $component->state($markdown);
-                                        }
-                                    }),
-                            ]),
+                        Select::make('options.selects')
+                            ->label('Post title')
                     ]),
             ]);
     }
