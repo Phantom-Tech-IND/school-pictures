@@ -1,6 +1,6 @@
 @extends('layouts.app')
-
 @section('content')
+    @dump($cartItems)
     <div class="bg-gray-50">
         <div class="max-w-2xl px-4 pt-16 pb-24 mx-auto sm:px-6 lg:max-w-7xl lg:px-8">
             <h2 class="sr-only">Checkout</h2>

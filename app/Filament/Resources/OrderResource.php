@@ -15,6 +15,8 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Filament\Forms\Components\Grid;
+
 
 class OrderResource extends Resource
 {
@@ -62,7 +64,7 @@ class OrderResource extends Resource
                     ->columnSpanFull()
                     ->label('Shipping address same as billing'),
                 Repeater::make('billing_address')
-                    ->collapsed()
+                    ->collapsed(false)  // Changed to false to make the collapsible open by default
                     ->addable(false)
                     ->schema([
                         TextInput::make('address')->nullable(),
@@ -81,7 +83,33 @@ class OrderResource extends Resource
                         TextInput::make('city')->nullable(),
                         TextInput::make('country')->nullable(),
                         TextInput::make('region')->nullable(),
-                    ])->hidden(fn (Get $get) => $get('address_same_as_billing') === true),
+                    ]),
+                
+                Repeater::make('items')
+                    ->relationship('items')
+                    ->collapsible()
+                    ->collapsed(false)
+                    ->grid()
+                    ->columnSpanFull()
+                    ->addable(false)
+                    ->schema([
+                        Select::make('product_id')
+                            ->relationship('product', 'name')
+                            ->disabled(true),
+                        Grid::make()
+                        ->columns()
+                        ->schema([
+                            TextInput::make('quantity')
+                                ->columnSpan(1)
+                                ->disabled(true),
+                            TextInput::make('price')
+                                ->columnSpan(1)
+                                ->prefix('CHF')
+                                ->disabled(true),
+                        ]),
+                        TextInput::make('options')
+                            ->disabled(true),
+                    ]),
             ]);
     }
 
@@ -153,12 +181,12 @@ class OrderResource extends Resource
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
+
     }
 
     public static function getRelations(): array
     {
         return [
-            //
             ContactsRelationManager::class,
         ];
     }
@@ -172,3 +200,6 @@ class OrderResource extends Resource
         ];
     }
 }
+
+
+
