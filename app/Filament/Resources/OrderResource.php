@@ -5,21 +5,18 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\ContactRelationManagerResource\RelationManagers\ContactsRelationManager;
 use App\Filament\Resources\OrderResource\Pages;
 use App\Models\Order;
-use Filament\Forms\Components\Card;
 use Filament\Forms\Components\Checkbox;
-use Filament\Forms\Components\MarkdownEditor;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
-use Filament\Forms\Get;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Filament\Forms\Components\Grid;
-
 
 class OrderResource extends Resource
 {
@@ -87,7 +84,7 @@ class OrderResource extends Resource
                         TextInput::make('country')->nullable(),
                         TextInput::make('region')->nullable(),
                     ]),
-                
+
                 Repeater::make('items')
                     ->relationship('items')
                     ->collapsible()
@@ -110,8 +107,42 @@ class OrderResource extends Resource
                                     ->prefix('CHF')
                                     ->disabled(true),
                             ]),
-                        Select::make('options.selects')
-                            ->label('Post title')
+                        Grid::make()
+                            ->columns(1)
+                            ->schema(function ($record) {
+                                $options = $record->options ?? [];
+                                $checkboxes = [];
+                                foreach ($options['checkbox'] as $groupKey => $groupValues) {
+                                    foreach ($groupValues as $key => $value) {
+                                        $checkboxes[] = Checkbox::make("options.checkbox.$groupKey.$key")
+                                            ->label($key)
+                                            ->disabled(true)
+                                            ->default($value);
+                                    }
+                                }
+
+                                $files = [];
+                                foreach ($options['files'] as $key => $value) {
+                                    $files[] = FileUpload::make("options.files.$key")
+                                        ->disk('public')
+                                        ->label($key)
+                                        ->downloadable()
+                                        ->disabled(true)
+                                        ->required();
+                                }
+
+                                $selects = [];
+                                foreach ($options['selects'] as $key => $value) {
+                                    $selects[] = Select::make("options.selects.$key")
+                                        ->label($key)
+                                        ->options([$key => $value])
+                                        ->disabled(true)
+                                        ->required();
+                                }
+
+                                return array_merge($checkboxes, $files, $selects);
+                            }),
+
                     ]),
             ]);
     }
@@ -203,8 +234,3 @@ class OrderResource extends Resource
         ];
     }
 }
-
-
-
-
-
