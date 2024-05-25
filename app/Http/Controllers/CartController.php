@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Contact;
 use App\Models\Order;
+use App\Models\OrderItem;
 use Artesaos\SEOTools\Facades\SEOTools;
 use Exception;
 use Illuminate\Http\Request;
@@ -69,8 +70,24 @@ class CartController extends Controller
             $contact = Contact::firstOrCreate($contactData);
             $orderData['contact_id'] = $contact->id;
 
+            $order = Order::create($orderData);
+            $cartItems = $cart['items'];
+
+            foreach ($cartItems as $item) {
+                OrderItem::create([
+                    'order_id' => $order->id,
+                    'product_id' => $item['product_id'],
+                    'quantity' => $item['quantity'],
+                    'price' => $item['totalPrice'],
+                    'options' => json_encode([
+                        'files' => $item['files'],
+                        'selects' => $item['selects'],
+                        'checkbox' => $item['checkbox'],
+                    ]),
+                ]);
+            }
+
             if ($data['payment_type'] === 'bank_transfer') {
-                Order::create($orderData);
 
                 return response()->json([
                     'success' => 'Order created successfully!',
@@ -78,19 +95,18 @@ class CartController extends Controller
                     'cartItems' => $this->getCartItems(),
                 ]);
             } else {
-                return $this->createPaymentForm($cart, $orderData, $contact);
+                return $this->createPaymentForm($cart, $order->id, $contact);
             }
         } catch (Exception $e) {
             return response()->json(['error' => 'Failed to create order: '.$e->getMessage()], 500);
         }
     }
 
-    public function createPaymentForm($cart, $orderData, $contact)
+    public function createPaymentForm($cart, $order_id, $contact)
     {
         $instanceName = env('PAYMENT_INSTANCE_NAME');
         $secret = env('PAYMENT_SECRET');
 
-        $order = Order::create($orderData);
         try {
             $payrexx = new \Payrexx\Payrexx($instanceName, $secret, '', 'zahls.ch');
 
@@ -101,7 +117,7 @@ class CartController extends Controller
             $gateway->setCancelRedirectUrl(url('/cart'));
             $gateway->setFailedRedirectUrl(url('/payment-failed'));
 
-            $gateway->setReferenceId($order->id);
+            $gateway->setReferenceId($order_id);
 
             $gateway->addField('forename', $contact->name);
             $gateway->addField('email', $contact->email);
