@@ -44,16 +44,16 @@ class OrderResource extends Resource
                     ->default('pending')
                     ->required()
                     ->native(false)
-                    ->options(['pending', 'completed']),
+                    ->options(['pending' => 'pending', 'completed' => 'completed']),
                 TextInput::make('invoice.id')
                     ->prefix('id'),
 
                 Select::make('payment_method')
-                    ->options(['card', 'bank_transfer'])
+                    ->options(['card' => 'card', 'bank_transfer' => 'bank_transfer'])
                     ->native(false)
                     ->required(),
                 Select::make('payment_status')
-                    ->options(['paid', 'unpaid'])
+                    ->options(['paid' => 'paid', 'unpaid' => 'unpaid'])
                     ->native(false)
                     ->required(),
                 Toggle::make('address_same_as_billing')
