@@ -51,7 +51,7 @@ class ProductResource extends Resource
                 Forms\Components\TextInput::make('short_description')
                     ->label('Short Description')
                     ->maxLength(80)
-                    ->hint(fn ($state, $component) => $component->getMaxLength() - strlen($state) . '/' . $component->getMaxLength())
+                    ->hint(fn ($state, $component) => $component->getMaxLength() - strlen($state).'/'.$component->getMaxLength())
                     ->reactive()
                     ->columnSpan(2),
                 MarkdownEditor::make('description')
@@ -69,6 +69,7 @@ class ProductResource extends Resource
                     ->label('Product Images')
                     ->multiple()
                     ->preserveFilenames()
+                    ->optimize('webp')
                     ->directory('product-images')
                     ->disk('public')
                     ->columnSpan(2),
@@ -102,6 +103,7 @@ class ProductResource extends Resource
                             ->label('Helper Image')
                             ->preserveFilenames()
                             ->directory('product-helper-image')
+                            ->optimize('webp')
                             ->disk('public')
                             ->visible(fn (Get $get): bool => $get('type') === 'fileInput'),
 

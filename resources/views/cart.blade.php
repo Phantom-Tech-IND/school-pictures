@@ -186,8 +186,6 @@
                                     <select id="country" name="country" autocomplete="country-name"
                                         class="block w-full border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring-accent-500 sm:text-sm custom-input">
                                         <option>Switzerland</option>
-                                        <option>Canada</option>
-                                        <option>Mexico</option>
                                     </select>
                                     <div
                                         class="absolute inset-y-0 right-0 items-center hidden pr-3 pointer-events-none input-error-icon">
@@ -592,17 +590,18 @@
                             @foreach ($cartItems['items'] as $item)
                                 <li id="cart-item-{{ $item['index'] }}" class="flex px-4 py-6 sm:px-6">
                                     <div class="flex flex-col items-end justify-between flex-shrink-0 gap-4">
-                                        <a href="{{ route('product', ['id' => $item['product']->id]) }}" class="group">
-                                            <img src="{{ $item['product']->images[0] }}"
+                                        <a href="{{ route('product', ['id' => asset('storage/' . $item['product']->images[0])]) }}"
+                                            class="group">
+                                            <img src="{{ asset('storage/' . $item['product']->images[0]) }}"
                                                 alt="{{ $item['product']->name }}"
                                                 class="w-20 transition duration-300 ease-in-out transform rounded-md group-hover:scale-110">
                                         </a>
 
                                         @if (!empty($item['files']))
                                             <div class="relative">
-                                                <a href="{{ head($item['files'])['href'] }}"
+                                                <a href="{{ asset('storage/' . head($item['files'])['href']) }}"
                                                     data-fslightbox="gallery-{{ $item['index'] }}" class="group">
-                                                    <img src="{{ head($item['files'])['href'] }}"
+                                                    <img src="{{ asset('storage/' . head($item['files'])['href']) }}"
                                                         alt="First Additional Image"
                                                         class="object-cover w-16 transition duration-300 ease-in-out transform rounded-md aspect-square group-hover:scale-110">
                                                     @foreach (array_slice($item['files'], 1) as $file)

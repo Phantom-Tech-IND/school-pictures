@@ -41,4 +41,8 @@
             throw new Error('Failed to forget cart!');
         }
     });
+
+    if (window.updateCartCount) {
+        window.updateCartCount();
+    }
 </script>

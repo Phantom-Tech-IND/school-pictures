@@ -75,6 +75,7 @@ class OfferItemResource extends Resource
                         ->label('File')
                         ->visible(fn ($record) => $record['type'] === 'fileInput')
                         ->directory('custom-attributes')
+                        ->optimize('webp')
                         ->disk('public'),
                 ])
                 ->grid(2)
@@ -89,7 +90,7 @@ class OfferItemResource extends Resource
             Tables\Columns\TextColumn::make('name'),
             Tables\Columns\TextColumn::make('price')->money('usd'),
             Tables\Columns\BooleanColumn::make('is_popular'),
-            
+
         ])->filters([
             //
         ])

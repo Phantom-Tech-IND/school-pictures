@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\Filament\GuestPanelController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,8 +37,8 @@ Route::controller(GuestPanelController::class)->group(function () {
     Route::get('/privacy-policy', 'privacyPolicy')->name('privacy-policy');
     Route::get('/agb', 'generalTermsAndConditions')->name('general-terms-and-conditions');
     Route::get('/haeufig-gestellte-fragen-faq', 'frequentlyAskedQuestions')->name('frequently-asked-questions');
-    Route::get('/login', 'login')->name('login');
     Route::post('/contact/submit', 'postContactForm')->name('contact.submit')->middleware('throttle:1,0.1');
+    Route::get('/test-email', 'testEmail')->name('test-email');
 });
 
 Route::controller(AuthController::class)->group(function () {
@@ -78,4 +79,16 @@ Route::get('robots.txt', function () {
 
 Route::get('sitemap.xml', function () {
     return response()->file(public_path('sitemap.xml'), ['Content-Type' => 'application/xml']);
+});
+
+Route::get('optimize', function () {
+    Artisan::call('optimize');
+
+    return redirect()->route('home');
+});
+
+Route::get('storage-link', function () {
+    Artisan::call('storage:link');
+
+    return redirect()->route('home');
 });

@@ -67,6 +67,8 @@ class OrderResource extends Resource
                 Repeater::make('billing_address')
                     ->collapsed(false)  // Changed to false to make the collapsible open by default
                     ->addable(false)
+                    ->label('')
+                    ->itemLabel('Billing Address')
                     ->schema([
                         TextInput::make('address')->nullable(),
                         TextInput::make('zip')->nullable(),
@@ -77,6 +79,8 @@ class OrderResource extends Resource
 
                 Repeater::make('shipping_address')
                     ->collapsed()
+                    ->label('')
+                    ->itemLabel('Shipping Address')
                     ->addable(false)
                     ->schema([
                         TextInput::make('address')->nullable(),
@@ -113,32 +117,39 @@ class OrderResource extends Resource
                             ->schema(function ($record) {
                                 $options = $record->options ?? [];
                                 $checkboxes = [];
-                                foreach ($options['checkbox'] as $groupKey => $groupValues) {
-                                    foreach ($groupValues as $key => $value) {
-                                        $checkboxes[] = Checkbox::make("options.checkbox.$groupKey.$key")
-                                            ->label($key)
-                                            ->disabled(true)
-                                            ->default($value);
+                                if (isset($options['checkbox'])) {
+                                    foreach ($options['checkbox'] as $groupKey => $groupValues) {
+                                        foreach ($groupValues as $key => $value) {
+                                            $checkboxes[] = Checkbox::make("options.checkbox.$groupKey.$key")
+                                                ->label($key)
+                                                ->disabled(true)
+                                                ->default($value);
+                                        }
                                     }
                                 }
 
                                 $files = [];
-                                foreach ($options['files'] as $key => $value) {
-                                    $files[] = FileUpload::make("options.files.$key")
-                                        ->disk('public')
-                                        ->label($key)
-                                        ->downloadable()
-                                        ->disabled(true)
-                                        ->required();
+                                if (isset($options['files'])) {
+                                    foreach ($options['files'] as $key => $value) {
+                                        $files[] = FileUpload::make("options.files.$key")
+                                            ->disk('public')
+                                            ->label($key)
+                                            ->optimize('webp')
+                                            ->downloadable()
+                                            ->disabled(true)
+                                            ->required();
+                                    }
                                 }
 
                                 $selects = [];
-                                foreach ($options['selects'] as $key => $value) {
-                                    $selects[] = Select::make("options.selects.$key")
-                                        ->label($key)
-                                        ->options([$key => $value])
-                                        ->disabled(true)
-                                        ->required();
+                                if (isset($options['selects'])) {
+                                    foreach ($options['selects'] as $key => $value) {
+                                        $selects[] = Select::make("options.selects.$key")
+                                            ->label($key)
+                                            ->options([$key => $value])
+                                            ->disabled(true)
+                                            ->required();
+                                    }
                                 }
 
                                 return array_merge($checkboxes, $files, $selects);

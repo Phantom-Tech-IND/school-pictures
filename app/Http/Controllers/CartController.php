@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\OrderCreated;
 use App\Models\Contact;
 use App\Models\Order;
 use App\Models\OrderItem;
 use Artesaos\SEOTools\Facades\SEOTools;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class CartController extends Controller
 {
@@ -88,6 +90,23 @@ class CartController extends Controller
             }
 
             if ($data['payment_type'] === 'bank_transfer') {
+
+                // foreach ($cartItems as $item) {
+                //     OrderItem::create([
+                //         'order_id' => $order->id,
+                //         'product_id' => $item['product_id'],
+                //         'quantity' => $item['quantity'],
+                //         'price' => $item['totalPrice'],
+                //         'options' => json_encode([
+                //             'files' => $item['files'],
+                //             'selects' => $item['selects'],
+                //             'checkbox' => $item['checkbox'],
+                //         ]),
+                //     ]);
+                // }
+
+                // Mail::to($contactData['email'])->send(new OrderCreated($order, $contact));
+                // Mail::to('user@example.com')->send(new OrderCreated($order, $contact)); // Replace 'user@example.com' with the actual user email
 
                 return response()->json([
                     'success' => 'Order created successfully!',

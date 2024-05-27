@@ -13,12 +13,25 @@ use App\Models\Order;
 use App\Models\Product;
 use App\Models\Student;
 use App\Models\User;
+use App\Notifications\MessageNotification;
 use Artesaos\SEOTools\Facades\SEOTools;
-use Filament\Notifications\Notification;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
 
 class GuestPanelController extends Controller
 {
+    public function testEmail()
+    {
+
+        $message = 'This is a test message.';
+
+        Notification::route('mail', 'axentioialexandru95@gmail.com')
+            ->notify(new MessageNotification($message));
+
+        return response()->json(['status' => 'success', 'message' => 'Email sent']);
+
+    }
+
     public function login()
     {
         // Set SEO tags
@@ -87,10 +100,7 @@ class GuestPanelController extends Controller
             Message::create($request->validated());
 
             $recipient = User::find(1);
-            Notification::make()
-                ->title('New message from '.$request->input('name'))
-                ->body($request->input('message'))
-                ->sendToDatabase($recipient);
+            Notification::send($recipient, new MessageNotification($request->all()));
 
             return response()->json([
                 'status' => 'success',

@@ -5,8 +5,8 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\MessageResource\Pages;
 use App\Models\Message;
 use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\MarkdownEditor;
 use Filament\Forms\Components\TagsInput;
-use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\TimePicker;
 use Filament\Forms\Form;
@@ -39,7 +39,8 @@ class MessageResource extends Resource
                     ->required()
                     ->email()
                     ->maxLength(255),
-                Textarea::make('message')
+                MarkdownEditor::make('message')
+                    ->columnSpanFull()
                     ->required()
                     ->maxLength(10000),
                 TextInput::make('subject')

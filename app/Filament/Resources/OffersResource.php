@@ -35,6 +35,7 @@ class OffersResource extends Resource
                 \Filament\Forms\Components\FileUpload::make('image')
                     ->label('Image')
                     ->image()
+                    ->optimize('webp')
                     ->directory('offers/images')
                     ->required()
                     ->columnSpan('full'),
@@ -42,6 +43,7 @@ class OffersResource extends Resource
                     ->label('Photo Gallery')
                     ->image()
                     ->multiple()
+                    ->optimize('webp')
                     ->directory('offers/photo_gallery')
                     ->required()
                     ->columnSpan('full'),
