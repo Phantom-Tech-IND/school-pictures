@@ -25,9 +25,9 @@ class Order extends Model
         return $this->belongsTo(Contact::class);
     }
 
-    public function invoice()
+    public function invoices()
     {
-        return $this->hasOne(Invoice::class);
+        return $this->hasMany(Invoice::class);
     }
 
     public function items()
