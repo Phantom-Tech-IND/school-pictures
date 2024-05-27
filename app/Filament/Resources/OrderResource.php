@@ -133,6 +133,7 @@ class OrderResource extends Resource
                                         $files[] = FileUpload::make("options.files.$key")
                                             ->disk('public')
                                             ->label($key)
+                                            ->optimize('webp')
                                             ->downloadable()
                                             ->disabled(true)
                                             ->required();

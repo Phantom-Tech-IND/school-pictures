@@ -36,8 +36,9 @@ class MessageNotification extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-            ->line('The introduction to the notification.')
-            ->action('Notification Action', url('/'))
+            ->subject('New message from '.$this->message['name'])
+            ->line('You just recieved an email from '.$this->message['name'].' with the message: '.$this->message['message'])
+            ->action('Go to app', url('/'))
             ->line('Thank you for using our application!');
     }
 

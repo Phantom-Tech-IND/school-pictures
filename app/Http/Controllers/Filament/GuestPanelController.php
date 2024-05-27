@@ -100,10 +100,7 @@ class GuestPanelController extends Controller
             Message::create($request->validated());
 
             $recipient = User::find(1);
-            Notification::make()
-                ->title('New message from '.$request->input('name'))
-                ->body($request->input('message'))
-                ->sendToDatabase($recipient);
+            Notification::send($recipient, new MessageNotification($request->all()));
 
             return response()->json([
                 'status' => 'success',

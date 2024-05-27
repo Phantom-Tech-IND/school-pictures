@@ -48,6 +48,7 @@ class StudentResource extends Resource
                             ->imageEditor()
                             ->preserveFilenames()
                             ->required()
+                            ->optimize('webp')
                             ->downloadable()
                             ->label('Photo'),
                     ])
