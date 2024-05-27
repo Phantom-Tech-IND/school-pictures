@@ -30,9 +30,11 @@ class InvoiceResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('order_id')
-                    ->required()
-                    ->numeric(),
+                Forms\Components\Select::make('order_id')
+                    ->relationship('order', 'id')
+                    ->searchable()
+                    ->preload()
+                    ->required(),
                 Forms\Components\TextInput::make('discount.amount')
                     ->required()
                     ->numeric(),
