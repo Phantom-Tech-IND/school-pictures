@@ -45,9 +45,10 @@ class OrderResource extends Resource
                     ->required()
                     ->native(false)
                     ->options(['pending' => 'pending', 'completed' => 'completed']),
-                TextInput::make('invoice.id')
-                    ->prefix('id'),
-
+                TextInput::make('id')
+                    ->label('Order ID')
+                    ->disabled()
+                    ->default(fn ($record) => $record->id),
                 Select::make('payment_method')
                     ->options(['card' => 'card', 'bank_transfer' => 'bank_transfer'])
                     ->native(false)
@@ -122,8 +123,11 @@ class OrderResource extends Resource
                         'success' => 'card',
                         'info' => 'bank_transfer',
                     ]),
-                TextColumn::make('Invoice.id')
+                TextColumn::make('invoices.id')
                     ->searchable()
+                    ->formatStateUsing(function ($record) {
+                        return $record->invoices->first()->id ?? 'No Invoice';
+                    })
                     ->openUrlInNewTab()
                     ->label('Invoice'),
                 TextColumn::make('contact.phone')
