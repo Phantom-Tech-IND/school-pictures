@@ -19,8 +19,14 @@
         "laravel/sanctum": "^4",
         "laravel/tinker": "^2.8",
         "payrexx/payrexx": "dev-master",
+        "pxlrbt/filament-environment-indicator": "^2.0",
+        "rickdbcn/filament-email": "^1.4",
+        "shuvroroy/filament-spatie-laravel-backup": "^2.1",
+        "shuvroroy/filament-spatie-laravel-health": "^2.0",
+        "spatie/laravel-activitylog": "^4.8",
         "spatie/laravel-cookie-consent": "^3.3",
-        "spatie/laravel-sitemap": "^7.2"
+        "spatie/laravel-sitemap": "^7.2",
+        "z3d0x/filament-logger": "^0.7.1"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.12",

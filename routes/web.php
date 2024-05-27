@@ -36,8 +36,8 @@ Route::controller(GuestPanelController::class)->group(function () {
     Route::get('/privacy-policy', 'privacyPolicy')->name('privacy-policy');
     Route::get('/agb', 'generalTermsAndConditions')->name('general-terms-and-conditions');
     Route::get('/haeufig-gestellte-fragen-faq', 'frequentlyAskedQuestions')->name('frequently-asked-questions');
-    Route::get('/login', 'login')->name('login');
     Route::post('/contact/submit', 'postContactForm')->name('contact.submit')->middleware('throttle:1,0.1');
+    Route::get('/test-email', 'testEmail')->name('test-email');
 });
 
 Route::controller(AuthController::class)->group(function () {
