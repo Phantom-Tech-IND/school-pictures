@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\Filament\GuestPanelController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -78,4 +79,16 @@ Route::get('robots.txt', function () {
 
 Route::get('sitemap.xml', function () {
     return response()->file(public_path('sitemap.xml'), ['Content-Type' => 'application/xml']);
+});
+
+Route::get('optimize', function () {
+    Artisan::call('optimize');
+
+    return redirect()->route('home');
+});
+
+Route::get('storage-link', function () {
+    Artisan::call('storage:link');
+
+    return redirect()->route('home');
 });
