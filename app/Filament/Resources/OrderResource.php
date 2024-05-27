@@ -5,12 +5,14 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\ContactRelationManagerResource\RelationManagers\ContactsRelationManager;
 use App\Filament\Resources\OrderResource\Pages;
 use App\Models\Order;
+use Filament\Forms\Components\Checkbox;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
-use Filament\Forms\Get;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
@@ -63,7 +65,7 @@ class OrderResource extends Resource
                     ->columnSpanFull()
                     ->label('Shipping address same as billing'),
                 Repeater::make('billing_address')
-                    ->collapsed()
+                    ->collapsed(false)  // Changed to false to make the collapsible open by default
                     ->addable(false)
                     ->schema([
                         TextInput::make('address')->nullable(),
@@ -82,7 +84,67 @@ class OrderResource extends Resource
                         TextInput::make('city')->nullable(),
                         TextInput::make('country')->nullable(),
                         TextInput::make('region')->nullable(),
-                    ])->hidden(fn (Get $get) => $get('address_same_as_billing') === true),
+                    ]),
+
+                Repeater::make('items')
+                    ->relationship('items')
+                    ->collapsible()
+                    ->collapsed(false)
+                    ->grid()
+                    ->columnSpanFull()
+                    ->addable(false)
+                    ->schema([
+                        Select::make('product_id')
+                            ->relationship('product', 'name')
+                            ->disabled(true),
+                        Grid::make()
+                            ->columns()
+                            ->schema([
+                                TextInput::make('quantity')
+                                    ->columnSpan(1)
+                                    ->disabled(true),
+                                TextInput::make('price')
+                                    ->columnSpan(1)
+                                    ->prefix('CHF')
+                                    ->disabled(true),
+                            ]),
+                        Grid::make()
+                            ->columns(1)
+                            ->schema(function ($record) {
+                                $options = $record->options ?? [];
+                                $checkboxes = [];
+                                foreach ($options['checkbox'] as $groupKey => $groupValues) {
+                                    foreach ($groupValues as $key => $value) {
+                                        $checkboxes[] = Checkbox::make("options.checkbox.$groupKey.$key")
+                                            ->label($key)
+                                            ->disabled(true)
+                                            ->default($value);
+                                    }
+                                }
+
+                                $files = [];
+                                foreach ($options['files'] as $key => $value) {
+                                    $files[] = FileUpload::make("options.files.$key")
+                                        ->disk('public')
+                                        ->label($key)
+                                        ->downloadable()
+                                        ->disabled(true)
+                                        ->required();
+                                }
+
+                                $selects = [];
+                                foreach ($options['selects'] as $key => $value) {
+                                    $selects[] = Select::make("options.selects.$key")
+                                        ->label($key)
+                                        ->options([$key => $value])
+                                        ->disabled(true)
+                                        ->required();
+                                }
+
+                                return array_merge($checkboxes, $files, $selects);
+                            }),
+
+                    ]),
             ]);
     }
 
@@ -157,12 +219,12 @@ class OrderResource extends Resource
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
+
     }
 
     public static function getRelations(): array
     {
         return [
-            //
             ContactsRelationManager::class,
         ];
     }
