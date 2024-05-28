@@ -10,6 +10,7 @@ use Artesaos\SEOTools\Facades\SEOTools;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use App\Models\User;
 
 class CartController extends Controller
 {
@@ -30,13 +31,26 @@ class CartController extends Controller
         }, $cart));
     }
 
+    private function newOrderSendMail($order, $contact, $emailTo)
+    {
+        Mail::to($emailTo)->send(new OrderCreated($order, $contact));
+
+        // Fetch all admin users
+        $admins = User::where('role', 'admin')->get();
+
+        // Send an email to each admin
+        foreach ($admins as $admin) {
+            // Mail::to($admin->email)->send(new OrderCreated($order, $contact));
+        }
+    }
+
     public function createBankPayment(Request $request)
     {
         $data = $request->all();
         $cart = $this->getCartItems();
 
         $contactData = [
-            'name' => $data['first-name'].' '.$data['last-name'],
+            'name' => $data['first-name'] . ' ' . $data['last-name'],
             'email' => $data['email-address'],
             'phone' => $data['phone'],
         ];
@@ -90,23 +104,7 @@ class CartController extends Controller
             }
 
             if ($data['payment_type'] === 'bank_transfer') {
-
-                // foreach ($cartItems as $item) {
-                //     OrderItem::create([
-                //         'order_id' => $order->id,
-                //         'product_id' => $item['product_id'],
-                //         'quantity' => $item['quantity'],
-                //         'price' => $item['totalPrice'],
-                //         'options' => json_encode([
-                //             'files' => $item['files'],
-                //             'selects' => $item['selects'],
-                //             'checkbox' => $item['checkbox'],
-                //         ]),
-                //     ]);
-                // }
-
-                // Mail::to($contactData['email'])->send(new OrderCreated($order, $contact));
-                // Mail::to('user@example.com')->send(new OrderCreated($order, $contact)); // Replace 'user@example.com' with the actual user email
+                $this->newOrderSendMail($order, $contact, $contactData['email']);
 
                 return response()->json([
                     'success' => 'Order created successfully!',
@@ -117,7 +115,7 @@ class CartController extends Controller
                 return $this->createPaymentForm($cart, $order->id, $contact);
             }
         } catch (Exception $e) {
-            return response()->json(['error' => 'Failed to create order: '.$e->getMessage()], 500);
+            return response()->json(['error' => 'Failed to create order: ' . $e->getMessage()], 500);
         }
     }
 
@@ -144,7 +142,7 @@ class CartController extends Controller
 
             $response = $payrexx->create($gateway);
 
-            if ($response && ! empty($response->getLink())) {
+            if ($response && !empty($response->getLink())) {
                 $paymentUrl = $response->getLink();
 
                 return response()->json(['paymentUrl' => $paymentUrl]);
@@ -152,11 +150,11 @@ class CartController extends Controller
                 throw new Exception('No link found in the response');
             }
         } catch (\Payrexx\PayrexxException $e) {
-            error_log('PayrexxException: '.$e->getMessage());
+            error_log('PayrexxException: ' . $e->getMessage());
 
             return response()->json(['error' => $e->getMessage()], 500);
         } catch (Exception $e) {
-            error_log('Exception: '.$e->getMessage());
+            error_log('Exception: ' . $e->getMessage());
 
             return response()->json(['error' => $e->getMessage()], 500);
         }
@@ -165,7 +163,7 @@ class CartController extends Controller
     private function calculateProductTotal($product_id, $selects, $checkboxes)
     {
         $product = \App\Models\Product::find($product_id);
-        if (! $product) {
+        if (!$product) {
             return 0;
         }
 
@@ -192,7 +190,7 @@ class CartController extends Controller
                     foreach ($attribute['options'] as $option) {
 
                         $optionLabelKey = $option['label'];
-                        if (! isset($option['price']) || $option['price'] == 0) {
+                        if (!isset($option['price']) || $option['price'] == 0) {
                             continue;
                         }
 

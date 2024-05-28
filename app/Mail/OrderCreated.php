@@ -7,41 +7,36 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Mail\Mailables\Content;
+use Illuminate\Mail\Mailables\Address;
+use App\Models\Order;
+use App\Models\Contact;
+use App\Models\OrderItem;
+use Illuminate\Database\Eloquent\Collection;
 
 class OrderCreated extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $order;
-
-    public $contact;
+    public Order $order;
+    public Contact $contact;
+    /** @var Collection<int, OrderItem> */
+    public Collection $items;
 
     /**
      * Create a new message instance.
      */
-    public function __construct($order, $contact)
-    {
+    public function __construct(Order $order, Contact $contact) {
         $this->order = $order;
         $this->contact = $contact;
+        $this->items = $order->items()->with('product')->get(); // Load product relationship
     }
 
-    public function build()
+    public function content(): Content
     {
-        $mailMessage = (new MailMessage)
-            ->subject('Order Created - '.$this->order->id)
-            ->line('Your order has been created.')
-            ->line('Order ID: '.$this->order->id)
-            ->line('Amount: '.$this->order->amount)
-            ->line('Contact: '.$this->contact->name)
-            ->line('Contact Email: '.$this->contact->email)
-            ->line('Contact Phone: '.$this->contact->phone)
-            ->line('Contact Address: '.$this->contact->address)
-            ->line('Contact City: '.$this->contact->city)
-            ->line('Contact Zip: '.$this->contact->zip)
-            ->line('Contact Country: '.$this->contact->country);
-
-        return $this->from('example@example.com') // Optionally set the sender
-            ->markdown('emails.simple', ['mailMessage' => $mailMessage->toArray()]);
+        return new Content(
+            markdown: 'emails.order_created',
+        );
     }
 
     /**
@@ -50,7 +45,9 @@ class OrderCreated extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
+            from: new Address(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME')),
             subject: 'Order Created - '.$this->order->id,
+            to: [new Address($this->contact->email, $this->contact->name)],
         );
     }
 

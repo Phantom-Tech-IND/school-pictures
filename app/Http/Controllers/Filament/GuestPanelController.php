@@ -25,7 +25,7 @@ class GuestPanelController extends Controller
 
         $message = 'This is a test message.';
 
-        Notification::route('mail', 'axentioialexandru95@gmail.com')
+        Notification::route('mail', env('MAIL_FROM_ADDRESS'))
             ->notify(new MessageNotification($message));
 
         return response()->json(['status' => 'success', 'message' => 'Email sent']);
