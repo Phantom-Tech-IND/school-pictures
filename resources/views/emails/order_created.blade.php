@@ -13,6 +13,7 @@ Total {{ $order->amount }} CHF<br>
 <hr>
 
 @foreach ($items as $item)
+
 **{{ $item->product->name }}**<br>
 Quantity: {{ $item->quantity }}<br>
 Price: {{ $item->price }} CHF<br>
@@ -37,6 +38,7 @@ Price: {{ $item->price }} CHF<br>
 @endforeach
 @endforeach
 <hr>
+
 @endforeach
 </div>
 
