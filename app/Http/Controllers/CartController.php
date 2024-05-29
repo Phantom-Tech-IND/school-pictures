@@ -104,9 +104,9 @@ class CartController extends Controller
                 ]);
             }
 
-            if ($data['payment_type'] === 'bank_transfer') {
-                $this->newOrderSendMail($order, $contact, $contactData['email']);
+            $this->newOrderSendMail($order, $contact, $contactData['email']);
 
+            if ($data['payment_type'] === 'bank_transfer') {
                 return response()->json([
                     'success' => 'Order created successfully!',
                     'totalItems' => $this->calculateTotalItems($this->getCart()),
