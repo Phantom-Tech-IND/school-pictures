@@ -96,10 +96,12 @@
                     class="{{ request()->routeIs('home')
                         ? 'text-accent font-semibold relative -left-2'
                         : 'relative left-0 font-medium transition-all duration-300 hover:pl-0 hover:text-accent hover:-left-2' }}">Home</a>
+                @auth('student')
                 <a href="{{ route('webshop') }}"
                     class="{{ request()->routeIs('webshop')
                         ? 'text-accent font-semibold relative -left-2'
                         : 'relative left-0 font-medium transition-all duration-300 hover:pl-0 hover:text-accent hover:-left-2' }}">Webshop</a>
+                @endauth
                 <a href="{{ route('kindergarden') }}"
                     class="{{ request()->routeIs('kindergarden')
                         ? 'text-accent font-semibold relative -left-2'

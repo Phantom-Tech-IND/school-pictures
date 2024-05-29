@@ -22,13 +22,15 @@ class OrderCreated extends Mailable
     public Contact $contact;
     /** @var Collection<int, OrderItem> */
     public Collection $items;
+    public string $emailRole;
 
     /**
      * Create a new message instance.
      */
-    public function __construct(Order $order, Contact $contact) {
+    public function __construct(Order $order, Contact $contact, string $emailRole) {
         $this->order = $order;
         $this->contact = $contact;
+        $this->emailRole = $emailRole;
         $this->items = $order->items()->with('product')->get(); // Load product relationship
     }
 

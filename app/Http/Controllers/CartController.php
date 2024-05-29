@@ -34,14 +34,14 @@ class CartController extends Controller
     private function newOrderSendMail($order, $contact, $emailTo)
     {
         // send mail to the client
-        Mail::to($emailTo)->send(new OrderCreated($order, $contact));
+        Mail::to($emailTo)->send(new OrderCreated($order, $contact, 'user'));
 
         // Fetch all admin users
         $admins = User::where('role', 'admin')->get();
 
         // Send an email to each admin
         foreach ($admins as $admin) {
-            Mail::to($admin->email)->send(new OrderCreated($order, $contact));
+            Mail::to($admin->email)->send(new OrderCreated($order, $contact, 'admin'));
         }
     }
 

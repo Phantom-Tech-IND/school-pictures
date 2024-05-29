@@ -288,3 +288,53 @@ img {
 .break-all {
     word-break: break-all;
 }
+
+.product-name-and-price {
+    display: block;
+}
+
+.product-name-and-price h2 {
+    display: inline-block;
+}
+
+.product-name-and-price p {
+    display: inline-block;
+}
+
+.product-first-row {
+    display: flex;
+    padding-bottom: 10px;
+}
+
+.product-info {
+    padding-left: 10px;
+}
+
+.product-image {
+    width: 15ch;
+    height: 15ch;
+    object-fit: cover;
+}
+
+.product-files {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.product-file-content {
+    padding-left: 10px;
+}
+
+.product-file-content p {
+    font-size: 8px;
+    max-width: 16ch;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.product-files img {
+    width: 13ch;
+    height: 13ch;
+    object-fit: cover;
+}
