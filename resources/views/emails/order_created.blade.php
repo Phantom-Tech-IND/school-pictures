@@ -7,6 +7,10 @@ Hello **{{ $contact->name }}**,<br>
 Thank you for your order! Here are the details:<br>
 Your order number is **{{ $order->id }}**<br>
 Total {{ $order->amount }} CHF<br>
+@if ($order->payment_method === 'bank_transfer')
+Please transfer the amount to the following account:<br>
+IBAN: {{ env('BANK_IBAN') }}<br>
+@endif
 @endif
 @if ($emailRole == 'admin')
 # New order from {{ $contact->name }}<br>
