@@ -736,7 +736,7 @@
                             </fieldset>
                         </div>
                         <div class="px-4 py-6 border-t border-gray-200 sm:px-6">
-                            <button
+                            <button type="submit"
                                 class="w-full px-4 py-3 text-base font-medium text-white border border-transparent rounded-md shadow-sm btn-zahls-modal bg-accent-600 hover:bg-accent-700 focus:outline-none focus:ring-2 focus:ring-accent-500 focus:ring-offset-2 focus:ring-offset-gray-50">Confirm
                                 order</button>
                         </div>
@@ -749,6 +749,11 @@
 <script>
     const submitForm = async (event) => {
         event.preventDefault();
+        const submitButton = event.target.querySelector('button[type="submit"]');
+        submitButton.disabled = true;
+        const buttonText = submitButton.textContent;
+        submitButton.textContent = 'Processing...';
+
         const formData = new FormData(event.target);
         const csrfToken = formData.get('_token');
         const paymentType = formData.get('payment_type');
@@ -771,7 +776,6 @@
 
             const data = await response.json();
 
-
             if (paymentType === 'bank_transfer') {
                 window.location.href = '{{ route('payment-success') }}';
             } else if (data.paymentUrl) {
@@ -782,6 +786,9 @@
         } catch (error) {
             console.error('Error:', error);
             window.location.href = '{{ route('payment-failed') }}';
+        } finally {
+            submitButton.disabled = false;
+            submitButton.textContent = buttonText;
         }
     };
 
