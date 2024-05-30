@@ -20,17 +20,17 @@ use Illuminate\Support\Facades\Notification;
 
 class GuestPanelController extends Controller
 {
-    public function testEmail()
-    {
+    // public function testEmail()
+    // {
 
-        $message = 'This is a test message.';
+    //     $message = 'This is a test message.';
 
-        Notification::route('mail', env('MAIL_FROM_ADDRESS'))
-            ->notify(new MessageNotification($message));
+    //     Notification::route('mail', env('MAIL_FROM_ADDRESS'))
+    //         ->notify(new MessageNotification($message));
 
-        return response()->json(['status' => 'success', 'message' => 'Email sent']);
+    //     return response()->json(['status' => 'success', 'message' => 'Email sent']);
 
-    }
+    // }
 
     public function login()
     {
@@ -97,10 +97,9 @@ class GuestPanelController extends Controller
     public function postContactForm(StoreMessageRequest $request)
     {
         try {
-            Message::create($request->validated());
-
+            $message = Message::create($request->validated());
             $recipient = User::find(1);
-            Notification::send($recipient, new MessageNotification($request->all()));
+            Notification::send($recipient, new MessageNotification($message));
 
             return response()->json([
                 'status' => 'success',
