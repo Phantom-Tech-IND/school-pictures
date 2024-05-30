@@ -7,6 +7,7 @@ use App\Filament\Resources\OrderResource\Pages;
 use App\Models\Order;
 use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Select;
@@ -64,32 +65,23 @@ class OrderResource extends Resource
                     ->default(true)
                     ->columnSpanFull()
                     ->label('Shipping address same as billing'),
-                Repeater::make('billing_address')
-                    ->collapsed(false)  // Changed to false to make the collapsible open by default
-                    ->addable(false)
-                    ->label('')
-                    ->itemLabel('Billing Address')
+                Fieldset::make('Billing Address')
                     ->schema([
-                        TextInput::make('address')->nullable(),
-                        TextInput::make('zip')->nullable(),
-                        TextInput::make('city')->nullable(),
-                        TextInput::make('country')->nullable(),
-                        TextInput::make('region')->nullable(),
+                        TextInput::make('billing_address.address')->label('Billing Address')->nullable(),
+                        TextInput::make('billing_address.zip')->label('Billing Zip')->nullable(),
+                        TextInput::make('billing_address.city')->label('Billing City')->nullable(),
+                        TextInput::make('billing_address.country')->label('Billing Country')->nullable(),
+                        TextInput::make('billing_address.region')->label('Billing Region')->nullable(),
                     ]),
-
-                Repeater::make('shipping_address')
-                    ->collapsed()
-                    ->label('')
-                    ->itemLabel('Shipping Address')
-                    ->addable(false)
+                Fieldset::make('Shipping Address')
                     ->schema([
-                        TextInput::make('address')->nullable(),
-                        TextInput::make('zip')->nullable(),
-                        TextInput::make('city')->nullable(),
-                        TextInput::make('country')->nullable(),
-                        TextInput::make('region')->nullable(),
-                    ]),
-
+                        TextInput::make('shipping_address.address')->label('Shipping Address')->nullable(),
+                        TextInput::make('shipping_address.zip')->label('Shipping Zip')->nullable(),
+                        TextInput::make('shipping_address.city')->label('Shipping City')->nullable(),
+                        TextInput::make('shipping_address.country')->label('Shipping Country')->nullable(),
+                        TextInput::make('shipping_address.region')->label('Shipping Region')->nullable(),
+                    ])
+                    ->hidden(fn ($get) => $get('address_same_as_billing')),
                 Repeater::make('items')
                     ->relationship('items')
                     ->collapsible()

@@ -41,7 +41,7 @@ class CartController extends Controller
 
         // Send an email to each admin
         foreach ($admins as $admin) {
-            Mail::to($admin->email)->send(new OrderCreated($order, $contact, 'admin'));
+            // Mail::to($admin->email)->send(new OrderCreated($order, $contact, 'admin'));
         }
     }
 
@@ -79,8 +79,9 @@ class CartController extends Controller
             'payment_method' => $data['payment_type'],
             'payment_status' => 'unpaid',
             'address_same_as_billing' => filter_var($data['address-same-as-billing'], FILTER_VALIDATE_BOOLEAN),
-            'billing_address' => [$billingAddress],
-            'shipping_address' => [$shippingAddress],
+            'billing_address' => json_encode($billingAddress),
+            'shipping_address' => json_encode($shippingAddress),
+            'comment' => $data['comment'] ?? '',
         ];
 
         try {

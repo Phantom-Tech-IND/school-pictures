@@ -24,6 +24,12 @@ class OrderCreated extends Mailable
     public Collection $items;
     public string $emailRole;
 
+    public string $address;
+    public string $country;
+    public string $city;
+    public string $zip;
+    public string $comment;
+
     /**
      * Create a new message instance.
      */
@@ -32,6 +38,22 @@ class OrderCreated extends Mailable
         $this->contact = $contact;
         $this->emailRole = $emailRole;
         $this->items = $order->items()->with('product')->get(); // Load product relationship
+        
+        $billingAddress = $order->billing_address;
+        $shippingAddress = $order->shipping_address;
+
+        if ($order->address_same_as_billing) {
+            $this->address = $billingAddress['address'];
+            $this->country = $billingAddress['country'];
+            $this->city = $billingAddress['city'];
+            $this->zip = $billingAddress['zip'];
+        } else {
+            $this->address = $shippingAddress['address'];
+            $this->country = $shippingAddress['country'];
+            $this->city = $shippingAddress['city'];
+            $this->zip = $shippingAddress['zip'];
+        }
+        $this->comment = $order->comment;
     }
 
     public function content(): Content
