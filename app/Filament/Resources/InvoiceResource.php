@@ -29,6 +29,7 @@ class InvoiceResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
+            ->defaultSort('created_at', 'desc')
             ->schema([
                 Forms\Components\Select::make('order_id')
                     ->relationship('order', 'id')

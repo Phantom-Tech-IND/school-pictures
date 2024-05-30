@@ -86,12 +86,14 @@ class OfferItemResource extends Resource
 
     public static function table(Table $table): Table
     {
-        return $table->columns([
-            Tables\Columns\TextColumn::make('name'),
-            Tables\Columns\TextColumn::make('price')->money('usd'),
-            Tables\Columns\BooleanColumn::make('is_popular'),
+        return $table
+            ->defaultSort('created_at', 'desc')
+            ->columns([
+                Tables\Columns\TextColumn::make('name'),
+                Tables\Columns\TextColumn::make('price')->money('usd'),
+                Tables\Columns\BooleanColumn::make('is_popular'),
 
-        ])->filters([
+            ])->filters([
             //
         ])
             ->actions([
