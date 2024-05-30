@@ -60,6 +60,10 @@ class OrderResource extends Resource
                     ->options(['paid' => 'paid', 'unpaid' => 'unpaid'])
                     ->native(false)
                     ->required(),
+                TextInput::make('comment')
+                    ->label('Order Comment')
+                    ->nullable()
+                    ->columnSpanFull(),
                 Toggle::make('address_same_as_billing')
                     ->live()
                     ->default(true)
