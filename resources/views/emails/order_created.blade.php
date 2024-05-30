@@ -11,7 +11,6 @@ Total {{ $order->amount }} CHF<br>
 City: {{ $country }}/{{ $city }}<br>
 Address: {{ $address }}<br>
 ZIP: {{ $zip }}<br>
-<br>
 @endif
 @if ($comment)
 Comment:<br>

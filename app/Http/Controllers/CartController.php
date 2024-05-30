@@ -33,15 +33,15 @@ class CartController extends Controller
 
     private function newOrderSendMail($order, $contact, $emailTo)
     {
-        // send mail to the client
-        Mail::to($emailTo)->send(new OrderCreated($order, $contact, 'user'));
+        // Queue mail to the client
+        Mail::to($emailTo)->queue(new OrderCreated($order, $contact, 'user'));
 
         // Fetch all admin users
         $admins = User::where('role', 'admin')->get();
 
-        // Send an email to each admin
+        // Queue an email to each admin
         foreach ($admins as $admin) {
-            // Mail::to($admin->email)->send(new OrderCreated($order, $contact, 'admin'));
+            Mail::to($admin->email)->queue(new OrderCreated($order, $contact, 'admin'));
         }
     }
 

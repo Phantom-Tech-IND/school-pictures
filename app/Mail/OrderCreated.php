@@ -3,6 +3,7 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -14,7 +15,7 @@ use App\Models\Contact;
 use App\Models\OrderItem;
 use Illuminate\Database\Eloquent\Collection;
 
-class OrderCreated extends Mailable
+class OrderCreated extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 

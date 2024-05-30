@@ -41,12 +41,17 @@ class MessageNotification extends Notification
             ->from(Config::get('mail.from.address'), Config::get('mail.from.name'))
             ->subject('New message from ' . $this->message->name)
             ->greeting('New message')
-            ->line('From: **' . $this->message->name . '**')
             ->action('Check message', url('/admin/messages/' . $this->message->id . '/edit'))
+            ->line('From: **' . $this->message->name . '**')
             ->line('Email: ' . $this->message->email)
-            ->line('Interests:')
-            ->line(implode(', ', $this->message->interests ?? []))
             ->line('Appointment: ' . ($this->message->appointment_date ?? 'N/A') . ' | ' . ($this->message->appointment_time ?? 'N/A'))
+            ->line('Interests:');
+
+        foreach ($this->message->interests ?? [] as $interest) {
+            $mailMessage->line('- ' . $interest);
+        }
+
+        $mailMessage
             ->line('Subject: ' . $this->message->subject)
             ->line($this->message->message);
 
