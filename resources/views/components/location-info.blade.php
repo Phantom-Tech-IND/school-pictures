@@ -5,19 +5,19 @@
         <label class="mb-1 font-semibold"> <!-- Adjusted spacing from mb-4 to mb-2 -->
             Adresse:
             <a href="https://www.google.com/maps/search/?api=1&query=Gewerbezone+59,+6018+Buttisholz" target="_blank"
-                class="mb-4 text-green-500 hover:text-green-700 focus:text-green-700">
+                class="mb-4 text-accent-600 hover:text-accent-700 focus:text-accent-700">
                 Gewerbezone 59, 6018 Buttisholz
             </a>
         </label>
         <label class="mb-1 font-semibold"> <!-- Adjusted spacing from mb-4 to mb-2 -->
             Telefon:
-            <a href="tel:+41419214025" class="mb-4 text-green-500 hover:text-green-700 focus:text-green-700">
+            <a href="tel:+41419214025" class="mb-4 text-accent-600 hover:text-accent-700 focus:text-accent-700">
                 +41 41 921 40 25
             </a>
         </label>
         <label class="mb-6 font-semibold"> <!-- Adjusted spacing from mb-4 to mb-2 -->
             E-Mail:
-            <a href="mailto:info@artlinefotografie.ch" class="text-green-500 hover:text-green-700 focus:text-green-700">
+            <a href="mailto:info@artlinefotografie.ch" class="text-accent-600 hover:text-accent-700 focus:text-accent-700">
                 info@artlinefotografie.ch
             </a>
         </label>
