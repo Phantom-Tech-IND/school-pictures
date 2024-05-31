@@ -7,17 +7,17 @@
         @csrf
         <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
             <div class="sm:col-span-2">
-                <label for="interests" class="block text-sm font-semibold leading-6 text-gray-900">Optional können Sie
-                    aus
-                    den Bereichen auswählen:</label>
-                @foreach ($offers as $offer)
-                    <label class="inline-flex items-center text-sm mt-2.5 mr-2">
-                        <input type="checkbox" name="interests" value="{{ $offer->title }}"
-                            class="w-5 h-5 text-green-500 form-checkbox"
-                            {{ $offerItem && $offerItem->offer_id == $offer->id ? 'checked' : '' }}>
-                        <span class="ml-2">{{ $offer->title }}</span>
-                    </label>
-                @endforeach
+                <fieldset>
+                    <legend class="block text-sm font-semibold leading-6 text-gray-900">Optional können Sie aus den Bereichen auswählen:</legend>
+                    @foreach ($offers as $offer)
+                        <label class="inline-flex items-center text-sm mt-2.5 mr-2">
+                            <input type="checkbox" name="interests" value="{{ $offer->title }}"
+                                class="w-5 h-5 text-green-500 form-checkbox"
+                                {{ $offerItem && $offerItem->offer_id == $offer->id ? 'checked' : '' }}>
+                            <span class="ml-2">{{ $offer->title }}</span>
+                        </label>
+                    @endforeach
+                </fieldset>
             </div>
             <div class="sm:col-span-2">
                 <label for="appointment_date" class="block text-sm font-semibold leading-6 text-gray-900">Bewerbungsbild
@@ -86,10 +86,13 @@ I am interested in the offer {{ $offerItem->name }} with price {{ $offerItem->pr
 
         const form = event.target;
         const formData = new FormData(form);
-        const formObject = Object.fromEntries(formData);
-        const prettyJson = JSON.stringify(formObject, null, 2);
+        const formObject = Object.fromEntries(formData.entries());
+        formObject['interests'] = formData.getAll('interests');
 
-        formObject.interests = formObject.interests.split(',');
+        // const prettyJson = JSON.stringify(formObject, null, 2);
+
+        // alert(prettyJson);
+        // return false;
 
         function validateDate(date) {
             const year = date.split('-')[0];
