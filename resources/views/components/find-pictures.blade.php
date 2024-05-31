@@ -25,7 +25,11 @@
                     Nachbestellungen und Fotoprodukte, melden Sie sich bitte mit Ihrem Galerie-Code an.</p>
                 <p id="login-error-message" class="hidden my-4 text-center text-red-500">
                     <span class="block text-lg font-semibold">Wir konnten Ihre Daten nicht finden.</span>
-                    <span class="block">Entweder der eingegebene Code oder das Geburtsdatum ist falsch.</span>
+                    <span class="block">Entweder der eingegebene Code oder das Geburtsdatum ist falsch. Bitte
+                        kontaktieren Sie uns per E-Mail unter <a href="mailto:{{ env('MAIL_FROM_ADDRESS') }}"
+                            class="font-semibold hover:text-accent-700">{{ env('MAIL_FROM_ADDRESS') }}</a> oder ber das
+                        <a href="{{ route('contact') }}"
+                            class="font-semibold hover:text-accent-700">Kontaktformular</a>.</span>
                 </p>
                 <form action="{{ route('login') }}" method="POST" class="my-4"
                     onsubmit="return beforeFormSubmit(event)">
@@ -36,10 +40,9 @@
                             class="w-full p-2 border rounded-sm focus:outline-2 focus:outline-accent-500 focus:ring-2 focus:ring-accent-500"
                             placeholder="Gallery Code">
                         <label class="w-full mt-4 text-sm" for="birth_date">Child's Birth-Date:</label>
-                        <input type="text" name="birth_date"
+                        <input type="date" name="birth_date"
                             class="w-full p-2 border rounded-sm focus:outline-2 focus:outline-accent-500 focus:ring-2 focus:ring-accent-500"
-                            placeholder="Enter Birth Date (DD/MM/YYYY)" pattern="\d{2}/\d{2}/\d{4}" minlength="10"
-                            maxlength="10" oninput="formatDateInput(this)">
+                            placeholder="Select Date" required>
                         <button type="submit" class="w-full p-2 mt-4 text-white rounded bg-accent">Login</button>
                     </div>
                 </form>
@@ -62,27 +65,14 @@
 <script>
     const errorParagraph = document.getElementById('login-error-message');
 
-    function formatDateInput(input) {
-        let value = input.value.replace(/[^\d]/g, '');
-        if (value.length > 2) {
-            value = value.slice(0, 2) + '/' + value.slice(2);
-        }
-        if (value.length > 5) {
-            value = value.slice(0, 5) + '/' + value.slice(5);
-        }
-        input.value = value;
-    }
-
     function beforeFormSubmit(event) {
         event.preventDefault();
 
-        const birthDateInput = event.target.birth_date;
         const childrenCodeInput = event.target.name;
-        const parts = birthDateInput.value.split('/');
+        const birthDateInput = event.target.birth_date;
         let isValid = true;
 
         // Reset styles
-
         birthDateInput.classList.remove('format-error-loggin');
         childrenCodeInput.classList.remove('format-error-loggin');
         errorParagraph.classList.add('hidden');
@@ -93,43 +83,40 @@
             isValid = false;
         }
 
-        // Validate date format
-        if (parts.length === 3) {
-            const formattedDate = `${parts[2]}-${parts[1]}-${parts[0]}`; // Convert to YYYY-MM-DD
-            const date = new Date(formattedDate);
-            if (!isNaN(date.getTime())) {
-                const formData = new FormData(event.target);
-                formData.set('birth_date', date.toISOString().split('T')[0]);
-
-                fetch('{{ route('login') }}', {
-                        method: 'POST',
-                        body: formData,
-                        headers: {
-                            'X-Requested-With': 'XMLHttpRequest',
-                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                        }
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.redirect) {
-                            window.location.href = data.redirect;
-                        } else if (data.error) {
-                            errorParagraph.classList.remove('hidden'); // Show the error message paragraph
-                        }
-                    })
-                    .catch(error => {
-                        errorParagraph.classList.remove('hidden'); // Show the error message paragraph
-                    });
-            } else {
-                birthDateInput.classList.add('format-error-loggin');
-                isValid = false;
-            }
-        } else {
+        // Check if Birth-Date is empty
+        if (!birthDateInput.value) {
             birthDateInput.classList.add('format-error-loggin');
             isValid = false;
         }
 
-        return isValid;
+        if (!isValid) {
+            return false;
+        }
+
+        // Proceed with fetch call if inputs are valid
+        const formData = new FormData(event.target);
+
+        fetch('{{ route('login') }}', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.redirect) {
+                    window.location.href = data.redirect;
+                } else if (data.error) {
+                    errorParagraph.classList.remove('hidden'); // Show the error message paragraph
+                }
+            })
+            .catch(error => {
+                errorParagraph.classList.remove('hidden'); // Show the error message paragraph
+            });
+
+        return true;
     }
 </script>
 
@@ -137,4 +124,5 @@
     .format-error-loggin {
         border: 2px solid red;
     }
+</style>
 </style>

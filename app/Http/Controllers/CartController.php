@@ -10,6 +10,7 @@ use Artesaos\SEOTools\Facades\SEOTools;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use App\Models\User;
 
 class CartController extends Controller
 {
@@ -30,13 +31,27 @@ class CartController extends Controller
         }, $cart));
     }
 
+    private function newOrderSendMail($order, $contact, $emailTo)
+    {
+        // Queue mail to the client
+        Mail::to($emailTo)->queue(new OrderCreated($order, $contact, 'user'));
+
+        // Fetch all admin users
+        $admins = User::where('role', 'admin')->get();
+
+        // Queue an email to each admin
+        foreach ($admins as $admin) {
+            Mail::to($admin->email)->queue(new OrderCreated($order, $contact, 'admin'));
+        }
+    }
+
     public function createBankPayment(Request $request)
     {
         $data = $request->all();
         $cart = $this->getCartItems();
 
         $contactData = [
-            'name' => $data['first-name'].' '.$data['last-name'],
+            'name' => $data['first-name'] . ' ' . $data['last-name'],
             'email' => $data['email-address'],
             'phone' => $data['phone'],
         ];
@@ -64,8 +79,9 @@ class CartController extends Controller
             'payment_method' => $data['payment_type'],
             'payment_status' => 'unpaid',
             'address_same_as_billing' => filter_var($data['address-same-as-billing'], FILTER_VALIDATE_BOOLEAN),
-            'billing_address' => [$billingAddress],
-            'shipping_address' => [$shippingAddress],
+            'billing_address' => json_encode($billingAddress),
+            'shipping_address' => json_encode($shippingAddress),
+            'comment' => $data['comment'] ?? '',
         ];
 
         try {
@@ -89,25 +105,9 @@ class CartController extends Controller
                 ]);
             }
 
+            $this->newOrderSendMail($order, $contact, $contactData['email']);
+
             if ($data['payment_type'] === 'bank_transfer') {
-
-                // foreach ($cartItems as $item) {
-                //     OrderItem::create([
-                //         'order_id' => $order->id,
-                //         'product_id' => $item['product_id'],
-                //         'quantity' => $item['quantity'],
-                //         'price' => $item['totalPrice'],
-                //         'options' => json_encode([
-                //             'files' => $item['files'],
-                //             'selects' => $item['selects'],
-                //             'checkbox' => $item['checkbox'],
-                //         ]),
-                //     ]);
-                // }
-
-                // Mail::to($contactData['email'])->send(new OrderCreated($order, $contact));
-                // Mail::to('user@example.com')->send(new OrderCreated($order, $contact)); // Replace 'user@example.com' with the actual user email
-
                 return response()->json([
                     'success' => 'Order created successfully!',
                     'totalItems' => $this->calculateTotalItems($this->getCart()),
@@ -117,7 +117,7 @@ class CartController extends Controller
                 return $this->createPaymentForm($cart, $order->id, $contact);
             }
         } catch (Exception $e) {
-            return response()->json(['error' => 'Failed to create order: '.$e->getMessage()], 500);
+            return response()->json(['error' => 'Failed to create order: ' . $e->getMessage()], 500);
         }
     }
 
@@ -144,7 +144,7 @@ class CartController extends Controller
 
             $response = $payrexx->create($gateway);
 
-            if ($response && ! empty($response->getLink())) {
+            if ($response && !empty($response->getLink())) {
                 $paymentUrl = $response->getLink();
 
                 return response()->json(['paymentUrl' => $paymentUrl]);
@@ -152,11 +152,11 @@ class CartController extends Controller
                 throw new Exception('No link found in the response');
             }
         } catch (\Payrexx\PayrexxException $e) {
-            error_log('PayrexxException: '.$e->getMessage());
+            error_log('PayrexxException: ' . $e->getMessage());
 
             return response()->json(['error' => $e->getMessage()], 500);
         } catch (Exception $e) {
-            error_log('Exception: '.$e->getMessage());
+            error_log('Exception: ' . $e->getMessage());
 
             return response()->json(['error' => $e->getMessage()], 500);
         }
@@ -165,7 +165,7 @@ class CartController extends Controller
     private function calculateProductTotal($product_id, $selects, $checkboxes)
     {
         $product = \App\Models\Product::find($product_id);
-        if (! $product) {
+        if (!$product) {
             return 0;
         }
 
@@ -192,7 +192,7 @@ class CartController extends Controller
                     foreach ($attribute['options'] as $option) {
 
                         $optionLabelKey = $option['label'];
-                        if (! isset($option['price']) || $option['price'] == 0) {
+                        if (!isset($option['price']) || $option['price'] == 0) {
                             continue;
                         }
 

@@ -729,14 +729,16 @@
                                     </div>
                                 </div>
                                 <p x-show="paymentType === 'bank_transfer'" class="mt-2 text-sm text-gray-500">
-                                    Transfer directly to our bank account. Please use your order number as the reference.
-                                    Your order will be processed only after the funds have been received in our account. You
-                                    will receive our bank details upon confirming your order.
+                                    Transfer directly to our bank account.<br>
+                                    Please use your order number as the reference.<br>
+                                    You will receive <span class="font-semibold">your reference number</span> in your confirmation email.<br>
+                                    Your order will be processed only after the funds have been received in our account.<br>
+                                    IBAN: <span class="font-semibold">{{ env('BANK_IBAN') }}</span>
                                 </p>
                             </fieldset>
                         </div>
                         <div class="px-4 py-6 border-t border-gray-200 sm:px-6">
-                            <button
+                            <button type="submit"
                                 class="w-full px-4 py-3 text-base font-medium text-white border border-transparent rounded-md shadow-sm btn-zahls-modal bg-accent-600 hover:bg-accent-700 focus:outline-none focus:ring-2 focus:ring-accent-500 focus:ring-offset-2 focus:ring-offset-gray-50">Confirm
                                 order</button>
                         </div>
@@ -749,6 +751,11 @@
 <script>
     const submitForm = async (event) => {
         event.preventDefault();
+        const submitButton = event.target.querySelector('button[type="submit"]');
+        submitButton.disabled = true;
+        const buttonText = submitButton.textContent;
+        submitButton.textContent = 'Processing...';
+
         const formData = new FormData(event.target);
         const csrfToken = formData.get('_token');
         const paymentType = formData.get('payment_type');
@@ -771,7 +778,6 @@
 
             const data = await response.json();
 
-
             if (paymentType === 'bank_transfer') {
                 window.location.href = '{{ route('payment-success') }}';
             } else if (data.paymentUrl) {
@@ -782,6 +788,9 @@
         } catch (error) {
             console.error('Error:', error);
             window.location.href = '{{ route('payment-failed') }}';
+        } finally {
+            submitButton.disabled = false;
+            submitButton.textContent = buttonText;
         }
     };
 

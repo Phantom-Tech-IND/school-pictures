@@ -12,13 +12,18 @@ class Order extends Model
 
     protected $fillable = [
         'amount', 'status', 'invoice', 'contact_id', 'payment_method', 'payment_status',
-        'address_same_as_billing', 'billing_address', 'shipping_address',
+        'address_same_as_billing', 'billing_address', 'shipping_address', 'comment',
     ];
 
-    protected $casts = [
-        'billing_address' => 'array',
-        'shipping_address' => 'array',
-    ];
+    public function getBillingAddressAttribute($value)
+    {
+        return json_decode($value, true);
+    }
+
+    public function getShippingAddressAttribute($value)
+    {
+        return json_decode($value, true);
+    }
 
     public function contact()
     {

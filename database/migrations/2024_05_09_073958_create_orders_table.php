@@ -21,6 +21,7 @@ return new class extends Migration
             $table->enum('payment_method', ['card', 'bank_transfer']);
             $table->enum('payment_status', ['paid', 'unpaid']);
             $table->boolean('address_same_as_billing')->default(0);
+            $table->text('comment')->nullable();
             $table->foreignId('contact_id')->constrained('contacts');
             $table->timestamps();
         });

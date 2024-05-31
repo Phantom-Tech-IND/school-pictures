@@ -3,19 +3,22 @@
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use App\Models\Message;
+use Illuminate\Support\Facades\Config;
 
-class MessageNotification extends Notification
+class MessageNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
-    private $message;
+    private Message $message;
 
     /**
      * Create a new notification instance.
      */
-    public function __construct($message)
+    public function __construct(Message $message)
     {
         $this->message = $message;
     }
@@ -35,11 +38,25 @@ class MessageNotification extends Notification
      */
     public function toMail(object $notifiable): MailMessage
     {
-        return (new MailMessage)
-            ->subject('New message from '.$this->message['name'])
-            ->line('You just recieved an email from '.$this->message['name'].' with the message: '.$this->message['message'])
-            ->action('Go to app', url('/'))
-            ->line('Thank you for using our application!');
+        $mailMessage = (new MailMessage)
+            ->from(Config::get('mail.from.address'), Config::get('mail.from.name'))
+            ->subject('New message from ' . $this->message->name)
+            ->greeting('New message')
+            ->action('Check message', url('/admin/messages/' . $this->message->id . '/edit'))
+            ->line('From: **' . $this->message->name . '**')
+            ->line('Email: ' . $this->message->email)
+            ->line('Appointment: ' . ($this->message->appointment_date ?? 'N/A') . ' | ' . ($this->message->appointment_time ?? 'N/A'))
+            ->line('Interests:');
+
+        foreach ($this->message->interests ?? [] as $interest) {
+            $mailMessage->line('- ' . $interest);
+        }
+
+        $mailMessage
+            ->line('Subject: ' . $this->message->subject)
+            ->line($this->message->message);
+
+        return $mailMessage;
     }
 
     /**
@@ -50,7 +67,7 @@ class MessageNotification extends Notification
     public function toArray(object $notifiable): array
     {
         return [
-            'message' => $this->message,
+            'message' => $this->message->toArray(),
         ];
     }
 }

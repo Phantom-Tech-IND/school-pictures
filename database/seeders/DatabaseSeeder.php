@@ -16,12 +16,21 @@ class DatabaseSeeder extends Seeder
             'name' => 'admin',
             'email' => 'admin@schoolpictures.com',
             'password' => bcrypt('parola123'),
+            'role' => 'admin',
         ]);
 
         \App\Models\User::factory()->create([
             'name' => 'Martina',
             'email' => 'martina@schoolpictures.com',
             'password' => bcrypt('Password123!!'),
+            'role' => 'admin',
+        ]);
+
+        \App\Models\User::factory()->create([
+            'name' => 'Test',
+            'email' => env('MAIL_FROM_ADDRESS'),
+            'password' => bcrypt('Password123!!'),
+            'role' => 'admin',
         ]);
 
         $this->call([
