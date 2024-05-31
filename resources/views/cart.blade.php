@@ -729,9 +729,11 @@
                                     </div>
                                 </div>
                                 <p x-show="paymentType === 'bank_transfer'" class="mt-2 text-sm text-gray-500">
-                                    Transfer directly to our bank account. Please use your order number as the reference.
-                                    Your order will be processed only after the funds have been received in our account. You
-                                    will receive our bank details upon confirming your order.
+                                    Transfer directly to our bank account.<br>
+                                    Please use your order number as the reference.<br>
+                                    You will receive <span class="font-semibold">your reference number</span> in your confirmation email.<br>
+                                    Your order will be processed only after the funds have been received in our account.<br>
+                                    IBAN: <span class="font-semibold">{{ env('BANK_IBAN') }}</span>
                                 </p>
                             </fieldset>
                         </div>
