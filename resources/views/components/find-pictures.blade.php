@@ -25,7 +25,10 @@
                     Nachbestellungen und Fotoprodukte, melden Sie sich bitte mit Ihrem Galerie-Code an.</p>
                 <p id="login-error-message" class="hidden my-4 text-center text-red-500">
                     <span class="block text-lg font-semibold">Wir konnten Ihre Daten nicht finden.</span>
-                    <span class="block">Entweder der eingegebene Code oder das Geburtsdatum ist falsch.</span>
+                    <span class="block">Entweder der eingegebene Code oder das Geburtsdatum ist falsch. Bitte
+                        kontaktieren Sie uns per E-Mail unter <a href="mailto:{{ env('MAIL_FROM_ADDRESS') }}"
+                            class="font-semibold hover:text-accent-700">{{ env('MAIL_FROM_ADDRESS') }}</a> oder ber das <a
+                            href="{{ route('contact') }}" class="font-semibold hover:text-accent-700">Kontaktformular</a>.</span>
                 </p>
                 <form action="{{ route('login') }}" method="POST" class="my-4"
                     onsubmit="return beforeFormSubmit(event)">
@@ -106,7 +109,8 @@
                         body: formData,
                         headers: {
                             'X-Requested-With': 'XMLHttpRequest',
-                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute(
+                                'content')
                         }
                     })
                     .then(response => response.json())
@@ -137,4 +141,5 @@
     .format-error-loggin {
         border: 2px solid red;
     }
+</style>
 </style>
