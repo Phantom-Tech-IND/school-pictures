@@ -4,10 +4,10 @@
 @extends('layouts.app')
 
 @section('content')
-    @include('components.secondary-banner', [
+    {{-- @include('components.secondary-banner', [
         'title' => $student->name,
         'image' => '/minimalistic-loft-photo-studio-scaled.jpg',
-    ])
+    ]) --}}
     <div class="px-6 pt-12 bg-white sm:py-8 lg:px-8">
         <div class="max-w-4xl mx-auto text-center">
             <h2 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">Fotoshooting
