@@ -20,7 +20,9 @@ use Illuminate\Support\Facades\Route;
 // Guest Panel Routes
 Route::controller(GuestPanelController::class)->group(function () {
     Route::get('/', 'index')->name('home');
-    Route::get('/not-available', 'notAvailable')->name('not-available');
+    Route::get('/not-available', function () {
+        abort(404);
+    });
     Route::get('/contact', 'contact')->name('contact');
     Route::get('/our-offers', 'offers')->name('offers');
     Route::post('/webhook-zahls', 'webhookZahls')->name('webhook-zahls')
@@ -44,6 +46,9 @@ Route::controller(GuestPanelController::class)->group(function () {
 Route::controller(AuthController::class)->group(function () {
     Route::post('/login', 'login')->name('login');
     Route::get('/logout', 'logout')->name('logout');
+    Route::get('/login', function () {
+        abort(404);
+    });
 });
 
 Route::middleware(['auth:student'])->group(function () {
