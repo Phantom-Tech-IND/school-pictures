@@ -1,9 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <x-hero-banner />
-    <div class="mt-8 md:mt-24">
-        @include('components.masonry-content')
-    </div>
+    @include('components.masonry-content')
     <div class="mt-8 md:mt-24">
         @include('components.c-t-a', [
             'link' => 'contact',

@@ -23,20 +23,52 @@ class HeroBanner extends Component
     {
         $slides = [
             [
-                'title' => 'Live as if you were to die tomorrow. Learn as if you were to live forever. - Mahatma Gandhi',
-                'image' => 'hero-banner.jpg',
-                'cta' => 'Get Started',
-                'link' => '/contact',
-                'caption' => 'Moderne Kindergarten - und Schulfotografie',
-                'alt' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+                'image' => 'slider-home/Geschwistershooting.jpg',
+                'alt' => 'A photoshoot featuring siblings.',
             ],
             [
-                'title' => 'Live as if you were to die tomorrow. Learn as if you were to live forever. - Mahatma Gandhi',
-                'image' => 'cute-boy-sit-grass-park-scaled.jpg',
-                'cta' => 'Get Started',
-                'link' => '/contact',
-                'caption' => 'Moderne Kindergarten - und Schulfotografie',
-                'alt' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+                'image' => 'slider-home/Kindershooting.jpg',
+                'alt' => 'A photoshoot featuring children.',
+            ],
+            [
+                'image' => 'slider-home/Maennershooting.jpg',
+                'alt' => 'A photoshoot featuring men.',
+            ],
+            [
+                'image' => 'slider-home/Newborn-Baby.jpg',
+                'alt' => 'A photoshoot featuring a newborn baby.',
+            ],
+            [
+                'image' => 'slider-home/Partnershooting.jpg',
+                'alt' => 'A photoshoot featuring partners.',
+            ],
+            [
+                'image' => 'slider-home/Passbilder.jpg',
+                'alt' => 'Passport photos.',
+            ],
+            [
+                'image' => 'slider-home/Rainshooting.jpg',
+                'alt' => 'A photoshoot in the rain.',
+            ],
+            [
+                'image' => 'slider-home/Schwangerschaftsshooting.jpg',
+                'alt' => 'A maternity photoshoot.',
+            ],
+            [
+                'image' => 'slider-home/Akt-Erotikshooting.jpg',
+                'alt' => 'A woman posing in lingerie on a bed for an artistic and erotic photoshoot.',
+            ],
+            [
+                'image' => 'slider-home/Bewerbungsbilder.jpg',
+                'alt' => 'A man in a business suit smiling and holding a folder, suitable for professional headshots or job application photos.',
+            ],
+            [
+                'image' => 'slider-home/Familienshooting.jpg',
+                'alt' => 'A family photoshoot.',
+            ],
+            [
+                'image' => 'slider-home/Frauenshooting.jpg',
+                'alt' => 'A photoshoot featuring women.',
             ],
         ];
 
