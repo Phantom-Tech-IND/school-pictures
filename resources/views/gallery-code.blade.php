@@ -18,7 +18,7 @@
     </div>
 
     <div class="px-6 mx-auto mb-6 max-w-7xl lg:px-8">
-        <div class="grid grid-cols-3 gap-3 py-6 mx-auto max-w-7xl xs:grid-cols-4 lg:grid-cols-5">
+        <div class="grid grid-cols-3 gap-3 py-6 mx-auto max-w-7xl xs:grid-cols-6 lg:grid-cols-7">
             @foreach ($student->photos as $photo)
                 <div class="relative  break-inside-avoid group " style="margin-top: 0">
                     <a href="{{ asset('storage/' . $photo->photo_path) }}" class="" data-fslightbox="gallery">
