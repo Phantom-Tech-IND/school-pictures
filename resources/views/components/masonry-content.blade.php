@@ -23,7 +23,7 @@
             </div>
             <div class="flex flex-col gap-4 md:flex-row">
                 <a class="w-full" href="{{ route('contact') }}">
-                    <div style="background-image: url('{{ asset('gr20-6782-7121.jpg') }}');" class="object-cover w-full bg-center bg-cover h-72">
+                    <div style="background-image: url('{{ asset('KC24-0298-4402.jpg') }}');" class="object-cover w-full bg-center bg-cover h-72">
                     </div>
                 </a>
                 @include('components.icon-card', [
