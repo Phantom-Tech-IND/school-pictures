@@ -20,7 +20,9 @@ use Illuminate\Support\Facades\Route;
 // Guest Panel Routes
 Route::controller(GuestPanelController::class)->group(function () {
     Route::get('/', 'index')->name('home');
-    Route::get('/not-available', 'notAvailable')->name('not-available');
+    Route::get('/not-available', function () {
+        abort(404);
+    });
     Route::get('/contact', 'contact')->name('contact');
     Route::get('/our-offers', 'offers')->name('offers');
     Route::post('/webhook-zahls', 'webhookZahls')->name('webhook-zahls')
@@ -44,6 +46,9 @@ Route::controller(GuestPanelController::class)->group(function () {
 Route::controller(AuthController::class)->group(function () {
     Route::post('/login', 'login')->name('login');
     Route::get('/logout', 'logout')->name('logout');
+    Route::get('/login', function () {
+        abort(404);
+    });
 });
 
 Route::middleware(['auth:student'])->group(function () {
@@ -54,17 +59,46 @@ Route::middleware(['auth:student'])->group(function () {
     });
 
     Route::post('/students/sync-photos', 'StudentController@syncPhotos')->name('students.sync-photos');
+    Route::get('/students/sync-photos', function () {
+        abort(404);
+    });
 
     Route::controller(CartController::class)->group(function () {
         Route::post('/add-to-cart', 'addToCart')->name('add.to.cart');
+        Route::get('/add-to-cart', function () {
+            abort(404);
+        });
+
         Route::get('/cart', 'index')->name('cart');
+
         Route::post('/cart/forget', 'forgetCart')->name('cart.forget');
+        Route::get('/cart/forget', function () {
+            abort(404);
+        });
+
         Route::post('/cart/payment', 'createPaymentForm')->name('cart.payment');
+        Route::get('/cart/payment', function () {
+            abort(404);
+        });
+
         Route::post('/cart/payment/bank', 'createBankPayment')->name('cart.payment.bank_transfer');
+        Route::get('/cart/payment/bank', function () {
+            abort(404);
+        });
+
         Route::get('/cart/count', 'countDistinctProducts')->name('cart.count');
+
         Route::post('/cart/remove/{productId}', 'removeFromCart')->name('cart.remove');
+        Route::get('/cart/remove/{productId}', function () {
+            abort(404);
+        });
+
         Route::get('/cart/items', 'getCartItems')->name('cart.items');
+
         Route::post('/cart/update-quantity/{productId}', 'updateQuantity')->name('cart.update-quantity');
+        Route::get('/cart/update-quantity/{productId}', function () {
+            abort(404);
+        });
 
         Route::get('/payment-success', 'paymentSuccess')->name('payment-success');
         Route::get('/payment-failed', 'paymentFailed')->name('payment-failed');
