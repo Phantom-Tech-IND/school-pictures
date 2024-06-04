@@ -8,7 +8,7 @@
                 <div class="swiper-slide">
                     <div class="flex items-center justify-center">
                         <img src="{{ asset($slide['image']) }}" alt="{{ $slide['alt'] }}"
-                            class="object-cover w-full md:h-[400px] lg:h-[600px] zoom-in-animation">
+                            class="object-cover w-full md:h-[600px] lg:h-[800px] zoom-in-animation">
                     </div>
                 </div>
             @endforeach
