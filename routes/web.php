@@ -126,3 +126,10 @@ Route::get('storage-link', function () {
 
     return redirect()->route('home');
 });
+
+Route::get('config-clear', function () {
+    Artisan::call('route:clear');
+    Artisan::call('cache:clear');
+
+    return redirect()->route('home');
+});
