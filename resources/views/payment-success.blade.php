@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
-    <div class="lg:py-24 px-4 -mb-8 sm:px-6 lg:px-8">
+    <div class="px-4 -mb-8 lg:py-24 sm:px-6 lg:px-8">
         <div class="relative w-full min-w-0 pt-1 -mb-48 overflow-x-hidden pointer-events-none h-96">
             <dotlottie-player src="https://lottie.host/f23675e0-dcd7-45d3-be1f-23ff7fd0209c/h1V2YckOAO.json"
                 background="transparent" speed="1"
@@ -24,25 +24,3 @@
         </div>
     </div>
 @endsection
-
-
-<meta name="csrf-token" content="{{ csrf_token() }}">
-<script>
-    document.addEventListener('DOMContentLoaded', async () => {
-        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-        const forgetCart = await fetch('{{ route('cart.forget') }}', {
-            method: 'POST',
-            headers: {
-                'X-CSRF-TOKEN': csrfToken
-            },
-        });
-
-        if (!forgetCart.ok) {
-            throw new Error('Failed to forget cart!');
-        }
-    });
-
-    if (window.updateCartCount) {
-        window.updateCartCount();
-    }
-</script>
