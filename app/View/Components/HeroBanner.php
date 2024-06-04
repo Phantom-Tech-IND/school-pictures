@@ -23,51 +23,51 @@ class HeroBanner extends Component
     {
         $slides = [
             [
-                'image' => 'slider-home/Geschwistershooting.jpg',
+                'image' => 'slider-home/Geschwistershooting.webp',
                 'alt' => 'A photoshoot featuring siblings.',
             ],
             [
-                'image' => 'slider-home/Kindershooting.jpg',
+                'image' => 'slider-home/Kindershooting.webp',
                 'alt' => 'A photoshoot featuring children.',
             ],
             [
-                'image' => 'slider-home/Maennershooting.jpg',
+                'image' => 'slider-home/Maennershooting.webp',
                 'alt' => 'A photoshoot featuring men.',
             ],
             [
-                'image' => 'slider-home/Newborn-Baby.jpg',
+                'image' => 'slider-home/Newborn-Baby.webp',
                 'alt' => 'A photoshoot featuring a newborn baby.',
             ],
             [
-                'image' => 'slider-home/Partnershooting.jpg',
+                'image' => 'slider-home/Partnershooting.webp',
                 'alt' => 'A photoshoot featuring partners.',
             ],
             [
-                'image' => 'slider-home/Passbilder.jpg',
+                'image' => 'slider-home/Passbilder.webp',
                 'alt' => 'Passport photos.',
             ],
             [
-                'image' => 'slider-home/Rainshooting.jpg',
+                'image' => 'slider-home/Rainshooting.webp',
                 'alt' => 'A photoshoot in the rain.',
             ],
             [
-                'image' => 'slider-home/Schwangerschaftsshooting.jpg',
+                'image' => 'slider-home/Schwangerschaftsshooting.webp',
                 'alt' => 'A maternity photoshoot.',
             ],
             [
-                'image' => 'slider-home/Akt-Erotikshooting.jpg',
+                'image' => 'slider-home/Akt-Erotikshooting.webp',
                 'alt' => 'A woman posing in lingerie on a bed for an artistic and erotic photoshoot.',
             ],
             [
-                'image' => 'slider-home/Bewerbungsbilder.jpg',
+                'image' => 'slider-home/Bewerbungsbilder.webp',
                 'alt' => 'A man in a business suit smiling and holding a folder, suitable for professional headshots or job application photos.',
             ],
             [
-                'image' => 'slider-home/Familienshooting.jpg',
+                'image' => 'slider-home/Familienshooting.webp',
                 'alt' => 'A family photoshoot.',
             ],
             [
-                'image' => 'slider-home/Frauenshooting.jpg',
+                'image' => 'slider-home/Frauenshooting.webp',
                 'alt' => 'A photoshoot featuring women.',
             ],
         ];
