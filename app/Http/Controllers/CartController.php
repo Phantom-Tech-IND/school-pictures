@@ -6,11 +6,11 @@ use App\Mail\OrderCreated;
 use App\Models\Contact;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\User;
 use Artesaos\SEOTools\Facades\SEOTools;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
-use App\Models\User;
 
 class CartController extends Controller
 {
@@ -51,7 +51,7 @@ class CartController extends Controller
         $cart = $this->getCartItems();
 
         $contactData = [
-            'name' => $data['first-name'] . ' ' . $data['last-name'],
+            'name' => $data['first-name'].' '.$data['last-name'],
             'email' => $data['email-address'],
             'phone' => $data['phone'],
         ];
@@ -117,7 +117,7 @@ class CartController extends Controller
                 return $this->createPaymentForm($cart, $order->id, $contact);
             }
         } catch (Exception $e) {
-            return response()->json(['error' => 'Failed to create order: ' . $e->getMessage()], 500);
+            return response()->json(['error' => 'Failed to create order: '.$e->getMessage()], 500);
         }
     }
 
@@ -144,7 +144,7 @@ class CartController extends Controller
 
             $response = $payrexx->create($gateway);
 
-            if ($response && !empty($response->getLink())) {
+            if ($response && ! empty($response->getLink())) {
                 $paymentUrl = $response->getLink();
 
                 return response()->json(['paymentUrl' => $paymentUrl]);
@@ -152,11 +152,11 @@ class CartController extends Controller
                 throw new Exception('No link found in the response');
             }
         } catch (\Payrexx\PayrexxException $e) {
-            error_log('PayrexxException: ' . $e->getMessage());
+            error_log('PayrexxException: '.$e->getMessage());
 
             return response()->json(['error' => $e->getMessage()], 500);
         } catch (Exception $e) {
-            error_log('Exception: ' . $e->getMessage());
+            error_log('Exception: '.$e->getMessage());
 
             return response()->json(['error' => $e->getMessage()], 500);
         }
@@ -165,7 +165,7 @@ class CartController extends Controller
     private function calculateProductTotal($product_id, $selects, $checkboxes)
     {
         $product = \App\Models\Product::find($product_id);
-        if (!$product) {
+        if (! $product) {
             return 0;
         }
 
@@ -192,7 +192,7 @@ class CartController extends Controller
                     foreach ($attribute['options'] as $option) {
 
                         $optionLabelKey = $option['label'];
-                        if (!isset($option['price']) || $option['price'] == 0) {
+                        if (! isset($option['price']) || $option['price'] == 0) {
                             continue;
                         }
 

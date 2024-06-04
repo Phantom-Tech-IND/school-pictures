@@ -200,11 +200,6 @@ class OrderResource extends Resource
                     })
                     ->openUrlInNewTab()
                     ->label('Invoice'),
-                TextColumn::make('contact.phone')
-                    ->searchable()
-                    ->label('Contact Phone')
-                    ->url(fn ($record) => 'tel:'.$record->contact->phone)
-                    ->openUrlInNewTab(),
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('payment_method')
