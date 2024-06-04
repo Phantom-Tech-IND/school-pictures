@@ -26,8 +26,8 @@
                 <p id="login-error-message" class="hidden my-4 text-center text-red-500">
                     <span class="block text-lg font-semibold">Wir konnten Ihre Daten nicht finden.</span>
                     <span class="block">Entweder der eingegebene Code oder das Geburtsdatum ist falsch. Bitte
-                        kontaktieren Sie uns per E-Mail unter <a href="mailto:{{ env('MAIL_FROM_ADDRESS') }}"
-                            class="font-semibold hover:text-accent-700">{{ env('MAIL_FROM_ADDRESS') }}</a> oder ber das
+                        kontaktieren Sie uns per E-Mail unter <a href="tel:{{ env('PHONE_FROM_ADDRESS') }}"
+                            class="font-semibold hover:text-accent-700">{{ env('PHONE_FROM_ADDRESS') }}</a> oder ber das
                         <a href="{{ route('contact') }}"
                             class="font-semibold hover:text-accent-700">Kontaktformular</a>.</span>
                 </p>
