@@ -7,12 +7,12 @@
                     <div class="flex flex-col h-full overflow-y-scroll bg-white shadow-xl">
                         <div class="flex-1 px-4 py-6 overflow-y-auto sm:px-6">
                             <div class="flex items-start justify-between">
-                                <h2 class="text-lg font-medium text-gray-900" id="slide-over-title">Shopping cart</h2>
+                                <h2 class="text-lg font-medium text-gray-900" id="slide-over-title">Warenkorb</h2>
                                 <div class="flex items-center ml-3 h-7">
                                     <button onclick="toggleSlideOverCart()" type="button"
                                         class="relative p-2 -m-2 text-gray-400 hover:text-gray-500">
                                         <span class="absolute -inset-0.5"></span>
-                                        <span class="sr-only">Close panel</span>
+                                        <span class="sr-only">Panel schließen</span>
                                         <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                             stroke="currentColor" aria-hidden="true">
                                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -32,20 +32,20 @@
 
                         <div class="px-4 py-6 border-t border-gray-200 sm:px-6">
                             <div class="flex justify-between text-base font-medium text-gray-900">
-                                <p>Subtotal</p>
-                                <p class="subtotal-display">$0.00</p>
+                                <p>Zwischensumme</p>
+                                <p class="subtotal-display">0.00 CHF</p>
                             </div>
-                            <p class="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
+                            <p class="mt-0.5 text-sm text-gray-500">Versand und Steuern werden beim Checkout berechnet.</p>
                             <div class="mt-6">
                                 <a href={{ route('cart') }}
-                                    class="flex items-center justify-center px-6 py-3 text-base font-medium text-white border border-transparent rounded-md shadow-sm bg-accent-600 hover:bg-accent-700">Checkout</a>
+                                    class="flex items-center justify-center px-6 py-3 text-base font-medium text-white border border-transparent rounded-md shadow-sm bg-accent-600 hover:bg-accent-700">Zur Kasse</a>
                             </div>
                             <div class="flex justify-center mt-6 text-sm text-center text-gray-500">
                                 <p>
-                                    or
+                                    oder
                                     <button onclick="toggleSlideOverCart()" type="button"
                                         class="font-medium text-accent-600 hover:text-accent-500">
-                                        Continue Shopping
+                                        Weiter einkaufen
                                         <span aria-hidden="true"> &rarr;</span>
                                     </button>
                                 </p>
@@ -65,25 +65,23 @@
         </div>
         <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
         <div
-            class="empty_cart_modal--content inline-block overflow-hidden text-left align-bottom transition-all transform bg-white rounded-lg shadow-xl sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+            class="inline-block overflow-hidden text-left align-bottom transition-all transform bg-white rounded-lg shadow-xl empty_cart_modal--content sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
             <div class="px-4 pt-5 pb-4 bg-white sm:p-6 sm:pb-4">
                 <div class="sm:flex sm:items-start">
                     <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                        <h3 class="text-lg font-medium leading-6 text-gray-900" id="modal-title">Cart Empty</h3>
+                        <h3 class="text-lg font-medium leading-6 text-gray-900" id="modal-title">Warenkorb leer</h3>
                         <div class="mt-2">
-                            <p class="text-sm text-gray-500">Your cart is empty. Please add some products before
-                                checking out.</p>
+                            <p class="text-sm text-gray-500">Ihr Warenkorb ist leer. Bitte fügen Sie einige Produkte hinzu, bevor Sie zur Kasse gehen.</p>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="flex flex-col gap-4 px-4 py-3 bg-gray-50 sm:px-6 sm:flex-row-reverse">
                 <a href="{{ route('webshop') }}"
-                    class="w-full px-4 py-2 text-base font-medium text-center text-white border border-transparent rounded-md shadow-sm bg-accent-600 hover:bg-accent-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-500 sm:w-auto sm:text-sm">Go
-                    to webshop</a>
+                    class="w-full px-4 py-2 text-base font-medium text-center text-white border border-transparent rounded-md shadow-sm bg-accent-600 hover:bg-accent-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-500 sm:w-auto sm:text-sm">Zum Webshop</a>
                 <button type="button"
                     class="w-full px-4 py-2 text-base font-medium border rounded-md text-accent-600 border-accent-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-500 sm:w-auto sm:text-sm"
-                    onclick="toggleModal('emptyCartModal', false)">Close</button>
+                    onclick="toggleModal('emptyCartModal', false)">Schließen</button>
             </div>
         </div>
     </div>
@@ -130,7 +128,6 @@
         const modalContent = document.querySelector('.empty_cart_modal--content');
 
         if (!cartModal.classList.contains('hidden') && !modalContent.contains(event.target)) {
-            console.log(123);
             cartModal.classList.add('hidden');
         }
     });
@@ -185,10 +182,10 @@
                                         <p class="ml-4">CHF ${item.totalPrice}</p>
                                     </div>
                                     <p class="mt-1 text-sm text-gray-500">${item.product.short_description}</p>
-                                    <p class="mt-1 text-sm text-gray-500">Qty ${item.quantity}</p>
+                                    <p class="mt-1 text-sm text-gray-500">Menge ${item.quantity}</p>
                                 </div>
                                 <div class="flex items-end justify-between flex-1 text-sm">
-                                    <button onclick="removeFromCart(${item.index})" type="button" class="font-medium text-accent-600 hover:text-accent-500">Remove</button>
+                                    <button onclick="removeFromCart(${item.index})" type="button" class="font-medium text-accent-600 hover:text-accent-500">Entfernen</button>
                                 </div>
                             </div>
                         </li>

@@ -359,6 +359,8 @@ class CartController extends Controller
         SEOTools::setTitle('Payment Success');
         SEOTools::setDescription('Your payment was successful.');
 
+        session()->forget('cart');
+
         return view('payment-success');
     }
 

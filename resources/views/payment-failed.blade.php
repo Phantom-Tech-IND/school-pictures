@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
-    <div class="lg:py-24 px-4 -mb-8 sm:px-6 lg:px-8">
+    <div class="px-4 -mb-8 lg:py-24 sm:px-6 lg:px-8">
         <div class="relative w-full min-w-0 pt-1 -mb-48 overflow-x-hidden pointer-events-none h-96">
             <dotlottie-player src="https://lottie.host/d7d635f6-7581-483a-a13f-4bea621809be/p15QdnvZK6.json"
                 background="transparent" speed="1"
@@ -10,15 +10,15 @@
         </div>
         <h1
             class="pb-2 text-2xl font-semibold text-center text-danger xs:pb-3 md:pb-4 lg:pb-6 xl:pb-8 xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl">
-            Payment Failed</h1>
+            Zahlung fehlgeschlagen</h1>
         <p class="text-center text-normal sm:text-md md:text-lg lg:text-xl xl:text-2xl">
-            Unfortunately, your payment could not be processed. Please try again or contact us for support.
+            Leider konnte Ihre Zahlung nicht verarbeitet werden. Bitte versuchen Sie es erneut oder kontaktieren Sie uns für Unterstützung.
             <x-feathericon-alert-circle class="inline-block -mt-2" />
         </p>
         <div class="mt-4 text-center">
             <a href="{{ route('gallery-code') }}"
                 class="inline-block px-4 py-2 mt-6 text-xs text-white rounded sm:px-6 sm:py-3 sm:mt-8 sm:text-sm bg-accent hover:bg-accent-600">
-                Go back to main page
+                Zurück zur Hauptseite
             </a>
         </div>
     </div>

@@ -8,13 +8,12 @@
                 d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
         </svg>
     </div>
-    <p class="mt-2 text-center text-gray-600">This function has been disabled for <b class="font-semibold">ArtLine
-            Fotografie AG -Fotografin- Tanja Arnold.</b></p>
+    <p class="mt-2 text-center text-gray-600">Diese Funktion wurde für <b class="font-semibold">ArtLine Fotografie AG -Fotografin- Tanja Arnold deaktiviert.</b></p>
 
     <div class="mt-5 sm:mt-6">
         <button type="button" onclick="document.getElementById('disable-right-click-modal').close()"
             class="inline-flex justify-center w-full px-3 py-2 text-sm font-semibold text-white bg-red-600 rounded-md shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600">
-            I understand</button>
+            Ich verstehe</button>
     </div>
 </dialog>
 

@@ -3,7 +3,7 @@
         <div class="max-w-2xl mx-auto lg:mx-0">
             <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Unser Team</h2>
             <p class="mt-6 text-lg leading-8 text-gray-600">Wir sind eine dynamische Gruppe von Individuen, die sich
-                fr das, was wir tun und auf das beste Ergebnis fr unser Kunden sttzt.</p>
+                für das, was wir tun und auf das beste Ergebnis für unsere Kunden stützt.</p>
         </div>
 
         <ul role="list"

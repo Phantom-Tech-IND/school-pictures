@@ -1,16 +1,14 @@
 <div x-data="{ showDialog: false }" x-cloak class="p-2 bg-accent">
     @guest('student')
-        <h1 @click="showDialog = true" class="font-semibold text-center text-white uppercase cursor-pointer">Search by gallery
-            code</h1>
+        <h1 @click="showDialog = true" class="font-semibold text-center text-white uppercase cursor-pointer">Suche nach Galerie-Code</h1>
     @endguest
 
     @auth('student')
         <div class="flex items-center justify-between gap-4 mx-auto font-bold text-white max-w-7xl lg:px-8">
             <a href="{{ route('gallery-code') }}"
                 class="flex gap-2 cursor-pointer hover:text-accent-100"><x-heroicon-s-rectangle-stack class="w-6 h-6" />
-                Go
-                back to gallery</a>
-            <a href="{{ route('logout') }}" class="flex gap-2 align-middle cursor-pointer hover:text-accent-100">Logout
+                Zurück zur Galerie</a>
+            <a href="{{ route('logout') }}" class="flex gap-2 align-middle cursor-pointer hover:text-accent-100">Abmelden
                 <x-heroicon-s-arrow-left-on-rectangle class="w-6 h-6 font-bold stroke-current" /></a>
         </div>
     @endauth
@@ -26,8 +24,8 @@
                 <p id="login-error-message" class="hidden my-4 text-center text-red-500">
                     <span class="block text-lg font-semibold">Wir konnten Ihre Daten nicht finden.</span>
                     <span class="block">Entweder der eingegebene Code oder das Geburtsdatum ist falsch. Bitte
-                        kontaktieren Sie uns per E-Mail unter <a href="tel:{{ env('PHONE_FROM_ADDRESS') }}"
-                            class="font-semibold hover:text-accent-700">{{ env('PHONE_FROM_ADDRESS') }}</a> oder ber das
+                        kontaktieren Sie uns per E-Mail unter <a href="mailto:{{ env('MAIL_FROM_ADDRESS') }}"
+                            class="font-semibold hover:text-accent-700">{{ env('MAIL_FROM_ADDRESS') }}</a> oder über das
                         <a href="{{ route('contact') }}"
                             class="font-semibold hover:text-accent-700">Kontaktformular</a>.</span>
                 </p>
@@ -35,15 +33,15 @@
                     onsubmit="return beforeFormSubmit(event)">
                     @csrf
                     <div class="flex flex-wrap">
-                        <label class="w-full text-sm" for="name">Children-Code:</label>
+                        <label class="w-full text-sm" for="name">Kinder-Code:</label>
                         <input type="text" name="name"
                             class="w-full p-2 border rounded-sm focus:outline-2 focus:outline-accent-500 focus:ring-2 focus:ring-accent-500"
-                            placeholder="Gallery Code">
-                        <label class="w-full mt-4 text-sm" for="birth_date">Child's Birth-Date:</label>
+                            placeholder="Galerie-Code">
+                        <label class="w-full mt-4 text-sm" for="birth_date">Geburtsdatum des Kindes:</label>
                         <input type="date" name="birth_date"
                             class="w-full p-2 border rounded-sm focus:outline-2 focus:outline-accent-500 focus:ring-2 focus:ring-accent-500"
-                            placeholder="Select Date" required>
-                        <button type="submit" class="w-full p-2 mt-4 text-white rounded bg-accent">Login</button>
+                            placeholder="Datum auswählen" required>
+                        <button type="submit" class="w-full p-2 mt-4 text-white rounded bg-accent">Anmelden</button>
                     </div>
                 </form>
                 <p class="text-center">Sie haben keinen Galerie-Code? Bitte kontaktieren Sie unseren Kundenservice
@@ -77,13 +75,13 @@
         childrenCodeInput.classList.remove('format-error-loggin');
         errorParagraph.classList.add('hidden');
 
-        // Check if Children-Code is empty
+        // Check if Kinder-Code is empty
         if (!childrenCodeInput.value.trim()) {
             childrenCodeInput.classList.add('format-error-loggin');
             isValid = false;
         }
 
-        // Check if Birth-Date is empty
+        // Check if Geburtsdatum is empty
         if (!birthDateInput.value) {
             birthDateInput.classList.add('format-error-loggin');
             isValid = false;
@@ -124,5 +122,4 @@
     .format-error-loggin {
         border: 2px solid red;
     }
-</style>
 </style>

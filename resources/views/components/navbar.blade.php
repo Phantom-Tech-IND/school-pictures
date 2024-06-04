@@ -50,7 +50,7 @@
                         </div>
                     </div>
                     <a href="{{ route('contact') }}"
-                        class="{{ request()->routeIs('contact') ? 'text-accent' : ' hover:text-accent' }} uppercase">Unsere
+                        class="{{ request()->routeIs('contact') ? 'text-accent' : ' hover:text-accent' }} uppercase">Unser
                         Kontakt</a>
                     @auth('student')
                         <a href="javascript:void(0);" onclick="toggleSlideOverCart()">
@@ -71,7 +71,7 @@
                             : 'relative left-0 font-medium transition-all duration-300 hover:pl-0 hover:text-accent' }}">
                         <button class="flex gap-2">
                             <x-heroicon-o-shopping-cart class="relative w-5 h-5" />
-                            <span class="">Cart<span data-id="cart-count"
+                            <span class="">Warenkorb<span data-id="cart-count"
                                     class="text-xs align-top bold">0</span></span>
                         </button>
                     </a>
@@ -115,7 +115,7 @@
                 <a href="{{ route('team') }}"
                     class="{{ request()->routeIs('team')
                         ? 'text-accent font-semibold relative -left-2'
-                        : 'relative left-0 font-medium transition-all duration-300 hover:pl-0 hover:text-accent hover:-left-2' }}">Unsere
+                        : 'relative left-0 font-medium transition-all duration-300 hover:pl-0 hover:text-accent hover:-left-2' }}">Unser
                     Team</a>
                 <a href="{{ route('partners') }}"
                     class="{{ request()->routeIs('partners')
@@ -125,9 +125,8 @@
                 <a href="{{ route('contact') }}"
                     class="{{ request()->routeIs('contact')
                         ? 'text-accent font-semibold relative -left-2'
-                        : 'relative left-0 font-medium transition-all duration-300 hover:pl-0 hover:text-accent hover:-left-2' }}">Unsere
+                        : 'relative left-0 font-medium transition-all duration-300 hover:pl-0 hover:text-accent hover:-left-2' }}">Unser
                     Kontakt</a>
-                
             </nav>
         </div>
     </div>

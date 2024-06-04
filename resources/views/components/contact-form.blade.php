@@ -60,7 +60,7 @@
                     <textarea name="message" id="message" rows="4" placeholder="Ihre Nachricht" maxlength="10000" required
                         class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
 @if ($offerItem)
-I am interested in the offer {{ $offerItem->name }} with price {{ $offerItem->price }} which contains:
+Ich bin an dem Angebot {{ $offerItem->name }} mit dem Preis {{ $offerItem->price }} interessiert, das Folgendes enthält:
 
 @foreach ($offerItem->custom_attributes as $attribute)
 - {!! strip_tags(html_entity_decode($attribute['title'])) !!}
@@ -126,3 +126,5 @@ I am interested in the offer {{ $offerItem->name }} with price {{ $offerItem->pr
             });
     }
 </script>
+
+

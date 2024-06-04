@@ -2,24 +2,23 @@
 @section('content')
     <div class="bg-gray-50">
         <div class="max-w-2xl px-4 pt-16 pb-24 mx-auto sm:px-6 lg:max-w-7xl lg:px-8">
-            <h2 class="sr-only">Checkout</h2>
+            <h2 class="sr-only">Kasse</h2>
 
             <form onsubmit="submitForm(event)" class="lg:grid lg:grid-cols-2 lg:gap-x-12 xl:gap-x-16">
                 @csrf
                 <div>
                     <div>
-                        <h2 class="text-lg font-medium text-gray-900">Contact information</h2>
+                        <h2 class="text-lg font-medium text-gray-900">Kontaktinformationen</h2>
 
                         <div class="mt-4 input-component">
                             <div class="flex justify-between">
-                                <label for="email-address" class="block text-sm font-medium text-gray-700">Email address<span
+                                <label for="email-address" class="block text-sm font-medium text-gray-700">E-Mail-Adresse<span
                                         class="pl-1 text-red-600">*</span></label>
-                                <p class="hidden text-sm text-red-600 input-error-message" id="email-error">Not a valid
-                                    email address</p>
+                                <p class="hidden text-sm text-red-600 input-error-message" id="email-error">Keine gültige E-Mail-Adresse</p>
                             </div>
                             <div class="relative mt-1">
                                 <input type="email" id="email-address" name="email-address" required
-                                    title="Please enter a valid email address" autocomplete="email"
+                                    title="Bitte geben Sie eine gültige E-Mail-Adresse ein" autocomplete="email"
                                     placeholder="you@example.com"
                                     class="block w-full border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring-accent-500 sm:text-sm custom-input">
 
@@ -37,18 +36,17 @@
                     </div>
 
                     <div class="pt-10 mt-10 border-t border-gray-200">
-                        <h2 class="text-lg font-medium text-gray-900">Billing information</h2>
+                        <h2 class="text-lg font-medium text-gray-900">Informationen zur Abrechnung</h2>
 
                         <div class="grid grid-cols-1 mt-4 gap-y-6 sm:grid-cols-2 sm:gap-x-4">
                             <div class="input-component">
                                 <div class="flex justify-between">
-                                    <label for="first-name" class="block text-sm font-medium text-gray-700">First
-                                        name<span class="pl-1 text-red-600">*</span></label>
-                                    <p class="hidden text-sm text-red-600 input-error-message">Not a valid first name</p>
+                                    <label for="first-name" class="block text-sm font-medium text-gray-700">Vorname<span class="pl-1 text-red-600">*</span></label>
+                                    <p class="hidden text-sm text-red-600 input-error-message">Kein gültiger Vorname</p>
                                 </div>
                                 <div class="relative mt-1">
                                     <input type="text" id="first-name" name="first-name" required
-                                        autocomplete="given-name" placeholder="John" title="Please enter a valid first name"
+                                        autocomplete="given-name" placeholder="John" title="Bitte geben Sie einen gültigen Vornamen ein"
                                         class="block w-full border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring-accent-500 sm:text-sm custom-input">
                                     <div
                                         class="absolute inset-y-0 right-0 items-center hidden pr-3 pointer-events-none input-error-icon">
@@ -64,14 +62,13 @@
 
                             <div class="input-component">
                                 <div class="flex justify-between">
-                                    <label for="last-name" class="block text-sm font-medium text-gray-700">Last name<span
+                                    <label for="last-name" class="block text-sm font-medium text-gray-700">Nachname<span
                                             class="pl-1 text-red-600">*</span></label>
-                                    <p class="hidden text-sm text-red-600 input-error-message" id="last-name-error">Not a
-                                        valid last name</p>
+                                    <p class="hidden text-sm text-red-600 input-error-message" id="last-name-error">Kein gültiger Nachname</p>
                                 </div>
                                 <div class="relative mt-1">
                                     <input type="text" id="last-name" name="last-name" required
-                                        autocomplete="family-name" placeholder="Doe" title="Please enter a valid last name"
+                                        autocomplete="family-name" placeholder="Doe" title="Bitte geben Sie einen gültigen Nachnamen ein"
                                         class="block w-full border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring-accent-500 sm:text-sm custom-input">
                                     <div
                                         class="absolute inset-y-0 right-0 items-center hidden pr-3 pointer-events-none input-error-icon">
@@ -87,12 +84,11 @@
 
                             <div class="sm:col-span-2 input-component">
                                 <div class="flex justify-between">
-                                    <label for="company" class="block text-sm font-medium text-gray-700">Company</label>
-                                    <p class="hidden text-sm text-red-600 input-error-message" id="company-error">Not a
-                                        valid company name</p>
+                                    <label for="company" class="block text-sm font-medium text-gray-700">Firmenname</label>
+                                    <p class="hidden text-sm text-red-600 input-error-message" id="company-error">Kein gültiger Firmenname</p>
                                 </div>
                                 <div class="relative mt-1">
-                                    <input type="text" name="company" id="company" placeholder="Your Company Inc."
+                                    <input type="text" name="company" id="company" placeholder="Ihre Firma Inc."
                                         class="block w-full border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring-accent-500 sm:text-sm custom-input">
                                     <div
                                         class="absolute inset-y-0 right-0 items-center hidden pr-3 pointer-events-none input-error-icon">
@@ -108,15 +104,14 @@
 
                             <div class="sm:col-span-2 input-component">
                                 <div class="flex justify-between">
-                                    <label for="address" class="block text-sm font-medium text-gray-700">Address<span
+                                    <label for="address" class="block text-sm font-medium text-gray-700">Adresse<span
                                             class="pl-1 text-red-600">*</span></label>
-                                    <p class="hidden text-sm text-red-600 input-error-message" id="address-error">Not a
-                                        valid address</p>
+                                    <p class="hidden text-sm text-red-600 input-error-message" id="address-error">Keine gültige Adresse</p>
                                 </div>
                                 <div class="relative mt-1">
                                     <input type="text" name="address" id="address" required
-                                        autocomplete="street-address" placeholder="1234 Main St"
-                                        title="Please enter a valid address"
+                                        autocomplete="street-address" placeholder="1234 Hauptstraße"
+                                        title="Bitte geben Sie eine gültige Adresse ein"
                                         class="block w-full border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring-accent-500 sm:text-sm custom-input">
                                     <div
                                         class="absolute inset-y-0 right-0 items-center hidden pr-3 pointer-events-none input-error-icon">
@@ -132,10 +127,8 @@
 
                             <div class="sm:col-span-2 input-component">
                                 <div class="flex justify-between">
-                                    <label for="apartment" class="block text-sm font-medium text-gray-700">Apartment,
-                                        suite, etc.</label>
-                                    <p class="hidden text-sm text-red-600 input-error-message" id="apartment-error">Not a
-                                        valid apartment, suite, etc.</p>
+                                    <label for="apartment" class="block text-sm font-medium text-gray-700">Wohnung, Suite usw.</label>
+                                    <p class="hidden text-sm text-red-600 input-error-message" id="apartment-error">Keine gültige Wohnung, Suite usw.</p>
                                 </div>
                                 <div class="relative mt-1">
                                     <input type="text" name="apartment" id="apartment" placeholder="Apt 101"
@@ -154,15 +147,14 @@
 
                             <div class="input-component">
                                 <div class="flex justify-between">
-                                    <label for="city" class="block text-sm font-medium text-gray-700">City<span
+                                    <label for="city" class="block text-sm font-medium text-gray-700">Stadt<span
                                             class="pl-1 text-red-600">*</span></label>
-                                    <p class="hidden text-sm text-red-600 input-error-message" id="city-error">Not a valid
-                                        city</p>
+                                    <p class="hidden text-sm text-red-600 input-error-message" id="city-error">Keine gültige Stadt</p>
                                 </div>
                                 <div class="relative mt-1">
                                     <input type="text" name="city" id="city" required
-                                        autocomplete="address-level2" placeholder="Anytown"
-                                        title="Please enter a valid city"
+                                        autocomplete="address-level2" placeholder="Irgendstadt"
+                                        title="Bitte geben Sie eine gültige Stadt ein"
                                         class="block w-full border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring-accent-500 sm:text-sm custom-input">
                                     <div
                                         class="absolute inset-y-0 right-0 items-center hidden pr-3 pointer-events-none input-error-icon">
@@ -178,14 +170,13 @@
 
                             <div class="input-component">
                                 <div class="flex justify-between">
-                                    <label for="country" class="block text-sm font-medium text-gray-700">Country</label>
-                                    <p class="hidden text-sm text-red-600 input-error-message" id="country-error">Not a
-                                        valid country</p>
+                                    <label for="country" class="block text-sm font-medium text-gray-700">Land</label>
+                                    <p class="hidden text-sm text-red-600 input-error-message" id="country-error">Kein gültiges Land</p>
                                 </div>
                                 <div class="mt-1">
                                     <select id="country" name="country" autocomplete="country-name"
                                         class="block w-full border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring-accent-500 sm:text-sm custom-input">
-                                        <option>Switzerland</option>
+                                        <option>Schweiz</option>
                                     </select>
                                     <div
                                         class="absolute inset-y-0 right-0 items-center hidden pr-3 pointer-events-none input-error-icon">
@@ -201,14 +192,13 @@
 
                             <div class="input-component">
                                 <div class="flex justify-between">
-                                    <label for="region" class="block text-sm font-medium text-gray-700">State /
-                                        Province</label>
-                                    <p class="hidden text-sm text-red-600 input-error-message" id="region-error">Not a
-                                        valid state or province</p>
+                                    <label for="region" class="block text-sm font-medium text-gray-700">Bundesland /
+                                        Provinz</label>
+                                    <p class="hidden text-sm text-red-600 input-error-message" id="region-error">Kein gültiges Bundesland oder Provinz</p>
                                 </div>
                                 <div class="relative mt-1">
                                     <input type="text" name="region" id="region" autocomplete="address-level1"
-                                        placeholder="State or Province"
+                                        placeholder="Bundesland oder Provinz"
                                         class="block w-full border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring-accent-500 sm:text-sm custom-input">
                                     <div
                                         class="absolute inset-y-0 right-0 items-center hidden pr-3 pointer-events-none input-error-icon">
@@ -224,15 +214,13 @@
 
                             <div class="input-component">
                                 <div class="flex justify-between">
-                                    <label for="postal-code" class="block text-sm font-medium text-gray-700">Postal
-                                        code<span class="pl-1 text-red-600">*</span></label>
-                                    <p class="hidden text-sm text-red-600 input-error-message" id="postal-code-error">Not
-                                        a valid postal code</p>
+                                    <label for="postal-code" class="block text-sm font-medium text-gray-700">Postleitzahl<span class="pl-1 text-red-600">*</span></label>
+                                    <p class="hidden text-sm text-red-600 input-error-message" id="postal-code-error">Keine gültige Postleitzahl</p>
                                 </div>
                                 <div class="relative mt-1">
                                     <input type="text" name="postal-code" id="postal-code" required
-                                        autocomplete="postal-code" placeholder="Postal Code" pattern="^\d{4}$"
-                                        title="Please enter a valid postal code"
+                                        autocomplete="postal-code" placeholder="Postleitzahl" pattern="^\d{4}$"
+                                        title="Bitte geben Sie eine gültige Postleitzahl ein"
                                         class="block w-full border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring-accent-500 sm:text-sm custom-input">
                                     <div
                                         class="absolute inset-y-0 right-0 items-center hidden pr-3 pointer-events-none input-error-icon">
@@ -248,15 +236,14 @@
 
                             <div class="sm:col-span-2 input-component">
                                 <div class="flex justify-between">
-                                    <label for="phone" class="block text-sm font-medium text-gray-700">Phone<span
+                                    <label for="phone" class="block text-sm font-medium text-gray-700">Telefon<span
                                             class="pl-1 text-red-600">*</span></label>
-                                    <p class="hidden text-sm text-red-600 input-error-message" id="phone-error">Not a
-                                        valid phone number</p>
+                                    <p class="hidden text-sm text-red-600 input-error-message" id="phone-error">Keine gültige Telefonnummer</p>
                                 </div>
                                 <div class="relative mt-1">
                                     <input type="tel" name="phone" id="phone" required
-                                        pattern="^\+?[0-9]{1,15}$" title="Please enter a valid phone number"
-                                        autocomplete="tel" placeholder="Enter your phone number"
+                                        pattern="^\+?[0-9]{1,15}$" title="Bitte geben Sie eine gültige Telefonnummer ein"
+                                        autocomplete="tel" placeholder="Geben Sie Ihre Telefonnummer ein"
                                         oninput="this.value = this.value.replace(/[^0-9+]/g, '').replace(/(\..*)\./g, '$1');"
                                         inputmode="tel"
                                         class="block w-full border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring-accent-500 sm:text-sm custom-input">
@@ -274,14 +261,14 @@
                         </div>
 
                         <div class="mt-10" x-data="{ sameAsBilling: true }">
-                            <h2 class="text-lg font-medium text-gray-900">Shipping Address</h2>
+                            <h2 class="text-lg font-medium text-gray-900">Lieferadresse</h2>
                             <div class="flex flex-wrap gap-10 mt-4">
                                 <div class="flex items-center">
                                     <input id="same-as-billing" type="radio" name="address-same-as-billing"
                                         value="true" x-model="sameAsBilling" checked
                                         class="w-4 h-4 text-accent-600 focus:ring-accent-500">
                                     <label for="same-as-billing" class="block ml-3 text-sm font-medium text-gray-700">
-                                        Same as billing address
+                                        Gleiche wie Rechnungsadresse
                                     </label>
                                 </div>
                                 <div class="flex items-center">
@@ -290,7 +277,7 @@
                                         class="w-4 h-4 text-accent-600 focus:ring-accent-500">
                                     <label for="different-shipping-address"
                                         class="block ml-3 text-sm font-medium text-gray-700">
-                                        Different shipping address
+                                        Verschiedene Lieferadresse
                                     </label>
                                 </div>
                             </div>
@@ -300,15 +287,15 @@
                                 <div class="sm:col-span-2 input-component">
                                     <div class="flex justify-between">
                                         <label for="shipping-address"
-                                            class="block text-sm font-medium text-gray-700">Address<span
+                                            class="block text-sm font-medium text-gray-700">Adresse<span
                                                 class="pl-1 text-red-600">*</span></label>
                                         <p class="hidden text-sm text-red-600 input-error-message"
-                                            id="shipping-address-error">Not a valid address</p>
+                                            id="shipping-address-error">Keine gültige Adresse</p>
                                     </div>
                                     <div class="relative mt-1">
                                         <input type="text" name="shipping-address" id="shipping-address"
                                             :required="sameAsBilling === 'false'" autocomplete="street-address"
-                                            placeholder="Enter your shipping address" title="Please enter a valid address"
+                                            placeholder="Geben Sie Ihre Lieferadresse ein" title="Bitte geben Sie eine gültige Adresse ein"
                                             class="block w-full border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring-accent-500 sm:text-sm custom-input">
                                         <div
                                             class="absolute inset-y-0 right-0 items-center hidden pr-3 pointer-events-none input-error-icon">
@@ -325,13 +312,13 @@
                                 <div class="sm:col-span-2 input-component">
                                     <div class="flex justify-between">
                                         <label for="shipping-apartment"
-                                            class="block text-sm font-medium text-gray-700">Apartment, suite, etc.</label>
+                                            class="block text-sm font-medium text-gray-700">Wohnung, Suite, etc.</label>
                                         <p class="hidden text-sm text-red-600 input-error-message"
-                                            id="shipping-apartment-error"> Not a valid apartment, suite, etc.</p>
+                                            id="shipping-apartment-error"> Keine gültige Wohnung, Suite, etc.</p>
                                     </div>
                                     <div class="relative mt-1">
                                         <input type="text" name="shipping-apartment" id="shipping-apartment"
-                                            placeholder="Apartment, suite, etc. (optional)"
+                                            placeholder="Wohnung, Suite, etc. (optional)"
                                             class="block w-full border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring-accent-500 sm:text-sm custom-input">
                                         <div
                                             class="absolute inset-y-0 right-0 items-center hidden pr-3 pointer-events-none input-error-icon">
@@ -348,15 +335,15 @@
                                 <div class="input-component">
                                     <div class="flex justify-between">
                                         <label for="shipping-city"
-                                            class="block text-sm font-medium text-gray-700">City<span
+                                            class="block text-sm font-medium text-gray-700">Stadt<span
                                                 class="pl-1 text-red-600">*</span></label>
                                         <p class="hidden text-sm text-red-600 input-error-message"
-                                            id="shipping-city-error">Not a valid city</p>
+                                            id="shipping-city-error">Keine gültige Stadt</p>
                                     </div>
                                     <div class="relative mt-1">
                                         <input type="text" name="shipping-city" id="shipping-city"
                                             :required="sameAsBilling === 'false'" autocomplete="address-level2"
-                                            placeholder="City" title="Please enter a valid city"
+                                            placeholder="Stadt" title="Bitte geben Sie eine gültige Stadt ein"
                                             class="block w-full border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring-accent-500 sm:text-sm custom-input">
                                         <div
                                             class="absolute inset-y-0 right-0 items-center hidden pr-3 pointer-events-none input-error-icon">
@@ -373,16 +360,14 @@
                                 <div class="input-component">
                                     <div class="flex justify-between">
                                         <label for="shipping-country"
-                                            class="block text-sm font-medium text-gray-700">Country</label>
+                                            class="block text-sm font-medium text-gray-700">Land</label>
                                         <p class="hidden text-sm text-red-600 input-error-message"
-                                            id="shipping-country-error">Not a valid country</p>
+                                            id="shipping-country-error">Kein gültiges Land</p>
                                     </div>
                                     <div class="mt-1">
                                         <select id="shipping-country" name="shipping-country" autocomplete="country-name"
                                             class="block w-full border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring-accent-500 sm:text-sm custom-input">
-                                            <option>Switzerland</option>
-                                            <option>Canada</option>
-                                            <option>Mexico</option>
+                                            <option>Schweiz</option>
                                         </select>
                                         <div
                                             class="absolute inset-y-0 right-0 items-center hidden pr-3 pointer-events-none input-error-icon">
@@ -398,16 +383,15 @@
 
                                 <div class="input-component">
                                     <div class="flex justify-between">
-                                        <label for="shipping-region" class="block text-sm font-medium text-gray-700">State
+                                        <label for="shipping-region" class="block text-sm font-medium text-gray-700">Bundesland
                                             /
-                                            Province</label>
+                                            Provinz</label>
                                         <p class="hidden text-sm text-red-600 input-error-message"
-                                            id="shipping-region-error">Not a
-                                            valid state or province</p>
+                                            id="shipping-region-error">Kein gültiges Bundesland oder Provinz</p>
                                     </div>
                                     <div class="relative mt-1">
                                         <input type="text" name="shipping-region" id="shipping-region"
-                                            autocomplete="address-level1" placeholder="State / Province"
+                                            autocomplete="address-level1" placeholder="Bundesland / Provinz"
                                             class="block w-full border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring-accent-500 sm:text-sm custom-input">
                                         <div
                                             class="absolute inset-y-0 right-0 items-center hidden pr-3 pointer-events-none input-error-icon">
@@ -424,18 +408,17 @@
                                 <div class="input-component">
                                     <div class="flex justify-between">
                                         <label for="shipping-postal-code"
-                                            class="block text-sm font-medium text-gray-700">Postal
-                                            code<span class="pl-1 text-red-600">*</span></label>
+                                            class="block text-sm font-medium text-gray-700">Postleitzahl
+                                            <span class="pl-1 text-red-600">*</span></label>
                                         <p class="hidden text-sm text-red-600 input-error-message"
                                             id="shipping-postal-code-error">
-                                            Not
-                                            a valid postal code</p>
+                                            Keine gültige Postleitzahl</p>
                                     </div>
                                     <div class="relative mt-1">
                                         <input type="text" name="shipping-postal-code" id="shipping-postal-code"
                                             :required="sameAsBilling === 'false'" autocomplete="postal-code"
-                                            placeholder="Postal Code" pattern="^\d{4}$"
-                                            title="Please enter a valid postal code"
+                                            placeholder="Postleitzahl" pattern="^\d{4}$"
+                                            title="Bitte geben Sie eine gültige Postleitzahl ein"
                                             class="block w-full border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring-accent-500 sm:text-sm custom-input">
                                         <div
                                             class="absolute inset-y-0 right-0 items-center hidden pr-3 pointer-events-none input-error-icon">
@@ -452,17 +435,16 @@
                                 <div class="sm:col-span-2 input-component">
                                     <div class="flex justify-between">
                                         <label for="shipping-phone"
-                                            class="block text-sm font-medium text-gray-700">Phone<span
+                                            class="block text-sm font-medium text-gray-700">Telefon<span
                                                 class="pl-1 text-red-600">*</span></label>
                                         <p class="hidden text-sm text-red-600 input-error-message"
-                                            id="shipping-phone-error">Not a
-                                            valid phone number</p>
+                                            id="shipping-phone-error">Keine gültige Telefonnummer</p>
                                     </div>
                                     <div class="relative mt-1">
                                         <input type="tel" name="shipping-phone" id="shipping-phone"
                                             :required="sameAsBilling === 'false'" pattern="^\+?[0-9]{1,15}$"
-                                            title="Please enter a valid phone number" autocomplete="tel"
-                                            placeholder="Enter your phone number"
+                                            title="Bitte geben Sie eine gültige Telefonnummer ein" autocomplete="tel"
+                                            placeholder="Geben Sie Ihre Telefonnummer ein"
                                             oninput="this.value = this.value.replace(/[^0-9+]/g, '').replace(/(\..*)\./g, '$1');"
                                             inputmode="tel"
                                             class="block w-full border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring-accent-500 sm:text-sm custom-input">
@@ -564,17 +546,17 @@
                     </div> --}}
 
                     <div class="pt-10 mt-10 border-t border-gray-200" x-data="{ comment: '', commentLength: 0 }">
-                        <h2 class="text-lg font-medium text-gray-900">Comments</h2>
+                        <h2 class="text-lg font-medium text-gray-900">Kommentare</h2>
                         <div class="mt-4 input-component">
                             <div class="flex justify-between px-1">
-                                <label for="comment" class="block text-sm font-medium text-gray-700">Add a comment
+                                <label for="comment" class="block text-sm font-medium text-gray-700">Ein Kommentar hinzufügen
                                     (optional)</label>
-                                <p class="text-sm text-gray-600" x-text="`${commentLength} / 512 characters`"></p>
+                                <p class="text-sm text-gray-600" x-text="`${commentLength} / 512 Zeichen`"></p>
                             </div>
                             <textarea id="comment" name="comment" rows="4" maxlength="512" x-model="comment"
                                 x-on:input="commentLength = comment.length"
                                 class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring-accent-500 sm:text-sm custom-input"
-                                placeholder="Type your comment here..."></textarea>
+                                placeholder="Geben Sie Ihren Kommentar hier ein..."></textarea>
 
                         </div>
                     </div>
@@ -582,10 +564,10 @@
 
                 <!-- Order summary -->
                 <div class="mt-10 lg:mt-0">
-                    <h2 class="text-lg font-medium text-gray-900">Order summary</h2>
+                    <h2 class="text-lg font-medium text-gray-900">Bestellübersicht</h2>
 
                     <div class="mt-4 bg-white border border-gray-200 rounded-lg shadow-sm">
-                        <h3 class="sr-only">Items in your cart</h3>
+                        <h3 class="sr-only">Artikel in Ihrem Warenkorb</h3>
                         <ul id="cart-items" role="list" class="divide-y divide-gray-200">
                             @foreach ($cartItems['items'] as $item)
                                 <li id="cart-item-{{ $item['index'] }}" class="flex px-4 py-6 sm:px-6">
@@ -602,7 +584,7 @@
                                                 <a href="{{ asset('storage/' . head($item['files'])['href']) }}"
                                                     data-fslightbox="gallery-{{ $item['index'] }}" class="group">
                                                     <img src="{{ asset('storage/' . head($item['files'])['href']) }}"
-                                                        alt="First Additional Image"
+                                                        alt="Erstes Zusätzliches Bild"
                                                         class="object-cover w-16 transition duration-300 ease-in-out transform rounded-md aspect-square group-hover:scale-110">
                                                     @foreach (array_slice($item['files'], 1) as $file)
                                                         <a href="{{ $file['href'] }}"
@@ -660,11 +642,11 @@
                                                                 window.updateCartCount();
                                                             })
                                                             .catch(error => {
-                                                                alert('Failed to remove product!');
+                                                                alert('Produkt nicht entfernt!');
                                                                 console.error('Error:', error);
                                                             });
                                                         ">
-                                                    <span class="sr-only">Remove</span>
+                                                    <span class="sr-only">Entfernen</span>
                                                     <svg class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor"
                                                         aria-hidden="true">
                                                         <path fill-rule="evenodd"
@@ -686,37 +668,36 @@
 
                         <dl class="px-4 py-6 space-y-6 border-t border-gray-200 sm:px-6">
                             <div class="flex items-center justify-between">
-                                <dt class="text-sm">Subtotal</dt>
+                                <dt class="text-sm">Zwischensumme</dt>
                                 <dd class="text-sm font-medium text-gray-900"><span
                                         id="subtotal">{{ number_format($cartItems['subtotal'], 2) }}</span> CHF</dd>
                             </div>
                             {{-- <div class="flex items-center justify-between">
-                                <dt class="text-sm">Shipping</dt>
+                                <dt class="text-sm">Versand</dt>
                                 <dd class="text-sm font-medium text-gray-900"><span id="shipping">0</span> CHF</dd>
                             </div> --}}
                             <div class="flex items-center justify-between">
-                                <dt class="text-sm">Taxes</dt>
+                                <dt class="text-sm">Steuern</dt>
                                 <dd class="text-sm font-medium text-gray-900"><span id="taxes">0</span> CHF</dd>
                             </div>
                             <div class="flex items-center justify-between pt-6 border-t border-gray-200">
-                                <dt class="text-base font-medium">Total</dt>
+                                <dt class="text-base font-medium">Gesamt</dt>
                                 <dd class="text-base font-medium text-gray-900"><span id="total">0</span> CHF</dd>
                             </div>
                         </dl>
 
                         <!-- Payment -->
                         <div class="px-4 py-6 space-y-6 border-t border-gray-200 sm:px-6">
-                            <h2 class="text-lg font-medium text-gray-900">Payment</h2>
+                            <h2 class="text-lg font-medium text-gray-900">Zahlung</h2>
 
                             <fieldset class="mt-4" x-data="{ paymentType: 'card' }">
-                                <legend class="sr-only">Payment type</legend>
+                                <legend class="sr-only">Zahlungsart</legend>
                                 <div class="space-y-4 sm:flex sm:items-center sm:space-x-10 sm:space-y-0">
                                     <div class="flex items-center">
                                         <input id="card" name="payment_type" type="radio" value="card"
                                             x-model="paymentType" checked
                                             class="w-4 h-4 border-gray-300 text-accent-600 focus:ring-accent-500">
-                                        <label for="card" class="block ml-3 text-sm font-medium text-gray-700">Credit
-                                            card /
+                                        <label for="card" class="block ml-3 text-sm font-medium text-gray-700">Kreditkarte /
                                             TWINT</label>
                                     </div>
                                     <div class="flex items-center">
@@ -724,23 +705,21 @@
                                             value="bank_transfer" x-model="paymentType"
                                             class="w-4 h-4 border-gray-300 text-accent-600 focus:ring-accent-500">
                                         <label for="bank_transfer"
-                                            class="block ml-3 text-sm font-medium text-gray-700">Bank transfer/advanced
-                                            payment</label>
+                                            class="block ml-3 text-sm font-medium text-gray-700">Banküberweisung/Vorauszahlung</label>
                                     </div>
                                 </div>
                                 <p x-show="paymentType === 'bank_transfer'" class="mt-2 text-sm text-gray-500">
-                                    Transfer directly to our bank account.<br>
-                                    Please use your order number as the reference.<br>
-                                    You will receive <span class="font-semibold">your reference number</span> in your confirmation email.<br>
-                                    Your order will be processed only after the funds have been received in our account.<br>
+                                    Überweisen Sie direkt auf unser Bankkonto.<br>
+                                    Bitte verwenden Sie Ihre Bestellnummer als Referenz.<br>
+                                    Sie erhalten <span class="font-semibold">Ihre Referenznummer</span> in Ihrer Bestätigungsemail.<br>
+                                    Ihre Bestellung wird erst nach Eingang der Gelder auf unserem Konto bearbeitet.<br>
                                     IBAN: <span class="font-semibold">{{ env('BANK_IBAN') }}</span>
                                 </p>
                             </fieldset>
                         </div>
                         <div class="px-4 py-6 border-t border-gray-200 sm:px-6">
                             <button type="submit"
-                                class="w-full px-4 py-3 text-base font-medium text-white border border-transparent rounded-md shadow-sm btn-zahls-modal bg-accent-600 hover:bg-accent-700 focus:outline-none focus:ring-2 focus:ring-accent-500 focus:ring-offset-2 focus:ring-offset-gray-50">Confirm
-                                order</button>
+                                class="w-full px-4 py-3 text-base font-medium text-white border border-transparent rounded-md shadow-sm btn-zahls-modal bg-accent-600 hover:bg-accent-700 focus:outline-none focus:ring-2 focus:ring-accent-500 focus:ring-offset-2 focus:ring-offset-gray-50">Bestellung bestätigen</button>
                         </div>
                     </div>
                 </div>
