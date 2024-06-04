@@ -1,40 +1,40 @@
 @component('mail::message')
 @if ($emailRole == 'user')
-# Order Confirmation
+# Bestellbestätigung
 
-Hello **{{ $contact->name }}**,<br>
+Hallo **{{ $contact->name }}**,<br>
 <br>
-Thank you for your order! Here are the details:<br>
-Your order number is **{{ $order->id }}**<br>
-Total {{ $order->amount }} CHF<br>
+Vielen Dank für Ihre Bestellung! Hier sind die Details:<br>
+Ihre Bestellnummer ist **{{ $order->id }}**<br>
+Gesamtbetrag: {{ $order->amount }} CHF<br>
 <br>
-City: {{ $country }}/{{ $city }}<br>
-Address: {{ $address }}<br>
-ZIP: {{ $zip }}<br>
+Stadt: {{ $country }}/{{ $city }}<br>
+Adresse: {{ $address }}<br>
+PLZ: {{ $zip }}<br>
 @endif
 @if ($comment)
-Comment:<br>
+Kommentar:<br>
 {{ $comment }}
 <br>
 @endif
 
 @if ($order->payment_method === 'bank_transfer' && $emailRole == 'user')
-Please transfer the amount to the following account:<br>
+Bitte überweisen Sie den Betrag auf folgendes Konto:<br>
 IBAN: <strong>{{ env('BANK_IBAN') }}</strong><br>
-Please use the reference number of the order as the reference for the transfer: <strong>{{ $order->id }}</strong><br>
+Bitte verwenden Sie die Bestellnummer als Verwendungszweck: <strong>{{ $order->id }}</strong><br>
 @endif
 @if ($emailRole == 'admin')
-# New order from {{ $contact->name }}<br>
+# Neue Bestellung von {{ $contact->name }}<br>
 @endif
 
 @if ($emailRole == 'admin')
 @component('mail::button', ['url' => url('admin/orders')])
-View Orders
+Bestellungen ansehen
 @endcomponent
 @endif
 <br>
 
-## Items Ordered:
+## Bestellte Artikel:
 <hr>
 
 @foreach ($items as $item)
@@ -53,7 +53,7 @@ View Orders
 @endforeach
 
 @if ($emailRole == 'user')
-# Thanks, {{ config('app.name') }}
-If you have any questions, please contact us on our [contact page]({{ route('contact') }}).
+# Danke, {{ config('app.name') }}
+Wenn Sie Fragen haben, kontaktieren Sie uns bitte über unsere [Kontaktseite]({{ route('contact') }}).
 @endif
 @endcomponent

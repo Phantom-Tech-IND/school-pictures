@@ -14,7 +14,7 @@
                 <div
                     class="bg-gray-100 border-2 border-gray-300 shadow-lg lg:col-span-2 lg:flex lg:flex-col lg:h-full lg:justify-stretch">
                     <img src="{{ asset('storage/' . $selectedProduct['images'][0]) ?? '' }}" id="productImage"
-                        alt="Two each of gray, white, and black shirts laying flat."
+                        alt="Zwei graue, weiße und schwarze Hemden flach liegend."
                         class="flex-shrink object-contain object-center w-full max-w-full min-h-0 p-4 rounded-lg lg:grow lg:h-auto h-72">
                     <image-display container-id="{{ $galleryName }}"
                         class="flex flex-row flex-shrink-0 overflow-x-auto"></image-display>
@@ -23,7 +23,7 @@
                 <div
                     class="relative grid grid-cols-3 gap-4 p-4 mt-8 overflow-y-scroll border-2 border-gray-300 shadow-lg lg:mt-0 max-h-72 lg:max-h-max lg:h-auto auto-rows-min place-items-center lg:col-span-2 lg:grid-cols-4 xs:grid-cols-4">
                     @foreach ($student['photos'] as $key => $photo)
-                        <image-selector container-id="{{ $galleryName }}" alt="Image {{ $key + 1 }}"
+                        <image-selector container-id="{{ $galleryName }}" alt="Bild {{ $key + 1 }}"
                             key="{{ $photo['id'] }}" src="{{ asset('storage/' . $photo['photo_path']) }}"
                             class="w-24 h-24"></image-selector>
                     @endforeach
@@ -43,7 +43,7 @@
                 </div>
 
                 <div class="mt-4 lg:row-span-3 lg:mt-0 lg:col-span-2">
-                    <h2 class="sr-only">Product information</h2>
+                    <h2 class="sr-only">Informationen zum Produkt</h2>
 
 
                     <div class="mt-10">
@@ -73,13 +73,12 @@
                             }
                         }" class="mt-10">
                             <div class="flex items-center justify-between">
-                                <h3 class="text-sm font-medium text-gray-900">Products</h3>
-                                <a href="#" class="text-sm font-medium text-accent-600 hover:text-accent-500">Info
-                                    about products</a>
+                                <h3 class="text-sm font-medium text-gray-900">Produkte</h3>
+                                <a href="#" class="text-sm font-medium text-accent-600 hover:text-accent-500">Info über Produkte</a>
                             </div>
 
                             <fieldset class="mt-4">
-                                <legend class="sr-only">Choose a product</legend>
+                                <legend class="sr-only">Wählen Sie ein Produkt</legend>
                                 <div class="grid grid-cols-2 gap-4 sm:grid-cols-6 lg:grid-cols-4 xs:grid-cols-3">
                                     @foreach ($products as $product)
                                         <label
@@ -112,15 +111,14 @@
                         </div>
 
                         <button type="submit"
-                            class="flex items-center justify-center w-full px-8 py-3 mt-10 text-base font-medium text-white border border-transparent rounded-md bg-accent-600 hover:bg-accent-700 focus:outline-none focus:ring-2 focus:ring-accent-500 focus:ring-offset-2">Add
-                            to bag</button>
+                            class="flex items-center justify-center w-full px-8 py-3 mt-10 text-base font-medium text-white border border-transparent rounded-md bg-accent-600 hover:bg-accent-700 focus:outline-none focus:ring-2 focus:ring-accent-500 focus:ring-offset-2">In den Warenkorb</button>
                     </div>
                 </div>
 
                 <div class="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pb-16 lg:pr-8 lg:pt-6">
 
                     <div>
-                        <h3 class="sr-only">Description</h3>
+                        <h3 class="sr-only">Beschreibung</h3>
 
                         <div class="space-y-6">
                             <p id="productDescription" x-text="selectedProductDescription"

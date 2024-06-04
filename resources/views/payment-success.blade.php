@@ -10,16 +10,16 @@
         </div>
         <h1
             class="pb-2 text-2xl font-semibold text-center xs:pb-3 md:pb-4 lg:pb-6 xl:pb-8 xs:text-3xl text-accent sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl">
-            Payment Successful</h1>
+            Zahlung erfolgreich</h1>
         <p class="text-center text-normal sm:text-md md:text-lg lg:text-xl xl:text-2xl">
-            Thanks for making a purchase.<br />
-            You will receive an email with the confirmation.
+            Vielen Dank für Ihren Kauf.<br />
+            Sie erhalten eine E-Mail mit der Bestätigung.
             <x-feathericon-mail class="inline-block -mt-2" />
         </p>
         <div class="mt-4 text-center">
             <a href="{{ route('gallery-code') }}"
                 class="inline-block px-4 py-2 mt-6 text-xs text-white rounded sm:px-6 sm:py-3 sm:mt-8 sm:text-sm bg-accent hover:bg-accent-600">
-                Go back to main page
+                Zurück zur Hauptseite
             </a>
         </div>
     </div>

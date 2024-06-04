@@ -43,7 +43,7 @@
 
 
     <div class="max-w-2xl px-4 mx-auto mt-16 sm:px-6 lg:max-w-7xl lg:px-8">
-        <h2 class="sr-only">Products</h2>
+        <h2 class="sr-only">Produkte</h2>
         <div class="grid grid-cols-1 mt-8 gap-y-12 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
             @foreach ($products as $product)
                 <div class="relative">
@@ -54,8 +54,7 @@
                             class="object-contain object-center w-full h-full transition duration-300 ease-in-out bg-[#726765] group-hover:opacity-75">
                         <div
                             class="absolute inset-0 flex items-center justify-center transition duration-300 ease-in-out bg-black bg-opacity-0 group-hover:bg-opacity-50">
-                            <span class="text-lg text-white opacity-0 group-hover:opacity-100">View
-                                Product</span>
+                            <span class="text-lg text-white opacity-0 group-hover:opacity-100">Produkt ansehen</span>
                         </div>
 
                     </a>
@@ -63,7 +62,7 @@
                         <h3 class="font-medium text-gray-900 truncate ">
                             {{ $product->name }}
                         </h3>
-                        <h5 class="font-light text-gray-900">${{ $product->price }}</h5>
+                        <h5 class="font-light text-gray-900 whitespace-nowrap">{{ $product->price }} CHF</h5>
                     </div>
                     <div class="px-2">
                         <p class="h-[3.75rem] text-sm text-gray-800 break-words line-clamp-3">
@@ -77,3 +76,4 @@
         </div>
     </div>
 @endsection
+

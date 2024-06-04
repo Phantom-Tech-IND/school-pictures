@@ -47,7 +47,7 @@
                     @foreach ($product->custom_attributes as $index => $attribute)
                         {{-- selector --}}
                         @if ($attribute['type'] == 'select')
-                            <div x-data="{ open: false, selected: { label: 'Select an option', price: 0 } }">
+                            <div x-data="{ open: false, selected: { label: 'Option auswählen', price: 0 } }">
                                 <label id="listbox-label-{{ $attribute['title'] }}"
                                     class="block pt-4 font-medium leading-6 text-gray-900">
                                     {{ $attribute['title'] }}
@@ -174,7 +174,7 @@
                                         <button type="button" onclick="openImageModal(event, {{ $index }})"
                                             class="w-20 h-20 text-white bg-center bg-no-repeat bg-contain rounded bg-accent-500 hover:bg-accent-700"
                                             data-attribute-index="{{ $index }}">
-                                            <p>Choose Image</p>
+                                            <p>Wählen Sie ein Bild</p>
                                         </button>
                                         <a data-fslightbox='{{ 'zoomImageButton-' . $index }}'
                                             href="{{ asset('storage/' . $index) }}"
@@ -226,7 +226,7 @@
                                 </svg>
                             </button>
 
-                            <h2 class="mt-4 text-2xl font-semibold">Select an Image</h2>
+                            <h2 class="mt-4 text-2xl font-semibold">Bild auswählen</h2>
                             <div class="h-[calc(100%-48px)] w-full overflow-y-scroll">
                                 <div class="grid grid-cols-3 gap-4 pt-2 xs:grid-cols-4 lg:grid-cols-5">
                                     @foreach ($student->photos as $photo)
@@ -235,7 +235,7 @@
                                                 onclick="selectImageForProduct('{{ $photo->id }}', '{{ asset('storage/' . $photo->photo_path) }}')"
                                                 class="p-0.5 relative">
                                                 <img src="{{ asset('storage/' . $photo->photo_path) }}"
-                                                    alt="Student Image"
+                                                    alt="Schülerbild"
                                                     class="block object-contain bg-gray-300 border-2 border-gray-300 rounded shadow-md cursor-pointer aspect-square">
                                                 <div
                                                     class="absolute inset-0 bg-black bg-opacity-0 rounded hover:bg-opacity-25">
@@ -270,10 +270,10 @@
                     <div class="p-4 mt-2 bg-gray-100 rounded-lg">
                         <div class="flex justify-between px-2 gap-x-4 gap-y-4">
                             <div class="flex flex-col gap-2">
-                                <span class="text-sm">Product price</span>
-                                <span class="text-sm">Options</span>
-                                <span class="text-sm">Quantity</span>
-                                <span class="font-semibold">Total</span>
+                                <span class="text-sm">Produktpreis</span>
+                                <span class="text-sm">Optionen</span>
+                                <span class="text-sm">Menge</span>
+                                <span class="font-semibold">Gesamt</span>
                             </div>
 
                             <div class="flex flex-col gap-2 items-end flex-grow-[1000]">
@@ -288,7 +288,7 @@
 
                         <button type="submit"
                             class="w-full px-4 py-2 mt-4 font-bold text-white rounded bg-accent-500 hover:bg-accent-700">
-                            Add to bag
+                            In den Warenkorb hinzufügen
                         </button>
                     </div>
 

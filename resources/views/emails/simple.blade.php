@@ -5,6 +5,6 @@
         {{ $line }}
     @endforeach
 
-    Thanks,
+    Danke,
     {{ config('app.name') }}
 @endcomponent
