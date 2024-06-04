@@ -23,7 +23,7 @@
                 <div class="relative bg-black break-inside-avoid group aspect-square" style="margin-top: 0">
                     <a href="{{ asset('storage/' . $photo->photo_path) }}" data-fslightbox="gallery">
                         <img src="{{ asset('storage/' . $photo->photo_path) }}" alt=""
-                            class="object-cover w-full h-full transition-opacity duration-300 bg-black group-hover:opacity-50">
+                            class="object-contain w-full h-full transition-opacity duration-300 bg-[#726765] group-hover:opacity-50">
                     </a>
                 </div>
             @endforeach
