@@ -19,11 +19,10 @@
     <div class="mt-8 md:mt-24">
         @include('components.popular-product', [
             'product' => [
-                'bg-image' => 'gr20-6782-7121.jpg',
+                'bg-image' => 'fotoshooting-card/BackgroundKC24-0302-3917.webp',
                 'images' => [
                     'fotoshooting-card/AK9-0030-0668-2.webp',
                     'fotoshooting-card/KC-0276-8633.webp',
-                    'fotoshooting-card/BackgroundKC24-0302-3917.webp',
                     'fotoshooting-card/GR20-6782-6952.webp',
                     'fotoshooting-card/KC-0302-7297.webp',
                     'fotoshooting-card/KI18-6046-3785.webp',

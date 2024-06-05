@@ -20,10 +20,10 @@
     <div class="px-6 mx-auto mb-6 max-w-7xl lg:px-8">
         <div class="grid grid-cols-3 gap-3 py-6 mx-auto max-w-7xl xs:grid-cols-10 lg:grid-cols-12">
             @foreach ($student->photos as $photo)
-                <div class="relative  break-inside-avoid group " style="margin-top: 0">
+                <div class="relative break-inside-avoid group " style="margin-top: 0">
                     <a href="{{ asset('storage/' . $photo->photo_path) }}" class="" data-fslightbox="gallery">
                         <img src="{{ asset('storage/' . $photo->photo_path) }}" alt=""
-                            class="object-contain  bg-white   transition-opacity duration-300  group-hover:opacity-50">
+                            class="object-contain transition-opacity duration-300 bg-white group-hover:opacity-50">
                     </a>
                 </div>
             @endforeach
@@ -32,11 +32,9 @@
 
     <div class="py-8 text-white bg-accent ">
         <div class="px-6 mx-auto max-w-7xl lg:px-8">
-            <div class="max-w-2xl mx-auto lg:mx-0">
-                <h2 class="text-lg lg:text-2xl font-bold tracking-tight ">ENTDECKEN SIE HIER DAS PASSENDE
+            <div class="mx-auto lg:mx-0">
+                <h2 class="text-lg font-bold tracking-tight text-center lg:text-2xl">ENTDECKEN SIE HIER DAS PASSENDE
                     PRODUKT FÜR IHRE WÜNSCHE. </h2>
-                <p class="mt-6 text-md lg:text-lg leading-8 ">Alle Preise exkl. MwSt. Die Steuer wird im Warenkorb
-                    berechnet und angezeigt.</p>
             </div>
         </div>
     </div>

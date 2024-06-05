@@ -17,7 +17,8 @@
                 ])
                
                <a class="w-full" href="{{ route('contact') }}">
-                    <div style="background-image: url('{{ asset('banner-3.jpg') }}');" class="object-cover w-full bg-cover h-72">
+                    <div class="w-full h-72">
+                        <img src="{{ asset('MA18-6079-4415.jpg') }}" alt="Banner 1" class="object-cover object-top w-full h-full">
                     </div>
                 </a>
             </div>
