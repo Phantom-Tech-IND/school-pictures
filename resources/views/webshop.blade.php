@@ -24,7 +24,8 @@
                                 <!-- Show All button -->
                                 <li>
                                     <a href="{{ route('webshop') }}"
-                                        class="block px-2 py-3 capitalize text-lg transition-all duration-300 ease-in-out transform hover:text-accent-800 origin-left hover:scale-110 hover:font-semibold {{ is_null($selectedCategory) ? 'text-accent-600' : '' }}">Alle anzeigen</a>
+                                        class="block px-2 py-3 capitalize text-lg transition-all duration-300 ease-in-out transform hover:text-accent-800 origin-left hover:scale-110 hover:font-semibold {{ is_null($selectedCategory) ? 'text-accent-600' : '' }}">Alle
+                                        anzeigen</a>
                                 </li>
                                 @foreach ($categories as $category)
                                     <li>
@@ -71,7 +72,8 @@
                                 <!-- Show All button -->
                                 <li>
                                     <a href="{{ route('webshop') }}"
-                                        class="block px-2 py-3 capitalize hover:text-accent-800 text-lg transition-all duration-300 ease-in-out transform origin-left hover:scale-110 hover:font-semibold {{ is_null($selectedCategory) ? 'text-accent-600' : '' }}">Alle anzeigen</a>
+                                        class="block px-2 py-3 capitalize hover:text-accent-800 text-lg transition-all duration-300 ease-in-out transform origin-left hover:scale-110 hover:font-semibold {{ is_null($selectedCategory) ? 'text-accent-600' : '' }}">Alle
+                                        anzeigen</a>
                                 </li>
                                 @foreach ($categories as $category)
                                     <li>
@@ -93,21 +95,23 @@
                                             <div class="relative">
                                                 <a href="{{ route('product', ['id' => $product->id]) }}"
                                                     class="relative block overflow-hidden rounded-lg h-72 group">
-                                                        <img src="{{ $product->images && count($product->images) > 0 ? asset('storage/' . $product->images[0]) : asset('images/no-image.jpg') }}"
-                                                            alt="{{ $product->type }}"
-                                                            class="object-contain object-center w-full h-full transition duration-300 ease-in-out bg-[#726765] group-hover:opacity-75">
-                                                        <div
-                                                            class="absolute inset-0 flex items-center justify-center transition duration-300 ease-in-out bg-black bg-opacity-0 group-hover:bg-opacity-50">
-                                                            <span
-                                                                class="text-lg text-white opacity-0 group-hover:opacity-100">Produkt ansehen</span>
-                                                        </div>
+                                                    <img src="{{ $product->images && count($product->images) > 0 ? asset('storage/' . $product->images[0]) : asset('images/no-image.jpg') }}"
+                                                        alt="{{ $product->type }}"
+                                                        class="object-contain object-center w-full h-full transition duration-300 ease-in-out bg-[#726765] group-hover:opacity-75">
+                                                    <div
+                                                        class="absolute inset-0 flex items-center justify-center transition duration-300 ease-in-out bg-black bg-opacity-0 group-hover:bg-opacity-50">
+                                                        <span
+                                                            class="text-lg text-white opacity-0 group-hover:opacity-100">Produkt
+                                                            ansehen</span>
+                                                    </div>
 
                                                 </a>
                                                 <div class="flex items-baseline justify-between mx-2 mt-4">
                                                     <h3 class="font-medium text-gray-900 truncate ">
                                                         {{ $product->name }}
                                                     </h3>
-                                                    <h5 class="font-light text-gray-900 whitespace-nowrap">{{ $product->price }} CHF</h5>
+                                                    <h5 class="font-light text-gray-900 whitespace-nowrap">
+                                                        {{ $product->price }} CHF</h5>
                                                 </div>
                                                 <div class="px-2">
                                                     <p class="h-[3.75rem] text-sm text-gray-800 break-words line-clamp-3">
