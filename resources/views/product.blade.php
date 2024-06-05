@@ -10,7 +10,7 @@
         </div>
         <input type="hidden" name="product_id" value="{{ $product->id }}">
         <div class="px-4 mx-auto max-w-7xl">
-            <div class="flex flex-wrap flex-wrap-reverse">
+            <div class="flex flex-wrap-reverse">
                 <!-- Image Gallery -->
                 <div class="w-full p-4 md:w-2/3" x-data="{ selectedImage: '{{ asset('storage/' . $product->images[0]) }}' }">
                     <img :src="selectedImage" alt="{{ $product->name }}"
@@ -28,10 +28,12 @@
                             </div>
                         @endforeach
                     </div>
-                    @if ($product->additional_information)
+                    @if ($product->description)
                         <div class="m-4 mt-8 prose">
                             {!! Str::markdown($product->description) !!}
                         </div>
+                    @endif
+                    @if ($product->additional_information)
                         <div class="m-4 mt-8 prose">
                             {!! Str::markdown($product->additional_information) !!}
                         </div>
