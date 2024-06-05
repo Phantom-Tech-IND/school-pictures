@@ -2,14 +2,12 @@
     <!-- Slider main container -->
     <div class="swiper">
         <!-- Additional required wrapper -->
-        <div class="swiper-wrapper ">
+        <div class="swiper-wrapper">
             <!-- Slides -->
             @foreach ($slides as $slide)
                 <div class="swiper-slide">
-                    <div class="flex items-center justify-center">
-                        <img src="{{ asset($slide['image']) }}" alt="{{ $slide['alt'] }}"
-                            class="object-cover w-full md:h-[600px] lg:h-[800px] zoom-in-animation">
-                    </div>
+                    <img src="{{ asset($slide['image']) }}" alt="{{ $slide['alt'] }}"
+                        class="object-cover w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px]">
                 </div>
             @endforeach
         </div>
@@ -24,3 +22,19 @@
         <div class="swiper-scrollbar"></div>
     </div>
 </div>
+
+<style>
+    .swiper-button-prev,
+    .swiper-button-next {
+        color: #94C11C;
+    }
+
+    .swiper-pagination-bullet {
+        background-color: #94C11C;
+    }
+
+    .swiper-slide {
+        transform: translate3d(0, 0, 0);
+        /* Force hardware acceleration */
+    }
+</style>

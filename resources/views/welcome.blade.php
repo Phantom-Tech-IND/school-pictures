@@ -1,9 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <x-hero-banner />
-    <div class="mt-8 md:mt-24">
-        @include('components.masonry-content')
-    </div>
+    @include('components.masonry-content')
     <div class="mt-8 md:mt-24">
         @include('components.c-t-a', [
             'link' => 'contact',
@@ -23,12 +21,13 @@
             'product' => [
                 'bg-image' => 'gr20-6782-7121.jpg',
                 'images' => [
-                    'kc-0287-5607-2.jpg',
-                    'kc-0173-0564-1.jpg',
-                    'gr17-5575-7039.jpg',
-                    'ak9-0009-9795.jpg',
-                    'kc-0283-1085-1.jpg',
-                    'gr20-6782-6987.jpg',
+                    'fotoshooting-card/AK9-0030-0668-2.webp',
+                    'fotoshooting-card/KC-0276-8633.webp',
+                    'fotoshooting-card/BackgroundKC24-0302-3917.webp',
+                    'fotoshooting-card/GR20-6782-6952.webp',
+                    'fotoshooting-card/KC-0302-7297.webp',
+                    'fotoshooting-card/KI18-6046-3785.webp',
+                    'fotoshooting-card/KC-0298-7925-2.webp',
                 ],
                 'name' => 'Photoshooting card',
                 'type' => 'Pro shooting',

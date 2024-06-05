@@ -1,4 +1,4 @@
-<div class="px-4 mx-auto sm:px-6 max-w-7xl lg:px-8">
+<div class="px-4 mx-auto mt-6 sm:px-6 max-w-7xl lg:px-8">
     <div class="text-center md:my-6">
         <h1 class="text-xl xs:text-2xl sm:text-3xl font-[500] uppercase text-primary">HERZLICH WILLKOMMEN BEI
             <br />
@@ -23,7 +23,7 @@
             </div>
             <div class="flex flex-col gap-4 md:flex-row">
                 <a class="w-full" href="{{ route('contact') }}">
-                    <div style="background-image: url('{{ asset('gr20-6782-7121.jpg') }}');" class="object-cover w-full bg-center bg-cover h-72">
+                    <div style="background-image: url('{{ asset('KC24-0298-4402.jpg') }}');" class="object-cover w-full bg-center bg-cover h-72">
                     </div>
                 </a>
                 @include('components.icon-card', [
