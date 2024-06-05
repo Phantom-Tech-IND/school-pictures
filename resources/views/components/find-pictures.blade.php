@@ -1,6 +1,6 @@
 <div x-data="{ showDialog: false }" x-cloak class="p-2 bg-accent">
     @guest('student')
-        <h1 @click="showDialog = true" class="font-semibold text-center text-white uppercase cursor-pointer">Suche nach Galerie-Code</h1>
+        <h1 @click="showDialog = true" class="font-semibold text-center text-white uppercase cursor-pointer">Ummelden mit Galerie-Code</h1>
     @endguest
 
     @auth('student')
