@@ -2,8 +2,8 @@
     style="min-height: 300px; md:min-height: 600px; background-repeat: no-repeat; background-size: cover; background-image: url({{ asset($product['bg-image']) }})">
     <div class="container relative z-10 grid grid-cols-1 gap-4 px-4 py-5 mx-auto mt-auto md:grid-cols-5 md:gap-6 md:px-10 md:py-10 backdrop-blur-md"
         style="background-color: rgba(255, 255, 255, 0.6);">
-        <div class="grid col-span-3 grid-cols-2 gap-2 max-h-[600px] auto-rows-[1fr]">
-            @foreach($product['images'] as $index => $image)
+        <div class="grid col-span-3 grid-cols-2 gap-2 max-h-[800px] auto-rows-[1fr]">
+            @foreach ($product['images'] as $index => $image)
                 {{-- <div class="min-h-0"> --}}
                 <div class="{{ $loop->last && $loop->count % 2 != 0 ? 'col-span-2' : '' }} min-h-0">
                     <img class="object-cover w-full h-full min-h-0" src="{{ asset($image) }}" alt="{{ $product['name'] }}">
@@ -25,4 +25,3 @@
         </div>
     </div>
 </div>
-
