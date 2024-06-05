@@ -19,4 +19,9 @@ class Offers extends Model
     {
         return $this->hasMany(OfferItem::class, 'offer_id');
     }
-  }
+
+    public function getImageUrlAttribute()
+    {
+        return asset('storage/'.$this->image);
+    }
+}

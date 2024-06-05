@@ -6,8 +6,9 @@
             <!-- Slides -->
             @foreach ($slides as $slide)
                 <div class="swiper-slide">
-                    <img src="{{ asset($slide['image']) }}" alt="{{ $slide['alt'] }}"
-                        class="object-cover w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px]">
+                    <a href="{{ $slide['link'] }}">
+                        <img src="{{ asset($slide['image']) }}" alt="{{ $slide['alt'] }}" class="object-cover w-full">
+                    </a>
                 </div>
             @endforeach
         </div>

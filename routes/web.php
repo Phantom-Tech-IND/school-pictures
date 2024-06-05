@@ -58,7 +58,6 @@ Route::middleware(['auth:student'])->group(function () {
         Route::get('/gallery-code', 'galleryCode')->name('gallery-code');
     });
 
-    Route::post('/students/sync-photos', 'StudentController@syncPhotos')->name('students.sync-photos');
     Route::get('/students/sync-photos', function () {
         abort(404);
     });
