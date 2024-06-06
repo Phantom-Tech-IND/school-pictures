@@ -72,6 +72,17 @@
     });
 </script>
 
+<style>
+    .flatpickr-calendar {
+        margin-top: 0.3rem;
+        border: 3px solid #94C11C;
+    }
+
+    .flatpickr-calendar::before, .flatpickr-calendar::after {
+        display: none;
+    }
+</style>
+
 <script>
     const errorParagraph = document.getElementById('login-error-message');
 
