@@ -1,6 +1,7 @@
 <div x-data="{ showDialog: false }" x-cloak class="p-2 bg-accent">
     @guest('student')
-        <h1 @click="showDialog = true" class="font-semibold text-center text-white uppercase cursor-pointer">Ummelden mit Galerie-Code</h1>
+        <h1 @click="showDialog = true" class="font-semibold text-center text-white uppercase cursor-pointer">Anmelden mit
+            Galerie-Code</h1>
     @endguest
 
     @auth('student')
@@ -24,8 +25,8 @@
                 <p id="login-error-message" class="hidden my-4 text-center text-red-500">
                     <span class="block text-lg font-semibold">Wir konnten Ihre Daten nicht finden.</span>
                     <span class="block">Entweder der eingegebene Code oder das Geburtsdatum ist falsch. Bitte
-                        kontaktieren Sie uns per E-Mail unter <a href="mailto:{{ env('MAIL_FROM_ADDRESS') }}"
-                            class="font-semibold hover:text-accent-700">{{ env('MAIL_FROM_ADDRESS') }}</a> oder über das
+                        kontaktieren Sie uns per Telefon unter <a href="tel:+41419214025"
+                            class="font-semibold hover:text-accent-700">+41 41 921 40 25</a> oder über das
                         <a href="{{ route('contact') }}"
                             class="font-semibold hover:text-accent-700">Kontaktformular</a>.</span>
                 </p>
