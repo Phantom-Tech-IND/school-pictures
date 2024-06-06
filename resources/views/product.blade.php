@@ -92,7 +92,7 @@
                                         @click.away="open = false">
                                         @foreach ($attribute['options'] as $option)
                                             <li @click="selected = { label: '{{ $option['label'] }}', price: {{ $option['price'] ?? 0 }} }; open = false"
-                                                :class="{ 'option-selected': selected.label === '{{ $option['label'] }}' }"
+                                                :class="{ 'bg-blue-100': selected.label === '{{ $option['label'] }}' }"
                                                 class="relative py-2 pl-3 pr-3 text-gray-900 cursor-default select-none hover:bg-gray-100"
                                                 id="listbox-option-{{ $loop->index }}" role="option"
                                                 data-price="{{ $option['price'] ?? 0 }}">
@@ -122,16 +122,6 @@
                                                         @endif
                                                     </span>
                                                 </div>
-                                                <span
-                                                    class="absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600"
-                                                    x-show="selected.label === '{{ $option['label'] }}'">
-                                                    <svg class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor"
-                                                        aria-hidden="true">
-                                                        <path fill-rule="evenodd"
-                                                            d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
-                                                            clip-rule="evenodd" />
-                                                    </svg>
-                                                </span>
                                             </li>
                                         @endforeach
                                     </ul>
