@@ -1,3 +1,7 @@
+@php
+    use App\Constants\Constants;
+@endphp
+
 @extends('layouts.app')
 @section('content')
     <div class="bg-gray-50">
@@ -690,10 +694,10 @@
                                 <dd class="text-sm font-medium text-gray-900"><span
                                         id="subtotal">{{ number_format($cartItems['subtotal'], 2) }}</span> CHF</dd>
                             </div>
-                            {{-- <div class="flex items-center justify-between">
+                            <div class="flex items-center justify-between">
                                 <dt class="text-sm">Versand</dt>
-                                <dd class="text-sm font-medium text-gray-900"><span id="shipping">0</span> CHF</dd>
-                            </div> --}}
+                                <dd class="text-sm font-medium text-gray-900"><span id="shipping">{{ Constants::SHIPPING_COST }}</span> CHF</dd>
+                            </div>
                             <div class="flex items-center justify-between">
                                 <dt class="text-sm">Steuern</dt>
                                 <dd class="text-sm font-medium text-gray-900"><span id="taxes">0</span> CHF</dd>
@@ -749,6 +753,9 @@
     </div>
 @endsection
 <script>
+    const shippingCost = parseFloat({{ Constants::SHIPPING_COST }});
+    const shippingThreshold = parseFloat({{ Constants::SHIPPING_THRESHOLD }});
+
     const submitForm = async (event) => {
         event.preventDefault();
         const submitButton = event.target.querySelector('button[type="submit"]');
@@ -795,8 +802,17 @@
     };
 
     const updateTotal = () => {
-        const subtotal = parseFloat(document.getElementById('subtotal').textContent);
+        let subtotal = parseFloat(document.getElementById('subtotal').textContent);
         const taxes = parseFloat(document.getElementById('taxes').textContent);
+
+        const shippingItem = document.getElementById('shipping');
+        if (subtotal > shippingThreshold) {
+            shippingItem.style.textDecoration = 'line-through';
+        } else {
+            subtotal += shippingCost;
+            shippingItem.style.textDecoration = 'none';
+        }
+
         const total = subtotal + taxes;
         document.getElementById('total').textContent = total.toFixed(2);
     };

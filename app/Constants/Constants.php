@@ -4,6 +4,9 @@ namespace App\Constants;
 
 class Constants
 {
+    const SHIPPING_COST = 3.5;
+    const SHIPPING_THRESHOLD = 50;
+
     const FACEBOOK_URL = 'https://www.facebook.com/pages/ArtLine-Fotografie-AG/105849706102568';
     const INSTAGRAM_URL = 'https://www.instagram.com/artline.fotografie.ag/';
     const KINDERGARDEN_IMAGE_URL = '/content/kindergarden-and-school/';
