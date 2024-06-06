@@ -12,7 +12,7 @@ class Order extends Model
 
     protected $fillable = [
         'amount', 'status', 'invoice', 'contact_id', 'payment_method', 'payment_status',
-        'address_same_as_billing', 'billing_address', 'shipping_address', 'comment',
+        'address_same_as_billing', 'billing_address', 'shipping_address', 'comment', 'shipping_cost'
     ];
 
     public function getBillingAddressAttribute($value)

@@ -14,6 +14,7 @@ use App\Models\Order;
 use App\Models\Contact;
 use App\Models\OrderItem;
 use Illuminate\Database\Eloquent\Collection;
+use App\Constants\Constants;
 
 class OrderCreated extends Mailable implements ShouldQueue
 {

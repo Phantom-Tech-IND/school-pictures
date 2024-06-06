@@ -11,6 +11,7 @@ use Artesaos\SEOTools\Facades\SEOTools;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use App\Constants\Constants;
 
 class CartController extends Controller
 {
@@ -49,6 +50,14 @@ class CartController extends Controller
     {
         $data = $request->all();
         $cart = $this->getCartItems();
+        $shippingCost = 0;
+        $totalPrice = $cart['subtotal'];
+
+        if ($totalPrice < Constants::SHIPPING_THRESHOLD) {
+            $shippingCost = Constants::SHIPPING_COST;
+        }
+
+        $totalPrice += $shippingCost;
 
         $contactData = [
             'name' => $data['first-name'].' '.$data['last-name'],
@@ -73,7 +82,8 @@ class CartController extends Controller
         ];
 
         $orderData = [
-            'amount' => $cart['subtotal'],
+            'amount' => $totalPrice,
+            'shipping_cost' => $shippingCost,
             'status' => 'pending',
             'invoice' => '',
             'payment_method' => $data['payment_type'],
@@ -121,7 +131,7 @@ class CartController extends Controller
         }
     }
 
-    public function createPaymentForm($cart, $order_id, $contact)
+    public function createPaymentForm($totalPrice, $order_id, $contact)
     {
         $instanceName = 'artlinefotografiepay';
         $secret = 'GYJzdEIaw74N6sW8pga3lWbuK3cIwW';
@@ -130,7 +140,7 @@ class CartController extends Controller
             $payrexx = new \Payrexx\Payrexx($instanceName, $secret, '', 'zahls.ch');
 
             $gateway = new \Payrexx\Models\Request\Gateway();
-            $gateway->setAmount(($cart['subtotal'] * 100));
+            $gateway->setAmount(($totalPrice * 100));
             $gateway->setCurrency('CHF');
             $gateway->setSuccessRedirectUrl(url('/payment-success'));
             $gateway->setCancelRedirectUrl(url('/cart'));

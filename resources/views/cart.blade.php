@@ -806,7 +806,7 @@
         const taxes = parseFloat(document.getElementById('taxes').textContent);
 
         const shippingItem = document.getElementById('shipping');
-        if (subtotal > shippingThreshold) {
+        if (subtotal >= shippingThreshold) {
             shippingItem.style.textDecoration = 'line-through';
         } else {
             subtotal += shippingCost;
