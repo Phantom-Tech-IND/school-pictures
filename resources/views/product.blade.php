@@ -130,6 +130,11 @@
                                         <span class="text-red-500">*</span>
                                     @endif
                                 </label>
+                                @if ($attribute['additional_info'])
+                                    <p class="my-1 text-sm text-gray-500">
+                                        {{ $attribute['additional_info'] }}
+                                    </p>
+                                @endif
                                 @foreach ($attribute['options'] as $option)
                                     <div class="mt-2">
                                         <!-- Hidden input for false value -->
@@ -145,6 +150,19 @@
                                             @if (isset($option['price']))
                                                 <span class="ml-2 text-sm text-gray-500">(+{{ $option['price'] }}
                                                     CHF)</span>
+                                            @endif
+                                            @if (isset($option['custom_info']))
+                                                <div class="relative group">
+                                                    <x-heroicon-s-exclamation-circle class="ml-2 transition duration-300 ease-in-out cursor-pointer size-6 text-accent-500 hover:text-accent-700"/>
+                                                    <div class="
+                                                        absolute pointer-events-none max-w-[25rem] w-[25rem] left-0 -top-6 translate-x-[-50%] translate-y-[-100%] p-3 m-4 text-sm text-gray-700 bg-white border rounded shadow-lg
+                                                        transition-opacity duration-300 ease-in-out delay-150
+                                                        opacity-0 group-hover:block group-hover:opacity-100 group-hover:delay-300
+                                                        group-hover:pointer-events-auto
+                                                        ">
+                                                        {{ $option['custom_info'] }}
+                                                    </div>
+                                                </div>
                                             @endif
                                         </label>
                                     </div>
