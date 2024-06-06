@@ -86,23 +86,41 @@
                                         x-transition:leave="transition ease-in duration-75"
                                         x-transition:leave-start="transform opacity-100 scale-100"
                                         x-transition:leave-end="transform opacity-0 scale-95"
-                                        class="absolute z-10 w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+                                        class="absolute z-10 w-full py-1 mt-1 text-base bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
                                         tabindex="-1" role="listbox"
                                         aria-labelledby="listbox-label-{{ $attribute['title'] }}"
                                         @click.away="open = false">
                                         @foreach ($attribute['options'] as $option)
                                             <li @click="selected = { label: '{{ $option['label'] }}', price: {{ $option['price'] ?? 0 }} }; open = false"
                                                 :class="{ 'option-selected': selected.label === '{{ $option['label'] }}' }"
-                                                class="relative py-2 pl-3 text-gray-900 cursor-default select-none pr-9 hover:bg-gray-100"
+                                                class="relative py-2 pl-3 pr-3 text-gray-900 cursor-default select-none hover:bg-gray-100"
                                                 id="listbox-option-{{ $loop->index }}" role="option"
                                                 data-price="{{ $option['price'] ?? 0 }}">
                                                 <div class="flex justify-between">
                                                     <span class="block font-normal">{{ $option['label'] }}</span>
-                                                    @if (isset($option['price']))
-                                                        <span
-                                                            class="block font-normal text-right text-gray-500 whitespace-nowrap">{{ $option['price'] }}
-                                                            CHF</span>
-                                                    @endif
+                                                    <span class="flex items-center">
+                                                        @if (isset($option['price']))
+                                                            <span
+                                                                class="block font-normal text-right text-gray-500 whitespace-nowrap
+                                                                {{ isset($option['custom_info']) ? '' : 'mr-8' }}
+                                                                ">{{ $option['price'] }}
+                                                                CHF</span>
+                                                        @endif
+                                                        @if (isset($option['custom_info']))
+                                                            <div class="relative group">
+                                                                <x-heroicon-s-exclamation-circle
+                                                                    class="ml-2 transition duration-300 ease-in-out cursor-pointer size-6 text-accent-500 hover:text-accent-700" />
+                                                                <div
+                                                                    class="
+                                                        absolute pointer-events-none max-w-[25rem] w-max left-0 -top-6 translate-x-[-50%] translate-y-[-100%] p-3 m-4 text-sm text-gray-700 bg-white border rounded shadow-lg
+                                                        transition-opacity duration-300 ease-in-out delay-150 opacity-0
+                                                        group-hover:block group-hover:opacity-100 group-hover:delay-300 group-hover:pointer-events-auto
+                                                        ">
+                                                                    {{ $option['custom_info'] }}
+                                                                </div>
+                                                            </div>
+                                                        @endif
+                                                    </span>
                                                 </div>
                                                 <span
                                                     class="absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600"
@@ -153,12 +171,13 @@
                                             @endif
                                             @if (isset($option['custom_info']))
                                                 <div class="relative group">
-                                                    <x-heroicon-s-exclamation-circle class="ml-2 transition duration-300 ease-in-out cursor-pointer size-6 text-accent-500 hover:text-accent-700"/>
-                                                    <div class="
-                                                        absolute pointer-events-none max-w-[25rem] w-[25rem] left-0 -top-6 translate-x-[-50%] translate-y-[-100%] p-3 m-4 text-sm text-gray-700 bg-white border rounded shadow-lg
-                                                        transition-opacity duration-300 ease-in-out delay-150
-                                                        opacity-0 group-hover:block group-hover:opacity-100 group-hover:delay-300
-                                                        group-hover:pointer-events-auto
+                                                    <x-heroicon-s-exclamation-circle
+                                                        class="ml-2 transition duration-300 ease-in-out cursor-pointer size-6 text-accent-500 hover:text-accent-700" />
+                                                    <div
+                                                        class="
+                                                        absolute pointer-events-none max-w-[25rem] w-max left-0 -top-6 translate-x-[-50%] translate-y-[-100%] p-3 m-4 text-sm text-gray-700 bg-white border rounded shadow-lg
+                                                        transition-opacity duration-300 ease-in-out delay-150 opacity-0
+                                                        group-hover:block group-hover:opacity-100 group-hover:delay-300 group-hover:pointer-events-auto
                                                         ">
                                                         {{ $option['custom_info'] }}
                                                     </div>
@@ -209,16 +228,16 @@
                                                         <g>
                                                             <path
                                                                 d="M139.414,96.193c-22.673,0-41.056,18.389-41.056,41.062c0,22.678,18.383,41.062,41.056,41.062
-                                                                                                                c22.678,0,41.059-18.383,41.059-41.062C180.474,114.582,162.094,96.193,139.414,96.193z M159.255,146.971h-12.06v12.06
-                                                                                                                c0,4.298-3.483,7.781-7.781,7.781c-4.298,0-7.781-3.483-7.781-7.781v-12.06h-12.06c-4.298,0-7.781-3.483-7.781-7.781
-                                                                                                                c0-4.298,3.483-7.781,7.781-7.781h12.06v-12.063c0-4.298,3.483-7.781,7.781-7.781c4.298,0,7.781,3.483,7.781,7.781v12.063h12.06
-                                                                                                                c4.298,0,7.781,3.483,7.781,7.781C167.036,143.488,163.555,146.971,159.255,146.971z" />
+                                                                                                                        c22.678,0,41.059-18.383,41.059-41.062C180.474,114.582,162.094,96.193,139.414,96.193z M159.255,146.971h-12.06v12.06
+                                                                                                                        c0,4.298-3.483,7.781-7.781,7.781c-4.298,0-7.781-3.483-7.781-7.781v-12.06h-12.06c-4.298,0-7.781-3.483-7.781-7.781
+                                                                                                                        c0-4.298,3.483-7.781,7.781-7.781h12.06v-12.063c0-4.298,3.483-7.781,7.781-7.781c4.298,0,7.781,3.483,7.781,7.781v12.063h12.06
+                                                                                                                        c4.298,0,7.781,3.483,7.781,7.781C167.036,143.488,163.555,146.971,159.255,146.971z" />
                                                             <path
                                                                 d="M149.997,0C67.157,0,0.001,67.158,0.001,149.995s67.156,150.003,149.995,150.003s150-67.163,150-150.003
-                                                                                                                S232.836,0,149.997,0z M225.438,221.254c-2.371,2.376-5.48,3.561-8.59,3.561s-6.217-1.185-8.593-3.561l-34.145-34.147
-                                                                                                                c-9.837,6.863-21.794,10.896-34.697,10.896c-33.548,0-60.742-27.196-60.742-60.744c0-33.548,27.194-60.742,60.742-60.742
-                                                                                                                c33.548,0,60.744,27.194,60.744,60.739c0,11.855-3.408,22.909-9.28,32.256l34.56,34.562
-                                                                                                                C230.185,208.817,230.185,216.512,225.438,221.254z" />
+                                                                                                                        S232.836,0,149.997,0z M225.438,221.254c-2.371,2.376-5.48,3.561-8.59,3.561s-6.217-1.185-8.593-3.561l-34.145-34.147
+                                                                                                                        c-9.837,6.863-21.794,10.896-34.697,10.896c-33.548,0-60.742-27.196-60.742-60.744c0-33.548,27.194-60.742,60.742-60.742
+                                                                                                                        c33.548,0,60.744,27.194,60.744,60.739c0,11.855-3.408,22.909-9.28,32.256l34.56,34.562
+                                                                                                                        C230.185,208.817,230.185,216.512,225.438,221.254z" />
 
                                                         </g>
                                                     </g>
