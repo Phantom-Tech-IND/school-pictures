@@ -39,7 +39,7 @@
                             class="w-full p-2 border rounded-sm focus:outline-2 focus:outline-accent-500 focus:ring-2 focus:ring-accent-500"
                             placeholder="Galerie-Code">
                         <label class="w-full mt-4 text-sm" for="birth_date">Geburtsdatum des Kindes:</label>
-                        <input type="date" name="birth_date"
+                        <input type="date" name="birth_date" id="birth_date_picker"
                             class="w-full p-2 border rounded-sm focus:outline-2 focus:outline-accent-500 focus:ring-2 focus:ring-accent-500"
                             placeholder="Datum auswählen" required>
                         <button type="submit" class="w-full p-2 mt-4 text-white rounded bg-accent">Anmelden</button>
@@ -58,6 +58,28 @@
 <style>
     [x-cloak] {
         display: none !important;
+    }
+</style>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+<script type="module">
+    document.addEventListener('DOMContentLoaded', function () {
+        flatpickr("#birth_date_picker", {
+            dateFormat: "Y-m-d",
+        });
+    });
+</script>
+
+<style>
+    .flatpickr-calendar {
+        margin-top: 0.3rem;
+        border: 3px solid #94C11C;
+    }
+
+    .flatpickr-calendar::before, .flatpickr-calendar::after {
+        display: none;
     }
 </style>
 
