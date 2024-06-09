@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->decimal('amount', 10, 2);
+            $table->decimal('shipping_cost', 10, 2)->default(0);
             $table->enum('status', ['pending', 'completed']);
             $table->string('invoice')->nullable();
             $table->json('billing_address')->nullable();

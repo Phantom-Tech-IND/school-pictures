@@ -26,13 +26,6 @@ class DatabaseSeeder extends Seeder
             'role' => 'admin',
         ]);
 
-        \App\Models\User::factory()->create([
-            'name' => 'Test',
-            'email' => env('MAIL_FROM_ADDRESS'),
-            'password' => bcrypt('Password123!!'),
-            'role' => 'admin',
-        ]);
-
         $this->call([
             CategorySeeder::class,
             StorageSeeder::class,

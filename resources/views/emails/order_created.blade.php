@@ -6,6 +6,7 @@ Hallo **{{ $contact->name }}**,<br>
 <br>
 Vielen Dank für Ihre Bestellung! Hier sind die Details:<br>
 Ihre Bestellnummer ist **{{ $order->id }}**<br>
+Versandkosten: {{ $order->shipping_cost }} CHF<br>
 Gesamtbetrag: {{ $order->amount }} CHF<br>
 <br>
 Stadt: {{ $country }}/{{ $city }}<br>
