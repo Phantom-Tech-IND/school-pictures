@@ -661,6 +661,7 @@
 
                                                                 let subtotal = response.data.cartItems.subtotal;
                                                                 document.getElementById('subtotal').textContent = `${subtotal.toFixed(2)}`;
+                                                                updateTotal(subtotal);
                                                                 window.updateCartCount();
                                                             })
                                                             .catch(error => {
@@ -737,7 +738,10 @@
                                     Sie erhalten <span class="font-semibold">Ihre Referenznummer</span> in Ihrer
                                     Bestätigungsemail.<br>
                                     Ihre Bestellung wird erst nach Eingang der Gelder auf unserem Konto bearbeitet.<br>
-                                    IBAN: <span class="font-semibold">{{ env('BANK_IBAN') }}</span>
+                                    Bank: <span class="font-semibold">{{ env('BANK_NAME') }}</span><br>
+                                    IBAN: <span class="font-semibold">{{ env('BANK_IBAN') }}</span><br>
+                                    BIC: <span class="font-semibold">{{ env('BANK_BIC') }}</span><br>
+                                    Kontonummer: <span class="font-semibold">{{ env('BANK_ACCOUNT_NUMBER') }}</span>
                                 </p>
                             </fieldset>
                         </div>
