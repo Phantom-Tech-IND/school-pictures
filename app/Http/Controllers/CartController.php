@@ -123,8 +123,8 @@ class CartController extends Controller
 
     public function createPaymentForm($cart, $order_id, $contact)
     {
-        $instanceName = 'artlinefotografiepay';
-        $secret = 'GYJzdEIaw74N6sW8pga3lWbuK3cIwW';
+        $instanceName = env('PAYMENT_INSTANCE_NAME');
+        $secret = env('PAYMENT_SECRET');
 
         try {
             $payrexx = new \Payrexx\Payrexx($instanceName, $secret, '', 'zahls.ch');
