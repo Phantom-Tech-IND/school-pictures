@@ -96,7 +96,7 @@ class ParseStudentPhotos extends Command
 
         return $student;
     }
-    
+
     protected function updateStudentPhotos(Student $student, $studentDir, $institutionType)
     {
         foreach (File::allFiles($studentDir) as $photo) {
@@ -108,8 +108,8 @@ class ParseStudentPhotos extends Command
             $basePath = public_path('media');
             $fullPhotoPath = $studentDir.'/'.$photo->getFilename();
 
-            $relativePhotoPath = '/media/' . $institutionType . '/' . $photo->getFilename();
- 
+            $relativePhotoPath = '/media/'.$institutionType.'/'.$photo->getFilename();
+
             if (! DB::table('student_photos')
                 ->where('student_id', $student->id)
                 ->where('photo_path', '=', $relativePhotoPath)
@@ -120,21 +120,21 @@ class ParseStudentPhotos extends Command
             }
         }
     }
-    
+
     protected function addPhotoToStudent($photo, Student $student, $studentDir, $institutionType)
     {
         $basePath = storage_path('app/public/media');
 
-        $targetDir = $basePath . '/' . $institutionType;
-        if (!File::exists($targetDir)) {
+        $targetDir = $basePath.'/'.$institutionType;
+        if (! File::exists($targetDir)) {
             File::makeDirectory($targetDir, 0755, true);
         }
 
-        $fullPhotoPath = $targetDir . '/' . $photo->getFilename();
+        $fullPhotoPath = $targetDir.'/'.$photo->getFilename();
 
         File::copy($photo->getPathname(), $fullPhotoPath);
 
-        $relativePhotoPath = '/media/' . $institutionType . '/' . $photo->getFilename();
+        $relativePhotoPath = '/media/'.$institutionType.'/'.$photo->getFilename();
 
         $studentPhoto = new \App\Models\StudentPhoto([
             'student_id' => $student->id,
