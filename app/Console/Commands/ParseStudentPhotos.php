@@ -24,9 +24,9 @@ class ParseStudentPhotos extends Command
             }
         }
 
-        $this->deleteDirectory(public_path('media/kindergarden'));
-        $this->deleteDirectory(public_path('media/school'));
-        $this->deleteDirectory(public_path('media/temp'));
+        // $this->deleteDirectory(public_path('media/kindergarden'));
+        // $this->deleteDirectory(public_path('media/school'));
+        // $this->deleteDirectory(public_path('media/temp'));
     }
 
     private function deleteDirectory(string $path): void
