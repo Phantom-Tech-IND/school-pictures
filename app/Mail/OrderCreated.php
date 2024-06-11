@@ -2,45 +2,51 @@
 
 namespace App\Mail;
 
+use App\Models\Contact;
+use App\Models\Order;
+use App\Models\OrderItem;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Mail\Mailable;
-use Illuminate\Mail\Mailables\Envelope;
-use Illuminate\Notifications\Messages\MailMessage;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Mail\Mailables\Content;
-use Illuminate\Mail\Mailables\Address;
-use App\Models\Order;
-use App\Models\Contact;
-use App\Models\OrderItem;
 use Illuminate\Database\Eloquent\Collection;
-use App\Constants\Constants;
+use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Address;
+use Illuminate\Mail\Mailables\Content;
+use Illuminate\Mail\Mailables\Envelope;
+use Illuminate\Queue\SerializesModels;
 
 class OrderCreated extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
     public Order $order;
+
     public Contact $contact;
+
     /** @var Collection<int, OrderItem> */
     public Collection $items;
+
     public string $emailRole;
 
     public string $address;
+
     public string $country;
+
     public string $city;
+
     public string $zip;
+
     public string $comment;
 
     /**
      * Create a new message instance.
      */
-    public function __construct(Order $order, Contact $contact, string $emailRole) {
+    public function __construct(Order $order, Contact $contact, string $emailRole)
+    {
         $this->order = $order;
         $this->contact = $contact;
         $this->emailRole = $emailRole;
-        $this->items = $order->items()->with('product')->get(); // Load product relationship
-        
+        $this->items = $order->items()->with('product')->get();
+
         $billingAddress = $order->billing_address;
         $shippingAddress = $order->shipping_address;
 

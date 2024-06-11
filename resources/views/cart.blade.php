@@ -653,23 +653,8 @@
                                             <div class="flex-shrink-0 flow-root ml-4">
                                                 <button type="button" data-product-id="{{ $item['index'] }}"
                                                     class="-m-2.5 flex items-center justify-center bg-white p-2.5 text-gray-400 hover:text-gray-500"
-                                                    onclick="
-                                                        axios.post('/cart/remove/' + {{ $item['index'] }})
-                                                            .then(response => {
-                                                                const itemElement = document.getElementById('cart-item-' + {{ $item['index'] }});
-                                                                if (itemElement) { itemElement.remove(); }
-
-                                                                let subtotal = response.data.cartItems.subtotal;
-                                                                document.getElementById('subtotal').textContent = `${subtotal.toFixed(2)}`;
-                                                                updateTotal(subtotal);
-                                                                window.updateCartCount();
-                                                            })
-                                                            .catch(error => {
-                                                                alert('Produkt nicht entfernt!');
-                                                                console.error('Error:', error);
-                                                            });
-                                                        ">
-                                                    <span class="sr-only">Entfernen</span>
+                                                    onclick="removeFromCart({{ $item['index'] }})"> <span
+                                                        class="sr-only">Entfernen</span>
                                                     <svg class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor"
                                                         aria-hidden="true">
                                                         <path fill-rule="evenodd"
@@ -697,7 +682,8 @@
                             </div>
                             <div class="flex items-center justify-between">
                                 <dt class="text-sm">Versand</dt>
-                                <dd class="text-sm font-medium text-gray-900"><span id="shipping">{{ Constants::SHIPPING_COST }}</span> CHF</dd>
+                                <dd class="text-sm font-medium text-gray-900"><span
+                                        id="shipping">{{ Constants::SHIPPING_COST }}</span> CHF</dd>
                             </div>
                             <div class="flex items-center justify-between">
                                 <dt class="text-sm">Steuern</dt>
@@ -759,6 +745,36 @@
 <script>
     const shippingCost = parseFloat({{ Constants::SHIPPING_COST }});
     const shippingThreshold = parseFloat({{ Constants::SHIPPING_THRESHOLD }});
+
+    const removeFromCart = async (index) => {
+        fetch('/cart/remove/' + index, {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute(
+                        'content'),
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    productId: index
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                const itemElement = document.getElementById('cart-item-' + index);
+                if (itemElement) {
+                    itemElement.remove();
+                }
+
+                let subtotal = data.cartItems.subtotal;
+                document.getElementById('subtotal').textContent = `${subtotal.toFixed(2)}`;
+                updateTotal(subtotal);
+                window.updateCartCount();
+            })
+            .catch(error => {
+                alert('Produkt nicht entfernt!');
+                console.error('Error:', error);
+            });
+    }
 
     const submitForm = async (event) => {
         event.preventDefault();
