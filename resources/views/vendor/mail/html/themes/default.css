@@ -325,12 +325,11 @@ img {
     padding-left: 10px;
 }
 
-.product-file-content p {
-    font-size: 8px;
-    max-width: 16ch;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+.product-files--name-list,
+.product-files--name-list li {
+    margin: 0;
+    padding: 0;
+    padding-left: 10px;
 }
 
 .product-files img {

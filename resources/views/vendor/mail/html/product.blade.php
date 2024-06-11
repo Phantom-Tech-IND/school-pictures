@@ -35,14 +35,21 @@
 </div>
 
 @if (!empty($files))
+
+<ul class="product-files--name-list">
+@foreach ($files as $fileKey => $file)
+<li>{{ $fileKey }}:</li>
+@endforeach
+</ul>
+
 <div class="product-files">
 @foreach ($files as $fileKey => $file)
 <div class="product-file-content">
-<p>{{ $fileKey }}:</p>
 <img src="{{ $message->embed(storage_path('app/public/') . $file['href']) }}" alt="{{ $fileKey }}">
 </div>
 @endforeach
 </div>
+
 @endif
 
 </div>
