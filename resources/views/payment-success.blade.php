@@ -10,7 +10,7 @@
         </div>
         <h1
             class="pb-2 text-2xl font-semibold text-center xs:pb-3 md:pb-4 lg:pb-6 xl:pb-8 xs:text-3xl text-accent sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl">
-            Zahlung erfolgreich</h1>
+            Bestellung erfolgreich aufgegeben</h1>
         <p class="text-center text-normal sm:text-md md:text-lg lg:text-xl xl:text-2xl">
             Vielen Dank für Ihren Kauf.<br />
             Sie erhalten eine E-Mail mit der Bestätigung.
