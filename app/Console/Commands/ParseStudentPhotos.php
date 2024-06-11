@@ -18,7 +18,7 @@ class ParseStudentPhotos extends Command
     {
         $mediaPath = public_path('media');
         foreach (File::directories($mediaPath) as $directory) {
-            $institutionType = basename($directory);
+            $institutionType = strtolower(basename($directory)); // Convert to lowercase
             if (in_array($institutionType, ['kindergarden', 'school'])) {
                 $this->processInstitution($mediaPath, $institutionType);
             }
@@ -39,10 +39,10 @@ class ParseStudentPhotos extends Command
 
             foreach ($files as $fileinfo) {
                 $todo = ($fileinfo->isDir() ? 'rmdir' : 'unlink');
-                @$todo($fileinfo->getRealPath()); // Suppress errors with @
+                @$todo($fileinfo->getRealPath()); 
             }
 
-            @rmdir($path); // Suppress errors with @
+            @rmdir($path);
         } catch (\Exception $e) {
             // Optionally log the error or just ignore it
         }
@@ -59,6 +59,12 @@ class ParseStudentPhotos extends Command
     {
         $studentName = basename($studentDir);
         $student = Student::where('name', $studentName)->first();
+
+        $birthDateFilePath = "$studentDir/custom_birth_date";
+        if (!File::exists($birthDateFilePath)) {
+            $this->error("Birth date file not found for student: $studentName");
+            return;
+        }
 
         $birthDate = $this->getFormattedBirthDate("$studentDir/custom_birth_date");
         if (! $birthDate) {

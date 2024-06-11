@@ -38,7 +38,7 @@
 
 <ul class="product-files--name-list">
 @foreach ($files as $fileKey => $file)
-<li>{{ $fileKey }}:</li>
+<li>{{ $fileKey }}: {{ basename($file['href']) }}</li>
 @endforeach
 </ul>
 
