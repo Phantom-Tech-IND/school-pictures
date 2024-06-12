@@ -695,14 +695,14 @@
                             <div class="flex flex-wrap gap-10 mt-4">
                                 <div class="flex items-center">
                                     <input id="delivery-shipping" type="radio" name="delivery-option" value="shipping"
-                                        class="w-4 h-4 text-accent-600 focus:ring-accent-500">
+                                        checked class="w-4 h-4 text-accent-600 focus:ring-accent-500">
                                     <label for="delivery-shipping" class="block ml-3 text-sm font-medium text-gray-700">
                                         Lieferung
                                     </label>
                                 </div>
                                 <div class="flex items-center">
                                     <input id="delivery-pickup" type="radio" name="delivery-option" value="pickup"
-                                        class="w-4 h-4 text-accent-600 focus:ring-accent-500" checked>
+                                        class="w-4 h-4 text-accent-600 focus:ring-accent-500" >
                                     <label for="delivery-pickup" class="block ml-3 text-sm font-medium text-gray-700">
                                         Abholung im Geschäft
                                     </label>
