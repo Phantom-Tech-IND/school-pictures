@@ -24,3 +24,6 @@ yarn-error.log
 # app/Models/Student.php
 # app/Providers/Filament/AdminPanelProvider.php
 # database/seeders/DatabaseSeeder.php
+
+/public/media/kindergarden
+__MACOSX

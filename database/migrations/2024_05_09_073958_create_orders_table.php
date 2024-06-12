@@ -16,7 +16,7 @@ return new class extends Migration
             $table->decimal('amount', 10, 2);
             $table->decimal('shipping_cost', 10, 2)->default(0);
             $table->enum('status', ['pending', 'completed']);
-            $table->boolean('pickup')->default(0);
+            $table->boolean('pickup')->default(false);
             $table->string('invoice')->nullable();
             $table->json('billing_address')->nullable();
             $table->json('shipping_address')->nullable();
