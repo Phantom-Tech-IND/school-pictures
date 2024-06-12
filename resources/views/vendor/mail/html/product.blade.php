@@ -13,13 +13,27 @@
 
 @if (!empty($checkboxes))
 <div class="product-checkboxes">
-@foreach ($checkboxes as $checkboxGroupKey => $checkboxGroup)
+@foreach($checkboxes as $checkboxGroupKey => $checkboxGroup)
+@php
+$shouldDisplayGroup = false;
+foreach($checkboxGroup as $checkboxValue) {
+    if($checkboxValue) {
+        $shouldDisplayGroup = true;
+        break;
+    }
+}
+@endphp
+
+@if($shouldDisplayGroup)
 <strong>{{ $checkboxGroupKey }}</strong><br>
-@foreach ($checkboxGroup as $checkboxKey => $checkboxValue)
+@foreach($checkboxGroup as $checkboxKey => $checkboxValue)
+@if($checkboxValue)
 <label>
-<input type="checkbox" {{ $checkboxValue ? 'checked' : '' }}> {{ $checkboxKey }}
+<input type="checkbox" checked> {{ $checkboxKey }}
 </label><br>
+@endif
 @endforeach
+@endif
 @endforeach
 </div>
 @endif
