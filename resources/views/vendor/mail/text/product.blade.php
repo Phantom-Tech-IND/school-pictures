@@ -1,11 +1,11 @@
 @props([
-	'imageUrl',
-	'name',
-	'price',
-	'quantity',
-	'checkboxes' => [],
-	'selects' => [],
-	'files' => [],
+    'imageUrl',
+    'name',
+    'price',
+    'quantity',
+    'checkboxes' => [],
+    'selects' => [],
+    'files' => [],
 ])
 
 **{{ $name }}**
@@ -15,10 +15,24 @@ Preis: {{ $price }} CHF
 @if(!empty($checkboxes))
 Kontrollkästchen:
 @foreach($checkboxes as $checkboxGroupKey => $checkboxGroup)
+@php
+$shouldDisplayGroup = false;
+foreach($checkboxGroup as $checkboxValue) {
+    if($checkboxValue) {
+        $shouldDisplayGroup = true;
+        break;
+    }
+}
+@endphp
+
+@if($shouldDisplayGroup)
 {{ $checkboxGroupKey }}:
 @foreach($checkboxGroup as $checkboxKey => $checkboxValue)
-- {{ $checkboxKey }}: {{ $checkboxValue ? 'Yes' : 'No' }}
+@if($checkboxValue)
+- {{ $checkboxKey }}: Yes
+@endif
 @endforeach
+@endif
 @endforeach
 @endif
 
@@ -32,7 +46,6 @@ Auswahlen:
 @if(!empty($files))
 Dateien:
 @foreach($files as $fileKey => $file)
-- {{ $fileKey }}: {{ $file['href'] }}
+- {{ $fileKey }}: {{ basename($file['href']) }}
 @endforeach
 @endif
-
