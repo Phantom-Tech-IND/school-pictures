@@ -52,8 +52,9 @@ class CartController extends Controller
         $cart = $this->getCartItems();
         $shippingCost = 0;
         $totalPrice = $cart['subtotal'];
+        $pickup = isset($data['pickup']) ? filter_var($data['pickup'], FILTER_VALIDATE_BOOLEAN) : false;
 
-        if ($totalPrice < Constants::SHIPPING_THRESHOLD) {
+        if ($totalPrice < Constants::SHIPPING_THRESHOLD && !$pickup) {
             $shippingCost = Constants::SHIPPING_COST;
         }
 
@@ -92,6 +93,7 @@ class CartController extends Controller
             'billing_address' => json_encode($billingAddress),
             'shipping_address' => json_encode($shippingAddress),
             'comment' => $data['comment'] ?? '',
+            'pickup' => $pickup,
         ];
 
         try {
@@ -296,9 +298,8 @@ class CartController extends Controller
             }
         }
 
-        $nextIndex = count($cart);
         $totalPrice = $this->calculateProductTotal($product_id, $selects, $checkbox);
-        $cart[$nextIndex] = [
+        $cart[] = [
             'product_id' => $product_id,
             'quantity' => $quantity,
             'selects' => $selects,

@@ -750,42 +750,6 @@
     </div>
 @endsection
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const pickupCheckbox = document.getElementById('pickup');
-        const shippingCostElement = document.getElementById('shipping');
-        const originalShippingCost = parseFloat({{ Constants::SHIPPING_COST }});
-        const shippingThreshold = parseFloat({{ Constants::SHIPPING_THRESHOLD }});
-
-        pickupCheckbox.addEventListener('change', function() {
-            updateShippingCostBasedOnPickup(this.checked);
-        });
-
-        function updateShippingCostBasedOnPickup(isPickup) {
-            if (isPickup) {
-                shippingCostElement.textContent = '0.00';
-            } else {
-                shippingCostElement.textContent = originalShippingCost.toFixed(2);
-            }
-            updateTotal();
-        }
-
-        function updateTotal() {
-            let subtotal = parseFloat(document.getElementById('subtotal').textContent);
-            let shippingCost = parseFloat(shippingCostElement.textContent);
-            const shippingCostText = shippingCostElement.textContent;
-
-            if (subtotal >= shippingThreshold) {
-                shippingCost = 0;
-            }
-
-            const total = subtotal + shippingCost;
-            document.getElementById('total').textContent = total.toFixed(2);
-        }
-
-        updateTotal();
-    });
-</script>
-<script>
     const shippingCost = parseFloat({{ Constants::SHIPPING_COST }});
     const shippingThreshold = parseFloat({{ Constants::SHIPPING_THRESHOLD }});
 
@@ -864,11 +828,19 @@
         }
     };
 
+    document.addEventListener('DOMContentLoaded', function() {
+        const pickupCheckbox = document.getElementById('pickup');
+        pickupCheckbox.addEventListener('change', function() {
+            updateTotal();
+        });
+    });
+
     const updateTotal = () => {
         let subtotal = parseFloat(document.getElementById('subtotal').textContent);
+        const pickupCheckbox = document.getElementById('pickup');
 
         const shippingItem = document.getElementById('shipping');
-        if (subtotal >= shippingThreshold) {
+        if (subtotal >= shippingThreshold || pickupCheckbox.checked) {
             shippingItem.style.textDecoration = 'line-through';
         } else {
             subtotal += shippingCost;
