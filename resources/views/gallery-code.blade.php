@@ -10,8 +10,9 @@
     ]) --}}
     <div class="px-6 pt-12 bg-white sm:py-8 lg:px-8">
         <div class="max-w-4xl mx-auto text-center">
-            <h2 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-2xl">Fotoshooting
-                im Kindergarten Buttisholz</h2>
+            <h2 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-2xl">
+                {!! $student->event_name ?? 'Fotoshooting' !!}
+            </h2>
             <p class="mt-6 text-lg leading-8 text-gray-600">Herzlich willkommen in Ihrer privaten Online Galerie. Besten
                 Dank, dass wir Ihr Kind fotografieren durften. Viel Spass beim Betrachten der Bilder..</p>
         </div>
