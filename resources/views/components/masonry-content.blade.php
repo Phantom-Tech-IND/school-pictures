@@ -4,8 +4,6 @@
             <br />
             ARTLINE FOTOGRAFIE AG
         </h1>
-        <h3 class="mt-2 text-sm italic text-gray-600 sm:text-md">REM GALISUM MAXIME VEL OBCAECATI QUAERAT EOS VELIT QUIA.
-        </h3>
     </div>
     <div class="masonry pt-8 max-w-[1140px] mx-auto">
         <div class="flex flex-col gap-4">
