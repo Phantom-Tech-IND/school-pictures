@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->enum('institution_type', ['school', 'kindergarden']);
+            $table->string('event_name')->nullable();
             $table->date('birth_date')->nullable();
             $table->timestamps();
         });

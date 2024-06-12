@@ -60,6 +60,9 @@ class ParseStudentPhotos extends Command
         $studentName = basename($studentDir);
         $student = Student::where('name', $studentName)->first();
 
+        $eventNameFilePath = "$studentDir/custom_text";
+        $eventName = File::exists($eventNameFilePath) ? trim(file_get_contents($eventNameFilePath)) : "Kindergarten und Schulfotografie";
+
         $birthDateFilePath = "$studentDir/custom_birth_date";
         if (!File::exists($birthDateFilePath)) {
             $this->error("Birth date file not found for student: $studentName");
@@ -74,9 +77,10 @@ class ParseStudentPhotos extends Command
         }
 
         if (! $student) {
-            $student = $this->createStudent($studentName, $institutionType, $birthDate);
+            $student = $this->createStudent($studentName, $institutionType, $birthDate, $eventName);
         } else {
             $student->birth_date = $birthDate;
+            $student->event_name = $eventName;
             $student->save();
         }
 
@@ -91,10 +95,11 @@ class ParseStudentPhotos extends Command
         return $birthDate ? $birthDate->format('Y-m-d') : null;
     }
 
-    protected function createStudent($studentName, $institutionType, $birthDate)
+    protected function createStudent($studentName, $institutionType, $birthDate, $eventName)
     {
         $student = new Student([
             'name' => $studentName,
+            'event_name' => $eventName,
             'institution_type' => $institutionType,
             'birth_date' => $birthDate,
         ]);

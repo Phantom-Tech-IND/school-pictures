@@ -13,6 +13,7 @@ class Student extends Model implements AuthAuthenticatable
     protected $fillable = [
         'name',
         'birth_date',
+        'event_name',
         'photo',
         'institution_type',
     ];
