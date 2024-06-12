@@ -6,8 +6,8 @@ use App\Filament\Resources\ContactRelationManagerResource\RelationManagers\Conta
 use App\Filament\Resources\OrderResource\Pages;
 use App\Models\Order;
 use Filament\Forms\Components\Checkbox;
-use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Fieldset;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Select;
@@ -43,15 +43,15 @@ class OrderResource extends Resource
                     ->native(false)
                     ->relationship('contact', 'name'),
                 TextInput::make('amount')->prefix('CHF')->required(),
+                Select::make('pickup')
+                    ->options(['0' => 'No', '1' => 'Yes'])
+                    ->default('0')
+                    ->required(),
                 Select::make('status')
                     ->default('pending')
                     ->required()
                     ->native(false)
                     ->options(['pending' => 'pending', 'completed' => 'completed']),
-                TextInput::make('id')
-                    ->label('Order ID')
-                    ->disabled()
-                    ->default(fn ($record) => $record->id),
                 Select::make('payment_method')
                     ->options(['card' => 'card', 'bank_transfer' => 'bank_transfer'])
                     ->native(false)
@@ -193,6 +193,13 @@ class OrderResource extends Resource
                         'success' => 'card',
                         'info' => 'bank_transfer',
                     ]),
+                TextColumn::make('pickup')
+                    ->label('Pickup')
+                    ->formatStateUsing(function (Order $record) {
+                        return $record->pickup ? 'Yes' : 'No';
+                    })
+                    ->badge()
+                    ->color(fn (Order $record) => $record->pickup ? 'success' : 'danger'),
                 TextColumn::make('invoices.id')
                     ->searchable()
                     ->formatStateUsing(function ($record) {

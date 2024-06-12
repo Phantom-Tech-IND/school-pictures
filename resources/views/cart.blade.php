@@ -135,7 +135,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="sm:col-span-2 input-component">
                                 <div class="flex justify-between">
                                     <label for="apartment" class="block text-sm font-medium text-gray-700">Wohnung, Suite
@@ -276,6 +275,18 @@
                                                 clip-rule="evenodd" />
                                         </svg>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="my-10">
+                            <h2 class="text-lg font-medium text-gray-900">Sie können auch</h2>
+                            <div class="flex flex-wrap gap-10 mt-4">
+                                <div class="flex items-center">
+                                    <input id="pickup" type="checkbox" name="pickup" value="true"
+                                        class="w-4 h-4 text-accent-600 focus:ring-accent-500">
+                                    <label for="pickup" class="block ml-3 text-sm font-medium text-gray-700">
+                                        Abholung im Geschäft, Gewerbezone 59, 6018 Buttisholz
+                                    </label>
                                 </div>
                             </div>
                         </div>
@@ -681,13 +692,9 @@
                                         id="subtotal">{{ number_format($cartItems['subtotal'], 2) }}</span> CHF</dd>
                             </div>
                             <div class="flex items-center justify-between">
-                                <dt class="text-sm">Versand</dt>
+                                <dt class="text-sm">Versandkostenpauschale - Kostenlos ab CHF 50.00</dt>
                                 <dd class="text-sm font-medium text-gray-900"><span
                                         id="shipping">{{ Constants::SHIPPING_COST }}</span> CHF</dd>
-                            </div>
-                            <div class="flex items-center justify-between">
-                                <dt class="text-sm">Steuern</dt>
-                                <dd class="text-sm font-medium text-gray-900"><span id="taxes">0</span> CHF</dd>
                             </div>
                             <div class="flex items-center justify-between pt-6 border-t border-gray-200">
                                 <dt class="text-base font-medium">Gesamt</dt>
@@ -742,6 +749,42 @@
         </div>
     </div>
 @endsection
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const pickupCheckbox = document.getElementById('pickup');
+        const shippingCostElement = document.getElementById('shipping');
+        const originalShippingCost = parseFloat({{ Constants::SHIPPING_COST }});
+        const shippingThreshold = parseFloat({{ Constants::SHIPPING_THRESHOLD }});
+
+        pickupCheckbox.addEventListener('change', function() {
+            updateShippingCostBasedOnPickup(this.checked);
+        });
+
+        function updateShippingCostBasedOnPickup(isPickup) {
+            if (isPickup) {
+                shippingCostElement.textContent = '0.00';
+            } else {
+                shippingCostElement.textContent = originalShippingCost.toFixed(2);
+            }
+            updateTotal(); 
+        }
+
+        function updateTotal() {
+            let subtotal = parseFloat(document.getElementById('subtotal').textContent);
+            let shippingCost = parseFloat(shippingCostElement.textContent);
+            const shippingCostText = shippingCostElement.textContent;
+
+            if (subtotal >= shippingThreshold) {
+                shippingCost = 0;
+            }
+
+            const total = subtotal + shippingCost;
+            document.getElementById('total').textContent = total.toFixed(2);
+        }
+
+        updateTotal();
+    });
+</script>
 <script>
     const shippingCost = parseFloat({{ Constants::SHIPPING_COST }});
     const shippingThreshold = parseFloat({{ Constants::SHIPPING_THRESHOLD }});

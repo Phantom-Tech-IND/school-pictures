@@ -13,11 +13,7 @@ Stadt: {{ $country }}/{{ $city }}<br>
 Adresse: {{ $address }}<br>
 PLZ: {{ $zip }}<br>
 @endif
-@if ($comment)
-Kommentar:<br>
-{{ $comment }}
-<br>
-@endif
+
 
 @if ($order->payment_method === 'bank_transfer' && $emailRole == 'user')
 Bitte überweisen Sie den Betrag auf folgendes Konto:<br>
@@ -29,7 +25,20 @@ Bitte verwenden Sie die Bestellnummer als Verwendungszweck: <strong>{{ $order->i
 @endif
 @if ($emailRole == 'admin')
 # Neue Bestellung von {{ $contact->name }}<br>
+Bestellnummer: **{{ $order->id }}**<br>
+Versandkosten: {{ $order->shipping_cost }} CHF<br>
+Gesamtbetrag: {{ $order->amount }} CHF<br>
+<br>
+Stadt: {{ $country }}/{{ $city }}<br>
+Adresse: {{ $address }}<br>
+PLZ: {{ $zip }}<br>
+Abholung im Geschäft: {{ $order->pickup === 1 ? 'ja' : 'nein' }}<br>
 Zahlungsmethode: {{ $order->payment_method === 'card' ? 'Zahls Payment' : ($order->payment_method === 'bank_transfer' ? 'Bank Transfer' : $order->payment_method) }}<br>
+@endif
+@if ($comment)
+Kommentar:<br>
+{{ $comment }}
+<br>
 @endif
 
 @if ($emailRole == 'admin')

@@ -4,15 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\OrderItem;
 
 class Order extends Model
 {
     use HasFactory;
 
     protected $fillable = [
+        'pickup',
         'amount', 'status', 'invoice', 'contact_id', 'payment_method', 'payment_status',
-        'address_same_as_billing', 'billing_address', 'shipping_address', 'comment', 'shipping_cost'
+        'address_same_as_billing', 'billing_address', 'shipping_address', 'comment', 'shipping_cost',
     ];
 
     public function getBillingAddressAttribute($value)
