@@ -9,11 +9,11 @@
 ])
 
 **{{ $name }}**
-Quantity: {{ $quantity }}
-Price: {{ $price }} CHF
+Menge: {{ $quantity }}
+Preis: {{ $price }} CHF
 
 @if(!empty($checkboxes))
-Checkboxes:
+Kontrollkästchen:
 @foreach($checkboxes as $checkboxGroupKey => $checkboxGroup)
 	{{ $checkboxGroupKey }}:
 	@foreach($checkboxGroup as $checkboxKey => $checkboxValue)
@@ -23,14 +23,14 @@ Checkboxes:
 @endif
 
 @if(!empty($selects))
-Selects:
+Auswahlen:
 @foreach($selects as $selectKey => $selectValue)
 	- {{ $selectKey }}: {{ $selectValue }}
 @endforeach
 @endif
 
 @if(!empty($files))
-Files:
+Dateien:
 @foreach($files as $fileKey => $file)
 	- {{ $fileKey }}: {{ $file['href'] }}
 @endforeach

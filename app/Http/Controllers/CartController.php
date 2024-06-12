@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Constants\Constants;
 use App\Mail\OrderCreated;
 use App\Models\Contact;
 use App\Models\Order;
@@ -11,7 +12,6 @@ use Artesaos\SEOTools\Facades\SEOTools;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
-use App\Constants\Constants;
 
 class CartController extends Controller
 {
@@ -54,7 +54,7 @@ class CartController extends Controller
         $totalPrice = $cart['subtotal'];
         $pickup = isset($data['pickup']) ? filter_var($data['pickup'], FILTER_VALIDATE_BOOLEAN) : false;
 
-        if ($totalPrice < Constants::SHIPPING_THRESHOLD && !$pickup) {
+        if ($totalPrice < Constants::SHIPPING_THRESHOLD && ! $pickup) {
             $shippingCost = Constants::SHIPPING_COST;
         }
 
@@ -311,7 +311,7 @@ class CartController extends Controller
         $this->saveCart($cart);
 
         return response()->json([
-            'success' => 'Product added to cart successfully!',
+            'success' => 'Produkt erfolgreich zum Warenkorb hinzugefgt!',
             'totalItems' => $this->calculateTotalItems($cart),
         ]);
     }
@@ -323,11 +323,11 @@ class CartController extends Controller
             unset($cart[$index]);
             $this->saveCart($cart);
         } else {
-            return response()->json(['error' => 'Product not found in cart'], 404);
+            return response()->json(['error' => 'Produkt nicht im Warenkorb gefunden'], 404);
         }
 
         return response()->json([
-            'success' => 'Product removed from cart successfully!',
+            'success' => 'Produkt erfolgreich aus dem Warenkorb entfernt!',
             'totalItems' => $this->calculateTotalItems($cart),
             'cartItems' => $this->getCartItems(),
         ]);
@@ -344,11 +344,11 @@ class CartController extends Controller
             $cart[$index]['quantity'] = $validated['quantity'];
             $this->saveCart($cart);
         } else {
-            return response()->json(['error' => 'Product not found in cart'], 404);
+            return response()->json(['error' => 'Produkt nicht im Warenkorb gefunden'], 404);
         }
 
         return response()->json([
-            'success' => 'Quantity updated successfully!',
+            'success' => 'Menge erfolgreich aktualisiert!',
             'cartItems' => $this->getCartItems(),
         ]);
     }
@@ -358,8 +358,8 @@ class CartController extends Controller
         $cartItems = $this->getCartItems();
 
         // Set SEO tags
-        SEOTools::setTitle('Your Cart');
-        SEOTools::setDescription('View and manage the items in your cart.');
+        SEOTools::setTitle('Ihr Warenkorb');
+        SEOTools::setDescription('Hier sehen Sie und verwalten Sie die Artikel im Ihrem Warenkorb.');
 
         return view('cart', ['cartItems' => $cartItems]);
     }
@@ -367,8 +367,8 @@ class CartController extends Controller
     public function paymentSuccess()
     {
         // Set SEO tags
-        SEOTools::setTitle('Payment Success');
-        SEOTools::setDescription('Your payment was successful.');
+        SEOTools::setTitle('Zahlung erfolgreich');
+        SEOTools::setDescription('Ihre Zahlung war erfolgreich.');
 
         session()->forget('cart');
 
@@ -378,8 +378,8 @@ class CartController extends Controller
     public function paymentFailed()
     {
         // Set SEO tags
-        SEOTools::setTitle('Payment Failed');
-        SEOTools::setDescription('Your payment failed. Please try again.');
+        SEOTools::setTitle('Zahlung fehlgeschlagen');
+        SEOTools::setDescription('Ihre Zahlung ist fehlgeschlagen. Bitte versuchen Sie es mit einer anderen Zahlungsmethode.');
 
         return view('payment-failed');
     }
@@ -389,7 +389,7 @@ class CartController extends Controller
         session()->forget('cart');
 
         return response()->json([
-            'success' => 'Cart cleared successfully!',
+            'success' => 'Warenkorb erfolgreich leert!',
             'totalItems' => 0,
             'cartItems' => [],
         ]);

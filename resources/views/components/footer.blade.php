@@ -37,8 +37,9 @@
                             <li>
                                 <a href="https://www.google.com/maps/place/Gewerbezone+59,+6018+Buttisholz,+Switzerland/@47.1116212,8.0758895,678m/data=!3m2!1e3!4b1!4m6!3m5!1s0x478fde276a6f0f23:0x5f29a9e362137116!8m2!3d47.1116176!4d8.0784698!16s%2Fg%2F11c5mfs8_s?entry=ttu"
                                     class="text-sm leading-6 text-gray-300 hover:text-white">Gewerbezone
-                                    59, Buttisholz,
-                                    6018, Schweiz</a>
+                                    59, 6018,
+                                    Buttisholz,
+                                    Schweiz</a>
                             </li>
                             <li>
                                 <a href="tel:+41419214025" class="text-sm leading-6 text-gray-300 hover:text-white">+41
