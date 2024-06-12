@@ -124,14 +124,14 @@ class CartController extends Controller
                     'cartItems' => $this->getCartItems(),
                 ]);
             } else {
-                return $this->createPaymentForm($cart, $order->id, $contact);
+                return $this->createPaymentForm($totalPrice, $order->id, $contact);
             }
         } catch (Exception $e) {
             return response()->json(['error' => 'Failed to create order: '.$e->getMessage()], 500);
         }
     }
 
-    public function createPaymentForm($totalPrice, $order_id, $contact)
+    public function createPaymentForm(float $totalPrice, string $order_id, Contact $contact)
     {
         $instanceName = env('PAYMENT_INSTANCE_NAME');
         $secret = env('PAYMENT_SECRET');
