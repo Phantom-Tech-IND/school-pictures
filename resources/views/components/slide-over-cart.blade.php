@@ -104,6 +104,41 @@
     }
 </style>
 <script>
+    function loadCartItems() {
+        fetch('/cart/items') // Adjust the URL based on your actual route for fetching cart items
+            .then(response => response.json())
+            .then(data => {
+                const itemsList = document.querySelector('.slide-over-cart ul');
+                itemsList.innerHTML = ''; // Clear existing items
+                data.items.forEach(item => {
+                    itemsList.innerHTML += `
+                        <li class="flex py-6">
+                            <div class="flex-shrink-0 w-24 h-24 overflow-hidden border border-gray-200 rounded-md">
+                                <img src="storage/${item.product.images[0]}" alt="${item.product.name}" class="object-cover object-center w-full h-full">
+                            </div>
+                            <div class="flex flex-col flex-1 ml-4">
+                                <div>
+                                    <div class="flex justify-between text-base font-medium text-gray-900">
+                                        <h3><a href="/product?id=${item.product.id}">${item.product.name}</a></h3>
+                                        <p class="ml-4">CHF ${item.totalPrice}</p>
+                                    </div>
+                                    <p class="mt-1 text-sm text-gray-500">${item.product.short_description}</p>
+                                    <p class="mt-1 text-sm text-gray-500">Menge ${item.quantity}</p>
+                                </div>
+                                <div class="flex items-end justify-between flex-1 text-sm">
+                                    <button onclick="removeFromCart(${item.index})" type="button" class="font-medium text-accent-600 hover:text-accent-500">Entfernen</button>
+                                </div>
+                            </div>
+                        </li>
+                    `;
+                });
+                document.querySelector('.slide-over-cart .subtotal-display').textContent =
+                    `CHF ${data.subtotal.toFixed(2)}`;
+
+            })
+            .catch(error => console.error('Error loading cart items:', error));
+    }
+
     function toggleSlideOverCart() {
         const slideOver = document.querySelector('.slide-over-cart');
         if (slideOver.classList.contains('open')) {
@@ -162,39 +197,4 @@
             .catch(error => console.error('Error removing cart item:', error));
     }
 
-    function loadCartItems() {
-        // Fetch cart items from a Laravel route and update the slide-over cart's content
-        fetch('/cart/items') // Adjust the URL based on your actual route for fetching cart items
-            .then(response => response.json())
-            .then(data => {
-                const itemsList = document.querySelector('.slide-over-cart ul');
-                itemsList.innerHTML = ''; // Clear existing items
-                data.items.forEach(item => {
-                    itemsList.innerHTML += `
-                        <li class="flex py-6">
-                            <div class="flex-shrink-0 w-24 h-24 overflow-hidden border border-gray-200 rounded-md">
-                                <img src="storage/${item.product.images[0]}" alt="${item.product.name}" class="object-cover object-center w-full h-full">
-                            </div>
-                            <div class="flex flex-col flex-1 ml-4">
-                                <div>
-                                    <div class="flex justify-between text-base font-medium text-gray-900">
-                                        <h3><a href="/product?id=${item.product.id}">${item.product.name}</a></h3>
-                                        <p class="ml-4">CHF ${item.totalPrice}</p>
-                                    </div>
-                                    <p class="mt-1 text-sm text-gray-500">${item.product.short_description}</p>
-                                    <p class="mt-1 text-sm text-gray-500">Menge ${item.quantity}</p>
-                                </div>
-                                <div class="flex items-end justify-between flex-1 text-sm">
-                                    <button onclick="removeFromCart(${item.index})" type="button" class="font-medium text-accent-600 hover:text-accent-500">Entfernen</button>
-                                </div>
-                            </div>
-                        </li>
-                    `;
-                });
-                document.querySelector('.slide-over-cart .subtotal-display').textContent =
-                    `CHF ${data.subtotal.toFixed(2)}`;
-
-            })
-            .catch(error => console.error('Error loading cart items:', error));
-    }
 </script>
