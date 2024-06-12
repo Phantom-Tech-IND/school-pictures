@@ -29,6 +29,7 @@ Bitte verwenden Sie die Bestellnummer als Verwendungszweck: <strong>{{ $order->i
 @endif
 @if ($emailRole == 'admin')
 # Neue Bestellung von {{ $contact->name }}<br>
+Zahlungsmethode: {{ $order->payment_method }}<br>
 @endif
 
 @if ($emailRole == 'admin')
