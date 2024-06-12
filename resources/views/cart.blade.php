@@ -766,7 +766,7 @@
             } else {
                 shippingCostElement.textContent = originalShippingCost.toFixed(2);
             }
-            updateTotal(); 
+            updateTotal();
         }
 
         function updateTotal() {
@@ -866,7 +866,6 @@
 
     const updateTotal = () => {
         let subtotal = parseFloat(document.getElementById('subtotal').textContent);
-        const taxes = parseFloat(document.getElementById('taxes').textContent);
 
         const shippingItem = document.getElementById('shipping');
         if (subtotal >= shippingThreshold) {
@@ -876,7 +875,7 @@
             shippingItem.style.textDecoration = 'none';
         }
 
-        const total = subtotal + taxes;
+        const total = subtotal;
         document.getElementById('total').textContent = total.toFixed(2);
     };
 
