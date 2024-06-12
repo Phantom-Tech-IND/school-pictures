@@ -105,11 +105,11 @@
 </style>
 <script>
     function loadCartItems() {
-        fetch('/cart/items') // Adjust the URL based on your actual route for fetching cart items
+        fetch('/cart/items') 
             .then(response => response.json())
             .then(data => {
                 const itemsList = document.querySelector('.slide-over-cart ul');
-                itemsList.innerHTML = ''; // Clear existing items
+                itemsList.innerHTML = ''; 
                 data.items.forEach(item => {
                     itemsList.innerHTML += `
                         <li class="flex py-6">

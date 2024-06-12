@@ -64,14 +64,6 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
-<script type="module">
-    document.addEventListener('DOMContentLoaded', function () {
-        flatpickr("#birth_date_picker", {
-            dateFormat: "Y-m-d",
-        });
-    });
-</script>
-
 <style>
     .flatpickr-calendar {
         margin-top: 0.3rem;
@@ -86,6 +78,14 @@
 <script>
     const errorParagraph = document.getElementById('login-error-message');
 
+    document.addEventListener('DOMContentLoaded', function () {
+        if (window.matchMedia('(hover: none) and (pointer: coarse)').matches) {
+            flatpickr("#birth_date_picker", {
+                dateFormat: "Y-m-d",
+            });
+        }
+    });
+    
     function beforeFormSubmit(event) {
         event.preventDefault();
 
