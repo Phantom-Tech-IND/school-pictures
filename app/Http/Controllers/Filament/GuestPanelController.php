@@ -86,8 +86,8 @@ class GuestPanelController extends Controller
     {
         try {
             $message = Message::create($request->validated());
-            $recipient = User::find(1);
-            Notification::send($recipient, new MessageNotification($message));
+            $adminRecipients = User::where('role', 'admin')->get(); // Fetch all users with the role of admin
+            Notification::send($adminRecipients, new MessageNotification($message)); // Send notification to all admin users
 
             return response()->json([
                 'status' => 'success',
