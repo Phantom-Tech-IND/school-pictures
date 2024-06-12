@@ -49,10 +49,7 @@
                                     class="text-sm leading-6 text-gray-300 hover:text-white">info@artlinefotografie.ch</a>
                             </li>
                             <li>
-                                <span class="text-sm leading-6 text-gray-300">Mo. + Mi. und Fr. : 13:00 – 17:00</span>
-                            </li>
-                            <li>
-                                <span class="text-sm leading-6 text-gray-300">Ausserhalb der Öffnungszeiten : Termine
+                                <span class="text-sm leading-6 text-gray-300">Öffnungszeiten : Termine
                                     nach Vereinbarung</span>
                             </li>
                         </ul>

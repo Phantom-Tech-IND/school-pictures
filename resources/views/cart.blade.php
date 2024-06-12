@@ -609,7 +609,7 @@
                                                         alt="Erstes Zusätzliches Bild"
                                                         class="object-cover w-16 transition duration-300 ease-in-out transform rounded-md aspect-square group-hover:scale-110">
                                                     @foreach (array_slice($item['files'], 1) as $file)
-                                                        <a href="{{ $file['href'] }}"
+                                                        <a href="{{ asset('storage/' . $file['href']) }}"
                                                             data-fslightbox="gallery-{{ $item['index'] }}"
                                                             aria-hidden="true"></a>
                                                     @endforeach

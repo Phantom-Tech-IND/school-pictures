@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <form onsubmit="handleAsyncSubmit(event)" method="POST" action="{{ route('add.to.cart') }}" id="myForm">
+    <form onsubmit="handleAsyncSubmit(event)" method="POST" action="{{ route('add.to.cart') }}" id="productForm">
         @csrf
 
         <!-- Toast Notification for displaying validation messages -->
@@ -358,7 +358,7 @@
             }
 
             // Validate select inputs and file inputs if they are required
-            document.querySelectorAll('input[type="hidden"][required]').forEach(input => {
+            document.querySelectorAll('#productForm input[type="hidden"][required]').forEach(input => {
                 const selectValue = formData.get(input.name);
                 let selectElement;
                 const isFileInput = input.id.startsWith(
@@ -389,7 +389,7 @@
 
             // Display errors if any
             if (!isValid) {
-                displayToast('All the * fields are required:\n' + errors.join('\n'));
+                displayToast('Alle mit * markierten Felder sind erforderlich:\n' + errors.join('\n'));
             }
 
             return isValid;

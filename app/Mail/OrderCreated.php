@@ -78,8 +78,7 @@ class OrderCreated extends Mailable implements ShouldQueue
     {
         return new Envelope(
             from: new Address(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME')),
-            subject: 'Order Created - '.$this->order->id,
-            to: [new Address($this->contact->email, $this->contact->name)],
+            subject: 'Bestellung erfolgreich - '.$this->order->id,
         );
     }
 
