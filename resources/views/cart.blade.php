@@ -278,18 +278,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="my-10">
-                            <h2 class="text-lg font-medium text-gray-900">Sie können auch</h2>
-                            <div class="flex flex-wrap gap-10 mt-4">
-                                <div class="flex items-center">
-                                    <input id="pickup" type="checkbox" name="pickup" value="true"
-                                        class="w-4 h-4 text-accent-600 focus:ring-accent-500">
-                                    <label for="pickup" class="block ml-3 text-sm font-medium text-gray-700">
-                                        Abholung im Geschäft, Gewerbezone 59, 6018 Buttisholz
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
 
                         <div class="mt-10" x-data="{ sameAsBilling: true }">
                             <h2 class="text-lg font-medium text-gray-900">Lieferadresse</h2>
@@ -702,6 +690,26 @@
                             </div>
                         </dl>
 
+                        <div class="px-4 py-6 space-y-6 border-t border-gray-200 sm:px-6">
+                            <h2 class="text-lg font-medium text-gray-900">Wählen Sie die Lieferung</h2>
+                            <div class="flex flex-wrap gap-10 mt-4">
+                                <div class="flex items-center">
+                                    <input id="delivery-shipping" type="radio" name="delivery-option" value="shipping"
+                                        class="w-4 h-4 text-accent-600 focus:ring-accent-500">
+                                    <label for="delivery-shipping" class="block ml-3 text-sm font-medium text-gray-700">
+                                        Lieferung
+                                    </label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input id="delivery-pickup" type="radio" name="delivery-option" value="pickup"
+                                        class="w-4 h-4 text-accent-600 focus:ring-accent-500" checked>
+                                    <label for="delivery-pickup" class="block ml-3 text-sm font-medium text-gray-700">
+                                        Abholung im Geschäft
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
                         <!-- Payment -->
                         <div class="px-4 py-6 space-y-6 border-t border-gray-200 sm:px-6">
                             <h2 class="text-lg font-medium text-gray-900">Zahlung</h2>
@@ -829,18 +837,19 @@
     };
 
     document.addEventListener('DOMContentLoaded', function() {
-        const pickupCheckbox = document.getElementById('pickup');
-        pickupCheckbox.addEventListener('change', function() {
-            updateTotal();
+        document.querySelectorAll('input[name="delivery-option"]').forEach(element => {
+            element.addEventListener('change', function() {
+                updateTotal();
+            });
         });
     });
 
     const updateTotal = () => {
         let subtotal = parseFloat(document.getElementById('subtotal').textContent);
-        const pickupCheckbox = document.getElementById('pickup');
+        const pickupCheckbox = document.querySelector('input[name="delivery-option"]:checked');
 
         const shippingItem = document.getElementById('shipping');
-        if (subtotal >= shippingThreshold || pickupCheckbox.checked) {
+        if (subtotal >= shippingThreshold || pickupCheckbox.value === 'pickup') {
             shippingItem.style.textDecoration = 'line-through';
         } else {
             subtotal += shippingCost;

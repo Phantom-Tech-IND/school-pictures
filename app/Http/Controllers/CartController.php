@@ -52,7 +52,7 @@ class CartController extends Controller
         $cart = $this->getCartItems();
         $shippingCost = 0;
         $totalPrice = $cart['subtotal'];
-        $pickup = isset($data['pickup']) ? filter_var($data['pickup'], FILTER_VALIDATE_BOOLEAN) : false;
+        $pickup = isset($data['delivery-option']) ? $data['delivery-option'] === 'pickup' : false;
 
         if ($totalPrice < Constants::SHIPPING_THRESHOLD && !$pickup) {
             $shippingCost = Constants::SHIPPING_COST;
