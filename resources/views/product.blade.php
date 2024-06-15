@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <form onsubmit="handleAsyncSubmit(event)" method="POST" action="{{ route('add.to.cart') }}" id="myForm">
+    <form onsubmit="handleAsyncSubmit(event)" method="POST" action="{{ route('add.to.cart') }}" id="productForm">
         @csrf
 
         <!-- Toast Notification for displaying validation messages -->
