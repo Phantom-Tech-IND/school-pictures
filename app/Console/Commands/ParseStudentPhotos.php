@@ -24,9 +24,9 @@ class ParseStudentPhotos extends Command
             }
         }
 
-        // $this->deleteDirectory(public_path('media/kindergarden'));
-        // $this->deleteDirectory(public_path('media/school'));
-        // $this->deleteDirectory(public_path('media/temp'));
+        $this->deleteDirectory(public_path('media/kindergarden'));
+        $this->deleteDirectory(public_path('media/school'));
+        $this->deleteDirectory(public_path('media/temp'));
     }
 
     private function deleteDirectory(string $path): void
@@ -39,7 +39,7 @@ class ParseStudentPhotos extends Command
 
             foreach ($files as $fileinfo) {
                 $todo = ($fileinfo->isDir() ? 'rmdir' : 'unlink');
-                @$todo($fileinfo->getRealPath()); 
+                @$todo($fileinfo->getRealPath());
             }
 
             @rmdir($path);
@@ -61,11 +61,12 @@ class ParseStudentPhotos extends Command
         $student = Student::where('name', $studentName)->first();
 
         $eventNameFilePath = "$studentDir/custom_text";
-        $eventName = File::exists($eventNameFilePath) ? trim(file_get_contents($eventNameFilePath)) : "Kindergarten und Schulfotografie";
+        $eventName = File::exists($eventNameFilePath) ? trim(file_get_contents($eventNameFilePath)) : 'Kindergarten und Schulfotografie';
 
         $birthDateFilePath = "$studentDir/custom_birth_date";
-        if (!File::exists($birthDateFilePath)) {
+        if (! File::exists($birthDateFilePath)) {
             $this->error("Birth date file not found for student: $studentName");
+
             return;
         }
 
@@ -89,7 +90,7 @@ class ParseStudentPhotos extends Command
 
     protected function getFormattedBirthDate($birthDateFilePath)
     {
-        $birthDateContents = trim(file_get_contents($birthDateFilePath), "\xEF\xBB\xBF");
+        $birthDateContents = trim(file_get_contents($birthDateFilePath), "\xEF\xBB\xBF\t\n\r\0\x0B\u{FEFF}");
         $birthDate = DateTime::createFromFormat('d.m.Y', $birthDateContents);
 
         return $birthDate ? $birthDate->format('Y-m-d') : null;
