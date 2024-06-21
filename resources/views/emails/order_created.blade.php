@@ -41,6 +41,8 @@ Kommentar:<br>
 <br>
 @endif
 
+Gallery code: {{ $studentName }}
+
 @if ($emailRole == 'admin')
 @component('mail::button', ['url' => url('admin/orders')])
 Bestellungen ansehen

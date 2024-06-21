@@ -37,14 +37,17 @@ class OrderCreated extends Mailable implements ShouldQueue
 
     public string $comment;
 
+    public string $studentName;
+
     /**
      * Create a new message instance.
      */
-    public function __construct(Order $order, Contact $contact, string $emailRole)
+    public function __construct(Order $order, Contact $contact, string $emailRole, string $studentName)
     {
         $this->order = $order;
         $this->contact = $contact;
         $this->emailRole = $emailRole;
+        $this->studentName = $studentName;
         $this->items = $order->items()->with('product')->get();
 
         $billingAddress = $order->billing_address;
