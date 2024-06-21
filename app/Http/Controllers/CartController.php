@@ -12,6 +12,7 @@ use Artesaos\SEOTools\Facades\SEOTools;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
@@ -32,17 +33,17 @@ class CartController extends Controller
         }, $cart));
     }
 
-    private function newOrderSendMail($order, $contact, $emailTo)
+    private function newOrderSendMail($order, $contact, $emailTo, $studentName)
     {
         // Queue mail to the client
-        Mail::to($emailTo)->queue(new OrderCreated($order, $contact, 'user'));
+        Mail::to($emailTo)->queue(new OrderCreated($order, $contact, 'user', $studentName));
 
         // Fetch all admin users
         $admins = User::where('role', 'admin')->get();
 
         // Queue an email to each admin
         foreach ($admins as $admin) {
-            Mail::to($admin->email)->queue(new OrderCreated($order, $contact, 'admin'));
+            Mail::to($admin->email)->queue(new OrderCreated($order, $contact, 'admin', $studentName));
         }
     }
 
@@ -117,7 +118,7 @@ class CartController extends Controller
                 ]);
             }
 
-            $this->newOrderSendMail($order, $contact, $contactData['email']);
+            $this->newOrderSendMail($order, $contact, $contactData['email'], Auth::user()->name);
 
             if ($data['payment_type'] === 'bank_transfer') {
                 return response()->json([
