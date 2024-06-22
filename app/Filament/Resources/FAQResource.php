@@ -26,6 +26,8 @@ class FAQResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $navigationGroup = 'Others';
+
     public static function form(Form $form): Form
     {
         return $form
@@ -57,9 +59,8 @@ class FAQResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('question'),
+                TextColumn::make('question')->limit(50),
                 TextColumn::make('category.name')->label('Category'),
-                TextColumn::make('answer')->limit(50),
             ])
             ->filters([
                 // Add filters if needed
