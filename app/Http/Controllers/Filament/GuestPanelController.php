@@ -17,6 +17,7 @@ use App\Notifications\MessageNotification;
 use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Notification;
+use App\Models\FAQCategory;
 
 class GuestPanelController extends Controller
 {
@@ -321,12 +322,35 @@ class GuestPanelController extends Controller
         return view('general-terms-and-conditions');
     }
 
+    // public function frequentlyAskedQuestions()
+    // {
+    //     // TODO: Add FAQs from the database
+    //     $tabs = \App\Constants\Constants::FAQ_TABS;
+
+    //     // Set SEO tags
+    //     SEOTools::setTitle('Frequently Asked Questions');
+    //     SEOTools::setDescription('Find answers to frequently asked questions.');
+
+    //     return view('frequently-asked-questions', compact('tabs'));
+    // }
+
     public function frequentlyAskedQuestions()
     {
-        // TODO: Add FAQs to the database
-        $tabs = \App\Constants\Constants::FAQ_TABS;
+        $categoriesDB = FAQCategory::with('faqs')->get();
 
-        // Set SEO tags
+        // Prepare the data in the specified format
+        $tabs = $categoriesDB->map(function ($category) {
+            return [
+                'name' => $category->name,
+                'questions' => $category->faqs->map(function ($faq) {
+                    return [
+                        'title' => $faq->question,
+                        'answer' => $faq->answer,
+                    ];
+                })->toArray()
+            ];
+        })->toArray();
+
         SEOTools::setTitle('Frequently Asked Questions');
         SEOTools::setDescription('Find answers to frequently asked questions.');
 
