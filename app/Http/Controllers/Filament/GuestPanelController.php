@@ -323,6 +323,7 @@ class GuestPanelController extends Controller
 
     public function frequentlyAskedQuestions()
     {
+        // TODO: Add FAQs to the database
         $tabs = \App\Constants\Constants::FAQ_TABS;
 
         // Set SEO tags
