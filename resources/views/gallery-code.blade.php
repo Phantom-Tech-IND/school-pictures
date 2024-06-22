@@ -14,7 +14,7 @@
                 {!! $student->event_name ?? 'Fotoshooting' !!}
             </h2>
             <p class="mt-6 text-lg leading-8 text-gray-600">Herzlich willkommen in Ihrer privaten Online Galerie. Besten
-                Dank, dass wir Ihr Kind fotografieren durften. Viel Spass beim Betrachten der Bilder..</p>
+                Dank, dass wir Ihr Kind fotografieren durften. Viel Spass beim Betrachten der Bilder.</p>
         </div>
     </div>
 

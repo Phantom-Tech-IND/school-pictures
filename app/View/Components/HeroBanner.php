@@ -22,7 +22,7 @@ class HeroBanner extends Component
      */
     public function render(): View|Closure|string
     {
-        $offers = Offers::orderBy('updated_at', 'desc')->take(5)->get();
+        $offers = Offers::where('title', '!=', 'Rainshooting')->orderBy('updated_at', 'desc')->take(5)->get();
         $slides = $offers->map(function ($offer) {
             return [
                 'image' => $offer->image_url,
