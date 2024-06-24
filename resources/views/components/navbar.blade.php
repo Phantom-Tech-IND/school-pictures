@@ -40,6 +40,8 @@
                             class="absolute right-0 z-50 w-48 mt-2 origin-top-right rounded-md shadow-sm"
                             style="display: none;">
                             <div class="py-1 text-right bg-white rounded-md ring-1 ring-black ring-opacity-5">
+                                <a href="{{ route('frequently-asked-questions') }}"
+                                    class="{{ request()->routeIs('frequently-asked-questions') ? 'bg-gray-100' : '' }} block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">FAQ</a>
                                 <a href="{{ route('team') }}"
                                     class="{{ request()->routeIs('team') ? 'bg-gray-100' : '' }} block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Unser
                                     Team</a>
@@ -49,6 +51,7 @@
                             </div>
                         </div>
                     </div>
+
                     <a href="{{ route('contact') }}"
                         class="{{ request()->routeIs('contact') ? 'text-accent' : ' hover:text-accent' }} uppercase">Unser
                         Kontakt</a>
@@ -112,6 +115,10 @@
                         ? 'text-accent font-semibold relative -left-2'
                         : 'relative left-0 font-medium transition-all duration-300 hover:pl-0 hover:text-accent hover:-left-2' }}">Unsere
                     angebote</a>
+                <a href="{{ route('frequently-asked-questions') }}"
+                    class="{{ request()->routeIs('frequently-asked-questions')
+                        ? 'text-accent font-semibold relative -left-2'
+                        : 'relative left-0 font-medium transition-all duration-300 hover:pl-0 hover:text-accent hover:-left-2' }}">FAQ</a>
                 <a href="{{ route('team') }}"
                     class="{{ request()->routeIs('team')
                         ? 'text-accent font-semibold relative -left-2'

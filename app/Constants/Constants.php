@@ -54,7 +54,6 @@ class Constants
 
     const FAQ_TABS = [
         [
-            'id' => 'kindergarten-und-schulfotografie',
             'name' => 'KINDERGARTEN- UND SCHULFOTOGRAFIE',
             'questions' => [
                 [
@@ -75,7 +74,6 @@ class Constants
             ],
         ],
         [
-            'id' => 'pass-/bewerbungsbilder',
             'name' => 'PASS-/BEWERBUNGSBILDER',
             'questions' => [
                 [
@@ -110,7 +108,6 @@ class Constants
             ],
         ],
         [
-            'id' => 'bestellungen',
             'name' => 'BESTELLUNGEN',
             'questions' => [
                 [

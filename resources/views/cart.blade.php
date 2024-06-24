@@ -135,73 +135,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="sm:col-span-2 input-component">
-                                <div class="flex justify-between">
-                                    <label for="apartment" class="block text-sm font-medium text-gray-700">Wohnung, Suite
-                                        usw.</label>
-                                    <p class="hidden text-sm text-red-600 input-error-message" id="apartment-error">Keine
-                                        gültige Wohnung, Suite usw.</p>
-                                </div>
-                                <div class="relative mt-1">
-                                    <input type="text" name="apartment" id="apartment" placeholder="Apt 101"
-                                        class="block w-full border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring-accent-500 sm:text-sm custom-input">
-                                    <div
-                                        class="absolute inset-y-0 right-0 items-center hidden pr-3 pointer-events-none input-error-icon">
-                                        <svg class="w-5 h-5 text-red-500" viewBox="0 0 20 20" fill="currentColor"
-                                            aria-hidden="true">
-                                            <path fill-rule="evenodd"
-                                                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-5a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0110 5zm0 10a1 1 0 100-2 1 1 0 000 2z"
-                                                clip-rule="evenodd" />
-                                        </svg>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="input-component">
-                                <div class="flex justify-between">
-                                    <label for="region" class="block text-sm font-medium text-gray-700">Bundesland /
-                                        Provinz</label>
-                                    <p class="hidden text-sm text-red-600 input-error-message" id="region-error">Kein
-                                        gültiges Bundesland oder Provinz</p>
-                                </div>
-                                <div class="relative mt-1">
-                                    <input type="text" name="region" id="region" autocomplete="address-level1"
-                                        placeholder="Bundesland oder Provinz"
-                                        class="block w-full border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring-accent-500 sm:text-sm custom-input">
-                                    <div
-                                        class="absolute inset-y-0 right-0 items-center hidden pr-3 pointer-events-none input-error-icon">
-                                        <svg class="w-5 h-5 text-red-500" viewBox="0 0 20 20" fill="currentColor"
-                                            aria-hidden="true">
-                                            <path fill-rule="evenodd"
-                                                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-5a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0110 5zm0 10a1 1 0 100-2 1 1 0 000 2z"
-                                                clip-rule="evenodd" />
-                                        </svg>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="input-component">
-                                <div class="flex justify-between">
-                                    <label for="country" class="block text-sm font-medium text-gray-700">Land</label>
-                                    <p class="hidden text-sm text-red-600 input-error-message" id="country-error">Kein
-                                        gültiges Land</p>
-                                </div>
-                                <div class="mt-1">
-                                    <select id="country" name="country" autocomplete="country-name"
-                                        class="block w-full border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring-accent-500 sm:text-sm custom-input">
-                                        <option>Schweiz</option>
-                                    </select>
-                                    <div
-                                        class="absolute inset-y-0 right-0 items-center hidden pr-3 pointer-events-none input-error-icon">
-                                        <svg class="w-5 h-5 text-red-500" viewBox="0 0 20 20" fill="currentColor"
-                                            aria-hidden="true">
-                                            <path fill-rule="evenodd"
-                                                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-5a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0110 5zm0 10a1 1 0 100-2 1 1 0 000 2z"
-                                                clip-rule="evenodd" />
-                                        </svg>
-                                    </div>
-                                </div>
-                            </div>
 
                             <div class="input-component">
                                 <div class="flex justify-between">
@@ -237,7 +170,7 @@
                                 </div>
                                 <div class="relative mt-1">
                                     <input type="text" name="city" id="city" required
-                                        autocomplete="address-level2" placeholder="Irgendstadt"
+                                        autocomplete="address-level2" placeholder="Ort"
                                         title="Bitte geben Sie eine gültige Stadt ein"
                                         class="block w-full border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring-accent-500 sm:text-sm custom-input">
                                     <div
@@ -329,78 +262,6 @@
                                     </div>
                                 </div>
 
-                                <div class="sm:col-span-2 input-component">
-                                    <div class="flex justify-between">
-                                        <label for="shipping-apartment"
-                                            class="block text-sm font-medium text-gray-700">Wohnung, Suite, etc.</label>
-                                        <p class="hidden text-sm text-red-600 input-error-message"
-                                            id="shipping-apartment-error"> Keine gültige Wohnung, Suite, etc.</p>
-                                    </div>
-                                    <div class="relative mt-1">
-                                        <input type="text" name="shipping-apartment" id="shipping-apartment"
-                                            placeholder="Wohnung, Suite, etc. (optional)"
-                                            class="block w-full border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring-accent-500 sm:text-sm custom-input">
-                                        <div
-                                            class="absolute inset-y-0 right-0 items-center hidden pr-3 pointer-events-none input-error-icon">
-                                            <svg class="w-5 h-5 text-red-500" viewBox="0 0 20 20" fill="currentColor"
-                                                aria-hidden="true">
-                                                <path fill-rule="evenodd"
-                                                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-5a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0110 5zm0 10a1 1 0 100-2 1 1 0 000 2z"
-                                                    clip-rule="evenodd" />
-                                            </svg>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="input-component">
-                                    <div class="flex justify-between">
-                                        <label for="shipping-region"
-                                            class="block text-sm font-medium text-gray-700">Bundesland
-                                            /
-                                            Provinz</label>
-                                        <p class="hidden text-sm text-red-600 input-error-message"
-                                            id="shipping-region-error">Kein gültiges Bundesland oder Provinz</p>
-                                    </div>
-                                    <div class="relative mt-1">
-                                        <input type="text" name="shipping-region" id="shipping-region"
-                                            autocomplete="address-level1" placeholder="Bundesland / Provinz"
-                                            class="block w-full border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring-accent-500 sm:text-sm custom-input">
-                                        <div
-                                            class="absolute inset-y-0 right-0 items-center hidden pr-3 pointer-events-none input-error-icon">
-                                            <svg class="w-5 h-5 text-red-500" viewBox="0 0 20 20" fill="currentColor"
-                                                aria-hidden="true">
-                                                <path fill-rule="evenodd"
-                                                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-5a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0110 5zm0 10a1 1 0 100-2 1 1 0 000 2z"
-                                                    clip-rule="evenodd" />
-                                            </svg>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="input-component">
-                                    <div class="flex justify-between">
-                                        <label for="shipping-country"
-                                            class="block text-sm font-medium text-gray-700">Land</label>
-                                        <p class="hidden text-sm text-red-600 input-error-message"
-                                            id="shipping-country-error">Kein gültiges Land</p>
-                                    </div>
-                                    <div class="mt-1">
-                                        <select id="shipping-country" name="shipping-country" autocomplete="country-name"
-                                            class="block w-full border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring-accent-500 sm:text-sm custom-input">
-                                            <option>Schweiz</option>
-                                        </select>
-                                        <div
-                                            class="absolute inset-y-0 right-0 items-center hidden pr-3 pointer-events-none input-error-icon">
-                                            <svg class="w-5 h-5 text-red-500" viewBox="0 0 20 20" fill="currentColor"
-                                                aria-hidden="true">
-                                                <path fill-rule="evenodd"
-                                                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-5a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0110 5zm0 10a1 1 0 100-2 1 1 0 000 2z"
-                                                    clip-rule="evenodd" />
-                                            </svg>
-                                        </div>
-                                    </div>
-                                </div>
-
                                 <div class="input-component">
                                     <div class="flex justify-between">
                                         <label for="shipping-postal-code"
@@ -410,6 +271,7 @@
                                             id="shipping-postal-code-error">
                                             Keine gültige Postleitzahl</p>
                                     </div>
+
                                     <div class="relative mt-1">
                                         <input type="text" name="shipping-postal-code" id="shipping-postal-code"
                                             :required="sameAsBilling === 'false'" autocomplete="postal-code"
@@ -439,7 +301,7 @@
                                     <div class="relative mt-1">
                                         <input type="text" name="shipping-city" id="shipping-city"
                                             :required="sameAsBilling === 'false'" autocomplete="address-level2"
-                                            placeholder="Stadt" title="Bitte geben Sie eine gültige Stadt ein"
+                                            placeholder="Ort" title="Bitte geben Sie eine gültige Stadt ein"
                                             class="block w-full border-gray-300 rounded-md shadow-sm focus:border-accent-500 focus:ring-accent-500 sm:text-sm custom-input">
                                         <div
                                             class="absolute inset-y-0 right-0 items-center hidden pr-3 pointer-events-none input-error-icon">

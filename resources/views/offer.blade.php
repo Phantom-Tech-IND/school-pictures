@@ -35,7 +35,7 @@
                 @endif
                     @include('components.plan-card', [
                         'offerId' => $item->id,
-                        'offer_url' => null, // TODO: fix this
+                        'offer_url' => null,
                         'title' => $item->name,
                         'badge' => $item->is_popular ? 'most popular' : null,
                         'price' => $item->price,
