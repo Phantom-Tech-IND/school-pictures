@@ -3,22 +3,16 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\FAQResource\Pages;
-use App\Filament\Resources\FAQResource\RelationManagers;
 use App\Models\FAQ;
-use Filament\Forms;
+use App\Models\FAQCategory;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\RichEditor;
-use Filament\Forms\Components\Select;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Forms\Components\Textarea;
-use App\Models\FAQCategory;
-use Filament\Forms\Components\Actions;
+use Filament\Tables\Table;
 
 class FAQResource extends Resource
 {
@@ -27,6 +21,8 @@ class FAQResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     protected static ?string $navigationGroup = 'Others';
+
+    protected static ?string $navigationLabel = 'FAQ';
 
     public static function form(Form $form): Form
     {
@@ -45,7 +41,7 @@ class FAQResource extends Resource
                     ->createOptionForm([
                         TextInput::make('name')
                             ->required()
-                            ->label('New Category Name')
+                            ->label('New Category Name'),
                     ])
                     ->preload()
                     ->required(),
@@ -93,4 +89,3 @@ class FAQResource extends Resource
         ];
     }
 }
-
