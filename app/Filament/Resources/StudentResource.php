@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\StudentResource\Pages;
+use App\Filament\Resources\StudentResource\Actions\AddCopyrightAction;
 use App\Models\Student;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -83,7 +84,20 @@ class StudentResource extends Resource
                     ->counts('photos'),
             ])
             ->filters([
-                //
+                Tables\Filters\Filter::make('birth_date')
+                    ->form([
+                        \Filament\Forms\Components\DatePicker::make('from')
+                            ->label('From')
+                            ->native(false),
+                        \Filament\Forms\Components\DatePicker::make('to')
+                            ->label('To')
+                            ->native(false),
+                    ])
+                    ->query(function ($query, array $data) {
+                        return $query
+                            ->when($data['from'], fn ($query, $date) => $query->whereDate('birth_date', '>=', $date))
+                            ->when($data['to'], fn ($query, $date) => $query->whereDate('birth_date', '<=', $date));
+                    }),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -91,6 +105,7 @@ class StudentResource extends Resource
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
+                    AddCopyrightAction::make('addCopyright'),
                 ]),
             ]);
     }

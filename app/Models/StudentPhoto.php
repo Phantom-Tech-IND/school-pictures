@@ -12,6 +12,7 @@ class StudentPhoto extends Model
     protected $fillable = [
         'student_id',
         'photo_path',
+        'has_copyright',
     ];
 
     public function student()
