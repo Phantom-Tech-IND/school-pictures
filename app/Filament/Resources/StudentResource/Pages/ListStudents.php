@@ -93,7 +93,7 @@ class ListStudents extends ListRecords
             Action::make('syncPhotos')
                 ->label('Sync Photos')
                 ->action(function () {
-                    \Illuminate\Support\Facades\Artisan::call('parse:student-photos');
+                    Artisan::call('parse:student-photos');
                 }),
         ];
     }
