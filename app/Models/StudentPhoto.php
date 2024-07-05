@@ -26,6 +26,8 @@ class StudentPhoto extends Model
         static::created(function ($studentPhoto) {
             $fullPhotoPath = storage_path('app/public/' . $studentPhoto->photo_path);
             WatermarkService::addWatermark($fullPhotoPath, $fullPhotoPath);
+            $studentPhoto->has_copyright = true;
+            $studentPhoto->save();
         });
     }
 }
