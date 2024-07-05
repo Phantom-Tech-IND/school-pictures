@@ -6,7 +6,7 @@ use Intervention\Image\ImageManagerStatic as Image;
 
 class WatermarkService
 {
-    public static function addWatermarkWithPattern(string $originalFilePath, string $filePath2Save, string $watermarkPath = null)
+    public static function addWatermarkWithPattern(string $originalFilePath, string $filePath2Save, ?string $watermarkPath = null)
     {
         $watermarkPath = $watermarkPath ?? public_path('watermark.png');
 
@@ -34,10 +34,11 @@ class WatermarkService
             $watermarkImg->destroy();
             $img->destroy(); // to free memory in case you have a lot of images to be processed
         }
+
         return $filePath2Save;
     }
 
-    public static function addWatermark(string $originalFilePath, string $filePath2Save, string $watermarkPath = null)
+    public static function addWatermark(string $originalFilePath, string $filePath2Save, ?string $watermarkPath = null)
     {
         $watermarkPath = $watermarkPath ?? public_path('watermark.png');
 
@@ -49,6 +50,8 @@ class WatermarkService
             $constraint->aspectRatio();
         });
 
+        $watermarkImg->opacity(30);
+
         // Calculate the center position
         $x = intval(($img->width() - $watermarkImg->width()) / 2);
         $y = intval(($img->height() - $watermarkImg->height()) / 2);
@@ -59,6 +62,7 @@ class WatermarkService
 
         $watermarkImg->destroy();
         $img->destroy();
+
         return $filePath2Save;
     }
 }
