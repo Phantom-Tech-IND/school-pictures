@@ -2,12 +2,13 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\StudentResource\Pages;
 use App\Filament\Resources\StudentResource\Actions\AddCopyrightAction;
+use App\Filament\Resources\StudentResource\Pages;
 use App\Models\Student;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Table;
 
 class StudentResource extends Resource
@@ -60,7 +61,7 @@ class StudentResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-            ->defaultSort('created_at', 'desc')
+            ->defaultSort('updated_at', 'desc')
             ->columns([
                 Tables\Columns\TextColumn::make('name')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('birth_date')->sortable()->label('Birth Date')->searchable(),
@@ -84,21 +85,27 @@ class StudentResource extends Resource
                     ->counts('photos'),
             ])
             ->filters([
-                Tables\Filters\Filter::make('birth_date')
+                Tables\Filters\Filter::make('updated_at')
                     ->form([
                         \Filament\Forms\Components\DatePicker::make('from')
-                            ->label('From')
+                            ->label('Updated From')
+                            ->columnSpan(1)
                             ->native(false),
                         \Filament\Forms\Components\DatePicker::make('to')
-                            ->label('To')
+                            ->label('Updated To')
+                            ->columnSpan(1)
                             ->native(false),
                     ])
+                    ->columns(2)
+                    ->columnSpan('full')
                     ->query(function ($query, array $data) {
                         return $query
-                            ->when($data['from'], fn ($query, $date) => $query->whereDate('birth_date', '>=', $date))
-                            ->when($data['to'], fn ($query, $date) => $query->whereDate('birth_date', '<=', $date));
+                            ->when($data['from'], fn ($query, $date) => $query->whereDate('updated_at', '>=', $date))
+                            ->when($data['to'], fn ($query, $date) => $query->whereDate('updated_at', '<=', $date));
                     }),
-            ])
+            ],
+                layout: FiltersLayout::AboveContent,
+            )
             ->actions([
                 Tables\Actions\EditAction::make(),
             ])
