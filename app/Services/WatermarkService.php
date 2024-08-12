@@ -50,8 +50,6 @@ class WatermarkService
             $constraint->aspectRatio();
         });
 
-        $watermarkImg->opacity(30);
-
         // Calculate the center position
         $x = intval(($img->width() - $watermarkImg->width()) / 2);
         $y = intval(($img->height() - $watermarkImg->height()) / 2);

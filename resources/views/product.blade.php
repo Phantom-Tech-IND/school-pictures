@@ -91,7 +91,7 @@
                                         aria-labelledby="listbox-label-{{ $attribute['title'] }}"
                                         @click.away="open = false">
                                         @foreach ($attribute['options'] as $option)
-                                            <li @click="selected = { label: '{{ $option['label'] }}', price: {{ $option['price'] ?? 0 }} }; open = false"
+                                            <li @click="selected = { label: '{{ $option['label'] }}', price: {{ $option['price'] ?? 0 }} }; open = false; updateTotalPrice()"
                                                 :class="{ 'bg-blue-100': selected.label === '{{ $option['label'] }}' }"
                                                 class="relative py-2 pl-3 pr-3 text-gray-900 cursor-default select-none hover:bg-gray-100"
                                                 id="listbox-option-{{ $loop->index }}" role="option"
@@ -218,16 +218,16 @@
                                                         <g>
                                                             <path
                                                                 d="M139.414,96.193c-22.673,0-41.056,18.389-41.056,41.062c0,22.678,18.383,41.062,41.056,41.062
-                                                                                                                                        c22.678,0,41.059-18.383,41.059-41.062C180.474,114.582,162.094,96.193,139.414,96.193z M159.255,146.971h-12.06v12.06
-                                                                                                                                        c0,4.298-3.483,7.781-7.781,7.781c-4.298,0-7.781-3.483-7.781-7.781v-12.06h-12.06c-4.298,0-7.781-3.483-7.781-7.781
-                                                                                                                                        c0-4.298,3.483-7.781,7.781-7.781h12.06v-12.063c0-4.298,3.483-7.781,7.781-7.781c4.298,0,7.781,3.483,7.781,7.781v12.063h12.06
-                                                                                                                                        c4.298,0,7.781,3.483,7.781,7.781C167.036,143.488,163.555,146.971,159.255,146.971z" />
+                                                                                                                                                    c22.678,0,41.059-18.383,41.059-41.062C180.474,114.582,162.094,96.193,139.414,96.193z M159.255,146.971h-12.06v12.06
+                                                                                                                                                    c0,4.298-3.483,7.781-7.781,7.781c-4.298,0-7.781-3.483-7.781-7.781v-12.06h-12.06c-4.298,0-7.781-3.483-7.781-7.781
+                                                                                                                                                    c0-4.298,3.483-7.781,7.781-7.781h12.06v-12.063c0-4.298,3.483-7.781,7.781-7.781c4.298,0,7.781,3.483,7.781,7.781v12.063h12.06
+                                                                                                                                                    c4.298,0,7.781,3.483,7.781,7.781C167.036,143.488,163.555,146.971,159.255,146.971z" />
                                                             <path
                                                                 d="M149.997,0C67.157,0,0.001,67.158,0.001,149.995s67.156,150.003,149.995,150.003s150-67.163,150-150.003
-                                                                                                                                        S232.836,0,149.997,0z M225.438,221.254c-2.371,2.376-5.48,3.561-8.59,3.561s-6.217-1.185-8.593-3.561l-34.145-34.147
-                                                                                                                                        c-9.837,6.863-21.794,10.896-34.697,10.896c-33.548,0-60.742-27.196-60.742-60.744c0-33.548,27.194-60.742,60.742-60.742
-                                                                                                                                        c33.548,0,60.744,27.194,60.744,60.739c0,11.855-3.408,22.909-9.28,32.256l34.56,34.562
-                                                                                                                                        C230.185,208.817,230.185,216.512,225.438,221.254z" />
+                                                                                                                                                    S232.836,0,149.997,0z M225.438,221.254c-2.371,2.376-5.48,3.561-8.59,3.561s-6.217-1.185-8.593-3.561l-34.145-34.147
+                                                                                                                                                    c-9.837,6.863-21.794,10.896-34.697,10.896c-33.548,0-60.742-27.196-60.742-60.744c0-33.548,27.194-60.742,60.742-60.742
+                                                                                                                                                    c33.548,0,60.744,27.194,60.744,60.739c0,11.855-3.408,22.909-9.28,32.256l34.56,34.562
+                                                                                                                                                    C230.185,208.817,230.185,216.512,225.438,221.254z" />
 
                                                         </g>
                                                     </g>
@@ -426,23 +426,30 @@
         }
 
         function updateTotalPrice() {
-            var basePrice = parseFloat('{{ $product->price }}'); // Get the base price from Blade into JS
+            var basePrice = parseFloat('{{ $product->price }}');
             var quantity = parseInt(document.querySelector('[x-bind\\:value="quantity"]').value);
             var optionsPrice = 0;
 
-            // Assuming each selected option has a class or attribute you can select on
-            document.querySelectorAll('.option-selected').forEach(option => {
-                optionsPrice += parseFloat(option.dataset.price); // Use dataset to access data attributes
+            // Calculate price for select options
+            document.querySelectorAll('input[type="hidden"][name]').forEach(input => {
+                const selectElement = document.querySelector(`[aria-labelledby="listbox-label-${input.name}"]`);
+                if (selectElement) {
+                    const selectedOption = selectElement.querySelector('span[x-text]').textContent;
+                    const priceMatch = selectedOption.match(/(\d+(\.\d{1,2})?) CHF/);
+                    if (priceMatch) {
+                        optionsPrice += parseFloat(priceMatch[1]);
+                    }
+                }
             });
 
-            // Update to include checkbox options with prices
+            // Calculate price for checkbox options (existing code)
             document.querySelectorAll('input[type="checkbox"]:checked').forEach(checkbox => {
                 var price = parseFloat(checkbox.getAttribute('data-price') || 0);
                 optionsPrice += price;
             });
 
             var priceWithOptions = basePrice + optionsPrice;
-            var totalPrice = (basePrice + optionsPrice) * quantity;
+            var totalPrice = priceWithOptions * quantity;
 
             document.getElementById('optionsPrice').innerText = optionsPrice.toFixed(2) + ' CHF';
             document.getElementById('priceWithOptions').innerText = quantity + ' x ' + priceWithOptions.toFixed(2) + ' CHF';
@@ -505,7 +512,7 @@
 
             window.scrollTo(0, scrollPosition);
         }
-
+        document.addEventListener('DOMContentLoaded', updateTotalPrice);
         document.addEventListener('click', function(event) {
             const modal = document.getElementById('attributeProductImageModal');
             if (event.target === modal) {
