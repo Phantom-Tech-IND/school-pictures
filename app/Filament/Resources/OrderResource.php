@@ -18,6 +18,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Collection;
 
 class OrderResource extends Resource
 {
@@ -168,10 +169,16 @@ class OrderResource extends Resource
                     ->searchable()
                     ->url(fn ($record) => 'mailto:'.$record->contact->email)
                     ->openUrlInNewTab(),
-                TextColumn::make('amount')
+                TextColumn::make('status')
                     ->sortable()
                     ->searchable()
-                    ->money('CHF'),
+                    ->badge(function (Order $record) {
+                        return $record->status;
+                    })
+                    ->colors([
+                        'success' => 'completed',
+                        'danger' => 'pending',
+                    ]),
                 TextColumn::make('payment_status')
                     ->label('Payment Status')
                     ->sortable()
@@ -183,6 +190,10 @@ class OrderResource extends Resource
                         'danger' => 'unpaid',
                     ]),
 
+                TextColumn::make('amount')
+                    ->sortable()
+                    ->searchable()
+                    ->money('CHF'),
                 TextColumn::make('payment_method')
                     ->sortable()
                     ->label('Payment Method')
@@ -226,6 +237,42 @@ class OrderResource extends Resource
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
+                    Tables\Actions\BulkAction::make('updateStatus')
+                        ->label('Update Status')
+                        ->icon('heroicon-o-check-circle')
+                        ->form([
+                            Select::make('status')
+                                ->label('Status')
+                                ->options([
+                                    'pending' => 'Pending',
+                                    'completed' => 'Completed',
+                                ])
+                                ->required(),
+                        ])
+                        ->action(function (Collection $records, array $data): void {
+                            $records->each(function ($record) use ($data) {
+                                $record->update(['status' => $data['status']]);
+                            });
+                        })
+                        ->deselectRecordsAfterCompletion(),
+                    Tables\Actions\BulkAction::make('updatePaymentStatus')
+                        ->label('Update Payment Status')
+                        ->icon('heroicon-o-credit-card')
+                        ->form([
+                            Select::make('payment_status')
+                                ->label('Payment Status')
+                                ->options([
+                                    'paid' => 'Paid',
+                                    'unpaid' => 'Unpaid',
+                                ])
+                                ->required(),
+                        ])
+                        ->action(function (Collection $records, array $data): void {
+                            $records->each(function ($record) use ($data) {
+                                $record->update(['payment_status' => $data['payment_status']]);
+                            });
+                        })
+                        ->deselectRecordsAfterCompletion(),
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
