@@ -78,16 +78,16 @@ class ListStudents extends ListRecords
                 ->label('Upload Multiple Students')
                 ->form([
                     FileUpload::make('zipFolder')
-                        ->label('Only .zip files allowed')
+                        ->label('Compressed files allowed')
                         ->disk('public')
                         ->optimize('jpg')
                         ->required()
                         ->optimize('webp')
-                        ->acceptedFileTypes(['application/zip'])
+                        ->acceptedFileTypes(['application/zip', 'application/x-zip', 'application/x-zip-compressed', 'application/octet-stream'])
                         ->directory(true)
                         ->multiple()
                         ->maxSize(2000048)
-                        ->placeholder('Drop ZIP file here or click to upload'),
+                        ->placeholder('Drop compressed file here or click to upload'),
                 ])
                 ->action(fn (array $data) => $this->handleUploadAction($data)),
             Action::make('syncPhotos')

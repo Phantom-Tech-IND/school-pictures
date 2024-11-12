@@ -19,7 +19,7 @@ class StudentResource extends Resource
 
     public static function getNavigationBadge(): ?string
     {
-        $count = static::getModel()::count();
+        $count = static::getModel()::whereBetween('created_at', [now()->startOfWeek(), now()->endOfWeek()])->count();
 
         return $count > 100 ? '100+' : (string) $count;
     }
